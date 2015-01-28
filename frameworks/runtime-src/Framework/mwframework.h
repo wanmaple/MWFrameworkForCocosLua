@@ -4,10 +4,10 @@
 #include "base/Macros.h"
 #include "base/IUncopyable.h"
 #include "base/IUninheritable.h"
-#include "base/BinaryData.h"
+#include "base/MWBinaryData.h"
+#include "base/MWDictionary.h"
 
-#include "scheme/GameScene.h"
-#include "scheme/ViewController.h"
-#include "scheme/ViewSegue.h"
+#include "scheme/MWGameScene.h"
+#include "scheme/MWViewController.h"
 
 #endif

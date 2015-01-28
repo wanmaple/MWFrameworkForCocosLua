@@ -15,6 +15,7 @@
 		15A8A4881834C90F00142BE0 /* libcurl.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 15A8A4871834C90E00142BE0 /* libcurl.dylib */; };
 		15AECE29195D482800907DB0 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15AECE28195D482800907DB0 /* MediaPlayer.framework */; };
 		1AF4C403178663F200122817 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AF4C402178663F200122817 /* libz.dylib */; };
+		33B78CB91A790DF9003FC84B /* MWDictionary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 33B78CB71A790DF9003FC84B /* MWDictionary.cpp */; };
 		5023811817EBBCAC00990C9B /* AppController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5023810817EBBCAC00990C9B /* AppController.mm */; };
 		5023811917EBBCAC00990C9B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5023810917EBBCAC00990C9B /* Default-568h@2x.png */; };
 		5023811A17EBBCAC00990C9B /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 5023810A17EBBCAC00990C9B /* Default.png */; };
@@ -48,10 +49,9 @@
 		50D7C97017EBBEEC005D0B91 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50D7C96F17EBBEEC005D0B91 /* IOKit.framework */; };
 		521A8E6A19F0C3AC00D177D7 /* Default-667h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 521A8E6819F0C3AC00D177D7 /* Default-667h@2x.png */; };
 		521A8E6B19F0C3AC00D177D7 /* Default-736h@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 521A8E6919F0C3AC00D177D7 /* Default-736h@3x.png */; };
-		78C738801A77EF9B0028FC3A /* GameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 78C7387E1A77EF9B0028FC3A /* GameScene.cpp */; };
-		78C738861A77F4100028FC3A /* ViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 78C738841A77F4100028FC3A /* ViewController.cpp */; };
-		78C738941A77F7440028FC3A /* BinaryData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 78C738871A77F7440028FC3A /* BinaryData.cpp */; };
-		78E0DD7C1A78099000E9D1F9 /* ViewSegue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 78E0DD7A1A78099000E9D1F9 /* ViewSegue.cpp */; };
+		78C738801A77EF9B0028FC3A /* MWGameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 78C7387E1A77EF9B0028FC3A /* MWGameScene.cpp */; };
+		78C738861A77F4100028FC3A /* MWViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 78C738841A77F4100028FC3A /* MWViewController.cpp */; };
+		78C738941A77F7440028FC3A /* MWBinaryData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 78C738871A77F7440028FC3A /* MWBinaryData.cpp */; };
 		C03781B918BF655400FE4F13 /* res in Resources */ = {isa = PBXBuildFile; fileRef = C03781B718BF655400FE4F13 /* res */; };
 		C03781BA18BF655400FE4F13 /* res in Resources */ = {isa = PBXBuildFile; fileRef = C03781B718BF655400FE4F13 /* res */; };
 		C03781BB18BF655400FE4F13 /* src in Resources */ = {isa = PBXBuildFile; fileRef = C03781B818BF655400FE4F13 /* src */; };
@@ -133,6 +133,8 @@
 		15AECE28195D482800907DB0 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/MediaPlayer.framework; sourceTree = DEVELOPER_DIR; };
 		15C1568D1683131500D239F2 /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl.a; path = "../../cocos2d-x/cocos2dx/platform/third_party/ios/libraries/libcurl.a"; sourceTree = "<group>"; };
 		1AF4C402178663F200122817 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		33B78CB71A790DF9003FC84B /* MWDictionary.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWDictionary.cpp; sourceTree = "<group>"; };
+		33B78CB81A790DF9003FC84B /* MWDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWDictionary.h; sourceTree = "<group>"; };
 		5023810717EBBCAC00990C9B /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppController.h; sourceTree = "<group>"; };
 		5023810817EBBCAC00990C9B /* AppController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppController.mm; sourceTree = "<group>"; };
 		5023810917EBBCAC00990C9B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -167,18 +169,16 @@
 		50D7C96F17EBBEEC005D0B91 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		521A8E6819F0C3AC00D177D7 /* Default-667h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-667h@2x.png"; sourceTree = "<group>"; };
 		521A8E6919F0C3AC00D177D7 /* Default-736h@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-736h@3x.png"; sourceTree = "<group>"; };
-		78C7387E1A77EF9B0028FC3A /* GameScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameScene.cpp; sourceTree = "<group>"; };
-		78C7387F1A77EF9B0028FC3A /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
+		78C7387E1A77EF9B0028FC3A /* MWGameScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWGameScene.cpp; sourceTree = "<group>"; };
+		78C7387F1A77EF9B0028FC3A /* MWGameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWGameScene.h; sourceTree = "<group>"; };
 		78C738811A77F0B70028FC3A /* mwframework.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mwframework.h; sourceTree = "<group>"; };
-		78C738841A77F4100028FC3A /* ViewController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ViewController.cpp; sourceTree = "<group>"; };
-		78C738851A77F4100028FC3A /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		78C738871A77F7440028FC3A /* BinaryData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BinaryData.cpp; sourceTree = "<group>"; };
-		78C738881A77F7440028FC3A /* BinaryData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BinaryData.h; sourceTree = "<group>"; };
+		78C738841A77F4100028FC3A /* MWViewController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWViewController.cpp; sourceTree = "<group>"; };
+		78C738851A77F4100028FC3A /* MWViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWViewController.h; sourceTree = "<group>"; };
+		78C738871A77F7440028FC3A /* MWBinaryData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWBinaryData.cpp; sourceTree = "<group>"; };
+		78C738881A77F7440028FC3A /* MWBinaryData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWBinaryData.h; sourceTree = "<group>"; };
 		78C738891A77F7440028FC3A /* Macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
 		78C738921A77F7440028FC3A /* IUncopyable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUncopyable.h; sourceTree = "<group>"; };
 		78C738931A77F7440028FC3A /* IUninheritable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUninheritable.h; sourceTree = "<group>"; };
-		78E0DD7A1A78099000E9D1F9 /* ViewSegue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ViewSegue.cpp; sourceTree = "<group>"; };
-		78E0DD7B1A78099000E9D1F9 /* ViewSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewSegue.h; sourceTree = "<group>"; };
 		C03781AE18BF654500FE4F13 /* cocos2d_lua_bindings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_lua_bindings.xcodeproj; path = "../../cocos2d-x/cocos/scripting/lua-bindings/proj.ios_mac/cocos2d_lua_bindings.xcodeproj"; sourceTree = "<group>"; };
 		C03781B718BF655400FE4F13 /* res */ = {isa = PBXFileReference; lastKnownFileType = folder; name = res; path = ../../../res; sourceTree = "<group>"; };
 		C03781B818BF655400FE4F13 /* src */ = {isa = PBXFileReference; lastKnownFileType = folder; name = src; path = ../../../src; sourceTree = "<group>"; };
@@ -249,6 +249,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		33B78CB61A790DE4003FC84B /* containers */ = {
+			isa = PBXGroup;
+			children = (
+				33B78CB71A790DF9003FC84B /* MWDictionary.cpp */,
+				33B78CB81A790DF9003FC84B /* MWDictionary.h */,
+			);
+			name = containers;
+			sourceTree = "<group>";
+		};
 		5023810617EBBCAC00990C9B /* ios */ = {
 			isa = PBXGroup;
 			children = (
@@ -314,12 +323,10 @@
 		78C7387D1A77EF8F0028FC3A /* scheme */ = {
 			isa = PBXGroup;
 			children = (
-				78C7387E1A77EF9B0028FC3A /* GameScene.cpp */,
-				78C7387F1A77EF9B0028FC3A /* GameScene.h */,
-				78C738841A77F4100028FC3A /* ViewController.cpp */,
-				78C738851A77F4100028FC3A /* ViewController.h */,
-				78E0DD7A1A78099000E9D1F9 /* ViewSegue.cpp */,
-				78E0DD7B1A78099000E9D1F9 /* ViewSegue.h */,
+				78C7387E1A77EF9B0028FC3A /* MWGameScene.cpp */,
+				78C7387F1A77EF9B0028FC3A /* MWGameScene.h */,
+				78C738841A77F4100028FC3A /* MWViewController.cpp */,
+				78C738851A77F4100028FC3A /* MWViewController.h */,
 			);
 			path = scheme;
 			sourceTree = "<group>";
@@ -327,8 +334,9 @@
 		78C738821A77F17A0028FC3A /* base */ = {
 			isa = PBXGroup;
 			children = (
-				78C738871A77F7440028FC3A /* BinaryData.cpp */,
-				78C738881A77F7440028FC3A /* BinaryData.h */,
+				33B78CB61A790DE4003FC84B /* containers */,
+				78C738871A77F7440028FC3A /* MWBinaryData.cpp */,
+				78C738881A77F7440028FC3A /* MWBinaryData.h */,
 				78C738891A77F7440028FC3A /* Macros.h */,
 				78C738921A77F7440028FC3A /* IUncopyable.h */,
 				78C738931A77F7440028FC3A /* IUninheritable.h */,
@@ -612,13 +620,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				78C738861A77F4100028FC3A /* ViewController.cpp in Sources */,
-				78C738801A77EF9B0028FC3A /* GameScene.cpp in Sources */,
-				78E0DD7C1A78099000E9D1F9 /* ViewSegue.cpp in Sources */,
+				78C738861A77F4100028FC3A /* MWViewController.cpp in Sources */,
+				78C738801A77EF9B0028FC3A /* MWGameScene.cpp in Sources */,
 				5023812517EBBCAC00990C9B /* RootViewController.mm in Sources */,
+				33B78CB91A790DF9003FC84B /* MWDictionary.cpp in Sources */,
 				F293BB9C15EB831F00256477 /* AppDelegate.cpp in Sources */,
 				5023812417EBBCAC00990C9B /* main.m in Sources */,
-				78C738941A77F7440028FC3A /* BinaryData.cpp in Sources */,
+				78C738941A77F7440028FC3A /* MWBinaryData.cpp in Sources */,
 				5023811817EBBCAC00990C9B /* AppController.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -21,29 +21,31 @@ namespace mwframework {
     /**
      * Basic game scene of the framework.
      */
-    class MWDLL GameScene : public cocos2d::Scene
+    class MWDLL MWGameScene : public cocos2d::Scene
     {
     public:
         /**
          * Create a game scene.
          *
-         * @return GameScene instance which is autoreleased.
+         * @return MWGameScene instance which is autoreleased.
          */
-        static GameScene *create();
+        static MWGameScene *create();
         /**
          * Create a game scene with user params.
          *
          * @param params User parameters to pass to the scene.
          *
-         * @return GameScene instance with params which is autoreleased.
+         * @return MWGameScene instance with params which is autoreleased.
          */
-        static GameScene *createWithParams(const cocos2d::Map<std::string, cocos2d::Ref*> &params);
+        static MWGameScene *createWithParams(const cocos2d::Map<std::string, cocos2d::Ref*> &params);
         
         /**
          * Base class overrides.
          */
         virtual void onEnter() override;
         virtual void onExit() override;
+        virtual void onEnterTransitionDidFinish() override;
+        virtual void onExitTransitionDidStart() override;
         
         /**
          * Overload methods to put new parameter to the scene.
@@ -58,7 +60,7 @@ namespace mwframework {
         void addParameter(const std::string &key, cocos2d::Ref *param);
         
         /**
-         * Get the parameter of the specified key, return nullptr or default value if it doesn't exist.
+         * Get the parameter of the specified key, it will throw an exception if the key doesn't exist.
          *
          * @param key Parameter key to consult.
          *
@@ -91,6 +93,12 @@ namespace mwframework {
          * Unload all view controllers of the scene.
          */
         void unloadAllViewControllers();
+        /**
+         * Get the loaded view controller by the specified identifier.
+         *
+         * @return The view controller with specified identifier.
+         */
+        ViewController *getViewControllerByIdentifier(const std::string &identifier);
         
     protected:
         virtual bool init();

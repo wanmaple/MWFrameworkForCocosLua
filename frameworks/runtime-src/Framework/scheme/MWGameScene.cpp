@@ -1,4 +1,4 @@
-#include "GameScene.h"
+#include "MWGameScene.h"
 #include "cocos2d.h"
 #include <new>
 
@@ -6,9 +6,9 @@ using namespace cocos2d;
 using namespace std;
 
 namespace mwframework {
-    GameScene *GameScene::create()
+    MWGameScene *MWGameScene::create()
     {
-        auto pScene = new (nothrow) GameScene();
+        auto pScene = new (nothrow) MWGameScene();
         if (pScene && pScene->init()) {
             pScene->autorelease();
             return pScene;

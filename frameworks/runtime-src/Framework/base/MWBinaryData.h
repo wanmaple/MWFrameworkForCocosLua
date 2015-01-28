@@ -18,7 +18,7 @@ namespace mwframework
 	/**
      * Wrapper of binary data.
      */
-	class MWDLL BinaryData : public cocos2d::Ref, private IUncopyable, public IUninheritable<BinaryData>
+	class MWDLL MWBinaryData : public cocos2d::Ref, private IUncopyable, public IUninheritable<MWBinaryData>
 	{
 	public:
 		/**
@@ -27,14 +27,14 @@ namespace mwframework
          * @param data Raw binary data.
          * @param size Binary data size.
          *
-         * @return BinaryData instance which is autoreleased.
+         * @return MWBinaryData instance which is autoreleased.
          */
-		static BinaryData *create(void *data, MW_ULONG size);
+		static MWBinaryData *create(void *data, MW_ULONG size);
 
 		/**
 		* BinaryData destructor.
 		*/
-		virtual ~BinaryData();
+		virtual ~MWBinaryData();
 
 		/**
 		* Get raw data.

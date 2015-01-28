@@ -18,6 +18,17 @@
 #define MW_BYTE unsigned char
 
 /**
+ * Mark as deprecated
+ */
+#if defined(__GNUC__) && ((__GNUC__ >= 4) || ((__GNUC__ == 3) && (__GNUC_MINOR__ >= 1)))
+#define MW_DEPRECATED __attribute__((deprecated))
+#elif _MSC_VER >= 1400
+#define MW_DEPRECATED __declspec(deprecated)
+#else
+#define MW_DEPRECATED
+#endif
+
+/**
  * Make a class singleton
  * @note You must implement the constructor of the class, even if it is just the default one.
  */

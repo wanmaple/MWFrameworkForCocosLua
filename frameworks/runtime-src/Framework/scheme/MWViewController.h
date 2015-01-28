@@ -29,27 +29,39 @@ namespace mwframework {
         virtual void didReceiveMemoryWarning() = 0;
     };
     
-    class GameLayer;
+    class MWGameLayer;
+    class MWGameScene;
     
     /**
      * Basic view controller of the framework.
      */
-    class MWDLL ViewController : public cocos2d::Ref, public IViewControllerDelegate
+    class MWDLL MWViewController : public cocos2d::Ref, public IViewControllerDelegate
     {
     public:
         /**
          * Create a view controller.
          *
-         * @return GameScene instance which is autoreleased.
+         * @param identifier View controller identifier maintained by the scene.
+         *
+         * @return MWViewController instance which is autoreleased.
          */
-        static ViewController *create();
+        static MWViewController *create(const std::string &identifier = "");
         
+        /**
+         * Get admin scene.
+         *
+         * @return Admin scene of the view controller.
+         */
+        inline MWGameScene *scene() const
+        {
+            return _scene;
+        }
         /**
          * Get related view.
          *
          * @return Related view of the view controller.
          */
-        inline GameLayer *view() const
+        inline MWGameLayer *view() const
         {
             return _view;
         }
@@ -62,6 +74,13 @@ namespace mwframework {
         {
             _identifer = identifier;
         }
+        
+        /**
+         * Show a child view.
+         *
+         * @return Related view of the view controller.
+         */
+        void segueToViewController(MWViewController *viewController);
         
         /**
          * IViewControllerDelegate overrides
@@ -77,7 +96,8 @@ namespace mwframework {
     protected:
         virtual bool init();
         
-        GameLayer *_view;
+        MWGameScene *_scene;
+        MWGameLayer *_view;
         std::string _identifer;
     };
 }

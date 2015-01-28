@@ -1,4 +1,4 @@
-#include "BinaryData.h"
+#include "MWBinaryData.h"
 #include "cocos2d.h"
 #include <new>
 #include <stdlib.h>
@@ -9,9 +9,9 @@ using namespace std;
 
 namespace mwframework
 {
-	BinaryData *BinaryData::create(void *data, MW_ULONG size)
+	MWBinaryData *MWBinaryData::create(void *data, MW_ULONG size)
 	{
-		auto pData = new (nothrow) BinaryData();
+		auto pData = new (nothrow) MWBinaryData();
 		if (pData && pData->init(data, size))
 		{
 			pData->autorelease();
@@ -21,7 +21,7 @@ namespace mwframework
 		return nullptr;
 	}
 
-	BinaryData::~BinaryData()
+	MWBinaryData::~MWBinaryData()
 	{
 		if (_data)
 		{
@@ -29,7 +29,7 @@ namespace mwframework
 		}
 	}
 
-	bool BinaryData::init(void *data, MW_ULONG size)
+	bool MWBinaryData::init(void *data, MW_ULONG size)
 	{
 		// copy the data
 		_data = (MW_ULONG*)malloc(size);
@@ -39,12 +39,12 @@ namespace mwframework
 		return true;
 	}
 
-	void *BinaryData::getData() const
+	void *MWBinaryData::getData() const
 	{
 		return _data;
 	}
 
-	MW_ULONG BinaryData::getSize() const
+	MW_ULONG MWBinaryData::getSize() const
 	{
 		return _size;
 	}
