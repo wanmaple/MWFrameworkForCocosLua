@@ -54,6 +54,7 @@
 		78C738801A77EF9B0028FC3A /* MWGameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 78C7387E1A77EF9B0028FC3A /* MWGameScene.cpp */; };
 		78C738861A77F4100028FC3A /* MWViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 78C738841A77F4100028FC3A /* MWViewController.cpp */; };
 		78C738941A77F7440028FC3A /* MWBinaryData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 78C738871A77F7440028FC3A /* MWBinaryData.cpp */; };
+		78CC2A8C1A7A9D12007AF21B /* MWLinkedList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 78CC2A8A1A7A9D12007AF21B /* MWLinkedList.cpp */; };
 		C03781B918BF655400FE4F13 /* res in Resources */ = {isa = PBXBuildFile; fileRef = C03781B718BF655400FE4F13 /* res */; };
 		C03781BA18BF655400FE4F13 /* res in Resources */ = {isa = PBXBuildFile; fileRef = C03781B718BF655400FE4F13 /* res */; };
 		C03781BB18BF655400FE4F13 /* src in Resources */ = {isa = PBXBuildFile; fileRef = C03781B818BF655400FE4F13 /* src */; };
@@ -186,6 +187,8 @@
 		78C738891A77F7440028FC3A /* FrameworkMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameworkMacros.h; sourceTree = "<group>"; };
 		78C738921A77F7440028FC3A /* IUncopyable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUncopyable.h; sourceTree = "<group>"; };
 		78C738931A77F7440028FC3A /* IUninheritable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUninheritable.h; sourceTree = "<group>"; };
+		78CC2A8A1A7A9D12007AF21B /* MWLinkedList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWLinkedList.cpp; sourceTree = "<group>"; };
+		78CC2A8B1A7A9D12007AF21B /* MWLinkedList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWLinkedList.h; sourceTree = "<group>"; };
 		C03781AE18BF654500FE4F13 /* cocos2d_lua_bindings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_lua_bindings.xcodeproj; path = "../../cocos2d-x/cocos/scripting/lua-bindings/proj.ios_mac/cocos2d_lua_bindings.xcodeproj"; sourceTree = "<group>"; };
 		C03781B718BF655400FE4F13 /* res */ = {isa = PBXFileReference; lastKnownFileType = folder; name = res; path = ../../../res; sourceTree = "<group>"; };
 		C03781B818BF655400FE4F13 /* src */ = {isa = PBXFileReference; lastKnownFileType = folder; name = src; path = ../../../src; sourceTree = "<group>"; };
@@ -263,6 +266,8 @@
 				33B78CB81A790DF9003FC84B /* MWDictionary.h */,
 				33125B181A7A53B80030DD61 /* MWArrayList.cpp */,
 				33125B191A7A53B80030DD61 /* MWArrayList.h */,
+				78CC2A8A1A7A9D12007AF21B /* MWLinkedList.cpp */,
+				78CC2A8B1A7A9D12007AF21B /* MWLinkedList.h */,
 			);
 			name = containers;
 			sourceTree = "<group>";
@@ -644,6 +649,7 @@
 				33125B1A1A7A53B80030DD61 /* MWArrayList.cpp in Sources */,
 				78C738801A77EF9B0028FC3A /* MWGameScene.cpp in Sources */,
 				5023812517EBBCAC00990C9B /* RootViewController.mm in Sources */,
+				78CC2A8C1A7A9D12007AF21B /* MWLinkedList.cpp in Sources */,
 				33B78CB91A790DF9003FC84B /* MWDictionary.cpp in Sources */,
 				33B78CC11A7A3A7A003FC84B /* MWException.cpp in Sources */,
 				F293BB9C15EB831F00256477 /* AppDelegate.cpp in Sources */,

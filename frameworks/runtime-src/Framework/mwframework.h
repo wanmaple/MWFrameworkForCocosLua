@@ -13,6 +13,8 @@
 #include "base/MWException.h"
 // framework data structures.
 #include "base/MWDictionary.h"
+#include "base/MWArrayList.h"
+#include "base/MWLinkedList.h"
 
 #include "scheme/MWGameScene.h"
 #include "scheme/MWViewController.h"

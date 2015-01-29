@@ -17,7 +17,9 @@
 
 MW_FRAMEWORK_BEGIN
 
-class ViewController;
+class MWViewController;
+class MWDictionary;
+class MWArrayList;
 
 /**
  * Basic game scene of the framework.
@@ -38,7 +40,16 @@ public:
      *
      * @return MWGameScene instance with params which is autoreleased.
      */
-    static MWGameScene *createWithParams(const cocos2d::Map<std::string, cocos2d::Ref*> &params);
+    static MWGameScene *createWithParams(MWDictionary *params);
+    
+    /**
+     * MWGameScene constructor.
+     */
+    MWGameScene();
+    /**
+     * MWGameScene destructor.
+     */
+    virtual ~MWGameScene();
     
     /**
      * Base class overrides.
@@ -77,13 +88,13 @@ public:
      *
      * @param controller The view controller to load.
      */
-    void loadViewController(ViewController *controller);
+    void loadViewController(MWViewController *controller);
     /**
      * Unload an existed view controller of the scene.
      *
      * @param controller The view controller to unload.
      */
-    void unloadViewController(ViewController *controller);
+    void unloadViewController(MWViewController *controller);
     /**
      * Unload a view controller by the identifier.
      *
@@ -99,13 +110,13 @@ public:
      *
      * @return The view controller with specified identifier.
      */
-    ViewController *getViewControllerByIdentifier(const std::string &identifier);
+    MWViewController *getViewControllerByIdentifier(const std::string &identifier);
     
 protected:
     virtual bool init();
     
-    cocos2d::Map<std::string, cocos2d::Ref*> _params;
-    cocos2d::Vector<ViewController*> _viewControllers;
+    MWDictionary *_params;
+    MWArrayList *_viewControllers;
 };
 
 MW_FRAMEWORK_END

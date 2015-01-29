@@ -14,7 +14,7 @@
 
 MW_FRAMEWORK_BEGIN
 
-class MW_DLL MWException : public cocos2d::Ref, std::exception
+class MW_DLL MWException : public cocos2d::Ref, public std::exception
 {
 public:
     /**

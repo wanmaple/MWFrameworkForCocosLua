@@ -8,7 +8,7 @@
 #define __BASE_DICTIONARY__
 
 #include "base/CCRef.h"
-#include "../base/FrameworkMacros.h"
+#include "FrameworkMacros.h"
 #include <unordered_map>
 #include <vector>
 #include <string>
@@ -97,9 +97,6 @@ public:
     
 protected:
     std::unordered_map<std::string, cocos2d::Ref*> _innerMap;
-    
-    // multithreading
-    MWMutex *_mutex;
 };
 
 MW_FRAMEWORK_END

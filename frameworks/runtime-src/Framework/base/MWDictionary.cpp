@@ -22,7 +22,6 @@ MWDictionary *MWDictionary::create()
 
 MWDictionary::MWDictionary()
 : _innerMap()
-, _mutex(nullptr)
 {
     
 }
@@ -34,65 +33,54 @@ MWDictionary::~MWDictionary()
 
 std::vector<const std::string> MWDictionary::allKeys()
 {
-    MW_MUTEX_LOCK(_mutex);
     vector<const std::string> vec;
     
     for (auto iter = _innerMap.cbegin(); iter != _innerMap.cend(); ++iter) {
         vec.push_back(iter->first);
     }
-    MW_MUTEX_UNLOCK(_mutex);
     
     return vec;
 }
 
 void MWDictionary::setObjectForKey(const std::string &key, double val)
 {
-    MW_MUTEX_LOCK(_mutex);
-    auto pVal = __Double::create(val);
-    pVal->retain();
-    _innerMap[key] = pVal;
-    MW_MUTEX_UNLOCK(_mutex);
+    this->setObjectForKey(key, __Double::create(val));
 }
 
 void MWDictionary::setObjectForKey(const std::string &key, bool val)
 {
-    MW_MUTEX_LOCK(_mutex);
-    auto pVal = __Bool::create(val);
-    pVal->retain();
-    _innerMap[key] = pVal;
-    MW_MUTEX_UNLOCK(_mutex);
+    this->setObjectForKey(key, __Bool::create(val));
 }
 
 void MWDictionary::setObjectForKey(const std::string &key, const std::string &val)
 {
-    MW_MUTEX_LOCK(_mutex);
-    auto pVal = __String::create(val);
-    pVal->retain();
-    _innerMap[key] = pVal;
-    MW_MUTEX_UNLOCK(_mutex);
+    this->setObjectForKey(key, __String::create(val));
 }
 
 void MWDictionary::setObjectForKey(const std::string &key, cocos2d::Ref *val)
 {
-    MW_MUTEX_LOCK(_mutex);
+    // check parameter.
+    if (!val) {
+        MW_THROW_EXCEPTION(1006);
+    }
+    // release the old object if it does exist.
+    if (_innerMap.find(key) != _innerMap.end()) {
+        _innerMap[key]->release();
+    }
+    val->retain();
     _innerMap[key] = val;
-    MW_MUTEX_UNLOCK(_mutex);
 }
 
 double MWDictionary::numberForKey(const std::string &key) const MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION)
 {
-    MW_MUTEX_LOCK(_mutex);
     // check existence.
     if (_innerMap.find(key) == _innerMap.end()) {
-        MW_MUTEX_UNLOCK(_mutex);
         MW_THROW_EXCEPTION(1001);
     }
     __Double *pNum = nullptr;
     if ((pNum = dynamic_cast<__Double*>(_innerMap.at(key)))) {
-        MW_MUTEX_UNLOCK(_mutex);
         return pNum->getValue();
     }
-    MW_MUTEX_UNLOCK(_mutex);
     // wrong type
     MW_THROW_EXCEPTION(1002);
 }

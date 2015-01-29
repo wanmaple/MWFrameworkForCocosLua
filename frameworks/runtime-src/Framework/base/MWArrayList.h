@@ -8,7 +8,7 @@
 #define __BASE_ARRAYLIST__
 
 #include "base/CCRef.h"
-#include "../base/FrameworkMacros.h"
+#include "FrameworkMacros.h"
 #include <vector>
 #include <string>
 
@@ -37,6 +37,16 @@ public:
     virtual ~MWArrayList();
     
     /**
+     * Overload methods to append value to the list.
+     *
+     * @param val List value to append.
+     */
+    void appendObject(double val);
+    void appendObject(bool val);
+    void appendObject(const std::string &val);
+    void appendObject(cocos2d::Ref *val);
+    
+    /**
      * Overload methods to set new value at the specified index.
      * @note If the index is out of range, it will throw an exception.
      *
@@ -47,6 +57,18 @@ public:
     void setObjectAtIndex(bool val, MW_UINT index) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
     void setObjectAtIndex(const std::string &val, MW_UINT index) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
     void setObjectAtIndex(cocos2d::Ref *val, MW_UINT index) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
+    
+    /**
+     * Overload methods to insert the value before the specified index.
+     * @note If the index is out of range, it will throw an exception.
+     *
+     * @param val List value to add.
+     * @param index List index to insert.
+     */
+    void insertObjectAtIndex(double val, MW_UINT index) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
+    void insertObjectAtIndex(bool val, MW_UINT index) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
+    void insertObjectAtIndex(const std::string &val, MW_UINT index) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
+    void insertObjectAtIndex(cocos2d::Ref *val, MW_UINT index) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
     
     /**
      * Get the value at the specified index, it will throw an exception if the key doesn't exist.
@@ -69,7 +91,7 @@ public:
      */
     bool removeObjectAtIndex(MW_UINT index);
     /**
-     * Clear all objects of the map.
+     * Clear all objects.
      */
     void clear();
     
@@ -86,7 +108,7 @@ public:
     }
     
 protected:
-    std::vector<cocos2d::Ref*> _items;
+    std::vector<cocos2d::Ref*> _innerVector;
 };
 
 MW_FRAMEWORK_END
