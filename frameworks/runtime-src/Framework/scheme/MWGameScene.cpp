@@ -5,15 +5,17 @@
 using namespace cocos2d;
 using namespace std;
 
-namespace mwframework {
-    MWGameScene *MWGameScene::create()
-    {
-        auto pScene = new (nothrow) MWGameScene();
-        if (pScene && pScene->init()) {
-            pScene->autorelease();
-            return pScene;
-        }
-        CC_SAFE_RELEASE(pScene);
-        return nullptr;
+MW_FRAMEWORK_BEGIN
+
+MWGameScene *MWGameScene::create()
+{
+    auto pScene = new (nothrow) MWGameScene();
+    if (pScene && pScene->init()) {
+        pScene->autorelease();
+        return pScene;
     }
+    CC_SAFE_RELEASE(pScene);
+    return nullptr;
 }
+
+MW_FRAMEWORK_END
