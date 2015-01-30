@@ -9,7 +9,7 @@ using namespace std;
 
 MW_FRAMEWORK_BEGIN
 
-MWBinaryData *MWBinaryData::create(void *data, MW_ULONG size)
+MWBinaryData *MWBinaryData::create(MW_RAW_DATA data, MW_ULONG size)
 {
     auto pData = new (nothrow) MWBinaryData();
     if (pData && pData->init(data, size))
@@ -29,7 +29,7 @@ MWBinaryData::~MWBinaryData()
     }
 }
 
-bool MWBinaryData::init(void *data, MW_ULONG size)
+bool MWBinaryData::init(MW_RAW_DATA data, MW_ULONG size)
 {
     // copy the data
     _data = (MW_ULONG*)malloc(size);
@@ -39,7 +39,7 @@ bool MWBinaryData::init(void *data, MW_ULONG size)
     return true;
 }
 
-void *MWBinaryData::getData() const
+MW_RAW_DATA MWBinaryData::getData() const
 {
     return _data;
 }

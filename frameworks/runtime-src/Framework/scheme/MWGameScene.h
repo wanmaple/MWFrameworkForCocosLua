@@ -78,23 +78,23 @@ public:
      *
      * @return The parameter value.
      */
-    double getNumberParameter(const std::string &key) const MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
-    bool getBooleanParameter(const std::string &key) const MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
-    std::string getStringParameter(const std::string &key) const MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
-    cocos2d::Ref *getRefParameter(const std::string &key) const MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
+    double getNumberParameter(const std::string &key) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
+    bool getBooleanParameter(const std::string &key) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
+    std::string getStringParameter(const std::string &key) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
+    cocos2d::Ref *getRefParameter(const std::string &key) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
     
     /**
      * Load a view controller to the scene.
      *
      * @param controller The view controller to load.
      */
-    void loadViewController(MWViewController *controller);
+    void loadViewController(MWViewController *controller) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
     /**
      * Unload an existed view controller of the scene.
      *
      * @param controller The view controller to unload.
      */
-    void unloadViewController(MWViewController *controller);
+    void unloadViewController(MWViewController *controller) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
     /**
      * Unload a view controller by the identifier.
      *
@@ -113,7 +113,7 @@ public:
     MWViewController *getViewControllerByIdentifier(const std::string &identifier);
     
 protected:
-    virtual bool init();
+    virtual bool init(MWDictionary *params = nullptr);
     
     MWDictionary *_params;
     MWArrayList *_viewControllers;

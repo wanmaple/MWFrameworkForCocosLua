@@ -95,7 +95,7 @@ public:
     virtual void didReceiveMemoryWarning() override;
     
 protected:
-    virtual bool init();
+    virtual bool initWithIdentifier(const std::string &identifier);
     
     MWGameScene *_scene;
     MWGameLayer *_view;

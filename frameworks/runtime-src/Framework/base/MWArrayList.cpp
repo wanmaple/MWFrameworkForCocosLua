@@ -16,7 +16,6 @@ MWArrayList *MWArrayList::create()
         pAry->autorelease();
         return pAry;
     }
-    CC_SAFE_RELEASE(pAry);
     return nullptr;
 }
 
@@ -111,7 +110,7 @@ void MWArrayList::insertObjectAtIndex(cocos2d::Ref *val, unsigned int index) MW_
     _innerVector.insert(_innerVector.begin() + index, val);
 }
 
-double MWArrayList::numberAtIndex(unsigned int index) const MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION)
+double MWArrayList::numberAtIndex(unsigned int index) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION)
 {
     // check if the index is out of range.
     if (index >= _innerVector.size()) {
@@ -125,7 +124,7 @@ double MWArrayList::numberAtIndex(unsigned int index) const MW_NOEXCEPTION(MW_WH
     MW_THROW_EXCEPTION(1007);
 }
 
-bool MWArrayList::booleanAtIndex(unsigned int index) const MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION)
+bool MWArrayList::booleanAtIndex(unsigned int index) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION)
 {
     // check if the index is out of range.
     if (index >= _innerVector.size()) {
@@ -139,7 +138,7 @@ bool MWArrayList::booleanAtIndex(unsigned int index) const MW_NOEXCEPTION(MW_WHE
     MW_THROW_EXCEPTION(1008);
 }
 
-std::string MWArrayList::stringAtIndex(unsigned int index) const MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION)
+std::string MWArrayList::stringAtIndex(unsigned int index) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION)
 {
     // check if the index is out of range.
     if (index >= _innerVector.size()) {
@@ -153,7 +152,7 @@ std::string MWArrayList::stringAtIndex(unsigned int index) const MW_NOEXCEPTION(
     MW_THROW_EXCEPTION(1009);
 }
 
-cocos2d::Ref *MWArrayList::objectAtIndex(unsigned int index) const MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION)
+cocos2d::Ref *MWArrayList::objectAtIndex(unsigned int index) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION)
 {
     // check if the index is out of range.
     if (index >= _innerVector.size()) {
@@ -162,12 +161,122 @@ cocos2d::Ref *MWArrayList::objectAtIndex(unsigned int index) const MW_NOEXCEPTIO
     return _innerVector[index];
 }
 
-bool MWArrayList::removeObjectAtIndex(unsigned int index)
+MW_UINT MWArrayList::indexOfObject(double obj)
+{
+    __Double *pNum = nullptr;
+    for (MW_UINT i = 0; i < this->count(); ++i) {
+        pNum = dynamic_cast<__Double*>(_innerVector[i]);
+        if (pNum && pNum->getValue() == obj) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+MW_UINT MWArrayList::indexOfObject(bool obj)
+{
+    __Bool *pBool = nullptr;
+    for (MW_UINT i = 0; i < this->count(); ++i) {
+        pBool = dynamic_cast<__Bool*>(_innerVector[i]);
+        if (pBool && pBool->getValue() == obj) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+MW_UINT MWArrayList::indexOfObject(const std::string &obj)
+{
+    __String *pStr = nullptr;
+    for (MW_UINT i = 0; i < this->count(); ++i) {
+        pStr = dynamic_cast<__String*>(_innerVector[i]);
+        if (pStr && string(pStr->getCString()) == obj) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+MW_UINT MWArrayList::indexOfObject(cocos2d::Ref *obj)
+{
+    for (MW_UINT i = 0; i < this->count(); ++i) {
+        if (_innerVector[i] == obj) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+MW_UINT MWArrayList::lastIndexOfObject(double obj)
+{
+    __Double *pNum = nullptr;
+    // Be aware of reverse order of unsigned types.
+    for (MW_UINT i = this->count() - 1; (int)i >= 0; --i) {
+        pNum = dynamic_cast<__Double*>(_innerVector[i]);
+        if (pNum && pNum->getValue() == obj) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+bool MWArrayList::removeObject(double obj)
+{
+    __Double *pNum = nullptr;
+    for (MW_UINT i = 0; i < this->count(); ++i) {
+        pNum = dynamic_cast<__Double*>(_innerVector[i]);
+        if (pNum && pNum->getValue() == obj) {
+            this->removeObjectAtIndex(i);
+            return true;
+        }
+    }
+    return false;
+}
+
+bool MWArrayList::removeObject(bool obj)
+{
+    __Bool *pBool = nullptr;
+    for (MW_UINT i = 0; i < this->count(); ++i) {
+        pBool = dynamic_cast<__Bool*>(_innerVector[i]);
+        if (pBool && pBool->getValue() == obj) {
+            this->removeObjectAtIndex(i);
+            return true;
+        }
+    }
+    return false;
+}
+
+bool MWArrayList::removeObject(const std::string &obj)
+{
+    __String *pStr = nullptr;
+    for (MW_UINT i = 0; i < this->count(); ++i) {
+        pStr = dynamic_cast<__String*>(_innerVector[i]);
+        if (pStr && string(pStr->getCString()) == obj) {
+            this->removeObjectAtIndex(i);
+            return true;
+        }
+    }
+    return false;
+}
+
+bool MWArrayList::removeObject(cocos2d::Ref *obj)
+{
+    for (MW_UINT i = 0; i < this->count(); ++i) {
+        if (_innerVector[i] == obj) {
+            this->removeObjectAtIndex(i);
+            return true;
+        }
+    }
+    return false;
+}
+
+bool MWArrayList::removeObjectAtIndex(unsigned int index) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION)
 {
     // check if the index is out of range.
     if (index >= _innerVector.size()) {
         return false;
     }
+    _innerVector[index]->release();
     _innerVector.erase(_innerVector.begin() + index);
     return true;
 }
@@ -180,9 +289,17 @@ void MWArrayList::clear()
     _innerVector.clear();
 }
 
-MW_UINT MWArrayList::count()
+MWArrayList *MWArrayList::clone()
 {
-    return _innerVector.size();
+    auto pCopy = new (nothrow) MWArrayList();
+    if (pCopy) {
+        for (auto &val : _innerVector) {
+            pCopy->appendObject(val);
+        }
+        pCopy->autorelease();
+        return pCopy;
+    }
+    return nullptr;
 }
 
 MW_FRAMEWORK_END

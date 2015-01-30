@@ -29,7 +29,7 @@ public:
      *
      * @return MWBinaryData instance which is autoreleased.
      */
-    static MWBinaryData *create(void *data, MW_ULONG size);
+    static MWBinaryData *create(MW_RAW_DATA data, MW_ULONG size);
     
     /**
      * BinaryData destructor.
@@ -50,9 +50,9 @@ public:
     MW_ULONG getSize() const;
     
 private:
-    bool init(void *data, MW_ULONG size);
+    bool init(MW_RAW_DATA data, MW_ULONG size);
     
-    void *_data;
+    MW_RAW_DATA _data;
     MW_ULONG _size;
 };
 

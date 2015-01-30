@@ -14,7 +14,6 @@ MWException *MWException::create(int errCode, const char *msg)
         pEx->autorelease();
         return pEx;
     }
-    CC_SAFE_RELEASE(pEx);
     return nullptr;
 }
 
@@ -27,7 +26,10 @@ MWException::MWException(int errCode, const char *msg)
 
 const char *MWException::what() const _NOEXCEPT
 {
-    return _errorMsg.c_str();
+    char buffer[1024];
+    sprintf(buffer, "Error message: %s\tError code: %d", _errorMsg.c_str(), _errorCode);
+    string msg = buffer;
+    return msg.c_str();
 }
 
 MW_FRAMEWORK_END

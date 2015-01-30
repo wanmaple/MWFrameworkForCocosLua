@@ -16,7 +16,6 @@ MWDictionary *MWDictionary::create()
         pDict->autorelease();
         return pDict;
     }
-    CC_SAFE_RELEASE(pDict);
     return nullptr;
 }
 
@@ -64,17 +63,17 @@ void MWDictionary::setObjectForKey(const std::string &key, cocos2d::Ref *val)
         MW_THROW_EXCEPTION(1006);
     }
     // release the old object if it does exist.
-    if (_innerMap.find(key) != _innerMap.end()) {
+    if (!this->hasKey(key)) {
         _innerMap[key]->release();
     }
     val->retain();
     _innerMap[key] = val;
 }
 
-double MWDictionary::numberForKey(const std::string &key) const MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION)
+double MWDictionary::numberForKey(const std::string &key) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION)
 {
     // check existence.
-    if (_innerMap.find(key) == _innerMap.end()) {
+    if (!this->hasKey(key)) {
         MW_THROW_EXCEPTION(1001);
     }
     __Double *pNum = nullptr;
@@ -85,10 +84,10 @@ double MWDictionary::numberForKey(const std::string &key) const MW_NOEXCEPTION(M
     MW_THROW_EXCEPTION(1002);
 }
 
-bool MWDictionary::booleanForKey(const std::string &key) const MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION)
+bool MWDictionary::booleanForKey(const std::string &key) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION)
 {
     // check existence.
-    if (_innerMap.find(key) == _innerMap.end()) {
+    if (!this->hasKey(key)) {
         MW_THROW_EXCEPTION(1001);
     }
     __Bool *pBool = nullptr;
@@ -99,10 +98,10 @@ bool MWDictionary::booleanForKey(const std::string &key) const MW_NOEXCEPTION(MW
     MW_THROW_EXCEPTION(1003);
 }
 
-string MWDictionary::stringForKey(const std::string &key) const MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION)
+string MWDictionary::stringForKey(const std::string &key) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION)
 {
     // check existence.
-    if (_innerMap.find(key) == _innerMap.end()) {
+    if (!this->hasKey(key)) {
         MW_THROW_EXCEPTION(1001);
     }
     __String *pStr = nullptr;
@@ -113,10 +112,10 @@ string MWDictionary::stringForKey(const std::string &key) const MW_NOEXCEPTION(M
     MW_THROW_EXCEPTION(1004);
 }
 
-Ref *MWDictionary::objectForKey(const std::string &key) const MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION)
+Ref *MWDictionary::objectForKey(const std::string &key) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION)
 {
     // check existence.
-    if (_innerMap.find(key) == _innerMap.end()) {
+    if (!this->hasKey(key)) {
         MW_THROW_EXCEPTION(1001);
     }
     return _innerMap.at(key);
@@ -124,7 +123,8 @@ Ref *MWDictionary::objectForKey(const std::string &key) const MW_NOEXCEPTION(MW_
 
 bool MWDictionary::removeObjectForKey(const std::string &key)
 {
-    if (_innerMap.find(key) == _innerMap.end()) {
+    // check existence.
+    if (!this->hasKey(key)) {
         return false;
     }
     _innerMap[key]->release();
@@ -138,6 +138,25 @@ void MWDictionary::clear()
         iter->second->release();
     }
     _innerMap.clear();
+}
+
+bool MWDictionary::hasKey(const std::string &key)
+{
+    return _innerMap.find(key) != _innerMap.end();
+}
+
+MWDictionary *MWDictionary::clone()
+{
+    auto pCopy = new (nothrow) MWDictionary();
+    if (pCopy) {
+        auto keys = this->allKeys();
+        for (auto &key : keys) {
+            pCopy->setObjectForKey(key, this->objectForKey(key));
+        }
+        pCopy->autorelease();
+        return pCopy;
+    }
+    return nullptr;
 }
 
 MW_FRAMEWORK_END

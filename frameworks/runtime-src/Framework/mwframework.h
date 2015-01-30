@@ -7,6 +7,7 @@
 // some common interface.
 #include "base/IUncopyable.h"
 #include "base/IUninheritable.h"
+#include "base/ICloneable.h"
 // common usages.
 #include "base/MWBinaryData.h"
 // error handler.
@@ -14,9 +15,11 @@
 // framework data structures.
 #include "base/MWDictionary.h"
 #include "base/MWArrayList.h"
-#include "base/MWLinkedList.h"
+#include "base/MWQueue.h"
+#include "base/MWStack.h"
 
 #include "scheme/MWGameScene.h"
 #include "scheme/MWViewController.h"
+#include "scheme/MWGameLayer.h"
 
 #endif

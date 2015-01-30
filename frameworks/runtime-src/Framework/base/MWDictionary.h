@@ -9,6 +9,7 @@
 
 #include "base/CCRef.h"
 #include "FrameworkMacros.h"
+#include "ICloneable.h"
 #include <unordered_map>
 #include <vector>
 #include <string>
@@ -20,7 +21,7 @@ class MWMutex;
 /**
  * Dictionary data structure.
  */
-class MW_DLL MWDictionary : public cocos2d::Ref
+class MW_DLL MWDictionary : public cocos2d::Ref, public ICloneable<MWDictionary>
 {
 public:
     /**
@@ -65,10 +66,10 @@ public:
      *
      * @return Dictionary value.
      */
-    double numberForKey(const std::string &key) const MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
-    bool booleanForKey(const std::string &key) const MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
-    std::string stringForKey(const std::string &key) const MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
-    cocos2d::Ref *objectForKey(const std::string &key) const MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
+    double numberForKey(const std::string &key) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
+    bool booleanForKey(const std::string &key) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
+    std::string stringForKey(const std::string &key) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
+    cocos2d::Ref *objectForKey(const std::string &key) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
     
     /**
      * Remove the pair of the specified key, you will get a false if there is no such key.
@@ -84,16 +85,29 @@ public:
     void clear();
     
     /**
+     * Whether the map contains the specified key?
+     */
+    bool hasKey(const std::string &key);
+    
+    /**
      * Get the pairs count of the map.
      */
-    MW_UINT count();
+    inline MW_UINT count()
+    {
+        return _innerMap.size();
+    }
     /**
      * Whether the map is empty?
      */
     inline bool empty()
     {
-        return this->count() <= 0;
+        return _innerMap.empty();
     }
+    
+    /**
+     * ICloneable overrides.
+     */
+    MWDictionary *clone() override;
     
 protected:
     std::unordered_map<std::string, cocos2d::Ref*> _innerMap;

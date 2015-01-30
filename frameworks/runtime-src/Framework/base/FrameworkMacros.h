@@ -16,6 +16,7 @@
 #define MW_UINT unsigned int
 #define MW_USHORT unsigned short
 #define MW_BYTE unsigned char
+#define MW_RAW_DATA void *
 
 /**
  * Mark as deprecated.

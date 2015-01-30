@@ -9,6 +9,7 @@
 
 #include "base/CCRef.h"
 #include "FrameworkMacros.h"
+#include "ICloneable.h"
 #include <vector>
 #include <string>
 
@@ -17,7 +18,7 @@ MW_FRAMEWORK_BEGIN
 /**
  * Linear list data structure.
  */
-class MW_DLL MWArrayList : public cocos2d::Ref
+class MW_DLL MWArrayList : public cocos2d::Ref, public ICloneable<MWArrayList>
 {
 public:
     /**
@@ -77,11 +78,47 @@ public:
      *
      * @return List value at the index.
      */
-    double numberAtIndex(MW_UINT index) const MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
-    bool booleanAtIndex(MW_UINT index) const MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
-    std::string stringAtIndex(MW_UINT index) const MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
-    cocos2d::Ref *objectAtIndex(MW_UINT index) const MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
+    double numberAtIndex(MW_UINT index) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
+    bool booleanAtIndex(MW_UINT index) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
+    std::string stringAtIndex(MW_UINT index) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
+    cocos2d::Ref *objectAtIndex(MW_UINT index) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
     
+    /**
+     * Overload methods to get the first index of the specified value.
+     * @note It will return -1 if it's not found.
+     *
+     * @param obj Object to consult.
+     *
+     * @return Consult result.
+     */
+    MW_UINT indexOfObject(double obj);
+    MW_UINT indexOfObject(bool obj);
+    MW_UINT indexOfObject(const std::string &obj);
+    MW_UINT indexOfObject(cocos2d::Ref *obj);
+    /**
+     * Overload methods to get the last index of the specified value.
+     * @note It will return -1 if it's not found.
+     *
+     * @param obj Object to consult.
+     *
+     * @return Consult result.
+     */
+    MW_UINT lastIndexOfObject(double obj);
+    MW_UINT lastIndexOfObject(bool obj);
+    MW_UINT lastIndexOfObject(const std::string &obj);
+    MW_UINT lastIndexOfObject(cocos2d::Ref *obj);
+    
+    /**
+     * Overload methods to remove specified object in the list.
+     *
+     * @param obj Object to remove.
+     *
+     * @return Remove result.
+     */
+    bool removeObject(double obj);
+    bool removeObject(bool obj);
+    bool removeObject(const std::string &obj);
+    bool removeObject(cocos2d::Ref *obj);
     /**
      * Remove object at specified index, you will get a false if the index is out of range.
      *
@@ -89,7 +126,7 @@ public:
      *
      * @return Remove result.
      */
-    bool removeObjectAtIndex(MW_UINT index);
+    bool removeObjectAtIndex(MW_UINT index) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
     /**
      * Clear all objects.
      */
@@ -98,14 +135,22 @@ public:
     /**
      * Get the elements count of the list.
      */
-    MW_UINT count();
+    inline MW_UINT count()
+    {
+        return _innerVector.size();
+    }
     /**
      * Whether the list is empty?
      */
     inline bool empty()
     {
-        return this->count() <= 0;
+        return _innerVector.empty();
     }
+    
+    /**
+     * ICloneable overrides.
+     */
+    MWArrayList *clone() override;
     
 protected:
     std::vector<cocos2d::Ref*> _innerVector;
