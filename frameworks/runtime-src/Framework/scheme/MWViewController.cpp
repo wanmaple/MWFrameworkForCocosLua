@@ -2,8 +2,6 @@
 #include "cocos2d.h"
 #include "MWGameScene.h"
 #include "MWGameLayer.h"
-#include "../base/MWException.h"
-#include "../base/FrameworkErrors.h"
 #include <new>
 
 using namespace cocos2d;

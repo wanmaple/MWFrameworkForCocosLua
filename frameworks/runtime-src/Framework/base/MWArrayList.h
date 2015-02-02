@@ -150,7 +150,7 @@ public:
     /**
      * ICloneable overrides.
      */
-    MWArrayList *clone() override;
+    virtual MWArrayList *clone() override;
     
 protected:
     std::vector<cocos2d::Ref*> _innerVector;

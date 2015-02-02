@@ -11,15 +11,13 @@
 #include "base/CCVector.h"
 #include "base/CCMap.h"
 #include "2d/CCScene.h"
-#include "../base/FrameworkMacros.h"
+#include "../base/mwbase.h"
 #include <map>
 #include <string>
 
 MW_FRAMEWORK_BEGIN
 
 class MWViewController;
-class MWDictionary;
-class MWArrayList;
 
 /**
  * Basic game scene of the framework.
@@ -84,7 +82,8 @@ public:
     cocos2d::Ref *getRefParameter(const std::string &key) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
     
     /**
-     * Load a view controller to the scene.
+     * Segue a view controller from the root view controller with the way of overlapping.
+     * @note The behavior is to load a view controller as the child of the root view controller, so when you call this method, you should know what you are doing.
      *
      * @param controller The view controller to load.
      */
@@ -117,6 +116,8 @@ protected:
     
     MWDictionary *_params;
     MWArrayList *_viewControllers;
+    
+    MWViewController *_rootViewController;  // root view controller. the brain to manage other view controllers.
 };
 
 MW_FRAMEWORK_END

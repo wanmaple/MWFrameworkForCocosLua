@@ -21,6 +21,8 @@
 		33BC56371A7B933000EBCA2A /* MWQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 33BC56351A7B933000EBCA2A /* MWQueue.cpp */; };
 		33BC563A1A7B99D400EBCA2A /* MWStack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 33BC56381A7B99D400EBCA2A /* MWStack.cpp */; };
 		33BC563F1A7BA39B00EBCA2A /* MWGameLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 33BC563D1A7BA39B00EBCA2A /* MWGameLayer.cpp */; };
+		33C73FF41A7F1BED0057DA34 /* MWLuaUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 33C73FF21A7F1BED0057DA34 /* MWLuaUtils.cpp */; };
+		33C73FF71A7F34B00057DA34 /* MWTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 33C73FF51A7F34B00057DA34 /* MWTree.cpp */; };
 		5023811817EBBCAC00990C9B /* AppController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5023810817EBBCAC00990C9B /* AppController.mm */; };
 		5023811917EBBCAC00990C9B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5023810917EBBCAC00990C9B /* Default-568h@2x.png */; };
 		5023811A17EBBCAC00990C9B /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 5023810A17EBBCAC00990C9B /* Default.png */; };
@@ -152,6 +154,11 @@
 		33BC56391A7B99D400EBCA2A /* MWStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWStack.h; sourceTree = "<group>"; };
 		33BC563D1A7BA39B00EBCA2A /* MWGameLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWGameLayer.cpp; sourceTree = "<group>"; };
 		33BC563E1A7BA39B00EBCA2A /* MWGameLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWGameLayer.h; sourceTree = "<group>"; };
+		33C73FF01A7F1A190057DA34 /* mwbase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mwbase.h; sourceTree = "<group>"; };
+		33C73FF21A7F1BED0057DA34 /* MWLuaUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWLuaUtils.cpp; sourceTree = "<group>"; };
+		33C73FF31A7F1BED0057DA34 /* MWLuaUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWLuaUtils.h; sourceTree = "<group>"; };
+		33C73FF51A7F34B00057DA34 /* MWTree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWTree.cpp; sourceTree = "<group>"; };
+		33C73FF61A7F34B00057DA34 /* MWTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWTree.h; sourceTree = "<group>"; };
 		5023810717EBBCAC00990C9B /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppController.h; sourceTree = "<group>"; };
 		5023810817EBBCAC00990C9B /* AppController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppController.mm; sourceTree = "<group>"; };
 		5023810917EBBCAC00990C9B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -277,6 +284,8 @@
 				33BC56361A7B933000EBCA2A /* MWQueue.h */,
 				33BC56381A7B99D400EBCA2A /* MWStack.cpp */,
 				33BC56391A7B99D400EBCA2A /* MWStack.h */,
+				33C73FF51A7F34B00057DA34 /* MWTree.cpp */,
+				33C73FF61A7F34B00057DA34 /* MWTree.h */,
 			);
 			name = containers;
 			sourceTree = "<group>";
@@ -288,6 +297,15 @@
 				33B78CC01A7A3A7A003FC84B /* MWException.h */,
 			);
 			name = exceptions;
+			sourceTree = "<group>";
+		};
+		33C73FF11A7F1BDE0057DA34 /* lua */ = {
+			isa = PBXGroup;
+			children = (
+				33C73FF21A7F1BED0057DA34 /* MWLuaUtils.cpp */,
+				33C73FF31A7F1BED0057DA34 /* MWLuaUtils.h */,
+			);
+			path = lua;
 			sourceTree = "<group>";
 		};
 		5023810617EBBCAC00990C9B /* ios */ = {
@@ -346,6 +364,7 @@
 			children = (
 				78C738821A77F17A0028FC3A /* base */,
 				78C7387D1A77EF8F0028FC3A /* scheme */,
+				33C73FF11A7F1BDE0057DA34 /* lua */,
 				78C738811A77F0B70028FC3A /* mwframework.h */,
 			);
 			name = Framework;
@@ -377,6 +396,7 @@
 				78C738921A77F7440028FC3A /* IUncopyable.h */,
 				78C738931A77F7440028FC3A /* IUninheritable.h */,
 				33BC56341A7B31B300EBCA2A /* ICloneable.h */,
+				33C73FF01A7F1A190057DA34 /* mwbase.h */,
 			);
 			path = base;
 			sourceTree = "<group>";
@@ -665,7 +685,9 @@
 				33B78CB91A790DF9003FC84B /* MWDictionary.cpp in Sources */,
 				33BC56371A7B933000EBCA2A /* MWQueue.cpp in Sources */,
 				33B78CC11A7A3A7A003FC84B /* MWException.cpp in Sources */,
+				33C73FF41A7F1BED0057DA34 /* MWLuaUtils.cpp in Sources */,
 				F293BB9C15EB831F00256477 /* AppDelegate.cpp in Sources */,
+				33C73FF71A7F34B00057DA34 /* MWTree.cpp in Sources */,
 				5023812417EBBCAC00990C9B /* main.m in Sources */,
 				78C738941A77F7440028FC3A /* MWBinaryData.cpp in Sources */,
 				33BC563A1A7B99D400EBCA2A /* MWStack.cpp in Sources */,

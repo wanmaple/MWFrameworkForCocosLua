@@ -15,6 +15,9 @@
 
 MW_FRAMEWORK_BEGIN
 
+/**
+ * Stack data structure.
+ */
 class MW_DLL MWStack : public cocos2d::Ref, public ICloneable<MWStack>
 {
 public:
@@ -78,7 +81,7 @@ public:
     /**
      * ICloneable overrides.
      */
-    MWStack *clone() override;
+    virtual MWStack *clone() override;
     
 protected:
     std::vector<cocos2d::Ref*> _innerStack;

@@ -107,7 +107,7 @@ public:
     /**
      * ICloneable overrides.
      */
-    MWDictionary *clone() override;
+    virtual MWDictionary *clone() override;
     
 protected:
     std::unordered_map<std::string, cocos2d::Ref*> _innerMap;

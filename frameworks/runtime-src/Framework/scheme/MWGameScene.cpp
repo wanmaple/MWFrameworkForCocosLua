@@ -2,10 +2,7 @@
 #include "cocos2d.h"
 #include "MWViewController.h"
 #include "MWGameLayer.h"
-#include "../base/MWException.h"
-#include "../base/FrameworkErrors.h"
-#include "../base/MWDictionary.h"
-#include "../base/MWArrayList.h"
+#include "../lua/MWLuaUtils.h"
 #include <new>
 
 using namespace cocos2d;
@@ -38,7 +35,9 @@ MWGameScene *MWGameScene::createWithParams(mwframework::MWDictionary *params)
 bool MWGameScene::init(MWDictionary *params)
 {
     _viewControllers = new (nothrow) MWArrayList();
-    if (_params && _viewControllers) {
+    _rootViewController = MWViewController::create();
+    if (_params && _viewControllers && _rootViewController) {
+        this->loadViewController(_rootViewController);
         if (params) {
             _params = params->clone();
             // the copy is autoreleased.
@@ -56,6 +55,7 @@ bool MWGameScene::init(MWDictionary *params)
 MWGameScene::MWGameScene()
 : _params(nullptr)
 , _viewControllers(nullptr)
+, _rootViewController(nullptr)
 {
     
 }
@@ -64,15 +64,32 @@ MWGameScene::~MWGameScene()
 {
     CC_SAFE_RELEASE(_params);
     CC_SAFE_RELEASE(_viewControllers);
+    CC_SAFE_RELEASE(_rootViewController);
 }
 
 void MWGameScene::onEnter()
 {
     Scene::onEnter();
+    
+#if CC_ENABLE_SCRIPT_BINDING
+    if (_scriptType == kScriptTypeLua) {
+        MWLuaUtils::getInstance()->executePeertableFunction(this, "onEnter", nullptr, nullptr, false);
+    } else if (_scriptType == kScriptTypeJavascript) {
+        // js todo
+    }
+#endif
 }
 
 void MWGameScene::onExit()
 {
+#if CC_ENABLE_SCRIPT_BINDING
+    if (_scriptType == kScriptTypeLua) {
+        MWLuaUtils::getInstance()->executePeertableFunction(this, "onExit", nullptr, nullptr, false);
+    } else if (_scriptType == kScriptTypeJavascript) {
+        // js todo
+    }
+#endif
+    
     // unload all view controllers.
     this->unloadAllViewControllers();
     
@@ -82,10 +99,26 @@ void MWGameScene::onExit()
 void MWGameScene::onEnterTransitionDidFinish()
 {
     Scene::onEnterTransitionDidFinish();
+    
+#if CC_ENABLE_SCRIPT_BINDING
+    if (_scriptType == kScriptTypeLua) {
+        MWLuaUtils::getInstance()->executePeertableFunction(this, "onEnterTransitionDidFinish", nullptr, nullptr, false);
+    } else if (_scriptType == kScriptTypeJavascript) {
+        // js todo
+    }
+#endif
 }
 
 void MWGameScene::onExitTransitionDidStart()
 {
+#if CC_ENABLE_SCRIPT_BINDING
+    if (_scriptType == kScriptTypeLua) {
+        MWLuaUtils::getInstance()->executePeertableFunction(this, "onExitTransitionDidStart", nullptr, nullptr, false);
+    } else if (_scriptType == kScriptTypeJavascript) {
+        // js todo
+    }
+#endif
+    
     Scene::onExitTransitionDidStart();
 }
 
@@ -135,8 +168,10 @@ void MWGameScene::loadViewController(mwframework::MWViewController *controller) 
     if (!controller) {
         MW_THROW_EXCEPTION(1006);
     }
+    controller->_scene = this;
     controller->viewDidLoad();
     this->addChild(controller->view());
+    _viewControllers->appendObject(controller);
 }
 
 void MWGameScene::unloadViewController(mwframework::MWViewController *controller) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION)
@@ -147,6 +182,7 @@ void MWGameScene::unloadViewController(mwframework::MWViewController *controller
     }
     if (_viewControllers->indexOfObject(controller) > 0) {
         controller->view()->removeFromParent();
+        controller->_scene = nullptr;
         controller->viewDidUnload();
         _viewControllers->removeObject(controller);
     }
@@ -182,6 +218,7 @@ void MWGameScene::unloadAllViewControllers()
         pVc = static_cast<MWViewController*>(_viewControllers->objectAtIndex(0));
         this->unloadViewController(pVc);
     }
+    _viewControllers->clear();
 }
 
 MW_FRAMEWORK_END

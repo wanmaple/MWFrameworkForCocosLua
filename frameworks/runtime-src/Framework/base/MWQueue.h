@@ -15,6 +15,9 @@
 
 MW_FRAMEWORK_BEGIN
 
+/**
+ * Linked queue data structure.
+ */
 class MW_DLL MWQueue : public cocos2d::Ref, public ICloneable<MWQueue>
 {
 public:
@@ -78,7 +81,7 @@ public:
     /**
      * ICloneable overrides.
      */
-    MWQueue *clone() override;
+    virtual MWQueue *clone() override;
     
 protected:
     std::list<cocos2d::Ref*> _innerQueue;

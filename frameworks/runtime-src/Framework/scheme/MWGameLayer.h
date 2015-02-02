@@ -8,7 +8,7 @@
 #define __SCHEME_GAME_LAYER__
 
 #include "2d/CCLayer.h"
-#include "../base/FrameworkMacros.h"
+#include "../base/mwbase.h"
 
 MW_FRAMEWORK_BEGIN
 

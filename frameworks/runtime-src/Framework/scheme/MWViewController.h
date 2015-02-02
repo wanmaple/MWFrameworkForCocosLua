@@ -8,7 +8,7 @@
 #define __SCHEME_VIEW_CONTROLLER__
 
 #include "base/CCRef.h"
-#include "../base/FrameworkMacros.h"
+#include "../base/mwbase.h"
 #include <string>
 
 MW_FRAMEWORK_BEGIN
@@ -38,6 +38,7 @@ class MWGameScene;
  */
 class MW_DLL MWViewController : public cocos2d::Ref, public IViewControllerDelegate
 {
+    friend class MWGameScene;
 public:
     /**
      * Create a view controller.
@@ -81,7 +82,7 @@ public:
      *
      * @return Related view of the view controller.
      */
-    void segueToViewController(MWViewController *viewController);
+    void segueToViewController(MWViewController *viewController)
     
     /**
      * IViewControllerDelegate overrides
