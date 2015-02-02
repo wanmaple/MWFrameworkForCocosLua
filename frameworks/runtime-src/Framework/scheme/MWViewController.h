@@ -82,7 +82,7 @@ public:
      *
      * @return Related view of the view controller.
      */
-    void segueToViewController(MWViewController *viewController)
+    void segueToViewController(MWViewController *viewController);
     
     /**
      * IViewControllerDelegate overrides
