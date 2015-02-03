@@ -1,7 +1,7 @@
 #include "MWViewController.h"
-#include "cocos2d.h"
 #include "MWGameScene.h"
-#include "MWGameLayer.h"
+#include "MWGameView.h"
+#include "../lua/MWLuaUtils.h"
 #include <new>
 
 using namespace cocos2d;
@@ -27,6 +27,63 @@ bool MWViewController::initWithIdentifier(const std::string &identifier)
     }
     _identifer = identifier;
     return true;
+}
+
+MWViewController::MWViewController()
+: _scene(nullptr)
+, _view(nullptr)
+, _identifer()
+, _scriptType(kScriptTypeNone)
+{
+#if CC_ENABLE_SCRIPT_BINDING
+    ScriptEngineProtocol *pEngine = ScriptEngineManager::getInstance()->getScriptEngine();
+    if (pEngine) {
+        _scriptType = pEngine->getScriptType();
+    }
+#endif
+}
+
+MWViewController::~MWViewController()
+{
+    CC_SAFE_RELEASE(_view);
+}
+
+void MWViewController::viewDidLoad()
+{
+    if (!_view) {
+        _view = MWGameView::create();
+        _view->retain();
+        _view->_controller = this;
+    }
+    
+#if CC_ENABLE_SCRIPT_BINDING
+    if (_scriptType == kScriptTypeLua) {
+        MWLuaUtils::getInstance()->executePeertableFunction(this, "viewDidLoad", nullptr, nullptr, false);
+    } else if (_scriptType == kScriptTypeJavascript) {
+        // js todo
+    }
+#endif
+}
+
+void MWViewController::viewDidUnload()
+{
+#if CC_ENABLE_SCRIPT_BINDING
+    if (_scriptType == kScriptTypeLua) {
+        MWLuaUtils::getInstance()->executePeertableFunction(this, "viewDidUnload", nullptr, nullptr, false);
+    } else if (_scriptType == kScriptTypeJavascript) {
+        // js todo
+    }
+#endif
+    
+    if (_view && _view->getParent() && _view->_controller) {
+        _view->removeFromParent();
+        _view->_controller = nullptr;
+    }
+}
+
+void MWViewController::didReceiveMemoryWarning()
+{
+    
 }
 
 MW_FRAMEWORK_END

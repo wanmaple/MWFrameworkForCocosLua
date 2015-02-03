@@ -4,8 +4,8 @@
  Date: 1/28/2014
  ******************************/
 
-#ifndef __BASE_IUNINHERITABLE__
-#define __BASE_IUNINHERITABLE__
+#ifndef __BASE_UNINHERITABLE__
+#define __BASE_UNINHERITABLE__
 
 #include "FrameworkMacros.h"
 

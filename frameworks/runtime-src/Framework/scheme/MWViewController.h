@@ -7,7 +7,7 @@
 #ifndef __SCHEME_VIEW_CONTROLLER__
 #define __SCHEME_VIEW_CONTROLLER__
 
-#include "base/CCRef.h"
+#include "cocos2d.h"
 #include "../base/mwbase.h"
 #include <string>
 
@@ -22,15 +22,11 @@ public:
      * Notified when the view is already loaded, do some ui initialization here.
      */
     virtual void viewDidLoad() = 0;
-    virtual void viewWillAppear() = 0;
-    virtual void viewDidAppear() = 0;
-    virtual void viewWillDisappear() = 0;
-    virtual void viewDidDisappear() = 0;
     virtual void viewDidUnload() = 0;
     virtual void didReceiveMemoryWarning() = 0;
 };
 
-class MWGameLayer;
+class MWGameView;
 class MWGameScene;
 
 /**
@@ -50,6 +46,15 @@ public:
     static MWViewController *create(const std::string &identifier = "");
     
     /**
+     * MWViewController constructor.
+     */
+    MWViewController();
+    /**
+     * MWViewController destructor.
+     */
+    virtual ~MWViewController();
+    
+    /**
      * Get admin scene.
      *
      * @return Admin scene of the view controller.
@@ -63,11 +68,14 @@ public:
      *
      * @return Related view of the view controller.
      */
-    inline MWGameLayer *view() const
+    inline MWGameView *view() const
     {
         return _view;
     }
     
+    /**
+     * Identifier getter and setter.
+     */
     inline std::string getIdentifier() const
     {
         return _identifer;
@@ -78,20 +86,9 @@ public:
     }
     
     /**
-     * Show a child view.
-     *
-     * @return Related view of the view controller.
-     */
-    void segueToViewController(MWViewController *viewController);
-    
-    /**
      * IViewControllerDelegate overrides
      */
     virtual void viewDidLoad() override;
-    virtual void viewWillAppear() override;
-    virtual void viewDidAppear() override;
-    virtual void viewWillDisappear() override;
-    virtual void viewDidDisappear() override;
     virtual void viewDidUnload() override;
     virtual void didReceiveMemoryWarning() override;
     
@@ -99,8 +96,12 @@ protected:
     virtual bool initWithIdentifier(const std::string &identifier);
     
     MWGameScene *_scene;
-    MWGameLayer *_view;
+    MWGameView *_view;
     std::string _identifer;
+    
+#if CC_ENABLE_SCRIPT_BINDING
+    cocos2d::ccScriptType _scriptType;         // type of script binding, lua or javascript
+#endif
 };
 
 MW_FRAMEWORK_END

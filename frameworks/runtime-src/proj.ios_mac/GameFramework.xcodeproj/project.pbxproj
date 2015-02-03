@@ -16,11 +16,12 @@
 		15AECE29195D482800907DB0 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15AECE28195D482800907DB0 /* MediaPlayer.framework */; };
 		1AF4C403178663F200122817 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AF4C402178663F200122817 /* libz.dylib */; };
 		33125B1A1A7A53B80030DD61 /* MWArrayList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 33125B181A7A53B80030DD61 /* MWArrayList.cpp */; };
+		3382D9F71A80F64C00A3702F /* FrameworkErrors.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3382D9F61A80F64C00A3702F /* FrameworkErrors.cpp */; };
 		33B78CB91A790DF9003FC84B /* MWDictionary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 33B78CB71A790DF9003FC84B /* MWDictionary.cpp */; };
 		33B78CC11A7A3A7A003FC84B /* MWException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 33B78CBF1A7A3A7A003FC84B /* MWException.cpp */; };
 		33BC56371A7B933000EBCA2A /* MWQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 33BC56351A7B933000EBCA2A /* MWQueue.cpp */; };
 		33BC563A1A7B99D400EBCA2A /* MWStack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 33BC56381A7B99D400EBCA2A /* MWStack.cpp */; };
-		33BC563F1A7BA39B00EBCA2A /* MWGameLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 33BC563D1A7BA39B00EBCA2A /* MWGameLayer.cpp */; };
+		33BC563F1A7BA39B00EBCA2A /* MWGameView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 33BC563D1A7BA39B00EBCA2A /* MWGameView.cpp */; };
 		33C73FF41A7F1BED0057DA34 /* MWLuaUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 33C73FF21A7F1BED0057DA34 /* MWLuaUtils.cpp */; };
 		33C73FF71A7F34B00057DA34 /* MWTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 33C73FF51A7F34B00057DA34 /* MWTree.cpp */; };
 		5023811817EBBCAC00990C9B /* AppController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5023810817EBBCAC00990C9B /* AppController.mm */; };
@@ -142,6 +143,7 @@
 		1AF4C402178663F200122817 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		33125B181A7A53B80030DD61 /* MWArrayList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWArrayList.cpp; sourceTree = "<group>"; };
 		33125B191A7A53B80030DD61 /* MWArrayList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWArrayList.h; sourceTree = "<group>"; };
+		3382D9F61A80F64C00A3702F /* FrameworkErrors.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FrameworkErrors.cpp; sourceTree = "<group>"; };
 		33B78CB71A790DF9003FC84B /* MWDictionary.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWDictionary.cpp; sourceTree = "<group>"; };
 		33B78CB81A790DF9003FC84B /* MWDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWDictionary.h; sourceTree = "<group>"; };
 		33B78CBF1A7A3A7A003FC84B /* MWException.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWException.cpp; sourceTree = "<group>"; };
@@ -152,8 +154,8 @@
 		33BC56361A7B933000EBCA2A /* MWQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWQueue.h; sourceTree = "<group>"; };
 		33BC56381A7B99D400EBCA2A /* MWStack.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWStack.cpp; sourceTree = "<group>"; };
 		33BC56391A7B99D400EBCA2A /* MWStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWStack.h; sourceTree = "<group>"; };
-		33BC563D1A7BA39B00EBCA2A /* MWGameLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWGameLayer.cpp; sourceTree = "<group>"; };
-		33BC563E1A7BA39B00EBCA2A /* MWGameLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWGameLayer.h; sourceTree = "<group>"; };
+		33BC563D1A7BA39B00EBCA2A /* MWGameView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWGameView.cpp; sourceTree = "<group>"; };
+		33BC563E1A7BA39B00EBCA2A /* MWGameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWGameView.h; sourceTree = "<group>"; };
 		33C73FF01A7F1A190057DA34 /* mwbase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mwbase.h; sourceTree = "<group>"; };
 		33C73FF21A7F1BED0057DA34 /* MWLuaUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWLuaUtils.cpp; sourceTree = "<group>"; };
 		33C73FF31A7F1BED0057DA34 /* MWLuaUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWLuaUtils.h; sourceTree = "<group>"; };
@@ -378,8 +380,8 @@
 				78C7387F1A77EF9B0028FC3A /* MWGameScene.h */,
 				78C738841A77F4100028FC3A /* MWViewController.cpp */,
 				78C738851A77F4100028FC3A /* MWViewController.h */,
-				33BC563D1A7BA39B00EBCA2A /* MWGameLayer.cpp */,
-				33BC563E1A7BA39B00EBCA2A /* MWGameLayer.h */,
+				33BC563D1A7BA39B00EBCA2A /* MWGameView.cpp */,
+				33BC563E1A7BA39B00EBCA2A /* MWGameView.h */,
 			);
 			path = scheme;
 			sourceTree = "<group>";
@@ -392,6 +394,7 @@
 				78C738871A77F7440028FC3A /* MWBinaryData.cpp */,
 				78C738881A77F7440028FC3A /* MWBinaryData.h */,
 				78C738891A77F7440028FC3A /* FrameworkMacros.h */,
+				3382D9F61A80F64C00A3702F /* FrameworkErrors.cpp */,
 				33B78CC21A7A4DF7003FC84B /* FrameworkErrors.h */,
 				78C738921A77F7440028FC3A /* IUncopyable.h */,
 				78C738931A77F7440028FC3A /* IUninheritable.h */,
@@ -679,7 +682,7 @@
 			files = (
 				78C738861A77F4100028FC3A /* MWViewController.cpp in Sources */,
 				33125B1A1A7A53B80030DD61 /* MWArrayList.cpp in Sources */,
-				33BC563F1A7BA39B00EBCA2A /* MWGameLayer.cpp in Sources */,
+				33BC563F1A7BA39B00EBCA2A /* MWGameView.cpp in Sources */,
 				78C738801A77EF9B0028FC3A /* MWGameScene.cpp in Sources */,
 				5023812517EBBCAC00990C9B /* RootViewController.mm in Sources */,
 				33B78CB91A790DF9003FC84B /* MWDictionary.cpp in Sources */,
@@ -692,6 +695,7 @@
 				78C738941A77F7440028FC3A /* MWBinaryData.cpp in Sources */,
 				33BC563A1A7B99D400EBCA2A /* MWStack.cpp in Sources */,
 				5023811817EBBCAC00990C9B /* AppController.mm in Sources */,
+				3382D9F71A80F64C00A3702F /* FrameworkErrors.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

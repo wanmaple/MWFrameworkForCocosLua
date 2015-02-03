@@ -1,7 +1,7 @@
 #include "MWGameScene.h"
 #include "cocos2d.h"
 #include "MWViewController.h"
-#include "MWGameLayer.h"
+#include "MWGameView.h"
 #include "../lua/MWLuaUtils.h"
 #include <new>
 

@@ -7,7 +7,7 @@
 // core scheme.
 #include "scheme/MWGameScene.h"
 #include "scheme/MWViewController.h"
-#include "scheme/MWGameLayer.h"
+#include "scheme/MWGameView.h"
 
 // lua related.
 #include "lua/MWLuaUtils.h"
