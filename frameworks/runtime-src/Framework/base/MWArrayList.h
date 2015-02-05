@@ -7,7 +7,7 @@
 #ifndef __BASE_ARRAYLIST__
 #define __BASE_ARRAYLIST__
 
-#include "base/CCRef.h"
+#include "MWObject.h"
 #include "FrameworkMacros.h"
 #include "ICloneable.h"
 #include <vector>
@@ -18,7 +18,7 @@ MW_FRAMEWORK_BEGIN
 /**
  * Linear list data structure.
  */
-class MW_DLL MWArrayList : public cocos2d::Ref, public ICloneable<MWArrayList>
+class MW_DLL MWArrayList : public MWObject, public ICloneable<MWArrayList>
 {
 public:
     /**

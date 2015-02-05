@@ -7,7 +7,7 @@
 #ifndef __BASE_QUEUE__
 #define __BASE_QUEUE__
 
-#include "base/CCRef.h"
+#include "MWObject.h"
 #include "FrameworkMacros.h"
 #include "ICloneable.h"
 #include <list>
@@ -18,7 +18,7 @@ MW_FRAMEWORK_BEGIN
 /**
  * Linked queue data structure.
  */
-class MW_DLL MWQueue : public cocos2d::Ref, public ICloneable<MWQueue>
+class MW_DLL MWQueue : public MWObject, public ICloneable<MWQueue>
 {
 public:
     /**

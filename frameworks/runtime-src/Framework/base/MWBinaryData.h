@@ -9,6 +9,7 @@
 
 #include "base/CCRef.h"
 #include "FrameworkMacros.h"
+#include "MWObject.h"
 #include "IUncopyable.h"
 #include "IUninheritable.h"
 #include <memory>
@@ -18,7 +19,7 @@ MW_FRAMEWORK_BEGIN
 /**
  * Wrapper of binary data.
  */
-class MW_DLL MWBinaryData : public cocos2d::Ref, MW_UNCOPYABLE, MW_UNINHERITABLE(MWBinaryData)
+class MW_DLL MWBinaryData : public MWObject, MW_UNCOPYABLE, MW_UNINHERITABLE(MWBinaryData)
 {
 public:
     /**

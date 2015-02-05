@@ -17,6 +17,7 @@
 		1AF4C403178663F200122817 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AF4C402178663F200122817 /* libz.dylib */; };
 		33125B1A1A7A53B80030DD61 /* MWArrayList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 33125B181A7A53B80030DD61 /* MWArrayList.cpp */; };
 		3382D9F71A80F64C00A3702F /* FrameworkErrors.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3382D9F61A80F64C00A3702F /* FrameworkErrors.cpp */; };
+		3382DA041A83966100A3702F /* MWObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3382DA021A83966100A3702F /* MWObject.cpp */; };
 		33B78CB91A790DF9003FC84B /* MWDictionary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 33B78CB71A790DF9003FC84B /* MWDictionary.cpp */; };
 		33B78CC11A7A3A7A003FC84B /* MWException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 33B78CBF1A7A3A7A003FC84B /* MWException.cpp */; };
 		33BC56371A7B933000EBCA2A /* MWQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 33BC56351A7B933000EBCA2A /* MWQueue.cpp */; };
@@ -144,6 +145,9 @@
 		33125B181A7A53B80030DD61 /* MWArrayList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWArrayList.cpp; sourceTree = "<group>"; };
 		33125B191A7A53B80030DD61 /* MWArrayList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWArrayList.h; sourceTree = "<group>"; };
 		3382D9F61A80F64C00A3702F /* FrameworkErrors.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FrameworkErrors.cpp; sourceTree = "<group>"; };
+		3382DA021A83966100A3702F /* MWObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWObject.cpp; sourceTree = "<group>"; };
+		3382DA031A83966100A3702F /* MWObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWObject.h; sourceTree = "<group>"; };
+		3382DA061A8398D000A3702F /* ISerializable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISerializable.h; sourceTree = "<group>"; };
 		33B78CB71A790DF9003FC84B /* MWDictionary.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWDictionary.cpp; sourceTree = "<group>"; };
 		33B78CB81A790DF9003FC84B /* MWDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWDictionary.h; sourceTree = "<group>"; };
 		33B78CBF1A7A3A7A003FC84B /* MWException.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWException.cpp; sourceTree = "<group>"; };
@@ -275,6 +279,17 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		3382DA051A83976000A3702F /* protocols */ = {
+			isa = PBXGroup;
+			children = (
+				78C738921A77F7440028FC3A /* IUncopyable.h */,
+				78C738931A77F7440028FC3A /* IUninheritable.h */,
+				33BC56341A7B31B300EBCA2A /* ICloneable.h */,
+				3382DA061A8398D000A3702F /* ISerializable.h */,
+			);
+			name = protocols;
+			sourceTree = "<group>";
+		};
 		33B78CB61A790DE4003FC84B /* containers */ = {
 			isa = PBXGroup;
 			children = (
@@ -389,16 +404,16 @@
 		78C738821A77F17A0028FC3A /* base */ = {
 			isa = PBXGroup;
 			children = (
+				3382DA051A83976000A3702F /* protocols */,
 				33B78CBE1A7A3A5F003FC84B /* exceptions */,
 				33B78CB61A790DE4003FC84B /* containers */,
+				3382DA021A83966100A3702F /* MWObject.cpp */,
+				3382DA031A83966100A3702F /* MWObject.h */,
 				78C738871A77F7440028FC3A /* MWBinaryData.cpp */,
 				78C738881A77F7440028FC3A /* MWBinaryData.h */,
 				78C738891A77F7440028FC3A /* FrameworkMacros.h */,
 				3382D9F61A80F64C00A3702F /* FrameworkErrors.cpp */,
 				33B78CC21A7A4DF7003FC84B /* FrameworkErrors.h */,
-				78C738921A77F7440028FC3A /* IUncopyable.h */,
-				78C738931A77F7440028FC3A /* IUninheritable.h */,
-				33BC56341A7B31B300EBCA2A /* ICloneable.h */,
 				33C73FF01A7F1A190057DA34 /* mwbase.h */,
 			);
 			path = base;
@@ -681,6 +696,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				78C738861A77F4100028FC3A /* MWViewController.cpp in Sources */,
+				3382DA041A83966100A3702F /* MWObject.cpp in Sources */,
 				33125B1A1A7A53B80030DD61 /* MWArrayList.cpp in Sources */,
 				33BC563F1A7BA39B00EBCA2A /* MWGameView.cpp in Sources */,
 				78C738801A77EF9B0028FC3A /* MWGameScene.cpp in Sources */,

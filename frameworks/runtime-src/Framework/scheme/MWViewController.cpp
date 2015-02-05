@@ -22,9 +22,6 @@ MWViewController *MWViewController::create(const std::string &identifier)
 
 bool MWViewController::initWithIdentifier(const std::string &identifier)
 {
-    if (identifier.size() <= 0) {
-        return false;
-    }
     _identifer = identifier;
     return true;
 }
@@ -33,14 +30,7 @@ MWViewController::MWViewController()
 : _scene(nullptr)
 , _view(nullptr)
 , _identifer()
-, _scriptType(kScriptTypeNone)
 {
-#if CC_ENABLE_SCRIPT_BINDING
-    ScriptEngineProtocol *pEngine = ScriptEngineManager::getInstance()->getScriptEngine();
-    if (pEngine) {
-        _scriptType = pEngine->getScriptType();
-    }
-#endif
 }
 
 MWViewController::~MWViewController()
@@ -53,7 +43,6 @@ void MWViewController::viewDidLoad()
     if (!_view) {
         _view = MWGameView::create();
         _view->retain();
-        _view->_controller = this;
     }
     
 #if CC_ENABLE_SCRIPT_BINDING
@@ -75,9 +64,8 @@ void MWViewController::viewDidUnload()
     }
 #endif
     
-    if (_view && _view->getParent() && _view->_controller) {
+    if (_view && _view->getParent()) {
         _view->removeFromParent();
-        _view->_controller = nullptr;
     }
 }
 

@@ -1,4 +1,5 @@
 #include "FrameworkErrors.h"
+#include <unordered_map>
 
 MW_FRAMEWORK_BEGIN
 

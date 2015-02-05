@@ -23,7 +23,6 @@ bool MWGameView::init()
 }
 
 MWGameView::MWGameView()
-: _controller(nullptr)
 {
     
 }

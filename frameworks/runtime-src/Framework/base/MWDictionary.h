@@ -7,7 +7,7 @@
 #ifndef __BASE_DICTIONARY__
 #define __BASE_DICTIONARY__
 
-#include "base/CCRef.h"
+#include "MWObject.h"
 #include "FrameworkMacros.h"
 #include "ICloneable.h"
 #include <unordered_map>
@@ -21,7 +21,7 @@ class MWMutex;
 /**
  * Dictionary data structure.
  */
-class MW_DLL MWDictionary : public cocos2d::Ref, public ICloneable<MWDictionary>
+class MW_DLL MWDictionary : public MWObject, public ICloneable<MWDictionary>
 {
 public:
     /**

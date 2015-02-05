@@ -8,7 +8,6 @@
 #define __FRAMEWORK_ERRORS__
 
 #include "FrameworkMacros.h"
-#include <unordered_map>
 
 MW_FRAMEWORK_BEGIN
 

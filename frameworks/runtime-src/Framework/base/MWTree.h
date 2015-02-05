@@ -7,7 +7,7 @@
 #ifndef __BASE_TREE__
 #define __BASE_TREE__
 
-#include "base/CCRef.h"
+#include "MWObject.h"
 #include "FrameworkMacros.h"
 #include "ICloneable.h"
 #include <string>
@@ -19,7 +19,7 @@ class MWArrayList;
 /**
  * Tree basic element.
  */
-class MW_DEPRECATED MWTreeNode : public cocos2d::Ref, public ICloneable<MWTreeNode>
+class MW_DEPRECATED MWTreeNode : public MWObject, public ICloneable<MWTreeNode>
 {
     friend class MWTree;
 public:

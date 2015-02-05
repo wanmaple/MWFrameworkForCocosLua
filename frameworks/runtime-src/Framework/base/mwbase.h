@@ -8,7 +8,9 @@
 #include "IUncopyable.h"
 #include "IUninheritable.h"
 #include "ICloneable.h"
+#include "ISerializable.h"
 // common usages.
+#include "MWObject.h"
 #include "MWBinaryData.h"
 // error handler.
 #include "MWException.h"

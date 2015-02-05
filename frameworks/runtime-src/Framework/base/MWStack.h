@@ -7,7 +7,7 @@
 #ifndef __BASE_STACK__
 #define __BASE_STACK__
 
-#include "base/CCRef.h"
+#include "MWObject.h"
 #include "FrameworkMacros.h"
 #include "ICloneable.h"
 #include <vector>
@@ -18,7 +18,7 @@ MW_FRAMEWORK_BEGIN
 /**
  * Stack data structure.
  */
-class MW_DLL MWStack : public cocos2d::Ref, public ICloneable<MWStack>
+class MW_DLL MWStack : public MWObject, public ICloneable<MWStack>
 {
 public:
     /**

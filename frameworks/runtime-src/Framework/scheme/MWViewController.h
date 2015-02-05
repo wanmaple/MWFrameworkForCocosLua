@@ -32,7 +32,7 @@ class MWGameScene;
 /**
  * Basic view controller of the framework.
  */
-class MW_DLL MWViewController : public cocos2d::Ref, public IViewControllerDelegate
+class MW_DLL MWViewController : public MWObject, public IViewControllerDelegate
 {
     friend class MWGameScene;
 public:
@@ -98,10 +98,6 @@ protected:
     MWGameScene *_scene;
     MWGameView *_view;
     std::string _identifer;
-    
-#if CC_ENABLE_SCRIPT_BINDING
-    cocos2d::ccScriptType _scriptType;         // type of script binding, lua or javascript
-#endif
 };
 
 MW_FRAMEWORK_END

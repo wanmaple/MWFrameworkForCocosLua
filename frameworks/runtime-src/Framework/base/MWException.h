@@ -7,14 +7,14 @@
 #ifndef __BASE_EXCEPTION__
 #define __BASE_EXCEPTION__
 
-#include "base/CCRef.h"
+#include "MWObject.h"
 #include "FrameworkMacros.h"
 #include <exception>
 #include <string>
 
 MW_FRAMEWORK_BEGIN
 
-class MW_DLL MWException : public cocos2d::Ref, public std::exception
+class MW_DLL MWException : public MWObject, public std::exception
 {
 public:
     /**
