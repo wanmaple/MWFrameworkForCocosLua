@@ -39,33 +39,16 @@ public:
     virtual ~MWGameView();
     
     /**
-     * For screen fit solutions, it will drag the top-left content to the top-left corner, top-right content to the top-right corner, bottom-left content to the bottom-left corner, and bottom-right content to the bottom-right corner.
-     *
-     * @param content The content to display.
-     * @param zOrder Z-axis value.
-     */
-    void addToTopLeft(cocos2d::Node *content, int zOrder);
-    void addToTopRight(cocos2d::Node *content, int zOrder);
-    void addToBottomLeft(cocos2d::Node *content, int zOrder);
-    void addToBottomRight(cocos2d::Node *content, int zOrder);
-    
-    /**
      * Set the background image of the view.
      *
      * @param bg Background node to display.
      */
-    void setBackground(cocos2d::Node *bg);
-    
-    virtual void sortAllChildren() override;
+    void setBackground(cocos2d::Node *bg) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
     
 protected:
     bool init();
     
     cocos2d::Node *_bg;
-    cocos2d::Layer *_topLeftCornor;
-    cocos2d::Layer *_topRightCornor;
-    cocos2d::Layer *_bottomLeftCornor;
-    cocos2d::Layer *_bottomRightCornor;
 };
 
 MW_FRAMEWORK_END
