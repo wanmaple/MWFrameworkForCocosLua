@@ -9,6 +9,7 @@
 
 #include "2d/CCNode.h"
 #include "2d/CCLayer.h"
+#include "base/CCEventListenerTouch.h"
 #include "../base/mwbase.h"
 
 MW_FRAMEWORK_BEGIN
@@ -45,10 +46,16 @@ public:
      */
     void setBackground(cocos2d::Node *bg) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
     
+    inline void setModalView(bool bModal)
+    {
+        _modalListener->setSwallowTouches(bModal);
+    }
+    
 protected:
     bool init();
     
     cocos2d::Node *_bg;
+    cocos2d::EventListenerTouchOneByOne *_modalListener;
 };
 
 MW_FRAMEWORK_END

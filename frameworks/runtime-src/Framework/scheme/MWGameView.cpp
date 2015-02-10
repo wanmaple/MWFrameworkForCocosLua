@@ -19,6 +19,11 @@ MWGameView *MWGameView::create()
 
 bool MWGameView::init()
 {
+    _modalListener = EventListenerTouchOneByOne::create();
+    _modalListener->setSwallowTouches(false);
+    
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(_modalListener, this);
+    
     return true;
 }
 
