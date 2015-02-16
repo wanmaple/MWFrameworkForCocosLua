@@ -162,13 +162,14 @@ cocos2d::Ref *MWGameScene::getRefParameter(const std::string &key) MW_NOEXCEPTIO
     return _params->objectForKey(key);
 }
 
-void MWGameScene::loadViewController(mwframework::MWViewController *controller) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION)
+void MWGameScene::loadViewController(mwframework::MWViewController *controller, bool modaled) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION)
 {
     // check parameter.
     if (!controller) {
         MW_THROW_EXCEPTION(1006);
     }
     controller->_scene = this;
+    controller->view()->setModaled(modaled);
     controller->viewDidLoad();
     this->addChild(controller->view());
     _viewControllers->appendObject(controller);

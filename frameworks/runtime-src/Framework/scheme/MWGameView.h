@@ -39,22 +39,14 @@ public:
      */
     virtual ~MWGameView();
     
-    /**
-     * Set the background image of the view.
-     *
-     * @param bg Background node to display.
-     */
-    void setBackground(cocos2d::Node *bg) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
-    
-    inline void setModalView(bool bModal)
+    inline void setModaled(bool modaled)
     {
-        _modalListener->setSwallowTouches(bModal);
+        _modalListener->setSwallowTouches(modaled);
     }
     
 protected:
     bool init();
     
-    cocos2d::Node *_bg;
     cocos2d::EventListenerTouchOneByOne *_modalListener;
 };
 

@@ -26,7 +26,7 @@ public:
     /**
      * Simply generate an unique value(by using its address).
      */
-    virtual int hash();
+    virtual MW_UINT hash();
     
 protected:
     MWObject();

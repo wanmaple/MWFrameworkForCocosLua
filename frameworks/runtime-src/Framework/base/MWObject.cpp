@@ -20,7 +20,7 @@ MWObject::~MWObject()
     
 }
 
-int MWObject::hash()
+MW_UINT MWObject::hash()
 {
     return (int)this;
 }

@@ -19,6 +19,5 @@
 #include "MWArrayList.h"
 #include "MWQueue.h"
 #include "MWStack.h"
-#include "MWTree.h"
 
 #endif

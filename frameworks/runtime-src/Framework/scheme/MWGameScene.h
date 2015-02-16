@@ -8,8 +8,6 @@
 #define __SCHEME_GAME_SCENE__
 
 #include "base/CCRef.h"
-#include "base/CCVector.h"
-#include "base/CCMap.h"
 #include "2d/CCScene.h"
 #include "../base/mwbase.h"
 #include <map>
@@ -87,7 +85,7 @@ public:
      *
      * @param controller The view controller to load.
      */
-    void loadViewController(MWViewController *controller) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
+    void loadViewController(MWViewController *controller, bool modaled = false) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
     /**
      * Unload an existed view controller of the scene.
      *
