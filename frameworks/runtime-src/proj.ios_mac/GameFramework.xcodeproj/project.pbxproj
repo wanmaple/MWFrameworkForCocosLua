@@ -44,6 +44,7 @@
 		33BC563A1A7B99D400EBCA2A /* MWStack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 33BC56381A7B99D400EBCA2A /* MWStack.cpp */; };
 		33BC563F1A7BA39B00EBCA2A /* MWGameView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 33BC563D1A7BA39B00EBCA2A /* MWGameView.cpp */; };
 		33C73FF41A7F1BED0057DA34 /* MWLuaUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 33C73FF21A7F1BED0057DA34 /* MWLuaUtils.cpp */; };
+		33D40BC11AA0794D001B8E7D /* MWNotifier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 33D40BBF1AA0794D001B8E7D /* MWNotifier.cpp */; };
 		5023811817EBBCAC00990C9B /* AppController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5023810817EBBCAC00990C9B /* AppController.mm */; };
 		5023811917EBBCAC00990C9B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5023810917EBBCAC00990C9B /* Default-568h@2x.png */; };
 		5023811A17EBBCAC00990C9B /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 5023810A17EBBCAC00990C9B /* Default.png */; };
@@ -236,6 +237,8 @@
 		33C73FF01A7F1A190057DA34 /* mwbase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mwbase.h; sourceTree = "<group>"; };
 		33C73FF21A7F1BED0057DA34 /* MWLuaUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWLuaUtils.cpp; sourceTree = "<group>"; };
 		33C73FF31A7F1BED0057DA34 /* MWLuaUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWLuaUtils.h; sourceTree = "<group>"; };
+		33D40BBF1AA0794D001B8E7D /* MWNotifier.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWNotifier.cpp; sourceTree = "<group>"; };
+		33D40BC01AA0794D001B8E7D /* MWNotifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWNotifier.h; sourceTree = "<group>"; };
 		5023810717EBBCAC00990C9B /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppController.h; sourceTree = "<group>"; };
 		5023810817EBBCAC00990C9B /* AppController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppController.mm; sourceTree = "<group>"; };
 		5023810917EBBCAC00990C9B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -600,6 +603,8 @@
 				78C738851A77F4100028FC3A /* MWViewController.h */,
 				33BC563D1A7BA39B00EBCA2A /* MWGameView.cpp */,
 				33BC563E1A7BA39B00EBCA2A /* MWGameView.h */,
+				33D40BBF1AA0794D001B8E7D /* MWNotifier.cpp */,
+				33D40BC01AA0794D001B8E7D /* MWNotifier.h */,
 			);
 			path = scheme;
 			sourceTree = "<group>";
@@ -901,6 +906,7 @@
 				78C738861A77F4100028FC3A /* MWViewController.cpp in Sources */,
 				3382DA041A83966100A3702F /* MWObject.cpp in Sources */,
 				33125B1A1A7A53B80030DD61 /* MWArrayList.cpp in Sources */,
+				33D40BC11AA0794D001B8E7D /* MWNotifier.cpp in Sources */,
 				33BC563F1A7BA39B00EBCA2A /* MWGameView.cpp in Sources */,
 				33250DC71A91E39A00D1668B /* MWJsonElement.cpp in Sources */,
 				33250DD41A91E39A00D1668B /* JSONStream.cpp in Sources */,

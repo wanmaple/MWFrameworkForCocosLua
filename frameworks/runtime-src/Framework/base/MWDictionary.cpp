@@ -63,7 +63,7 @@ void MWDictionary::setObjectForKey(const std::string &key, cocos2d::Ref *val)
         MW_THROW_EXCEPTION(1006);
     }
     // release the old object if it does exist.
-    if (!this->hasKey(key)) {
+    if (this->hasKey(key)) {
         _innerMap[key]->release();
     }
     val->retain();

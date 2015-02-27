@@ -8,6 +8,7 @@
 #include "scheme/MWGameScene.h"
 #include "scheme/MWViewController.h"
 #include "scheme/MWGameView.h"
+#include "scheme/MWNotifier.h"
 
 // db operations.
 #include "db/sqlite/MWSqliteDb.h"
