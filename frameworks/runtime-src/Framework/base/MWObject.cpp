@@ -22,7 +22,7 @@ MWObject::~MWObject()
 
 MW_UINT MWObject::hash()
 {
-    return (int)this;
+    return 0;
 }
 
 MW_FRAMEWORK_END
