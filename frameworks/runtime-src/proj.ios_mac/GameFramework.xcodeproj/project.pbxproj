@@ -296,6 +296,7 @@
 		F293B3DA15EB7BE500256477 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		F293BB7E15EB831F00256477 /* AppDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AppDelegate.cpp; path = ../Classes/AppDelegate.cpp; sourceTree = "<group>"; };
 		F293BB7F15EB831F00256477 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ../Classes/AppDelegate.h; sourceTree = "<group>"; };
+		F59B05F41AB367EF001204D1 /* MWNetService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MWNetService.h; path = net/MWNetService.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -580,6 +581,7 @@
 		78C7387C1A77EF8F0028FC3A /* Framework */ = {
 			isa = PBXGroup;
 			children = (
+				F59B05F21AB36718001204D1 /* net */,
 				33250D901A91E39A00D1668B /* json */,
 				33A37BEE1A91D3D30042CA97 /* db */,
 				78C738821A77F17A0028FC3A /* base */,
@@ -698,6 +700,14 @@
 			);
 			name = Resources;
 			path = ../Resources;
+			sourceTree = "<group>";
+		};
+		F59B05F21AB36718001204D1 /* net */ = {
+			isa = PBXGroup;
+			children = (
+				F59B05F41AB367EF001204D1 /* MWNetService.h */,
+			);
+			name = net;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
