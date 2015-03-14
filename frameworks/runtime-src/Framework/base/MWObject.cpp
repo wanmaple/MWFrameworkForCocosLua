@@ -7,7 +7,7 @@ MW_FRAMEWORK_BEGIN
 MWObject::MWObject()
 : _scriptType(kScriptTypeNone)
 {
-#if CC_ENABLE_SCRIPT_BINDING
+#if MW_ENABLE_SCRIPT_BINDING
     ScriptEngineProtocol *pEngine = ScriptEngineManager::getInstance()->getScriptEngine();
     if (pEngine) {
         _scriptType = pEngine->getScriptType();

@@ -14,7 +14,7 @@ MW_FRAMEWORK_BEGIN
 /**
  * Make object uncopyable.
  */
-class IUncopyable
+class MW_INTERFACE IUncopyable
 {
 protected:
     IUncopyable() {}

@@ -93,6 +93,12 @@
 		F293B3D915EB7BE500256477 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F293B3D815EB7BE500256477 /* Foundation.framework */; };
 		F293B3DB15EB7BE500256477 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F293B3DA15EB7BE500256477 /* CoreGraphics.framework */; };
 		F293BB9C15EB831F00256477 /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F293BB7E15EB831F00256477 /* AppDelegate.cpp */; };
+		F535359D1AB448FD00EF7298 /* MWNetRequest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F535359B1AB448FD00EF7298 /* MWNetRequest.cpp */; };
+		F53535A21AB44F1600EF7298 /* MWNetResponse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F53535A01AB44F1600EF7298 /* MWNetResponse.cpp */; };
+		F53535A51AB4512D00EF7298 /* MWNetProtocol.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F53535A31AB4512D00EF7298 /* MWNetProtocol.cpp */; };
+		F53535AD1AB455AE00EF7298 /* MWNetCenter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F53535AB1AB455AE00EF7298 /* MWNetCenter.cpp */; };
+		F53535B01AB4569A00EF7298 /* MWNetHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F53535AF1AB4569A00EF7298 /* MWNetHandler.cpp */; };
+		F53535B51AB45A4100EF7298 /* MWNetFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F53535B31AB45A4100EF7298 /* MWNetFilter.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -296,6 +302,18 @@
 		F293B3DA15EB7BE500256477 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		F293BB7E15EB831F00256477 /* AppDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AppDelegate.cpp; path = ../Classes/AppDelegate.cpp; sourceTree = "<group>"; };
 		F293BB7F15EB831F00256477 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ../Classes/AppDelegate.h; sourceTree = "<group>"; };
+		F535359B1AB448FD00EF7298 /* MWNetRequest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MWNetRequest.cpp; path = net/MWNetRequest.cpp; sourceTree = "<group>"; };
+		F535359C1AB448FD00EF7298 /* MWNetRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MWNetRequest.h; path = net/MWNetRequest.h; sourceTree = "<group>"; };
+		F53535A01AB44F1600EF7298 /* MWNetResponse.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MWNetResponse.cpp; path = net/MWNetResponse.cpp; sourceTree = "<group>"; };
+		F53535A11AB44F1600EF7298 /* MWNetResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MWNetResponse.h; path = net/MWNetResponse.h; sourceTree = "<group>"; };
+		F53535A31AB4512D00EF7298 /* MWNetProtocol.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MWNetProtocol.cpp; path = net/MWNetProtocol.cpp; sourceTree = "<group>"; };
+		F53535A41AB4512D00EF7298 /* MWNetProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MWNetProtocol.h; path = net/MWNetProtocol.h; sourceTree = "<group>"; };
+		F53535A71AB452B200EF7298 /* MWNetHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MWNetHandler.h; path = net/MWNetHandler.h; sourceTree = "<group>"; };
+		F53535AB1AB455AE00EF7298 /* MWNetCenter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MWNetCenter.cpp; path = net/MWNetCenter.cpp; sourceTree = "<group>"; };
+		F53535AC1AB455AE00EF7298 /* MWNetCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MWNetCenter.h; path = net/MWNetCenter.h; sourceTree = "<group>"; };
+		F53535AF1AB4569A00EF7298 /* MWNetHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MWNetHandler.cpp; path = net/MWNetHandler.cpp; sourceTree = "<group>"; };
+		F53535B31AB45A4100EF7298 /* MWNetFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MWNetFilter.cpp; path = net/MWNetFilter.cpp; sourceTree = "<group>"; };
+		F53535B41AB45A4100EF7298 /* MWNetFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MWNetFilter.h; path = net/MWNetFilter.h; sourceTree = "<group>"; };
 		F59B05F41AB367EF001204D1 /* MWNetService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MWNetService.h; path = net/MWNetService.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -581,10 +599,10 @@
 		78C7387C1A77EF8F0028FC3A /* Framework */ = {
 			isa = PBXGroup;
 			children = (
+				78C738821A77F17A0028FC3A /* base */,
 				F59B05F21AB36718001204D1 /* net */,
 				33250D901A91E39A00D1668B /* json */,
 				33A37BEE1A91D3D30042CA97 /* db */,
-				78C738821A77F17A0028FC3A /* base */,
 				78C7387D1A77EF8F0028FC3A /* scheme */,
 				33C73FF11A7F1BDE0057DA34 /* lua */,
 				78C738811A77F0B70028FC3A /* mwframework.h */,
@@ -705,6 +723,18 @@
 		F59B05F21AB36718001204D1 /* net */ = {
 			isa = PBXGroup;
 			children = (
+				F53535AB1AB455AE00EF7298 /* MWNetCenter.cpp */,
+				F53535AC1AB455AE00EF7298 /* MWNetCenter.h */,
+				F53535A31AB4512D00EF7298 /* MWNetProtocol.cpp */,
+				F53535A41AB4512D00EF7298 /* MWNetProtocol.h */,
+				F53535A01AB44F1600EF7298 /* MWNetResponse.cpp */,
+				F53535A11AB44F1600EF7298 /* MWNetResponse.h */,
+				F535359B1AB448FD00EF7298 /* MWNetRequest.cpp */,
+				F535359C1AB448FD00EF7298 /* MWNetRequest.h */,
+				F53535B31AB45A4100EF7298 /* MWNetFilter.cpp */,
+				F53535B41AB45A4100EF7298 /* MWNetFilter.h */,
+				F53535AF1AB4569A00EF7298 /* MWNetHandler.cpp */,
+				F53535A71AB452B200EF7298 /* MWNetHandler.h */,
 				F59B05F41AB367EF001204D1 /* MWNetService.h */,
 			);
 			name = net;
@@ -762,7 +792,7 @@
 				LastUpgradeCheck = 0500;
 				TargetAttributes = {
 					F293B3C715EB7BE500256477 = {
-						DevelopmentTeam = MDDB52YB8L;
+						DevelopmentTeam = Q989R2SM23;
 					};
 				};
 			};
@@ -924,8 +954,11 @@
 				33250DD61A91E39A00D1668B /* JSONWorker.cpp in Sources */,
 				33250DC81A91E39A00D1668B /* MWJsonFormatter.cpp in Sources */,
 				33250DD71A91E39A00D1668B /* JSONWriter.cpp in Sources */,
+				F53535A21AB44F1600EF7298 /* MWNetResponse.cpp in Sources */,
 				33250DD21A91E39A00D1668B /* JSONNode_Mutex.cpp in Sources */,
 				33B78CB91A790DF9003FC84B /* MWDictionary.cpp in Sources */,
+				F535359D1AB448FD00EF7298 /* MWNetRequest.cpp in Sources */,
+				F53535AD1AB455AE00EF7298 /* MWNetCenter.cpp in Sources */,
 				33BC56371A7B933000EBCA2A /* MWQueue.cpp in Sources */,
 				33250DCF1A91E39A00D1668B /* JSONIterators.cpp in Sources */,
 				33250DD51A91E39A00D1668B /* JSONValidator.cpp in Sources */,
@@ -939,11 +972,14 @@
 				33250DCA1A91E39A00D1668B /* MWJsonStructure.cpp in Sources */,
 				5023812417EBBCAC00990C9B /* main.m in Sources */,
 				78C738941A77F7440028FC3A /* MWBinaryData.cpp in Sources */,
+				F53535B01AB4569A00EF7298 /* MWNetHandler.cpp in Sources */,
 				33250DD31A91E39A00D1668B /* JSONPreparse.cpp in Sources */,
 				33BC563A1A7B99D400EBCA2A /* MWStack.cpp in Sources */,
 				5023811817EBBCAC00990C9B /* AppController.mm in Sources */,
+				F53535A51AB4512D00EF7298 /* MWNetProtocol.cpp in Sources */,
 				3382D9F71A80F64C00A3702F /* FrameworkErrors.cpp in Sources */,
 				33250DC91A91E39A00D1668B /* MWJsonParser.cpp in Sources */,
+				F53535B51AB45A4100EF7298 /* MWNetFilter.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1043,6 +1079,7 @@
 					"CC_LUA_ENGINE_ENABLED=1",
 					"CC_ENABLE_CHIPMUNK_INTEGRATION=1",
 					GLFW_EXPOSE_NATIVE_COCOA,
+					MW_ENABLE_SCRIPT_BINDING,
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -1065,6 +1102,7 @@
 					USE_FILE32API,
 					"CC_LUA_ENGINE_ENABLED=1",
 					"CC_ENABLE_CHIPMUNK_INTEGRATION=1",
+					MW_ENABLE_SCRIPT_BINDING,
 				);
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;

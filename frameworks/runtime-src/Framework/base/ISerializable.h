@@ -14,7 +14,7 @@ MW_FRAMEWORK_BEGIN
 /**
  * Enable to serialize the object.
  */
-class ISerializable
+class MW_INTERFACE ISerializable
 {
 public:
     virtual ~ISerializable() {}

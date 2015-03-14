@@ -8,13 +8,15 @@
 #define __NET_NET_SERVICE__
 
 #include "../base/mwbase.h"
-#include "base/CCRef.h"
 
 MW_FRAMEWORK_BEGIN
 
 class MWNetRequest;
 
-class MWNetService : public cocos2d::Ref
+/**
+ * Network service base class.
+ */
+class MWNetService : public MWObject
 {
 public:
     virtual ~MWNetService() {}

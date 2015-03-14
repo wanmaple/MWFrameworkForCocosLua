@@ -45,7 +45,7 @@ void MWViewController::viewDidLoad()
         _view->retain();
     }
     
-#if CC_ENABLE_SCRIPT_BINDING
+#if MW_ENABLE_SCRIPT_BINDING
     if (_scriptType == kScriptTypeLua) {
         MWLuaUtils::getInstance()->executePeertableFunction(this, "viewDidLoad", nullptr, nullptr, false);
     } else if (_scriptType == kScriptTypeJavascript) {
@@ -56,7 +56,7 @@ void MWViewController::viewDidLoad()
 
 void MWViewController::viewDidUnload()
 {
-#if CC_ENABLE_SCRIPT_BINDING
+#if MW_ENABLE_SCRIPT_BINDING
     if (_scriptType == kScriptTypeLua) {
         MWLuaUtils::getInstance()->executePeertableFunction(this, "viewDidUnload", nullptr, nullptr, false);
     } else if (_scriptType == kScriptTypeJavascript) {

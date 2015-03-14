@@ -13,7 +13,7 @@
 
 MW_FRAMEWORK_BEGIN
 
-class IViewControllerDelegate
+class MW_INTERFACE IViewControllerDelegate
 {
 public:
     virtual ~IViewControllerDelegate() {}

@@ -31,7 +31,7 @@ public:
 protected:
     MWObject();
     
-#if CC_ENABLE_SCRIPT_BINDING
+#if MW_ENABLE_SCRIPT_BINDING
     cocos2d::ccScriptType _scriptType;         // type of script binding, lua or javascript
 #endif
 };

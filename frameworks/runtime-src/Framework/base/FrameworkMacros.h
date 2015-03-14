@@ -8,6 +8,7 @@
 #define __FRAMEWORK_MACROS__
 
 #define MW_DLL
+#define MW_INTERFACE
 
 /**
  * Basic types.
@@ -65,8 +66,8 @@
  * Make a class singleton.
  * @note You must implement the constructor of the class, even if it is just the default one.
  */
-#define MW_SINGLETON(__TYPE__)		\
-public:		\
+#define MW_SINGLETON(__TYPE__)	\
+public:	\
 static __TYPE__* getInstance()	\
 {	\
 static __TYPE__* _instance;	\
@@ -78,6 +79,44 @@ return _instance;		\
 }	\
 protected:	\
 __TYPE__();
+
+/**
+ * Inline methods macros.
+ */
+#define MW_SYNTHESIZE(__VAR_TYPE__, __VAR_NAME__, __FUNC_NAME__)    \
+public: \
+inline __VAR_TYPE__ get##__FUNC_NAME__() const  \
+{   \
+return __VAR_NAME__;    \
+}   \
+inline void set##__FUNC_NAME__(__VAR_TYPE__ var)    \
+{   \
+__VAR_NAME__ = var; \
+}   \
+protected:  \
+__VAR_TYPE__ __VAR_NAME__;
+
+#define MW_SYNTHESIZE_PASS_BY_CONST_REF(__VAR_TYPE__, __VAR_NAME__, __FUNC_NAME__)    \
+public: \
+inline __VAR_TYPE__ get##__FUNC_NAME__() const  \
+{   \
+return __VAR_NAME__;    \
+}   \
+inline void set##__FUNC_NAME__(const __VAR_TYPE__ &var)    \
+{   \
+__VAR_NAME__ = var; \
+}   \
+protected:  \
+__VAR_TYPE__ __VAR_NAME__;
+
+#define MW_SYNTHESIZE_READONLY(__VAR_TYPE__, __VAR_NAME__, __FUNC_NAME__)   \
+public: \
+inline __VAR_TYPE__ get##__FUNC_NAME__() const  \
+{   \
+    return __VAR_NAME__;    \
+}   \
+protected:  \
+__VAR_TYPE__ __VAR_NAME__;
 
 #define MW_SUPPORT_MULTITHREADING 0
 /**

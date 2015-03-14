@@ -14,8 +14,13 @@ static std::unordered_map<int, const char*> g_errorMap = {
     { 1007, "The list value of the index is not a number value." },
     { 1008, "The list value of the index is not a boolean value." },
     { 1009, "The list value of the index is not a string value." },
+    { 1010, "Invalid object." },
     // io errors, 2001 - 3000.
     { 2001, "The file doesn't exist." },
+    // network errors, 5001 - 6000.
+    { 5002, "Unknown or unregisted network service." },
+    { 5002, "Unknown or unregisted network protocol." },
+    { 5003, "Duplicated network service." },
 };
 
 const char *GetErrorString(int errCode)

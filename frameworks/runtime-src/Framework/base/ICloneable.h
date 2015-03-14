@@ -15,7 +15,7 @@ MW_FRAMEWORK_BEGIN
  * Enable to clone the object.
  */
 template<typename T>
-class ICloneable
+class MW_INTERFACE ICloneable
 {
 public:
     virtual ~ICloneable() {}

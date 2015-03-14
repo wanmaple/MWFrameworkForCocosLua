@@ -71,7 +71,7 @@ void MWGameScene::onEnter()
 {
     Scene::onEnter();
     
-#if CC_ENABLE_SCRIPT_BINDING
+#if MW_ENABLE_SCRIPT_BINDING
     if (_scriptType == kScriptTypeLua) {
         MWLuaUtils::getInstance()->executePeertableFunction(this, "onEnter", nullptr, nullptr, false);
     } else if (_scriptType == kScriptTypeJavascript) {
@@ -82,7 +82,7 @@ void MWGameScene::onEnter()
 
 void MWGameScene::onExit()
 {
-#if CC_ENABLE_SCRIPT_BINDING
+#if MW_ENABLE_SCRIPT_BINDING
     if (_scriptType == kScriptTypeLua) {
         MWLuaUtils::getInstance()->executePeertableFunction(this, "onExit", nullptr, nullptr, false);
     } else if (_scriptType == kScriptTypeJavascript) {
@@ -100,7 +100,7 @@ void MWGameScene::onEnterTransitionDidFinish()
 {
     Scene::onEnterTransitionDidFinish();
     
-#if CC_ENABLE_SCRIPT_BINDING
+#if MW_ENABLE_SCRIPT_BINDING
     if (_scriptType == kScriptTypeLua) {
         MWLuaUtils::getInstance()->executePeertableFunction(this, "onEnterTransitionDidFinish", nullptr, nullptr, false);
     } else if (_scriptType == kScriptTypeJavascript) {
@@ -111,7 +111,7 @@ void MWGameScene::onEnterTransitionDidFinish()
 
 void MWGameScene::onExitTransitionDidStart()
 {
-#if CC_ENABLE_SCRIPT_BINDING
+#if MW_ENABLE_SCRIPT_BINDING
     if (_scriptType == kScriptTypeLua) {
         MWLuaUtils::getInstance()->executePeertableFunction(this, "onExitTransitionDidStart", nullptr, nullptr, false);
     } else if (_scriptType == kScriptTypeJavascript) {

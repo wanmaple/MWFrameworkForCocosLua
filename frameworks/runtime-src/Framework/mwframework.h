@@ -20,6 +20,12 @@
 
 // net.
 #include "net/MWNetService.h"
+#include "net/MWNetHandler.h"
+#include "net/MWNetFilter.h"
+#include "net/MWNetRequest.h"
+#include "net/MWNetResponse.h"
+#include "net/MWNetProtocol.h"
+#include "net/MWNetCenter.h"
 
 // lua related.
 #include "lua/MWLuaUtils.h"

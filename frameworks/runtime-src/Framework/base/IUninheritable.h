@@ -28,7 +28,7 @@ private:
  * Make class inheritable.
  */
 template<typename T>
-class IUninheritable : public virtual Sealed<T>		// use virtual inherit is to ensure the derived class of a sealed class must call the Sealed's constructor at first.
+class MW_INTERFACE IUninheritable : public virtual Sealed<T>		// use virtual inherit is to ensure the derived class of a sealed class must call the Sealed's constructor at first.
 {
 protected:
     IUninheritable() {}
