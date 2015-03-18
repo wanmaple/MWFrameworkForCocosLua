@@ -201,7 +201,7 @@ public:
 /**
  * Http downloader.
  */
-class MWHttpDownloader : public MWObject
+class MW_DLL MWHttpDownloader : public MWObject
 {
     friend size_t onReceiveData(void *, size_t size, size_t writeSize, void *userdata);
     friend void *downloadThread(void *data);
