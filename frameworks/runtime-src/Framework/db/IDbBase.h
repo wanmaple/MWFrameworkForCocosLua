@@ -15,7 +15,7 @@ MW_FRAMEWORK_BEGIN
 /**
  * DB interfaces.
  */
-class IDbBase
+class MW_INTERFACE IDbBase
 {
 public:
     virtual ~IDbBase() {}
