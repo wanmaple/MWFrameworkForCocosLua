@@ -99,6 +99,11 @@
 		F53535AD1AB455AE00EF7298 /* MWNetCenter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F53535AB1AB455AE00EF7298 /* MWNetCenter.cpp */; };
 		F53535B01AB4569A00EF7298 /* MWNetHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F53535AF1AB4569A00EF7298 /* MWNetHandler.cpp */; };
 		F53535B51AB45A4100EF7298 /* MWNetFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F53535B31AB45A4100EF7298 /* MWNetFilter.cpp */; };
+		F5714FE01AB9D77B00AF3A51 /* MWHttpDownloader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5714FD91AB9D77B00AF3A51 /* MWHttpDownloader.cpp */; };
+		F5714FE11AB9D77B00AF3A51 /* MWHttpForm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5714FDB1AB9D77B00AF3A51 /* MWHttpForm.cpp */; };
+		F5714FE21AB9D77B00AF3A51 /* MWHttpService.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5714FDD1AB9D77B00AF3A51 /* MWHttpService.cpp */; };
+		F57150931AB9E4B900AF3A51 /* libcurl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F57150921AB9E4B900AF3A51 /* libcurl.a */; };
+		F57150971AB9E70900AF3A51 /* MWIOUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F57150951AB9E70900AF3A51 /* MWIOUtils.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -314,6 +319,25 @@
 		F53535AF1AB4569A00EF7298 /* MWNetHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MWNetHandler.cpp; path = net/MWNetHandler.cpp; sourceTree = "<group>"; };
 		F53535B31AB45A4100EF7298 /* MWNetFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MWNetFilter.cpp; path = net/MWNetFilter.cpp; sourceTree = "<group>"; };
 		F53535B41AB45A4100EF7298 /* MWNetFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MWNetFilter.h; path = net/MWNetFilter.h; sourceTree = "<group>"; };
+		F5714FD91AB9D77B00AF3A51 /* MWHttpDownloader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWHttpDownloader.cpp; sourceTree = "<group>"; };
+		F5714FDA1AB9D77B00AF3A51 /* MWHttpDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWHttpDownloader.h; sourceTree = "<group>"; };
+		F5714FDB1AB9D77B00AF3A51 /* MWHttpForm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWHttpForm.cpp; sourceTree = "<group>"; };
+		F5714FDC1AB9D77B00AF3A51 /* MWHttpForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWHttpForm.h; sourceTree = "<group>"; };
+		F5714FDD1AB9D77B00AF3A51 /* MWHttpService.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWHttpService.cpp; sourceTree = "<group>"; };
+		F5714FDE1AB9D77B00AF3A51 /* MWHttpService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWHttpService.h; sourceTree = "<group>"; };
+		F5714FDF1AB9D77B00AF3A51 /* MWHttpTransferStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWHttpTransferStrategy.h; sourceTree = "<group>"; };
+		F5714FF31AB9E47A00AF3A51 /* curl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = curl.h; sourceTree = "<group>"; };
+		F5714FF41AB9E47A00AF3A51 /* curlbuild.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = curlbuild.h; sourceTree = "<group>"; };
+		F5714FF51AB9E47A00AF3A51 /* curlrules.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = curlrules.h; sourceTree = "<group>"; };
+		F5714FF61AB9E47A00AF3A51 /* curlver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = curlver.h; sourceTree = "<group>"; };
+		F5714FF71AB9E47A00AF3A51 /* easy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = easy.h; sourceTree = "<group>"; };
+		F5714FF81AB9E47A00AF3A51 /* mprintf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mprintf.h; sourceTree = "<group>"; };
+		F5714FF91AB9E47A00AF3A51 /* multi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = multi.h; sourceTree = "<group>"; };
+		F5714FFA1AB9E47A00AF3A51 /* stdcheaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stdcheaders.h; sourceTree = "<group>"; };
+		F5714FFB1AB9E47A00AF3A51 /* typecheck-gcc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "typecheck-gcc.h"; sourceTree = "<group>"; };
+		F57150921AB9E4B900AF3A51 /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl.a; path = ../Framework/net/http/curl/prebuilt/ios/libcurl.a; sourceTree = "<group>"; };
+		F57150951AB9E70900AF3A51 /* MWIOUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWIOUtils.cpp; sourceTree = "<group>"; };
+		F57150961AB9E70900AF3A51 /* MWIOUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWIOUtils.h; sourceTree = "<group>"; };
 		F59B05F41AB367EF001204D1 /* MWNetService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MWNetService.h; path = net/MWNetService.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -341,6 +365,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F57150931AB9E4B900AF3A51 /* libcurl.a in Frameworks */,
 				15427C5B198F1E0100DC375D /* libluacocos2d iOS.a in Frameworks */,
 				15427C5A198F1DF000DC375D /* libcocos2d iOS.a in Frameworks */,
 				15AECE29195D482800907DB0 /* MediaPlayer.framework in Frameworks */,
@@ -605,6 +630,7 @@
 				33A37BEE1A91D3D30042CA97 /* db */,
 				78C7387D1A77EF8F0028FC3A /* scheme */,
 				33C73FF11A7F1BDE0057DA34 /* lua */,
+				F57150941AB9E70900AF3A51 /* utils */,
 				78C738811A77F0B70028FC3A /* mwframework.h */,
 			);
 			name = Framework;
@@ -678,6 +704,7 @@
 		F293B3CB15EB7BE500256477 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F57150921AB9E4B900AF3A51 /* libcurl.a */,
 				15AECE28195D482800907DB0 /* MediaPlayer.framework */,
 				15A8A4871834C90E00142BE0 /* libcurl.dylib */,
 				D6B061341803AC000077942B /* CoreMotion.framework */,
@@ -720,9 +747,75 @@
 			path = ../Resources;
 			sourceTree = "<group>";
 		};
+		F5714FD81AB9D77B00AF3A51 /* http */ = {
+			isa = PBXGroup;
+			children = (
+				F5714FE31AB9E47A00AF3A51 /* curl */,
+				F5714FD91AB9D77B00AF3A51 /* MWHttpDownloader.cpp */,
+				F5714FDA1AB9D77B00AF3A51 /* MWHttpDownloader.h */,
+				F5714FDB1AB9D77B00AF3A51 /* MWHttpForm.cpp */,
+				F5714FDC1AB9D77B00AF3A51 /* MWHttpForm.h */,
+				F5714FDD1AB9D77B00AF3A51 /* MWHttpService.cpp */,
+				F5714FDE1AB9D77B00AF3A51 /* MWHttpService.h */,
+				F5714FDF1AB9D77B00AF3A51 /* MWHttpTransferStrategy.h */,
+			);
+			name = http;
+			path = net/http;
+			sourceTree = "<group>";
+		};
+		F5714FE31AB9E47A00AF3A51 /* curl */ = {
+			isa = PBXGroup;
+			children = (
+				F5714FE41AB9E47A00AF3A51 /* include */,
+			);
+			path = curl;
+			sourceTree = "<group>";
+		};
+		F5714FE41AB9E47A00AF3A51 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				F5714FF11AB9E47A00AF3A51 /* ios */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		F5714FF11AB9E47A00AF3A51 /* ios */ = {
+			isa = PBXGroup;
+			children = (
+				F5714FF21AB9E47A00AF3A51 /* curl */,
+			);
+			path = ios;
+			sourceTree = "<group>";
+		};
+		F5714FF21AB9E47A00AF3A51 /* curl */ = {
+			isa = PBXGroup;
+			children = (
+				F5714FF31AB9E47A00AF3A51 /* curl.h */,
+				F5714FF41AB9E47A00AF3A51 /* curlbuild.h */,
+				F5714FF51AB9E47A00AF3A51 /* curlrules.h */,
+				F5714FF61AB9E47A00AF3A51 /* curlver.h */,
+				F5714FF71AB9E47A00AF3A51 /* easy.h */,
+				F5714FF81AB9E47A00AF3A51 /* mprintf.h */,
+				F5714FF91AB9E47A00AF3A51 /* multi.h */,
+				F5714FFA1AB9E47A00AF3A51 /* stdcheaders.h */,
+				F5714FFB1AB9E47A00AF3A51 /* typecheck-gcc.h */,
+			);
+			path = curl;
+			sourceTree = "<group>";
+		};
+		F57150941AB9E70900AF3A51 /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				F57150951AB9E70900AF3A51 /* MWIOUtils.cpp */,
+				F57150961AB9E70900AF3A51 /* MWIOUtils.h */,
+			);
+			path = utils;
+			sourceTree = "<group>";
+		};
 		F59B05F21AB36718001204D1 /* net */ = {
 			isa = PBXGroup;
 			children = (
+				F5714FD81AB9D77B00AF3A51 /* http */,
 				F53535AB1AB455AE00EF7298 /* MWNetCenter.cpp */,
 				F53535AC1AB455AE00EF7298 /* MWNetCenter.h */,
 				F53535A31AB4512D00EF7298 /* MWNetProtocol.cpp */,
@@ -943,6 +1036,7 @@
 				33125B1A1A7A53B80030DD61 /* MWArrayList.cpp in Sources */,
 				33BC563F1A7BA39B00EBCA2A /* MWGameView.cpp in Sources */,
 				33250DC71A91E39A00D1668B /* MWJsonElement.cpp in Sources */,
+				F5714FE01AB9D77B00AF3A51 /* MWHttpDownloader.cpp in Sources */,
 				33250DD41A91E39A00D1668B /* JSONStream.cpp in Sources */,
 				33250DD11A91E39A00D1668B /* JSONNode.cpp in Sources */,
 				33250DCD1A91E39A00D1668B /* JSONChildren.cpp in Sources */,
@@ -958,6 +1052,7 @@
 				33250DD21A91E39A00D1668B /* JSONNode_Mutex.cpp in Sources */,
 				33B78CB91A790DF9003FC84B /* MWDictionary.cpp in Sources */,
 				F535359D1AB448FD00EF7298 /* MWNetRequest.cpp in Sources */,
+				F57150971AB9E70900AF3A51 /* MWIOUtils.cpp in Sources */,
 				F53535AD1AB455AE00EF7298 /* MWNetCenter.cpp in Sources */,
 				33BC56371A7B933000EBCA2A /* MWQueue.cpp in Sources */,
 				33250DCF1A91E39A00D1668B /* JSONIterators.cpp in Sources */,
@@ -968,6 +1063,7 @@
 				F293BB9C15EB831F00256477 /* AppDelegate.cpp in Sources */,
 				33250DD81A91E39A00D1668B /* libjson.cpp in Sources */,
 				33250DCB1A91E39A00D1668B /* internalJSONNode.cpp in Sources */,
+				F5714FE21AB9D77B00AF3A51 /* MWHttpService.cpp in Sources */,
 				33A37BF61A91D3D30042CA97 /* sqlite3.c in Sources */,
 				33250DCA1A91E39A00D1668B /* MWJsonStructure.cpp in Sources */,
 				5023812417EBBCAC00990C9B /* main.m in Sources */,
@@ -980,6 +1076,7 @@
 				3382D9F71A80F64C00A3702F /* FrameworkErrors.cpp in Sources */,
 				33250DC91A91E39A00D1668B /* MWJsonParser.cpp in Sources */,
 				F53535B51AB45A4100EF7298 /* MWNetFilter.cpp in Sources */,
+				F5714FE11AB9D77B00AF3A51 /* MWHttpForm.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1130,7 +1227,19 @@
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = ios/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				LIBRARY_SEARCH_PATHS = "";
+				LIBRARY_SEARCH_PATHS = (
+					"/Users/Maple/Documents/Projects/MWFramework2.0/frameworks/runtime-src/Framework/net/http/curl/prebuilt/android/armeabi",
+					"/Users/Maple/Documents/Projects/MWFramework2.0/frameworks/runtime-src/Framework/net/http/curl/prebuilt/android/armeabi-v7a",
+					"/Users/Maple/Documents/Projects/MWFramework2.0/frameworks/runtime-src/Framework/net/http/curl/prebuilt/android/x86",
+					"/Users/Maple/Documents/Projects/MWFramework2.0/frameworks/runtime-src/Framework/net/http/curl/prebuilt/ios",
+					"/Users/Maple/Documents/Projects/MWFramework2.0/frameworks/runtime-src/Framework/net/http/curl/prebuilt/win32",
+					"/Users/Maple/Documents/Projects/MWFramework2.0/frameworks/runtime-src/Framework/net/http/curl/prebuilt/winrt_8.1/arm",
+					"/Users/Maple/Documents/Projects/MWFramework2.0/frameworks/runtime-src/Framework/net/http/curl/prebuilt/winrt_8.1/win32",
+					"/Users/Maple/Documents/Projects/MWFramework2.0/frameworks/runtime-src/Framework/net/http/curl/prebuilt/wp8/arm",
+					"/Users/Maple/Documents/Projects/MWFramework2.0/frameworks/runtime-src/Framework/net/http/curl/prebuilt/wp8/win32",
+					"/Users/Maple/Documents/Projects/MWFramework2.0/frameworks/runtime-src/Framework/net/http/curl/prebuilt/wp_8.1/arm",
+					"/Users/Maple/Documents/Projects/MWFramework2.0/frameworks/runtime-src/Framework/net/http/curl/prebuilt/wp_8.1/win32",
+				);
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../../cocos2d-x/cocos/platform/ios";
@@ -1153,7 +1262,19 @@
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = ios/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				LIBRARY_SEARCH_PATHS = "";
+				LIBRARY_SEARCH_PATHS = (
+					"/Users/Maple/Documents/Projects/MWFramework2.0/frameworks/runtime-src/Framework/net/http/curl/prebuilt/android/armeabi",
+					"/Users/Maple/Documents/Projects/MWFramework2.0/frameworks/runtime-src/Framework/net/http/curl/prebuilt/android/armeabi-v7a",
+					"/Users/Maple/Documents/Projects/MWFramework2.0/frameworks/runtime-src/Framework/net/http/curl/prebuilt/android/x86",
+					"/Users/Maple/Documents/Projects/MWFramework2.0/frameworks/runtime-src/Framework/net/http/curl/prebuilt/ios",
+					"/Users/Maple/Documents/Projects/MWFramework2.0/frameworks/runtime-src/Framework/net/http/curl/prebuilt/win32",
+					"/Users/Maple/Documents/Projects/MWFramework2.0/frameworks/runtime-src/Framework/net/http/curl/prebuilt/winrt_8.1/arm",
+					"/Users/Maple/Documents/Projects/MWFramework2.0/frameworks/runtime-src/Framework/net/http/curl/prebuilt/winrt_8.1/win32",
+					"/Users/Maple/Documents/Projects/MWFramework2.0/frameworks/runtime-src/Framework/net/http/curl/prebuilt/wp8/arm",
+					"/Users/Maple/Documents/Projects/MWFramework2.0/frameworks/runtime-src/Framework/net/http/curl/prebuilt/wp8/win32",
+					"/Users/Maple/Documents/Projects/MWFramework2.0/frameworks/runtime-src/Framework/net/http/curl/prebuilt/wp_8.1/arm",
+					"/Users/Maple/Documents/Projects/MWFramework2.0/frameworks/runtime-src/Framework/net/http/curl/prebuilt/wp_8.1/win32",
+				);
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../../cocos2d-x/cocos/platform/ios";

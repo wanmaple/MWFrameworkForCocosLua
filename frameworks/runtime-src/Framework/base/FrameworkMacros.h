@@ -118,6 +118,29 @@ inline __VAR_TYPE__ get##__FUNC_NAME__() const  \
 protected:  \
 __VAR_TYPE__ __VAR_NAME__;
 
+#define MW_SYNTHESIZE_RETAIN(__VAR_TYPE__, __VAR_NAME__, __FUNC_NAME__)    \
+public: \
+inline __VAR_TYPE__ get##__FUNC_NAME__() const  \
+{   \
+return __VAR_NAME__;    \
+}   \
+inline void set##__FUNC_NAME__(__VAR_TYPE__ var)    \
+{   \
+if (var != __VAR_NAME__) {  \
+CC_SAFE_RELEASE(__VAR_NAME__);  \
+__VAR_NAME__ = var; \
+CC_SAFE_RETAIN(__VAR_NAME__);   \
+}   \
+}   \
+protected:  \
+__VAR_TYPE__ __VAR_NAME__;
+
+// bind for c11 functional
+#define MW_CALLBACK_0(__SELECTOR__,__TARGET__, ...) std::bind(&__SELECTOR__,__TARGET__, ##__VA_ARGS__)
+#define MW_CALLBACK_1(__SELECTOR__,__TARGET__, ...) std::bind(&__SELECTOR__,__TARGET__, std::placeholders::_1, ##__VA_ARGS__)
+#define MW_CALLBACK_2(__SELECTOR__,__TARGET__, ...) std::bind(&__SELECTOR__,__TARGET__, std::placeholders::_1, std::placeholders::_2, ##__VA_ARGS__)
+#define MW_CALLBACK_3(__SELECTOR__,__TARGET__, ...) std::bind(&__SELECTOR__,__TARGET__, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, ##__VA_ARGS__)
+
 #define MW_SUPPORT_MULTITHREADING 0
 /**
  * Threading mutex lock, unlock.

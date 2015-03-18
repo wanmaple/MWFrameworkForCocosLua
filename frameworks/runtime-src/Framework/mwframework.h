@@ -18,6 +18,9 @@
 #include "json/MWJsonFormatter.h"
 #include "json/MWJsonParser.h"
 
+// utils.
+#include "utils/MWIOUtils.h"
+
 // net.
 #include "net/MWNetService.h"
 #include "net/MWNetHandler.h"
@@ -26,6 +29,10 @@
 #include "net/MWNetResponse.h"
 #include "net/MWNetProtocol.h"
 #include "net/MWNetCenter.h"
+#include "net/http/MWHttpForm.h"
+#include "net/http/MWHttpTransferStrategy.h"
+#include "net/http/MWHttpService.h"
+#include "net/http/MWHttpDownloader.h"
 
 // lua related.
 #include "lua/MWLuaUtils.h"
