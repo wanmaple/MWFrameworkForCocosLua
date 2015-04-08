@@ -43,7 +43,7 @@ public:
      *
      * @return MWViewController instance which is autoreleased.
      */
-    static MWViewController *create(const std::string &identifier = "");
+    static MWViewController *create();
     
     /**
      * MWViewController constructor.
@@ -80,10 +80,6 @@ public:
     {
         return _identifer;
     }
-    inline void setIdentifier(const std::string &identifier)
-    {
-        _identifer = identifier;
-    }
     
     /**
      * IViewControllerDelegate overrides
@@ -93,7 +89,7 @@ public:
     virtual void didReceiveMemoryWarning() override;
     
 protected:
-    virtual bool initWithIdentifier(const std::string &identifier);
+    virtual bool init();
     
     MWGameScene *_scene;
     MWGameView *_view;

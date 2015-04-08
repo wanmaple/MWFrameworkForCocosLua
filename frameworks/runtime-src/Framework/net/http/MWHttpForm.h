@@ -59,6 +59,11 @@ public:
 protected:
     bool _init();
     
+    unsigned char toHex(unsigned char x);
+    unsigned char fromHex(unsigned char x);
+    std::string urlEncode(const std::string &str);
+    std::string urlDecode(const std::string &str);
+    
     std::map<std::string, std::string> _params;
 };
 

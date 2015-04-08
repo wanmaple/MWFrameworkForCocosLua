@@ -34,16 +34,17 @@ MWGameScene *MWGameScene::createWithParams(mwframework::MWDictionary *params)
 
 bool MWGameScene::init(MWDictionary *params)
 {
-    _viewControllers = new (nothrow) MWArrayList();
-    _rootViewController = MWViewController::create();
-    if (_params && _viewControllers && _rootViewController) {
-        this->loadViewController(_rootViewController);
+    _viewControllers = new (nothrow) MWDictionary();
+    if (_params && _viewControllers) {
         if (params) {
             _params = params->clone();
             // the copy is autoreleased.
             _params->retain();
         } else {
             _params = new (nothrow) MWDictionary();
+            if (!_params) {
+                return false;
+            }
         }
         return true;
     }
@@ -55,7 +56,6 @@ bool MWGameScene::init(MWDictionary *params)
 MWGameScene::MWGameScene()
 : _params(nullptr)
 , _viewControllers(nullptr)
-, _rootViewController(nullptr)
 {
     
 }
@@ -64,7 +64,6 @@ MWGameScene::~MWGameScene()
 {
     CC_SAFE_RELEASE(_params);
     CC_SAFE_RELEASE(_viewControllers);
-    CC_SAFE_RELEASE(_rootViewController);
 }
 
 void MWGameScene::onEnter()
@@ -162,17 +161,20 @@ cocos2d::Ref *MWGameScene::getRefParameter(const std::string &key) MW_NOEXCEPTIO
     return _params->objectForKey(key);
 }
 
-void MWGameScene::loadViewController(mwframework::MWViewController *controller, bool modaled) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION)
+void MWGameScene::loadViewController(mwframework::MWViewController *controller, const std::string &identifier) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION)
 {
     // check parameter.
-    if (!controller) {
+    if (!controller || identifier.size() <= 0) {
         MW_THROW_EXCEPTION(1006);
     }
+    if (_viewControllers->hasKey(identifier)) {
+        MW_THROW_EXCEPTION(1011);
+    }
     controller->_scene = this;
-    controller->view()->setModaled(modaled);
+    controller->_identifer = identifier;
     controller->viewDidLoad();
     this->addChild(controller->view());
-    _viewControllers->appendObject(controller);
+    _viewControllers->setObjectForKey(identifier, controller);
 }
 
 void MWGameScene::unloadViewController(mwframework::MWViewController *controller) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION)
@@ -181,11 +183,12 @@ void MWGameScene::unloadViewController(mwframework::MWViewController *controller
     if (!controller) {
         MW_THROW_EXCEPTION(1006);
     }
-    if (_viewControllers->indexOfObject(controller) > 0) {
+    if (_viewControllers->hasKey(controller->getIdentifier())) {
         controller->view()->removeFromParent();
         controller->_scene = nullptr;
+        controller->_identifer = "";
         controller->viewDidUnload();
-        _viewControllers->removeObject(controller);
+        _viewControllers->removeObjectForKey(controller->getIdentifier());
     }
 }
 
@@ -203,21 +206,18 @@ MWViewController *MWGameScene::getViewControllerByIdentifier(const std::string &
         return nullptr;
     }
     MWViewController *pVc = nullptr;
-    for (MW_UINT i = 0; i < _viewControllers->count(); ++i) {
-        pVc = static_cast<MWViewController*>(_viewControllers->objectAtIndex(i));
-        if (pVc->getIdentifier() == identifier) {
-            return pVc;
-        }
+    if (_viewControllers->hasKey(identifier)) {
+        pVc = static_cast<MWViewController*>(_viewControllers->objectForKey(identifier));
+        return pVc;
     }
     return nullptr;
 }
 
 void MWGameScene::unloadAllViewControllers()
 {
-    MWViewController *pVc = nullptr;
-    while (_viewControllers->count() > 0) {
-        pVc = static_cast<MWViewController*>(_viewControllers->objectAtIndex(0));
-        this->unloadViewController(pVc);
+    auto allKeys = _viewControllers->allKeys();
+    for (auto &key : allKeys) {
+        this->unloadViewControllerByIdentifier(key);
     }
     _viewControllers->clear();
 }

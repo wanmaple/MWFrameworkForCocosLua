@@ -9,10 +9,10 @@ using namespace std;
 
 MW_FRAMEWORK_BEGIN
 
-MWViewController *MWViewController::create(const std::string &identifier)
+MWViewController *MWViewController::create()
 {
     auto pVc = new (nothrow) MWViewController();
-    if (pVc && pVc->initWithIdentifier(identifier)) {
+    if (pVc && pVc->init()) {
         pVc->autorelease();
         return pVc;
     }
@@ -20,9 +20,8 @@ MWViewController *MWViewController::create(const std::string &identifier)
     return nullptr;
 }
 
-bool MWViewController::initWithIdentifier(const std::string &identifier)
+bool MWViewController::init()
 {
-    _identifer = identifier;
     return true;
 }
 

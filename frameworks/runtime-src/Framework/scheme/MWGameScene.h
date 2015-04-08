@@ -85,7 +85,7 @@ public:
      *
      * @param controller The view controller to load.
      */
-    void loadViewController(MWViewController *controller, bool modaled = false) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
+    void loadViewController(MWViewController *controller, const std::string &identifier) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
     /**
      * Unload an existed view controller of the scene.
      *
@@ -113,9 +113,7 @@ protected:
     virtual bool init(MWDictionary *params = nullptr);
     
     MWDictionary *_params;
-    MWArrayList *_viewControllers;
-    
-    MWViewController *_rootViewController;  // root view controller. the brain to manage other view controllers.
+    MWDictionary *_viewControllers;
 };
 
 MW_FRAMEWORK_END

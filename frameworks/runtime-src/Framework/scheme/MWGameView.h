@@ -39,13 +39,13 @@ public:
      */
     virtual ~MWGameView();
     
+protected:
+    bool init();
+    
     inline void setModaled(bool modaled)
     {
         _modalListener->setSwallowTouches(modaled);
     }
-    
-protected:
-    bool init();
     
     cocos2d::EventListenerTouchOneByOne *_modalListener;
 };

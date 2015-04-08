@@ -1227,19 +1227,7 @@
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = ios/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				LIBRARY_SEARCH_PATHS = (
-					"/Users/Maple/Documents/Projects/MWFramework2.0/frameworks/runtime-src/Framework/net/http/curl/prebuilt/android/armeabi",
-					"/Users/Maple/Documents/Projects/MWFramework2.0/frameworks/runtime-src/Framework/net/http/curl/prebuilt/android/armeabi-v7a",
-					"/Users/Maple/Documents/Projects/MWFramework2.0/frameworks/runtime-src/Framework/net/http/curl/prebuilt/android/x86",
-					"/Users/Maple/Documents/Projects/MWFramework2.0/frameworks/runtime-src/Framework/net/http/curl/prebuilt/ios",
-					"/Users/Maple/Documents/Projects/MWFramework2.0/frameworks/runtime-src/Framework/net/http/curl/prebuilt/win32",
-					"/Users/Maple/Documents/Projects/MWFramework2.0/frameworks/runtime-src/Framework/net/http/curl/prebuilt/winrt_8.1/arm",
-					"/Users/Maple/Documents/Projects/MWFramework2.0/frameworks/runtime-src/Framework/net/http/curl/prebuilt/winrt_8.1/win32",
-					"/Users/Maple/Documents/Projects/MWFramework2.0/frameworks/runtime-src/Framework/net/http/curl/prebuilt/wp8/arm",
-					"/Users/Maple/Documents/Projects/MWFramework2.0/frameworks/runtime-src/Framework/net/http/curl/prebuilt/wp8/win32",
-					"/Users/Maple/Documents/Projects/MWFramework2.0/frameworks/runtime-src/Framework/net/http/curl/prebuilt/wp_8.1/arm",
-					"/Users/Maple/Documents/Projects/MWFramework2.0/frameworks/runtime-src/Framework/net/http/curl/prebuilt/wp_8.1/win32",
-				);
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../../runtime-src/Framework/net/http/curl/prebuilt/ios";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../../cocos2d-x/cocos/platform/ios";
@@ -1262,19 +1250,7 @@
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = ios/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				LIBRARY_SEARCH_PATHS = (
-					"/Users/Maple/Documents/Projects/MWFramework2.0/frameworks/runtime-src/Framework/net/http/curl/prebuilt/android/armeabi",
-					"/Users/Maple/Documents/Projects/MWFramework2.0/frameworks/runtime-src/Framework/net/http/curl/prebuilt/android/armeabi-v7a",
-					"/Users/Maple/Documents/Projects/MWFramework2.0/frameworks/runtime-src/Framework/net/http/curl/prebuilt/android/x86",
-					"/Users/Maple/Documents/Projects/MWFramework2.0/frameworks/runtime-src/Framework/net/http/curl/prebuilt/ios",
-					"/Users/Maple/Documents/Projects/MWFramework2.0/frameworks/runtime-src/Framework/net/http/curl/prebuilt/win32",
-					"/Users/Maple/Documents/Projects/MWFramework2.0/frameworks/runtime-src/Framework/net/http/curl/prebuilt/winrt_8.1/arm",
-					"/Users/Maple/Documents/Projects/MWFramework2.0/frameworks/runtime-src/Framework/net/http/curl/prebuilt/winrt_8.1/win32",
-					"/Users/Maple/Documents/Projects/MWFramework2.0/frameworks/runtime-src/Framework/net/http/curl/prebuilt/wp8/arm",
-					"/Users/Maple/Documents/Projects/MWFramework2.0/frameworks/runtime-src/Framework/net/http/curl/prebuilt/wp8/win32",
-					"/Users/Maple/Documents/Projects/MWFramework2.0/frameworks/runtime-src/Framework/net/http/curl/prebuilt/wp_8.1/arm",
-					"/Users/Maple/Documents/Projects/MWFramework2.0/frameworks/runtime-src/Framework/net/http/curl/prebuilt/wp_8.1/win32",
-				);
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../../runtime-src/Framework/net/http/curl/prebuilt/ios";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../../cocos2d-x/cocos/platform/ios";

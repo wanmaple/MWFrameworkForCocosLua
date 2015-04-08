@@ -15,6 +15,7 @@ static std::unordered_map<int, const char*> g_errorMap = {
     { 1008, "The list value of the index is not a boolean value." },
     { 1009, "The list value of the index is not a string value." },
     { 1010, "Invalid object." },
+    { 1011, "The arugment does already exist." },
     // io errors, 2001 - 3000.
     { 2001, "The file doesn't exist." },
     // network errors, 5001 - 6000.
