@@ -75,17 +75,20 @@ bool MWIOUtils::copyFile(const std::string &oldPath, const std::string &newPath)
 
 bool MWIOUtils::writeDataToFile(const unsigned char *content, unsigned long length, const std::string &filePath, bool isAppend)
 {
-    const char *mode = isAppend ? "ab" : "wb";
-    FILE *hFile = fopen(filePath.c_str(), mode);
-    if (!hFile)
-    {
+    ofstream ofs;
+    auto mode = std::ios::out | std::ios::binary;
+    if (isAppend) {
+        mode |= std::ios::app;
+    }
+    ofs.open(filePath, mode);
+    if (!ofs.is_open()) {
         return false;
     }
     
-    size_t writtenSize = fwrite(content, length, 1, hFile);
-    fclose(hFile);
+    ofs.write((const char *)content, length);
+    ofs.close();
     
-    return writtenSize == length;
+    return true;
 }
 
 bool MWIOUtils::removeFile(const std::string &filePath)
