@@ -16,8 +16,8 @@ MW_FRAMEWORK_BEGIN
 class MW_DLL MWSystemHelperStrategyIos : public MWSystemHelperStrategy
 {
 public:
-    void copyToPasteBoard(const std::string &content);
-    double getCurrentUsedMemory();
+    void copyToPasteBoard(const std::string &content) override;
+    double getCurrentUsedMemory() override;
 };
 
 MW_FRAMEWORK_END

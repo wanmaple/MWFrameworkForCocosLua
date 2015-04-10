@@ -59,6 +59,7 @@ bool MWGameScene::init(MWDictionary *params)
 MWGameScene::MWGameScene()
 : _params(nullptr)
 , _viewControllers(nullptr)
+, _memoryWarningLine(400)
 {
     
 }
