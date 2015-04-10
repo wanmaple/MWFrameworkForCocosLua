@@ -3,7 +3,10 @@
 #include "MWViewController.h"
 #include "MWGameView.h"
 #include "../lua/MWLuaUtils.h"
+#include "../platform/MWSystemHelper.h"
 #include <new>
+
+#define MEMORY_SCHEDULER_NAME "MEMORY_CHECK_SCHEDULER"
 
 using namespace cocos2d;
 using namespace std;
@@ -70,6 +73,9 @@ void MWGameScene::onEnter()
 {
     Scene::onEnter();
     
+    // open scheduler to check memory.
+    Director::getInstance()->getScheduler()->schedule(MW_CALLBACK_1(MWGameScene::checkMemory, this), this, 60, CC_REPEAT_FOREVER, 60, false, MEMORY_SCHEDULER_NAME);
+    
 #if MW_ENABLE_SCRIPT_BINDING
     if (_scriptType == kScriptTypeLua) {
         MWLuaUtils::getInstance()->executePeertableFunction(this, "onEnter", nullptr, nullptr, false);
@@ -91,6 +97,9 @@ void MWGameScene::onExit()
     
     // unload all view controllers.
     this->unloadAllViewControllers();
+    
+    // close the memory scheduler
+    Director::getInstance()->getScheduler()->unschedule(MEMORY_SCHEDULER_NAME, this);
     
     Scene::onExit();
 }
@@ -175,6 +184,8 @@ void MWGameScene::loadViewController(mwframework::MWViewController *controller, 
     controller->viewDidLoad();
     this->addChild(controller->view());
     _viewControllers->setObjectForKey(identifier, controller);
+    
+    this->detectMemory();
 }
 
 void MWGameScene::unloadViewController(mwframework::MWViewController *controller) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION)
@@ -220,6 +231,25 @@ void MWGameScene::unloadAllViewControllers()
         this->unloadViewControllerByIdentifier(key);
     }
     _viewControllers->clear();
+}
+
+void MWGameScene::detectMemory()
+{
+    // detect memory
+    double memory = MWSystemHelper::getInstance()->getCurrentUsedMemory();
+    if (memory >= _memoryWarningLine) {
+        auto allKeys = _viewControllers->allKeys();
+        MWViewController *pVc = nullptr;
+        for (auto &key : allKeys) {
+            pVc = static_cast<MWViewController*>(_viewControllers->objectForKey(key));
+            pVc->didReceiveMemoryWarning();
+        }
+    }
+}
+
+void MWGameScene::checkMemory(float dt)
+{
+    this->detectMemory();
 }
 
 MW_FRAMEWORK_END

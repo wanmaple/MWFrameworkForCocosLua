@@ -4,6 +4,10 @@
 // framework base.
 #include "base/mwbase.h"
 
+// platform.
+#include "platform/MWSystemHelperStrategy.h"
+#include "platform/MWSystemHelper.h"
+
 // core scheme.
 #include "scheme/MWGameScene.h"
 #include "scheme/MWViewController.h"

@@ -104,6 +104,8 @@
 		F5714FE21AB9D77B00AF3A51 /* MWHttpService.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5714FDD1AB9D77B00AF3A51 /* MWHttpService.cpp */; };
 		F57150931AB9E4B900AF3A51 /* libcurl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F57150921AB9E4B900AF3A51 /* libcurl.a */; };
 		F57150971AB9E70900AF3A51 /* MWIOUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F57150951AB9E70900AF3A51 /* MWIOUtils.cpp */; };
+		F5C9F9271AD7B5B6008FAF9A /* MWSystemHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5C9F9251AD7B5B6008FAF9A /* MWSystemHelper.cpp */; };
+		F5C9F92C1AD7B99A008FAF9A /* MWSystemHelperStrategyIOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = F5C9F92B1AD7B99A008FAF9A /* MWSystemHelperStrategyIOS.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -339,6 +341,11 @@
 		F57150951AB9E70900AF3A51 /* MWIOUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWIOUtils.cpp; sourceTree = "<group>"; };
 		F57150961AB9E70900AF3A51 /* MWIOUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWIOUtils.h; sourceTree = "<group>"; };
 		F59B05F41AB367EF001204D1 /* MWNetService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MWNetService.h; path = net/MWNetService.h; sourceTree = "<group>"; };
+		F5C9F9251AD7B5B6008FAF9A /* MWSystemHelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWSystemHelper.cpp; sourceTree = "<group>"; };
+		F5C9F9261AD7B5B6008FAF9A /* MWSystemHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWSystemHelper.h; sourceTree = "<group>"; };
+		F5C9F9291AD7B7F4008FAF9A /* MWSystemHelperStrategy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MWSystemHelperStrategy.h; sourceTree = "<group>"; };
+		F5C9F92A1AD7B99A008FAF9A /* MWSystemHelperStrategyIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWSystemHelperStrategyIOS.h; sourceTree = "<group>"; };
+		F5C9F92B1AD7B99A008FAF9A /* MWSystemHelperStrategyIOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MWSystemHelperStrategyIOS.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -630,6 +637,7 @@
 				33A37BEE1A91D3D30042CA97 /* db */,
 				78C7387D1A77EF8F0028FC3A /* scheme */,
 				33C73FF11A7F1BDE0057DA34 /* lua */,
+				F5C9F9241AD7B574008FAF9A /* platform */,
 				F57150941AB9E70900AF3A51 /* utils */,
 				78C738811A77F0B70028FC3A /* mwframework.h */,
 			);
@@ -831,6 +839,18 @@
 				F59B05F41AB367EF001204D1 /* MWNetService.h */,
 			);
 			name = net;
+			sourceTree = "<group>";
+		};
+		F5C9F9241AD7B574008FAF9A /* platform */ = {
+			isa = PBXGroup;
+			children = (
+				F5C9F9251AD7B5B6008FAF9A /* MWSystemHelper.cpp */,
+				F5C9F9261AD7B5B6008FAF9A /* MWSystemHelper.h */,
+				F5C9F9291AD7B7F4008FAF9A /* MWSystemHelperStrategy.h */,
+				F5C9F92A1AD7B99A008FAF9A /* MWSystemHelperStrategyIOS.h */,
+				F5C9F92B1AD7B99A008FAF9A /* MWSystemHelperStrategyIOS.mm */,
+			);
+			path = platform;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1042,8 +1062,10 @@
 				33250DCD1A91E39A00D1668B /* JSONChildren.cpp in Sources */,
 				33250DCC1A91E39A00D1668B /* JSONAllocator.cpp in Sources */,
 				78C738801A77EF9B0028FC3A /* MWGameScene.cpp in Sources */,
+				F5C9F92C1AD7B99A008FAF9A /* MWSystemHelperStrategyIOS.mm in Sources */,
 				33A37BF71A91D3D30042CA97 /* MWSqliteDb.cpp in Sources */,
 				5023812517EBBCAC00990C9B /* RootViewController.mm in Sources */,
+				F5C9F9271AD7B5B6008FAF9A /* MWSystemHelper.cpp in Sources */,
 				33250DD01A91E39A00D1668B /* JSONMemory.cpp in Sources */,
 				33250DD61A91E39A00D1668B /* JSONWorker.cpp in Sources */,
 				33250DC81A91E39A00D1668B /* MWJsonFormatter.cpp in Sources */,

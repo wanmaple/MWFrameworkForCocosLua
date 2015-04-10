@@ -1,7 +1,7 @@
 /******************************
  Description: Handle IO operations
  Author: M.Wan
- Date: 03/18/2015
+ Date: 3/18/2015
  ******************************/
 
 #ifndef __UTILS_IOUTILS__
