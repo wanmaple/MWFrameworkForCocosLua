@@ -1,6 +1,7 @@
 #include "MWViewController.h"
 #include "MWGameScene.h"
 #include "MWGameView.h"
+#include "MWViewSegue.h"
 #include "../lua/MWLuaUtils.h"
 #include <new>
 
@@ -9,10 +10,10 @@ using namespace std;
 
 MW_FRAMEWORK_BEGIN
 
-MWViewController *MWViewController::create()
+MWViewController *MWViewController::create(MWViewSegue *segue)
 {
     auto pVc = new (nothrow) MWViewController();
-    if (pVc && pVc->init()) {
+    if (pVc && pVc->init(segue)) {
         pVc->autorelease();
         return pVc;
     }
@@ -20,8 +21,10 @@ MWViewController *MWViewController::create()
     return nullptr;
 }
 
-bool MWViewController::init()
+bool MWViewController::init(MWViewSegue *segue)
 {
+    _segue = segue;
+    
     return true;
 }
 
@@ -70,7 +73,13 @@ void MWViewController::viewDidUnload()
 
 void MWViewController::didReceiveMemoryWarning()
 {
-    
+#if MW_ENABLE_SCRIPT_BINDING
+    if (_scriptType == kScriptTypeLua) {
+        MWLuaUtils::getInstance()->executePeertableFunction(this, "didReceiveMemoryWarning", nullptr, nullptr, false);
+    } else if (_scriptType == kScriptTypeJavascript) {
+        // js todo
+    }
+#endif
 }
 
 MW_FRAMEWORK_END

@@ -110,6 +110,7 @@ public:
     MWViewController *getViewControllerByIdentifier(const std::string &identifier);
     
     MW_SYNTHESIZE(double, _memoryWarningLine, MemoryWarningLine);
+    MW_SYNTHESIZE_READONLY(MWDictionary *, _viewControllers, ViewControllers);
     
 protected:
     virtual bool init(MWDictionary *params = nullptr);
@@ -118,7 +119,6 @@ protected:
     void checkMemory(float dt);
     
     MWDictionary *_params;
-    MWDictionary *_viewControllers;
 };
 
 MW_FRAMEWORK_END

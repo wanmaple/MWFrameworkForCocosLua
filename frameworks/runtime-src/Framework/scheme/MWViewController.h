@@ -28,6 +28,7 @@ public:
 
 class MWGameView;
 class MWGameScene;
+class MWViewSegue;
 
 /**
  * Basic view controller of the framework.
@@ -43,7 +44,7 @@ public:
      *
      * @return MWViewController instance which is autoreleased.
      */
-    static MWViewController *create();
+    static MWViewController *create(MWViewSegue *segue = nullptr);
     
     /**
      * MWViewController constructor.
@@ -74,6 +75,14 @@ public:
     }
     
     /**
+     * Related segue getter and setter.
+     */
+    inline MWViewSegue *segue() const
+    {
+        return _segue;
+    }
+    
+    /**
      * Identifier getter and setter.
      */
     inline std::string getIdentifier() const
@@ -89,10 +98,11 @@ public:
     virtual void didReceiveMemoryWarning() override;
     
 protected:
-    virtual bool init();
+    virtual bool init(MWViewSegue *segue);
     
     MWGameScene *_scene;
     MWGameView *_view;
+    MWViewSegue *_segue;
     std::string _identifer;
 };
 

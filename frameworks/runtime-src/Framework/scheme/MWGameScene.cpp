@@ -2,6 +2,7 @@
 #include "cocos2d.h"
 #include "MWViewController.h"
 #include "MWGameView.h"
+#include "MWViewSegue.h"
 #include "../lua/MWLuaUtils.h"
 #include "../platform/MWSystemHelper.h"
 #include <new>
@@ -182,9 +183,18 @@ void MWGameScene::loadViewController(mwframework::MWViewController *controller, 
     }
     controller->_scene = this;
     controller->_identifer = identifier;
+    // initialize the view
+    MWViewSegue *pSegue = controller->segue();
+    if (pSegue) {
+        pSegue->viewReadyToSegue(controller->view());
+    }
     controller->viewDidLoad();
     this->addChild(controller->view());
     _viewControllers->setObjectForKey(identifier, controller);
+    // what to do after the loading
+    if (pSegue) {
+        pSegue->viewDidSegue(this);
+    }
     
     this->detectMemory();
 }
@@ -200,6 +210,11 @@ void MWGameScene::unloadViewController(mwframework::MWViewController *controller
         controller->_scene = nullptr;
         controller->_identifer = "";
         controller->viewDidUnload();
+        // what to do after the unloading
+        MWViewSegue *pSegue = controller->segue();
+        if (pSegue) {
+            pSegue->viewDidSegueBack(this);
+        }
         _viewControllers->removeObjectForKey(controller->getIdentifier());
     }
 }

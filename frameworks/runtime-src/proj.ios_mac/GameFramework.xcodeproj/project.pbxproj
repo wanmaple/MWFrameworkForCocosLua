@@ -106,6 +106,7 @@
 		F57150971AB9E70900AF3A51 /* MWIOUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F57150951AB9E70900AF3A51 /* MWIOUtils.cpp */; };
 		F5C9F9271AD7B5B6008FAF9A /* MWSystemHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5C9F9251AD7B5B6008FAF9A /* MWSystemHelper.cpp */; };
 		F5C9F92C1AD7B99A008FAF9A /* MWSystemHelperStrategyIOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = F5C9F92B1AD7B99A008FAF9A /* MWSystemHelperStrategyIOS.mm */; };
+		F5CF4A421ADB6DA900D0AF87 /* MWViewSegue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5CF4A401ADB6DA900D0AF87 /* MWViewSegue.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -346,6 +347,8 @@
 		F5C9F9291AD7B7F4008FAF9A /* MWSystemHelperStrategy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MWSystemHelperStrategy.h; sourceTree = "<group>"; };
 		F5C9F92A1AD7B99A008FAF9A /* MWSystemHelperStrategyIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWSystemHelperStrategyIOS.h; sourceTree = "<group>"; };
 		F5C9F92B1AD7B99A008FAF9A /* MWSystemHelperStrategyIOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MWSystemHelperStrategyIOS.mm; sourceTree = "<group>"; };
+		F5CF4A401ADB6DA900D0AF87 /* MWViewSegue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWViewSegue.cpp; sourceTree = "<group>"; };
+		F5CF4A411ADB6DA900D0AF87 /* MWViewSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWViewSegue.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -654,6 +657,8 @@
 				78C738851A77F4100028FC3A /* MWViewController.h */,
 				33BC563D1A7BA39B00EBCA2A /* MWGameView.cpp */,
 				33BC563E1A7BA39B00EBCA2A /* MWGameView.h */,
+				F5CF4A401ADB6DA900D0AF87 /* MWViewSegue.cpp */,
+				F5CF4A411ADB6DA900D0AF87 /* MWViewSegue.h */,
 			);
 			path = scheme;
 			sourceTree = "<group>";
@@ -1082,6 +1087,7 @@
 				33B78CC11A7A3A7A003FC84B /* MWException.cpp in Sources */,
 				33C73FF41A7F1BED0057DA34 /* MWLuaUtils.cpp in Sources */,
 				33250DCE1A91E39A00D1668B /* JSONDebug.cpp in Sources */,
+				F5CF4A421ADB6DA900D0AF87 /* MWViewSegue.cpp in Sources */,
 				F293BB9C15EB831F00256477 /* AppDelegate.cpp in Sources */,
 				33250DD81A91E39A00D1668B /* libjson.cpp in Sources */,
 				33250DCB1A91E39A00D1668B /* internalJSONNode.cpp in Sources */,
