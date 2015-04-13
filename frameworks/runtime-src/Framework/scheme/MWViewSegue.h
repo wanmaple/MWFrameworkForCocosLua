@@ -33,6 +33,9 @@ public:
     virtual void viewDidSegueBack(MWGameScene *scene) = 0;
 };
 
+/**
+ * Basic view segue.
+ */
 class MW_DLL MWViewSegue : public MWObject, public MWViewSegueDelegate
 {
 public:
@@ -51,6 +54,9 @@ protected:
     bool init();
 };
 
+/**
+ * Modaled view segue.
+ */
 class MW_DLL MWModalViewSegue : public MWViewSegue
 {
 public:

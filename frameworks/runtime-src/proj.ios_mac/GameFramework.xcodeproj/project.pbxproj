@@ -103,10 +103,11 @@
 		F5714FE11AB9D77B00AF3A51 /* MWHttpForm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5714FDB1AB9D77B00AF3A51 /* MWHttpForm.cpp */; };
 		F5714FE21AB9D77B00AF3A51 /* MWHttpService.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5714FDD1AB9D77B00AF3A51 /* MWHttpService.cpp */; };
 		F57150931AB9E4B900AF3A51 /* libcurl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F57150921AB9E4B900AF3A51 /* libcurl.a */; };
-		F57150971AB9E70900AF3A51 /* MWIOUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F57150951AB9E70900AF3A51 /* MWIOUtils.cpp */; };
 		F5C9F9271AD7B5B6008FAF9A /* MWSystemHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5C9F9251AD7B5B6008FAF9A /* MWSystemHelper.cpp */; };
 		F5C9F92C1AD7B99A008FAF9A /* MWSystemHelperStrategyIOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = F5C9F92B1AD7B99A008FAF9A /* MWSystemHelperStrategyIOS.mm */; };
 		F5CF4A421ADB6DA900D0AF87 /* MWViewSegue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5CF4A401ADB6DA900D0AF87 /* MWViewSegue.cpp */; };
+		F5CF4A491ADBEDC000D0AF87 /* MWIOUtilsImpIOS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5CF4A481ADBEDC000D0AF87 /* MWIOUtilsImpIOS.cpp */; };
+		F5CF4A4C1ADBF3BC00D0AF87 /* MWUUIDGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5CF4A4A1ADBF3BC00D0AF87 /* MWUUIDGenerator.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -339,8 +340,6 @@
 		F5714FFA1AB9E47A00AF3A51 /* stdcheaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stdcheaders.h; sourceTree = "<group>"; };
 		F5714FFB1AB9E47A00AF3A51 /* typecheck-gcc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "typecheck-gcc.h"; sourceTree = "<group>"; };
 		F57150921AB9E4B900AF3A51 /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl.a; path = ../Framework/net/http/curl/prebuilt/ios/libcurl.a; sourceTree = "<group>"; };
-		F57150951AB9E70900AF3A51 /* MWIOUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWIOUtils.cpp; sourceTree = "<group>"; };
-		F57150961AB9E70900AF3A51 /* MWIOUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWIOUtils.h; sourceTree = "<group>"; };
 		F59B05F41AB367EF001204D1 /* MWNetService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MWNetService.h; path = net/MWNetService.h; sourceTree = "<group>"; };
 		F5C9F9251AD7B5B6008FAF9A /* MWSystemHelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWSystemHelper.cpp; sourceTree = "<group>"; };
 		F5C9F9261AD7B5B6008FAF9A /* MWSystemHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWSystemHelper.h; sourceTree = "<group>"; };
@@ -349,6 +348,10 @@
 		F5C9F92B1AD7B99A008FAF9A /* MWSystemHelperStrategyIOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MWSystemHelperStrategyIOS.mm; sourceTree = "<group>"; };
 		F5CF4A401ADB6DA900D0AF87 /* MWViewSegue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWViewSegue.cpp; sourceTree = "<group>"; };
 		F5CF4A411ADB6DA900D0AF87 /* MWViewSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWViewSegue.h; sourceTree = "<group>"; };
+		F5CF4A461ADBEC8700D0AF87 /* MWIOUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWIOUtils.h; sourceTree = "<group>"; };
+		F5CF4A481ADBEDC000D0AF87 /* MWIOUtilsImpIOS.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWIOUtilsImpIOS.cpp; sourceTree = "<group>"; };
+		F5CF4A4A1ADBF3BC00D0AF87 /* MWUUIDGenerator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWUUIDGenerator.cpp; sourceTree = "<group>"; };
+		F5CF4A4B1ADBF3BC00D0AF87 /* MWUUIDGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWUUIDGenerator.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -819,8 +822,8 @@
 		F57150941AB9E70900AF3A51 /* utils */ = {
 			isa = PBXGroup;
 			children = (
-				F57150951AB9E70900AF3A51 /* MWIOUtils.cpp */,
-				F57150961AB9E70900AF3A51 /* MWIOUtils.h */,
+				F5CF4A4A1ADBF3BC00D0AF87 /* MWUUIDGenerator.cpp */,
+				F5CF4A4B1ADBF3BC00D0AF87 /* MWUUIDGenerator.h */,
 			);
 			path = utils;
 			sourceTree = "<group>";
@@ -849,6 +852,8 @@
 		F5C9F9241AD7B574008FAF9A /* platform */ = {
 			isa = PBXGroup;
 			children = (
+				F5CF4A481ADBEDC000D0AF87 /* MWIOUtilsImpIOS.cpp */,
+				F5CF4A461ADBEC8700D0AF87 /* MWIOUtils.h */,
 				F5C9F9251AD7B5B6008FAF9A /* MWSystemHelper.cpp */,
 				F5C9F9261AD7B5B6008FAF9A /* MWSystemHelper.h */,
 				F5C9F9291AD7B7F4008FAF9A /* MWSystemHelperStrategy.h */,
@@ -1079,7 +1084,6 @@
 				33250DD21A91E39A00D1668B /* JSONNode_Mutex.cpp in Sources */,
 				33B78CB91A790DF9003FC84B /* MWDictionary.cpp in Sources */,
 				F535359D1AB448FD00EF7298 /* MWNetRequest.cpp in Sources */,
-				F57150971AB9E70900AF3A51 /* MWIOUtils.cpp in Sources */,
 				F53535AD1AB455AE00EF7298 /* MWNetCenter.cpp in Sources */,
 				33BC56371A7B933000EBCA2A /* MWQueue.cpp in Sources */,
 				33250DCF1A91E39A00D1668B /* JSONIterators.cpp in Sources */,
@@ -1087,10 +1091,12 @@
 				33B78CC11A7A3A7A003FC84B /* MWException.cpp in Sources */,
 				33C73FF41A7F1BED0057DA34 /* MWLuaUtils.cpp in Sources */,
 				33250DCE1A91E39A00D1668B /* JSONDebug.cpp in Sources */,
+				F5CF4A4C1ADBF3BC00D0AF87 /* MWUUIDGenerator.cpp in Sources */,
 				F5CF4A421ADB6DA900D0AF87 /* MWViewSegue.cpp in Sources */,
 				F293BB9C15EB831F00256477 /* AppDelegate.cpp in Sources */,
 				33250DD81A91E39A00D1668B /* libjson.cpp in Sources */,
 				33250DCB1A91E39A00D1668B /* internalJSONNode.cpp in Sources */,
+				F5CF4A491ADBEDC000D0AF87 /* MWIOUtilsImpIOS.cpp in Sources */,
 				F5714FE21AB9D77B00AF3A51 /* MWHttpService.cpp in Sources */,
 				33A37BF61A91D3D30042CA97 /* sqlite3.c in Sources */,
 				33250DCA1A91E39A00D1668B /* MWJsonStructure.cpp in Sources */,

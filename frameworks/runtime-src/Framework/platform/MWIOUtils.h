@@ -8,6 +8,7 @@
 #define __UTILS_IOUTILS__
 
 #include "../base/mwbase.h"
+#include "cocos2d.h"
 #include <string>
 
 MW_FRAMEWORK_BEGIN

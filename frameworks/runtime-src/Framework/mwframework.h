@@ -7,6 +7,7 @@
 // platform.
 #include "platform/MWSystemHelperStrategy.h"
 #include "platform/MWSystemHelper.h"
+#include "platform/MWIOUtils.h"
 
 // core scheme.
 #include "scheme/MWGameScene.h"
@@ -23,8 +24,8 @@
 #include "json/MWJsonFormatter.h"
 #include "json/MWJsonParser.h"
 
-// utils.
-#include "utils/MWIOUtils.h"
+// utils
+#include "utils/MWUUIDGenerator.h"
 
 // net.
 #include "net/MWNetService.h"

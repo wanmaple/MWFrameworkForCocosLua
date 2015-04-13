@@ -1,3 +1,5 @@
+#if CC_TARGET_PLATFORM == CC_PLATFORM_IOS
+
 #include "MWIOUtils.h"
 
 #include <sys/uio.h>
@@ -141,3 +143,5 @@ bool MWIOUtils::createDirectory(const std::string &directoryPath)
 }
 
 MW_FRAMEWORK_END
+
+#endif

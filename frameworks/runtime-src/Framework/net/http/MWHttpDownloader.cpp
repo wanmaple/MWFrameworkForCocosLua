@@ -1,6 +1,6 @@
 #include "MWHttpDownloader.h"
 #include "cocos2d.h"
-#include "../../utils/MWIOUtils.h"
+#include "../../platform/MWIOUtils.h"
 
 #include <time.h>
 #include <new>
