@@ -64,7 +64,7 @@ bool MWGifSprite::initWithRawData(MWBinaryData *imgData)
     if (g_hGif->ImageCount <= 0) {
         return false;
     }
-    _gifFrames = MWArrayList::create();
+    _gifFrames = new MWArrayList();
     MWGifFrame *pFrame = nullptr;
     for (int i = 0; i < g_hGif->ImageCount; ++i) {
         pFrame = this->getFrameAtIndex(i);
@@ -74,6 +74,17 @@ bool MWGifSprite::initWithRawData(MWBinaryData *imgData)
     }
     
     return true;
+}
+
+MWGifSprite::MWGifSprite()
+: _gifFrames(nullptr)
+{
+    
+}
+
+MWGifSprite::~MWGifSprite()
+{
+    CC_SAFE_RELEASE(_gifFrames);
 }
 
 bool MWGifSprite::openGif(void *imgData)
@@ -204,7 +215,7 @@ MWGifFrame *MWGifSprite::getFrameAtIndex(int index)
     if (!pTex) {
         return nullptr;
     }
-    MWGifFrame *pFrame = MWGifFrame::create(pTex, this->getDurationAtIndex(index));
+    MWGifFrame *pFrame = MWGifFrame::create(pTex, duration);
     return pFrame;
 }
 

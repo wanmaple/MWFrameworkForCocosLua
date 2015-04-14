@@ -83,6 +83,13 @@ bool MWGifFrame::init(Texture2D *texture, MW_UINT duration)
     return true;
 }
 
+MWGifFrame::MWGifFrame()
+: _texture(nullptr)
+, _duration(0)
+{
+    
+}
+
 MWGifFrame::~MWGifFrame()
 {
     CC_SAFE_RELEASE(_texture);

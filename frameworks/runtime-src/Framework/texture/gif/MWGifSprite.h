@@ -48,6 +48,8 @@ protected:
     bool initWithFile(const std::string &gifPath);
     bool initWithRawData(MWBinaryData *imgData);
     
+    MWGifSprite();
+    
     bool openGif(MW_RAW_DATA imgData);
     MWGifFrame *getFrameAtIndex(int index);
     MW_UINT getDurationAtIndex(int index);

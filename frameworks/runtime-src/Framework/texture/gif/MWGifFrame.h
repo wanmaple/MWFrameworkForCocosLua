@@ -67,6 +67,8 @@ public:
     void setTexture(cocos2d::Texture2D *texture) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
     
 protected:
+    MWGifFrame();
+    
     bool init(cocos2d::Texture2D *texture, MW_UINT duration);
     
     cocos2d::Texture2D *_texture;
