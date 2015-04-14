@@ -141,6 +141,10 @@ __VAR_TYPE__ __VAR_NAME__;
 #define MW_CALLBACK_2(__SELECTOR__,__TARGET__, ...) std::bind(&__SELECTOR__,__TARGET__, std::placeholders::_1, std::placeholders::_2, ##__VA_ARGS__)
 #define MW_CALLBACK_3(__SELECTOR__,__TARGET__, ...) std::bind(&__SELECTOR__,__TARGET__, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, ##__VA_ARGS__)
 
+// graphic
+#define MULS16(x, y) ((int16_t)(x) * (y))
+#define ALPHA_MUL(value, alpha256) (MULS16(value, alpha256) >> 8)
+
 #define MW_SUPPORT_MULTITHREADING 0
 /**
  * Threading mutex lock, unlock.

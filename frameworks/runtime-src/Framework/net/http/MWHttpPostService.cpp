@@ -1,4 +1,4 @@
-#include "MWHttpService.h"
+#include "MWHttpPostService.h"
 
 #include "HttpRequest.h"
 #include "MWHttpForm.h"
@@ -15,9 +15,9 @@ using namespace std;
 
 MW_FRAMEWORK_BEGIN
 
-MWHttpService *MWHttpService::create(const std::string &serviceAddress)
+MWHttpPostService *MWHttpPostService::create(const std::string &serviceAddress)
 {
-    auto pService = new (nothrow) MWHttpService(serviceAddress);
+    auto pService = new (nothrow) MWHttpPostService(serviceAddress);
     if (pService && pService->_init(serviceAddress))
     {
         pService->autorelease();
@@ -27,25 +27,25 @@ MWHttpService *MWHttpService::create(const std::string &serviceAddress)
     return nullptr;
 }
 
-bool MWHttpService::_init(const std::string &serviceAddress)
+bool MWHttpPostService::_init(const std::string &serviceAddress)
 {
     _serviceAddr = serviceAddress;
     
     return true;
 }
 
-MWHttpService::MWHttpService(const std::string &serviceAddress)
+MWHttpPostService::MWHttpPostService(const std::string &serviceAddress)
 : _serviceAddr(serviceAddress)
 , _strategy(nullptr)
 {
 }
 
-MWHttpService::~MWHttpService()
+MWHttpPostService::~MWHttpPostService()
 {
     CC_SAFE_DELETE(_strategy);
 }
 
-void MWHttpService::sendMessage(MWNetRequest *request)
+void MWHttpPostService::sendMessage(MWNetRequest *request)
 {
     std::string body = request->getBody();
     auto pHttpRequest = new HttpRequest();
@@ -53,7 +53,7 @@ void MWHttpService::sendMessage(MWNetRequest *request)
     pHttpRequest->setUserData(request);
     // need retain
     request->retain();
-    pHttpRequest->setRequestType(HttpRequest::Type::GET);
+    pHttpRequest->setRequestType(HttpRequest::Type::POST);
     MWHttpForm *pForm = nullptr;
     // get parameters through the strategy.
     pForm = this->_createForm(body);
@@ -65,24 +65,21 @@ void MWHttpService::sendMessage(MWNetRequest *request)
     }
     string url = _serviceAddr;
     string formStr = pForm->toString();
-    if (formStr.size() > 0)
-    {
-        url.append("?").append(formStr);
-    }
     pHttpRequest->setUrl(url.c_str());
-    CCLOG("MWHttpService sent: %s", pHttpRequest->getUrl());
+    CCLOG("MWHttpPostService sent: %s", pHttpRequest->getUrl());
     // set callback
-    pHttpRequest->setResponseCallback(MW_CALLBACK_2(MWHttpService::onHttpRequestCompleted, this));
+    pHttpRequest->setRequestData(formStr.c_str(), formStr.size());
+    pHttpRequest->setResponseCallback(MW_CALLBACK_2(MWHttpPostService::onHttpRequestCompleted, this));
     HttpClient::getInstance()->send(pHttpRequest);
     pHttpRequest->release();
 }
 
-void MWHttpService::executeCommand(const std::string &cmd, cocos2d::Ref *param)
+void MWHttpPostService::executeCommand(const std::string &cmd, cocos2d::Ref *param)
 {
     // Add user commands here.
 }
 
-void MWHttpService::onHttpRequestCompleted(HttpClient *client, HttpResponse *response)
+void MWHttpPostService::onHttpRequestCompleted(HttpClient *client, HttpResponse *response)
 {
     HttpRequest *pRelatedRequest = response->getHttpRequest();
     MWNetRequest *pUserRequest = static_cast<MWNetRequest*>(pRelatedRequest->getUserData());
@@ -108,7 +105,7 @@ void MWHttpService::onHttpRequestCompleted(HttpClient *client, HttpResponse *res
     pUserRequest->release();
 }
 
-MWHttpForm *MWHttpService::_createForm(const std::string &body)
+MWHttpForm *MWHttpPostService::_createForm(const std::string &body)
 {
     CCASSERT(_strategy, "A transfer rule is required!");
     std::map<std::string, std::string> params = _strategy->transferParameters();

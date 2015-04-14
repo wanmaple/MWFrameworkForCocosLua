@@ -1,11 +1,11 @@
 /******************************
- Description: Http service.
+ Description: Http get service.
  Author: M.Wan
  Date: 03/18/2015
  ******************************/
 
-#ifndef __HTTP_HTTPSERVICE__
-#define __HTTP_HTTPSERVICE__
+#ifndef __HTTP_HTTP_GET_SERVICE__
+#define __HTTP_HTTP_GET_SERVICE__
 
 #include "../../base/mwbase.h"
 
@@ -23,28 +23,28 @@ class MWNetRequest;
 class MWHttpForm;
 
 /**
- * Http service.
+ * Http get service.
  */
-class MW_DLL MWHttpService : public MWNetService
+class MW_DLL MWHttpGetService : public MWNetService
 {
 public:
     /**
-     * Create HttpService with specified service address.
+     * Create HttpGetService with specified service address.
      *
      * @param serviceAddress Service address.
      */
-    static MWHttpService *create(const std::string &serviceAddress);
+    static MWHttpGetService *create(const std::string &serviceAddress);
     
     /**
-     * HttpService constructor.
+     * HttpGetService constructor.
      *
      * @param serviceAddress Service address.
      */
-    explicit MWHttpService(const std::string &serviceAddress);
+    explicit MWHttpGetService(const std::string &serviceAddress);
     /**
-     * HttpService destructor.
+     * HttpGetService destructor.
      */
-    virtual ~MWHttpService();
+    virtual ~MWHttpGetService();
     
     /**
      * NetService overrides.

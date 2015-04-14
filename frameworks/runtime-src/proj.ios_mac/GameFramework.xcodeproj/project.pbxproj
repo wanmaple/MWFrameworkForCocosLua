@@ -101,13 +101,23 @@
 		F53535B51AB45A4100EF7298 /* MWNetFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F53535B31AB45A4100EF7298 /* MWNetFilter.cpp */; };
 		F5714FE01AB9D77B00AF3A51 /* MWHttpDownloader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5714FD91AB9D77B00AF3A51 /* MWHttpDownloader.cpp */; };
 		F5714FE11AB9D77B00AF3A51 /* MWHttpForm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5714FDB1AB9D77B00AF3A51 /* MWHttpForm.cpp */; };
-		F5714FE21AB9D77B00AF3A51 /* MWHttpService.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5714FDD1AB9D77B00AF3A51 /* MWHttpService.cpp */; };
+		F5714FE21AB9D77B00AF3A51 /* MWHttpGetService.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5714FDD1AB9D77B00AF3A51 /* MWHttpGetService.cpp */; };
 		F57150931AB9E4B900AF3A51 /* libcurl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F57150921AB9E4B900AF3A51 /* libcurl.a */; };
 		F5C9F9271AD7B5B6008FAF9A /* MWSystemHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5C9F9251AD7B5B6008FAF9A /* MWSystemHelper.cpp */; };
 		F5C9F92C1AD7B99A008FAF9A /* MWSystemHelperStrategyIOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = F5C9F92B1AD7B99A008FAF9A /* MWSystemHelperStrategyIOS.mm */; };
 		F5CF4A421ADB6DA900D0AF87 /* MWViewSegue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5CF4A401ADB6DA900D0AF87 /* MWViewSegue.cpp */; };
 		F5CF4A491ADBEDC000D0AF87 /* MWIOUtilsImpIOS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5CF4A481ADBEDC000D0AF87 /* MWIOUtilsImpIOS.cpp */; };
 		F5CF4A4C1ADBF3BC00D0AF87 /* MWUUIDGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5CF4A4A1ADBF3BC00D0AF87 /* MWUUIDGenerator.cpp */; };
+		F5CF4A511ADCE52C00D0AF87 /* MWHttpPostService.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5CF4A4F1ADCE52C00D0AF87 /* MWHttpPostService.cpp */; };
+		F5CF4A5F1ADCE8CD00D0AF87 /* dgif_lib.c in Sources */ = {isa = PBXBuildFile; fileRef = F5CF4A551ADCE8CD00D0AF87 /* dgif_lib.c */; };
+		F5CF4A601ADCE8CD00D0AF87 /* egif_lib.c in Sources */ = {isa = PBXBuildFile; fileRef = F5CF4A561ADCE8CD00D0AF87 /* egif_lib.c */; };
+		F5CF4A611ADCE8CD00D0AF87 /* gif_err.c in Sources */ = {isa = PBXBuildFile; fileRef = F5CF4A571ADCE8CD00D0AF87 /* gif_err.c */; };
+		F5CF4A621ADCE8CD00D0AF87 /* gif_font.c in Sources */ = {isa = PBXBuildFile; fileRef = F5CF4A581ADCE8CD00D0AF87 /* gif_font.c */; };
+		F5CF4A631ADCE8CD00D0AF87 /* gif_hash.c in Sources */ = {isa = PBXBuildFile; fileRef = F5CF4A591ADCE8CD00D0AF87 /* gif_hash.c */; };
+		F5CF4A641ADCE8CD00D0AF87 /* gifalloc.c in Sources */ = {isa = PBXBuildFile; fileRef = F5CF4A5D1ADCE8CD00D0AF87 /* gifalloc.c */; };
+		F5CF4A651ADCE8CD00D0AF87 /* quantize.c in Sources */ = {isa = PBXBuildFile; fileRef = F5CF4A5E1ADCE8CD00D0AF87 /* quantize.c */; };
+		F5CF4A681ADCE9EA00D0AF87 /* MWGifFrame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5CF4A661ADCE9EA00D0AF87 /* MWGifFrame.cpp */; };
+		F5CF4A6D1ADCF1EC00D0AF87 /* MWGifSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5CF4A6B1ADCF1EC00D0AF87 /* MWGifSprite.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -327,8 +337,8 @@
 		F5714FDA1AB9D77B00AF3A51 /* MWHttpDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWHttpDownloader.h; sourceTree = "<group>"; };
 		F5714FDB1AB9D77B00AF3A51 /* MWHttpForm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWHttpForm.cpp; sourceTree = "<group>"; };
 		F5714FDC1AB9D77B00AF3A51 /* MWHttpForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWHttpForm.h; sourceTree = "<group>"; };
-		F5714FDD1AB9D77B00AF3A51 /* MWHttpService.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWHttpService.cpp; sourceTree = "<group>"; };
-		F5714FDE1AB9D77B00AF3A51 /* MWHttpService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWHttpService.h; sourceTree = "<group>"; };
+		F5714FDD1AB9D77B00AF3A51 /* MWHttpGetService.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWHttpGetService.cpp; sourceTree = "<group>"; };
+		F5714FDE1AB9D77B00AF3A51 /* MWHttpGetService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWHttpGetService.h; sourceTree = "<group>"; };
 		F5714FDF1AB9D77B00AF3A51 /* MWHttpTransferStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWHttpTransferStrategy.h; sourceTree = "<group>"; };
 		F5714FF31AB9E47A00AF3A51 /* curl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = curl.h; sourceTree = "<group>"; };
 		F5714FF41AB9E47A00AF3A51 /* curlbuild.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = curlbuild.h; sourceTree = "<group>"; };
@@ -352,6 +362,22 @@
 		F5CF4A481ADBEDC000D0AF87 /* MWIOUtilsImpIOS.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWIOUtilsImpIOS.cpp; sourceTree = "<group>"; };
 		F5CF4A4A1ADBF3BC00D0AF87 /* MWUUIDGenerator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWUUIDGenerator.cpp; sourceTree = "<group>"; };
 		F5CF4A4B1ADBF3BC00D0AF87 /* MWUUIDGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWUUIDGenerator.h; sourceTree = "<group>"; };
+		F5CF4A4F1ADCE52C00D0AF87 /* MWHttpPostService.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWHttpPostService.cpp; sourceTree = "<group>"; };
+		F5CF4A501ADCE52C00D0AF87 /* MWHttpPostService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWHttpPostService.h; sourceTree = "<group>"; };
+		F5CF4A551ADCE8CD00D0AF87 /* dgif_lib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dgif_lib.c; sourceTree = "<group>"; };
+		F5CF4A561ADCE8CD00D0AF87 /* egif_lib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = egif_lib.c; sourceTree = "<group>"; };
+		F5CF4A571ADCE8CD00D0AF87 /* gif_err.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gif_err.c; sourceTree = "<group>"; };
+		F5CF4A581ADCE8CD00D0AF87 /* gif_font.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gif_font.c; sourceTree = "<group>"; };
+		F5CF4A591ADCE8CD00D0AF87 /* gif_hash.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gif_hash.c; sourceTree = "<group>"; };
+		F5CF4A5A1ADCE8CD00D0AF87 /* gif_hash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gif_hash.h; sourceTree = "<group>"; };
+		F5CF4A5B1ADCE8CD00D0AF87 /* gif_lib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gif_lib.h; sourceTree = "<group>"; };
+		F5CF4A5C1ADCE8CD00D0AF87 /* gif_lib_private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gif_lib_private.h; sourceTree = "<group>"; };
+		F5CF4A5D1ADCE8CD00D0AF87 /* gifalloc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gifalloc.c; sourceTree = "<group>"; };
+		F5CF4A5E1ADCE8CD00D0AF87 /* quantize.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = quantize.c; sourceTree = "<group>"; };
+		F5CF4A661ADCE9EA00D0AF87 /* MWGifFrame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWGifFrame.cpp; sourceTree = "<group>"; };
+		F5CF4A671ADCE9EA00D0AF87 /* MWGifFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWGifFrame.h; sourceTree = "<group>"; };
+		F5CF4A6B1ADCF1EC00D0AF87 /* MWGifSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWGifSprite.cpp; sourceTree = "<group>"; };
+		F5CF4A6C1ADCF1EC00D0AF87 /* MWGifSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWGifSprite.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -644,6 +670,7 @@
 				78C7387D1A77EF8F0028FC3A /* scheme */,
 				33C73FF11A7F1BDE0057DA34 /* lua */,
 				F5C9F9241AD7B574008FAF9A /* platform */,
+				F5CF4A521ADCE8CD00D0AF87 /* texture */,
 				F57150941AB9E70900AF3A51 /* utils */,
 				78C738811A77F0B70028FC3A /* mwframework.h */,
 			);
@@ -771,8 +798,10 @@
 				F5714FDA1AB9D77B00AF3A51 /* MWHttpDownloader.h */,
 				F5714FDB1AB9D77B00AF3A51 /* MWHttpForm.cpp */,
 				F5714FDC1AB9D77B00AF3A51 /* MWHttpForm.h */,
-				F5714FDD1AB9D77B00AF3A51 /* MWHttpService.cpp */,
-				F5714FDE1AB9D77B00AF3A51 /* MWHttpService.h */,
+				F5CF4A4F1ADCE52C00D0AF87 /* MWHttpPostService.cpp */,
+				F5CF4A501ADCE52C00D0AF87 /* MWHttpPostService.h */,
+				F5714FDD1AB9D77B00AF3A51 /* MWHttpGetService.cpp */,
+				F5714FDE1AB9D77B00AF3A51 /* MWHttpGetService.h */,
 				F5714FDF1AB9D77B00AF3A51 /* MWHttpTransferStrategy.h */,
 			);
 			name = http;
@@ -861,6 +890,43 @@
 				F5C9F92B1AD7B99A008FAF9A /* MWSystemHelperStrategyIOS.mm */,
 			);
 			path = platform;
+			sourceTree = "<group>";
+		};
+		F5CF4A521ADCE8CD00D0AF87 /* texture */ = {
+			isa = PBXGroup;
+			children = (
+				F5CF4A531ADCE8CD00D0AF87 /* gif */,
+			);
+			path = texture;
+			sourceTree = "<group>";
+		};
+		F5CF4A531ADCE8CD00D0AF87 /* gif */ = {
+			isa = PBXGroup;
+			children = (
+				F5CF4A541ADCE8CD00D0AF87 /* gif_lib */,
+				F5CF4A661ADCE9EA00D0AF87 /* MWGifFrame.cpp */,
+				F5CF4A671ADCE9EA00D0AF87 /* MWGifFrame.h */,
+				F5CF4A6B1ADCF1EC00D0AF87 /* MWGifSprite.cpp */,
+				F5CF4A6C1ADCF1EC00D0AF87 /* MWGifSprite.h */,
+			);
+			path = gif;
+			sourceTree = "<group>";
+		};
+		F5CF4A541ADCE8CD00D0AF87 /* gif_lib */ = {
+			isa = PBXGroup;
+			children = (
+				F5CF4A551ADCE8CD00D0AF87 /* dgif_lib.c */,
+				F5CF4A561ADCE8CD00D0AF87 /* egif_lib.c */,
+				F5CF4A571ADCE8CD00D0AF87 /* gif_err.c */,
+				F5CF4A581ADCE8CD00D0AF87 /* gif_font.c */,
+				F5CF4A591ADCE8CD00D0AF87 /* gif_hash.c */,
+				F5CF4A5A1ADCE8CD00D0AF87 /* gif_hash.h */,
+				F5CF4A5B1ADCE8CD00D0AF87 /* gif_lib.h */,
+				F5CF4A5C1ADCE8CD00D0AF87 /* gif_lib_private.h */,
+				F5CF4A5D1ADCE8CD00D0AF87 /* gifalloc.c */,
+				F5CF4A5E1ADCE8CD00D0AF87 /* quantize.c */,
+			);
+			path = gif_lib;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1061,6 +1127,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F5CF4A641ADCE8CD00D0AF87 /* gifalloc.c in Sources */,
 				78C738861A77F4100028FC3A /* MWViewController.cpp in Sources */,
 				3382DA041A83966100A3702F /* MWObject.cpp in Sources */,
 				33125B1A1A7A53B80030DD61 /* MWArrayList.cpp in Sources */,
@@ -1069,14 +1136,18 @@
 				F5714FE01AB9D77B00AF3A51 /* MWHttpDownloader.cpp in Sources */,
 				33250DD41A91E39A00D1668B /* JSONStream.cpp in Sources */,
 				33250DD11A91E39A00D1668B /* JSONNode.cpp in Sources */,
+				F5CF4A6D1ADCF1EC00D0AF87 /* MWGifSprite.cpp in Sources */,
 				33250DCD1A91E39A00D1668B /* JSONChildren.cpp in Sources */,
 				33250DCC1A91E39A00D1668B /* JSONAllocator.cpp in Sources */,
+				F5CF4A611ADCE8CD00D0AF87 /* gif_err.c in Sources */,
+				F5CF4A601ADCE8CD00D0AF87 /* egif_lib.c in Sources */,
 				78C738801A77EF9B0028FC3A /* MWGameScene.cpp in Sources */,
 				F5C9F92C1AD7B99A008FAF9A /* MWSystemHelperStrategyIOS.mm in Sources */,
 				33A37BF71A91D3D30042CA97 /* MWSqliteDb.cpp in Sources */,
 				5023812517EBBCAC00990C9B /* RootViewController.mm in Sources */,
 				F5C9F9271AD7B5B6008FAF9A /* MWSystemHelper.cpp in Sources */,
 				33250DD01A91E39A00D1668B /* JSONMemory.cpp in Sources */,
+				F5CF4A681ADCE9EA00D0AF87 /* MWGifFrame.cpp in Sources */,
 				33250DD61A91E39A00D1668B /* JSONWorker.cpp in Sources */,
 				33250DC81A91E39A00D1668B /* MWJsonFormatter.cpp in Sources */,
 				33250DD71A91E39A00D1668B /* JSONWriter.cpp in Sources */,
@@ -1091,15 +1162,20 @@
 				33B78CC11A7A3A7A003FC84B /* MWException.cpp in Sources */,
 				33C73FF41A7F1BED0057DA34 /* MWLuaUtils.cpp in Sources */,
 				33250DCE1A91E39A00D1668B /* JSONDebug.cpp in Sources */,
+				F5CF4A621ADCE8CD00D0AF87 /* gif_font.c in Sources */,
+				F5CF4A651ADCE8CD00D0AF87 /* quantize.c in Sources */,
 				F5CF4A4C1ADBF3BC00D0AF87 /* MWUUIDGenerator.cpp in Sources */,
 				F5CF4A421ADB6DA900D0AF87 /* MWViewSegue.cpp in Sources */,
 				F293BB9C15EB831F00256477 /* AppDelegate.cpp in Sources */,
+				F5CF4A511ADCE52C00D0AF87 /* MWHttpPostService.cpp in Sources */,
 				33250DD81A91E39A00D1668B /* libjson.cpp in Sources */,
+				F5CF4A5F1ADCE8CD00D0AF87 /* dgif_lib.c in Sources */,
 				33250DCB1A91E39A00D1668B /* internalJSONNode.cpp in Sources */,
 				F5CF4A491ADBEDC000D0AF87 /* MWIOUtilsImpIOS.cpp in Sources */,
-				F5714FE21AB9D77B00AF3A51 /* MWHttpService.cpp in Sources */,
+				F5714FE21AB9D77B00AF3A51 /* MWHttpGetService.cpp in Sources */,
 				33A37BF61A91D3D30042CA97 /* sqlite3.c in Sources */,
 				33250DCA1A91E39A00D1668B /* MWJsonStructure.cpp in Sources */,
+				F5CF4A631ADCE8CD00D0AF87 /* gif_hash.c in Sources */,
 				5023812417EBBCAC00990C9B /* main.m in Sources */,
 				78C738941A77F7440028FC3A /* MWBinaryData.cpp in Sources */,
 				F53535B01AB4569A00EF7298 /* MWNetHandler.cpp in Sources */,

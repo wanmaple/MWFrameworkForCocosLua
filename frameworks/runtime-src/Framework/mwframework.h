@@ -35,9 +35,12 @@
 #include "net/MWNetResponse.h"
 #include "net/MWNetProtocol.h"
 #include "net/MWNetCenter.h"
+
+// http
 #include "net/http/MWHttpForm.h"
 #include "net/http/MWHttpTransferStrategy.h"
-#include "net/http/MWHttpService.h"
+#include "net/http/MWHttpGetService.h"
+#include "net/http/MWHttpPostService.h"
 #include "net/http/MWHttpDownloader.h"
 
 // lua related.
