@@ -12,34 +12,6 @@
 
 MW_FRAMEWORK_BEGIN
 
-struct ColorRGBA
-{
-    MW_BYTE r;
-    MW_BYTE g;
-    MW_BYTE b;
-    MW_BYTE a;
-};
-
-class MWBitmap
-{
-public:
-    explicit MWBitmap(MW_UINT width, MW_UINT height);
-    ~MWBitmap();
-    
-    void allocate();
-    void destroy();
-    
-    bool isValid();
-    
-    void clearWithColor(const ColorRGBA &color);
-    
-    ColorRGBA *offsetAt(int left, int top);
-    
-    MW_SYNTHESIZE(MW_UINT, _width, Width);
-    MW_SYNTHESIZE(MW_UINT, _height, Height);
-    MW_SYNTHESIZE_READONLY(ColorRGBA *, _data, Data);
-};
-
 /**
  * GIF frame wrapper.
  */
@@ -50,7 +22,7 @@ public:
     /**
      * Create a wrapper of gif frame data.
      */
-    static MWGifFrame *create(cocos2d::Texture2D *texture, MW_UINT duration);
+    static MWGifFrame *create(cocos2d::SpriteFrame *spriteFrame, MW_UINT duration);
     
     ~MWGifFrame();
     
@@ -58,20 +30,20 @@ public:
 //    MW_SYNTHESIZE_READONLY(MW_UINT, _index, Index);
     
     /**
-     * Texture getter and setter.
+     * Sprite frame getter and setter.
      */
-    inline cocos2d::Texture2D *getTexture()
+    inline cocos2d::SpriteFrame *getSpriteFrame()
     {
-        return _texture;
+        return _spriteFrame;
     }
-    void setTexture(cocos2d::Texture2D *texture) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
+    void setSpriteFrame(cocos2d::SpriteFrame *spriteFrame) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
     
 protected:
     MWGifFrame();
     
-    bool init(cocos2d::Texture2D *texture, MW_UINT duration);
+    bool init(cocos2d::SpriteFrame *spriteFrame, MW_UINT duration);
     
-    cocos2d::Texture2D *_texture;
+    cocos2d::SpriteFrame *_spriteFrame;
 };
 
 MW_FRAMEWORK_END

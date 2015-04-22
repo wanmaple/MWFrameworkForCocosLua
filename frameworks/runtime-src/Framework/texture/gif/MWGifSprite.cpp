@@ -58,6 +58,9 @@ MWGifSprite *MWGifSprite::createWithRawData(MWBinaryData *imgData)
 
 bool MWGifSprite::initWithRawData(MWBinaryData *imgData)
 {
+    if (!Sprite::init()) {
+        return false;
+    }
     if (!this->openGif(imgData->getData())) {
         return false;
     }
@@ -71,13 +74,24 @@ bool MWGifSprite::initWithRawData(MWBinaryData *imgData)
         if (pFrame) {
             _gifFrames->appendObject(pFrame);
         }
+        _gifFrames->appendObject(pFrame);
     }
+
+    this->setSpriteFrame(static_cast<MWGifFrame *>(_gifFrames->objectAtIndex(0))->getSpriteFrame());
+    
+    this->play();
     
     return true;
 }
 
 MWGifSprite::MWGifSprite()
-: _gifFrames(nullptr)
+: Sprite()
+, _gifFrames(nullptr)
+, _currentIndex(0)
+, _passedDeltaTime(0.0f)
+, _repeatTimes(0)
+, _playTimes(0)
+, _playing(false)
 {
     
 }
@@ -85,6 +99,82 @@ MWGifSprite::MWGifSprite()
 MWGifSprite::~MWGifSprite()
 {
     CC_SAFE_RELEASE(_gifFrames);
+    if (g_hGif) {
+        int err;
+        DGifCloseFile(g_hGif, &err);
+    }
+}
+
+void MWGifSprite::play(MW_UINT count)
+{
+    if (_playing) {
+        return;
+    }
+    _repeatTimes = count;
+    _playing = true;
+    Director::getInstance()->getScheduler()->scheduleUpdate(this, 0, false);
+}
+
+void MWGifSprite::pause()
+{
+    _playing = false;
+}
+
+void MWGifSprite::resume()
+{
+    _playing = true;
+}
+
+void MWGifSprite::stop()
+{
+    Director::getInstance()->getScheduler()->unscheduleUpdate(this);
+    _currentIndex = 0;
+    _passedDeltaTime = 0.0f;
+    _repeatTimes = 0;
+    _playTimes = 0;
+    _playing = false;
+    this->setSpriteFrame(static_cast<MWGifFrame *>(_gifFrames->objectAtIndex(0))->getSpriteFrame());
+}
+
+void MWGifSprite::update(float dt)
+{
+    // paused.
+    if (!_playing) {
+        return;
+    }
+    
+    _passedDeltaTime += dt;
+    MWGifFrame *pFrame = static_cast<MWGifFrame *>(_gifFrames->objectAtIndex(_currentIndex));
+    MW_UINT duration = pFrame->getDuration();
+    if (_passedDeltaTime * 1000 > duration) {
+        _passedDeltaTime -= (double)duration / 1000;
+        // update frame
+        ++_currentIndex;
+        if (_currentIndex >= _gifFrames->count()) {
+            ++_playTimes;
+            // repeat forever? reach the repeat times?
+            if (_repeatTimes > 0 && _playTimes >= _repeatTimes) {
+                this->stop();
+                return;
+            }
+            _currentIndex = 0;
+        }
+        pFrame = static_cast<MWGifFrame *>(_gifFrames->objectAtIndex(_currentIndex));
+        this->setSpriteFrame(pFrame->getSpriteFrame());
+    }
+}
+
+MW_UINT MWGifSprite::getTotalDuration()
+{
+    static MW_UINT totalDuration = 0;
+    if (totalDuration > 0) {
+        return totalDuration;
+    }
+    for (int i = 0; i < _gifFrames->count(); ++i) {
+        MWGifFrame *pFrame = static_cast<MWGifFrame *>(_gifFrames->objectAtIndex(i));
+        totalDuration += pFrame->getDuration();
+    }
+    return totalDuration;
 }
 
 bool MWGifSprite::openGif(void *imgData)
@@ -105,117 +195,93 @@ bool MWGifSprite::openGif(void *imgData)
     return true;
 }
 
-MWGifFrame *MWGifSprite::getFrameAtIndex(int index)
+MWGifFrame *MWGifSprite::getFrameAtIndex(int i)
 {
-    MW_UINT duration = this->getDurationAtIndex(index);
-    
-    const int width = g_hGif->SWidth;
-    const int height = g_hGif->SHeight;
-    if (width <= 0 || height <= 0) {
-        return nullptr;
+    // gif width and height
+    int bgWidth = g_hGif->SWidth;
+    int bgHeight = g_hGif->SHeight;
+    // check bg color, if the global color map is nonexistent, then the bg color is no use.
+    GifColorType defaultColor = { 0x0, 0x0, 0x0 };
+    GifColorType bgColor = g_hGif->SColorMap ? g_hGif->SColorMap->Colors[g_hGif->SBackGroundColor] : defaultColor;
+    // alloc the data for the bg at first, use RGBA8888 here
+    MW_UINT len = bgWidth * bgHeight * sizeof(MW_UINT);
+    unsigned int *pBgBuffer = (unsigned int*)malloc(len);
+    // fill the bg color to the bg buffer
+    // the first row
+    unsigned int r, g, b, a;
+    r = bgColor.Red;
+    g = bgColor.Green;
+    b = bgColor.Blue;
+    a = 0x0;       // alpha, 0 indicates transparency
+    unsigned int bgRgba = (a << 24) | (b << 16) | (g << 8) | r;
+    for (int i = 0; i < bgWidth; ++i) {
+        pBgBuffer[i] = bgRgba;
+    }
+    // copy the first row to the rest rows.
+    for (int i = 1; i < bgHeight; ++i) {
+        memcpy(pBgBuffer + i * bgWidth, pBgBuffer, bgWidth);
     }
     
-    MWBitmap *pBmp = new MWBitmap(width, height);
-    pBmp->allocate();
+    // save the sub image
+    unsigned int *pImgBuffer = nullptr;
+    pImgBuffer = (unsigned int*)malloc(len);
+    memcpy(pImgBuffer, pBgBuffer, len);
     
-    ColorRGBA bgColor = { 0 };
-    if (g_hGif->SColorMap) {
-        const GifColorType &color = g_hGif->SColorMap->Colors[g_hGif->SBackGroundColor];
-        bgColor.a = 0xff;
-        bgColor.r = color.Red;
-        bgColor.g = color.Green;
-        bgColor.b = color.Blue;
+    int top = g_hGif->SavedImages[i].ImageDesc.Top;
+    int left = g_hGif->SavedImages[i].ImageDesc.Left;
+    int width = g_hGif->SavedImages[i].ImageDesc.Width;
+    int height = g_hGif->SavedImages[i].ImageDesc.Height;
+    // check transparency from extension blocks
+    GraphicsControlBlock gcb;
+    DGifSavedExtensionToGCB(g_hGif, i, &gcb);
+//    CCLOG("delay ts: %d", gcb.DelayTime);
+    // image raw data: RGBRGB...(all color index) read them one by one
+    MW_BYTE *pRawData = g_hGif->SavedImages[i].RasterBits;
+    // check local color map, if nonexistence, use global color map
+    // any possibility that neither of color maps exists?
+    GifColorType *pColorMap = g_hGif->SavedImages[i].ImageDesc.ColorMap ? g_hGif->SavedImages[i].ImageDesc.ColorMap->Colors : g_hGif->SColorMap->Colors;
+    // calculate the offset, retrieve data from raw data
+    MW_UINT *pImgPtr = pImgBuffer + top * bgWidth + left;
+    MW_BYTE *pRawPtr = pRawData;
+    int rawIndex;
+    GifColorType color;
+    for (int y = 0; y < height; ++y) {
+        for (int x = 0; x < width; ++x) {
+            rawIndex = pRawPtr[x];
+            // check whether it is the transparent pixel
+            if (gcb.TransparentColor != -1 && gcb.TransparentColor == rawIndex) {
+                // skip the current pixel.
+                continue;
+            }
+            color = pColorMap[rawIndex];
+            r = color.Red;
+            g = color.Green;
+            b = color.Blue;
+            a = 0xff;       // alpha, default as 100% opacity
+            pImgPtr[x] = (a << 24) | (b << 16) | (g << 8) | r;
+        }
+        // shift the pointer
+        pImgPtr += width + left;
+        pRawPtr += width;
     }
     
-    static ColorRGBA paintColor;
-    SavedImage *pCurImg = &g_hGif->SavedImages[index];
-    // whether transparent?
-    bool tran = false;
-    int disposal;
-    for (int i = 0; i < pCurImg->ExtensionBlockCount; ++i) {
-        ExtensionBlock *pEb = pCurImg->ExtensionBlocks + i;
-        if (pEb->Function == GRAPHICS_EXT_FUNC_CODE && pEb->ByteCount == 4) {
-            tran = (pEb->Bytes[0] & 0x1) == 1;
-            disposal = (pEb->Bytes[0] >> 2) & 0x111;
-        }
-    }
-    if (!tran && g_hGif->SColorMap) {
-        paintColor = bgColor;
-    }
-    pBmp->clearWithColor(paintColor);
-    
-    // we can skip this process when it's disposal
-    if (!this->checkWhetherWillBeCleared(index)) {
-        // draw frame
-        int transparent = -1;
-        
-        for (int i = 0; i < pCurImg->ExtensionBlockCount; ++i) {
-            ExtensionBlock *pEb = pCurImg->ExtensionBlocks + i;
-            if (pEb->Function == GRAPHICS_EXT_FUNC_CODE && pEb->ByteCount == 4) {
-                bool isTransparent = (pEb->Bytes[0] & 0x1) == 1;
-                if (isTransparent) {
-                    transparent = (MW_BYTE)pEb->Bytes[3];
-                }
-            }
-        }
-        
-        ColorMapObject *pMap = nullptr;
-        if (pCurImg->ImageDesc.ColorMap) {
-            // use local color table
-            pMap = pCurImg->ImageDesc.ColorMap;
-        }
-        
-        if (pMap && pMap->ColorCount == (1 << pMap->BitsPerPixel)) {
-            // blit
-            const MW_BYTE *pSrc = (MW_BYTE *)pCurImg->RasterBits;
-            ColorRGBA *pDst = pBmp->offsetAt(pCurImg->ImageDesc.Left, pCurImg->ImageDesc.Top);
-            
-            GifWord copyWidth = pCurImg->ImageDesc.Width;
-            if (pCurImg->ImageDesc.Left + copyWidth > width) {
-                copyWidth = width - pCurImg->ImageDesc.Left;
-            }
-            GifWord copyHeight = pCurImg->ImageDesc.Height;
-            if (pCurImg->ImageDesc.Top + copyHeight > height) {
-                copyHeight = height - pCurImg->ImageDesc.Top;
-            }
-            
-            for ( ; copyHeight > 0; --copyHeight) {
-                for ( ; copyWidth > 0; --copyWidth, ++pSrc, ++pDst) {
-                    if (*pSrc != transparent) {
-                        GifColorType tmp = pMap->Colors[*pSrc];
-                        *pDst = { tmp.Red, tmp.Green, tmp.Blue, 0xff };
-                    }
-                }
-                pSrc += pCurImg->ImageDesc.Width;
-                pDst += width;
-            }
-        }
+    // get duration
+    MW_UINT duration = 0;
+    for (int n = 0; n <= i; ++n) {
+        duration += this->getDurationAtIndex(n);
     }
     
     // create texture
-    Texture2D *pTex = nullptr;
-    Image *pImg = new Image();
-    do {
-        bool res = true;
-        ColorRGBA *pColorData = pBmp->getData();
-        res = pImg->initWithImageData((const unsigned char *)pColorData, width * height);
-        if (!res) {
-            break;
-        }
-        pTex = new Texture2D();
-        res = pTex->initWithImage(pImg);
-        if (!res) {
-            delete pTex;
-            pTex = nullptr;
-            break;
-        }
-        pTex->autorelease();
-    } while (0);
+    auto pTexture = new Texture2D();
+    pTexture->initWithData((MW_RAW_DATA)pImgBuffer, len, Texture2D::PixelFormat::RGBA8888, bgWidth, bgHeight, Size(bgWidth, bgHeight));
+    pTexture->autorelease();
+    free(pImgBuffer);
+    auto pSpriteFrame = SpriteFrame::createWithTexture(pTexture, Rect(0, 0, pTexture->getContentSize().width, pTexture->getContentSize().height));
     
-    if (!pTex) {
-        return nullptr;
-    }
-    MWGifFrame *pFrame = MWGifFrame::create(pTex, duration);
+    // clean the buffer
+    free(pBgBuffer);
+    MWGifFrame *pFrame = MWGifFrame::create(pSpriteFrame, duration);
+    
     return pFrame;
 }
 
@@ -230,7 +296,7 @@ MW_UINT MWGifSprite::getDurationAtIndex(int index)
                 break;
             }
             const uint8_t *b = (const uint8_t *)img.ExtensionBlocks[i].Bytes;
-            duration = ((b[2] << 8) | b[1]) * 10;
+            duration = ((b[2] << 8) | b[1]);
             break;
         }
     }

@@ -44,6 +44,27 @@ public:
         return _gifFrames;
     }
     
+    /**
+     * Play the animation.
+     *
+     * @param count How many times would you want to play the animation? It will play forever if the count is set to 0.
+     */
+    void play(MW_UINT count = 0);
+    /**
+     * Pause the animation.
+     */
+    void pause();
+    /**
+     * Resume the animation.
+     */
+    void resume();
+    /**
+     * Stop the animation, the sprite will display the first texture.
+     */
+    void stop();
+    
+    virtual void update(float dt) override;
+    
 protected:
     bool initWithFile(const std::string &gifPath);
     bool initWithRawData(MWBinaryData *imgData);
@@ -55,7 +76,15 @@ protected:
     MW_UINT getDurationAtIndex(int index);
     bool checkWhetherWillBeCleared(int index);
     
+    MW_UINT getTotalDuration();
+    
     MWArrayList *_gifFrames;
+    
+    int _currentIndex;
+    double _passedDeltaTime;
+    MW_UINT _repeatTimes;
+    MW_UINT _playTimes;
+    bool _playing;
 };
 
 MW_FRAMEWORK_END

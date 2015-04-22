@@ -18,6 +18,10 @@
 // db operations.
 #include "db/sqlite/MWSqliteDb.h"
 
+// texture extensions
+#include "texture/gif/MWGifFrame.h"
+#include "texture/gif/MWGifSprite.h"
+
 // json.
 #include "json/MWJsonElement.h"
 #include "json/MWJsonStructure.h"

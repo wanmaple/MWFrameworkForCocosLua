@@ -17,7 +17,7 @@ typedef struct _GUID {
 
 MW_FRAMEWORK_BEGIN
 
-GUID CreateGUID()
+static GUID CreateGUID()
 {
     GUID guid;
 #ifdef WIN32
@@ -28,7 +28,7 @@ GUID CreateGUID()
     return guid;
 }
 
-string GuidToString(const GUID &guid)
+static string GuidToString(const GUID &guid)
 {
     char buffer[64] = { 0 };
 #ifdef __GNUC__

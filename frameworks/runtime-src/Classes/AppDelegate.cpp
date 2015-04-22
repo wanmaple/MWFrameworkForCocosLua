@@ -37,6 +37,16 @@ bool AppDelegate::applicationDidFinishLaunching()
     ScriptEngineManager::getInstance()->setScriptEngine(engine);
     lua_State* L = engine->getLuaStack()->getLuaState();
     lua_module_register(L);
+    
+    auto pScene = Scene::create();
+    auto pLayer = Layer::create();
+    auto pGif = mwframework::MWGifSprite::createWithFile("res/002.gif");
+    pGif->setPosition(400, 200);
+    pLayer->addChild(pGif);
+    pScene->addChild(pLayer);
+    Director::getInstance()->runWithScene(pScene);
+    
+    return true;
 
     // If you want to use Quick-Cocos2d-X, please uncomment below code
     // register_all_quick_manual(L);
