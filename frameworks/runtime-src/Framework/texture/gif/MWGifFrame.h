@@ -27,7 +27,6 @@ public:
     ~MWGifFrame();
     
     MW_SYNTHESIZE(MW_UINT, _duration, Duration);
-//    MW_SYNTHESIZE_READONLY(MW_UINT, _index, Index);
     
     /**
      * Sprite frame getter and setter.

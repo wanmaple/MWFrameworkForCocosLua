@@ -40,11 +40,14 @@ bool AppDelegate::applicationDidFinishLaunching()
     
     auto pScene = Scene::create();
     auto pLayer = Layer::create();
-    auto pGif = mwframework::MWGifSprite::createWithFile("res/002.gif");
+    auto pGif = mwframework::MWGifSprite::createWithFile("res/GIF/006.gif");
     pGif->setPosition(400, 200);
+    pGif->setSpeedRatio(1.0f);
     pLayer->addChild(pGif);
     pScene->addChild(pLayer);
     Director::getInstance()->runWithScene(pScene);
+    
+    CCLOG("%s\n", mwframework::MWArrayList::create()->toString().c_str());
     
     return true;
 

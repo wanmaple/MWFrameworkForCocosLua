@@ -9,6 +9,7 @@
 
 #include "cocos2d.h"
 #include "FrameworkMacros.h"
+#include <string>
 
 MW_FRAMEWORK_BEGIN
 
@@ -24,9 +25,9 @@ public:
     virtual ~MWObject();
     
     /**
-     * Simply generate an unique value(by using its address).
+     * Get object related string data.
      */
-    virtual MW_UINT hash();
+    virtual std::string toString();
     
 protected:
     MWObject();

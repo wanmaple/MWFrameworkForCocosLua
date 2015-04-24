@@ -65,18 +65,21 @@ public:
     
     virtual void update(float dt) override;
     
+    MW_SYNTHESIZE(float, _speedRatio, SpeedRatio);
+    
 protected:
     bool initWithFile(const std::string &gifPath);
     bool initWithRawData(MWBinaryData *imgData);
     
     MWGifSprite();
     
-    bool openGif(MW_RAW_DATA imgData);
     MWGifFrame *getFrameAtIndex(int index);
-    MW_UINT getDurationAtIndex(int index);
-    bool checkWhetherWillBeCleared(int index);
+    bool openGif(MW_RAW_DATA imgData);
     
     MW_UINT getTotalDuration();
+    float getUnitDeltaTime();
+    cocos2d::Texture2D *createTextureByRawData(MW_RAW_DATA imgData);
+    MWGifFrame *createGifFrame(cocos2d::Texture2D *texture, MW_UINT duration);
     
     MWArrayList *_gifFrames;
     

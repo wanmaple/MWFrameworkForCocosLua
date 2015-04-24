@@ -1,6 +1,9 @@
 #include "MWObject.h"
 
+#include <sstream>
+
 using namespace cocos2d;
+using namespace std;
 
 MW_FRAMEWORK_BEGIN
 
@@ -20,9 +23,13 @@ MWObject::~MWObject()
     
 }
 
-MW_UINT MWObject::hash()
+string MWObject::toString()
 {
-    return 0;
+    stringstream ss;
+    ss << typeid(this).name();
+    ss << "\t0x";
+    ss << (MW_ULONG)this;
+    return ss.str();
 }
 
 MW_FRAMEWORK_END
