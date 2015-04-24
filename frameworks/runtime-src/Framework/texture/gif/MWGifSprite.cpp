@@ -136,7 +136,7 @@ static void DisposeFrame(const SavedImage *currentImg, const SavedImage *nextImg
     
     // 0       /* No disposal specified. */
     // 1       /* Leave image in place */
-    // 2       /* Set area too background color */
+    // 2       /* Set area to background color */
     // 3       /* Restore to previous content */
     if ((currentDisposal == 2 || currentDisposal == 3) && (isNextTransparent || !CheckWhetherCovered(nextImg, currentImg))) {
         if (currentDisposal == 2) {
@@ -286,7 +286,7 @@ bool MWGifSprite::initWithRawData(MWBinaryData *imgData)
     _gifFrames = new MWArrayList();
     MWGifFrame *pFrame = nullptr;
     for (int i = 0; i < g_hGif->ImageCount; ++i) {
-        pFrame = this->getFrameAtIndex(i);
+        pFrame = this->generateFrameAtIndex(i);
         if (pFrame) {
             _gifFrames->appendObject(pFrame);
         }
@@ -343,6 +343,12 @@ MWGifSprite::~MWGifSprite()
         free(g_backUp);
         g_backUp = nullptr;
     }
+}
+
+SpriteFrame *MWGifSprite::getSpriteFrameAtIndex(int index)
+{
+    MWGifFrame *pFrame = static_cast<MWGifFrame *>(_gifFrames->objectAtIndex(index));
+    return pFrame->getSpriteFrame();
 }
 
 void MWGifSprite::play(MW_UINT count)
@@ -440,7 +446,7 @@ bool MWGifSprite::openGif(void *imgData)
     return true;
 }
 
-MWGifFrame *MWGifSprite::getFrameAtIndex(int i)
+MWGifFrame *MWGifSprite::generateFrameAtIndex(int i)
 {
     if (!g_hGif || i < 0 || i >= g_hGif->ImageCount) {
         return nullptr;

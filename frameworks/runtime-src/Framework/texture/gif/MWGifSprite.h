@@ -43,6 +43,7 @@ public:
     {
         return _gifFrames;
     }
+    cocos2d::SpriteFrame *getSpriteFrameAtIndex(int index);
     
     /**
      * Play the animation.
@@ -73,7 +74,7 @@ protected:
     
     MWGifSprite();
     
-    MWGifFrame *getFrameAtIndex(int index);
+    MWGifFrame *generateFrameAtIndex(int index);
     bool openGif(MW_RAW_DATA imgData);
     
     MW_UINT getTotalDuration();
