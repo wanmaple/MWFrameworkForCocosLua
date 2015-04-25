@@ -21,7 +21,7 @@ typedef struct {
 /** Global helper attributes and functions **/
 static GifFileType *g_hGif = nullptr;
 static PRGBA g_buffer = nullptr;
-static PRGBA g_firstTemplateBuffer = nullptr;
+static PRGBA g_lastTemplateBuffer = nullptr;
 static PRGBA g_lastReserveBuffer = nullptr;
 static bool g_bgColorInited = false;
 
@@ -205,6 +205,23 @@ static void DrawFrame(RGBA *buffer, const SavedImage *img, const ColorMapObject 
     }
 }
 
+static void FreeBuffers()
+{
+    // clean the buffer
+    if (g_buffer) {
+        free(g_buffer);
+        g_buffer = nullptr;
+    }
+    if (g_lastTemplateBuffer) {
+        free(g_lastTemplateBuffer);
+        g_lastTemplateBuffer = nullptr;
+    }
+    if (g_lastReserveBuffer) {
+        free(g_lastReserveBuffer);
+        g_lastReserveBuffer = nullptr;
+    }
+}
+
 
 
 /** MWGifSprite implementation **/
@@ -261,19 +278,7 @@ bool MWGifSprite::initWithRawData(MWBinaryData *imgData)
         }
     }
     
-    // clean the buffer
-    if (g_buffer) {
-        free(g_buffer);
-        g_buffer = nullptr;
-    }
-    if (g_firstTemplateBuffer) {
-        free(g_firstTemplateBuffer);
-        g_firstTemplateBuffer = nullptr;
-    }
-    if (g_lastReserveBuffer) {
-        free(g_lastReserveBuffer);
-        g_lastReserveBuffer = nullptr;
-    }
+    FreeBuffers();
     g_bgColorInited = false;
     
     // close gif
@@ -308,18 +313,7 @@ MWGifSprite::~MWGifSprite()
         int err;
         DGifCloseFile(g_hGif, &err);
     }
-    if (g_buffer) {
-        free(g_buffer);
-        g_buffer = nullptr;
-    }
-    if (g_firstTemplateBuffer) {
-        free(g_firstTemplateBuffer);
-        g_firstTemplateBuffer = nullptr;
-    }
-    if (g_lastReserveBuffer) {
-        free(g_lastReserveBuffer);
-        g_lastReserveBuffer = nullptr;
-    }
+    FreeBuffers();
 }
 
 SpriteFrame *MWGifSprite::getSpriteFrameAtIndex(int index)
@@ -472,16 +466,6 @@ MWGifFrame *MWGifSprite::generateFrameAtIndex(int index)
         
         // draw frame.
         DrawFrame(g_buffer, pCurrentImg, g_hGif->SColorMap);
-        
-        // whether is the first template frame.
-        if (currentFrameDisposal == 2) {
-            if (!g_firstTemplateBuffer) {
-                g_firstTemplateBuffer = (PRGBA) malloc(len);
-            }
-            // save the template
-            memcpy(g_firstTemplateBuffer, g_buffer, len);
-            ClearRectWithColor(g_firstTemplateBuffer, pCurrentImg->ImageDesc.Left, pCurrentImg->ImageDesc.Top, pCurrentImg->ImageDesc.Width, pCurrentImg->ImageDesc.Height, paintColor);
-        }
     } else {
         const SavedImage *pLastImg = &g_hGif->SavedImages[index - 1];
         bool isLastFrameTransparent;
@@ -505,7 +489,7 @@ MWGifFrame *MWGifSprite::generateFrameAtIndex(int index)
             DrawFrame(g_buffer, pCurrentImg, g_hGif->SColorMap);
         } else if (lastFrameDisposal == 2) {
             // use first template image, then draw the frame.
-            memcpy(g_buffer, g_firstTemplateBuffer, len);
+            memcpy(g_buffer, g_lastTemplateBuffer, len);
             // draw frame.
             DrawFrame(g_buffer, pCurrentImg, g_hGif->SColorMap);
         } else if (lastFrameDisposal == 3) {
@@ -514,16 +498,16 @@ MWGifFrame *MWGifSprite::generateFrameAtIndex(int index)
             // draw frame.
             DrawFrame(g_buffer, pCurrentImg, g_hGif->SColorMap);
         }
-        
-        // whether is the first template frame.
-        if (currentFrameDisposal == 2 and lastFrameDisposal != 2) {
-            if (!g_firstTemplateBuffer) {
-                g_firstTemplateBuffer = (PRGBA) malloc(len);
-            }
-            // save the template
-            memcpy(g_firstTemplateBuffer, g_buffer, len);
-            ClearRectWithColor(g_firstTemplateBuffer, pCurrentImg->ImageDesc.Left, pCurrentImg->ImageDesc.Top, pCurrentImg->ImageDesc.Width, pCurrentImg->ImageDesc.Height, paintColor);
+    }
+    
+    // whether is the disposal template frame.
+    if (currentFrameDisposal == 2) {
+        if (!g_lastTemplateBuffer) {
+            g_lastTemplateBuffer = (PRGBA) malloc(len);
         }
+        // save the template
+        memcpy(g_lastTemplateBuffer, g_buffer, len);
+        ClearRectWithColor(g_lastTemplateBuffer, pCurrentImg->ImageDesc.Left, pCurrentImg->ImageDesc.Top, pCurrentImg->ImageDesc.Width, pCurrentImg->ImageDesc.Height, paintColor);
     }
     
     if (index < g_hGif->ImageCount - 1) {
