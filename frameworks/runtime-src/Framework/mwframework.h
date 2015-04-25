@@ -18,6 +18,9 @@
 // db operations.
 #include "db/sqlite/MWSqliteDb.h"
 
+// compression
+#include "compression/MWZipData.h"
+
 // texture extensions
 #include "texture/gif/MWGifFrame.h"
 #include "texture/gif/MWGifSprite.h"

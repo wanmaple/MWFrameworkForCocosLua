@@ -99,6 +99,11 @@
 		F53535AD1AB455AE00EF7298 /* MWNetCenter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F53535AB1AB455AE00EF7298 /* MWNetCenter.cpp */; };
 		F53535B01AB4569A00EF7298 /* MWNetHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F53535AF1AB4569A00EF7298 /* MWNetHandler.cpp */; };
 		F53535B51AB45A4100EF7298 /* MWNetFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F53535B31AB45A4100EF7298 /* MWNetFilter.cpp */; };
+		F5629EB81AEC202A00CC4F1F /* MWZipData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5629EB61AEC202A00CC4F1F /* MWZipData.cpp */; };
+		F5629EC41AEC20F000CC4F1F /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = F5629EBC1AEC20F000CC4F1F /* ioapi.c */; };
+		F5629EC51AEC20F000CC4F1F /* mztools.c in Sources */ = {isa = PBXBuildFile; fileRef = F5629EBE1AEC20F000CC4F1F /* mztools.c */; };
+		F5629EC61AEC20F000CC4F1F /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = F5629EC01AEC20F000CC4F1F /* unzip.c */; };
+		F5629EC71AEC20F000CC4F1F /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = F5629EC21AEC20F000CC4F1F /* zip.c */; };
 		F5714FE01AB9D77B00AF3A51 /* MWHttpDownloader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5714FD91AB9D77B00AF3A51 /* MWHttpDownloader.cpp */; };
 		F5714FE11AB9D77B00AF3A51 /* MWHttpForm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5714FDB1AB9D77B00AF3A51 /* MWHttpForm.cpp */; };
 		F5714FE21AB9D77B00AF3A51 /* MWHttpGetService.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5714FDD1AB9D77B00AF3A51 /* MWHttpGetService.cpp */; };
@@ -333,6 +338,17 @@
 		F53535AF1AB4569A00EF7298 /* MWNetHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MWNetHandler.cpp; path = net/MWNetHandler.cpp; sourceTree = "<group>"; };
 		F53535B31AB45A4100EF7298 /* MWNetFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MWNetFilter.cpp; path = net/MWNetFilter.cpp; sourceTree = "<group>"; };
 		F53535B41AB45A4100EF7298 /* MWNetFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MWNetFilter.h; path = net/MWNetFilter.h; sourceTree = "<group>"; };
+		F5629EB61AEC202A00CC4F1F /* MWZipData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWZipData.cpp; sourceTree = "<group>"; };
+		F5629EB71AEC202A00CC4F1F /* MWZipData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWZipData.h; sourceTree = "<group>"; };
+		F5629EBB1AEC20F000CC4F1F /* crypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crypt.h; sourceTree = "<group>"; };
+		F5629EBC1AEC20F000CC4F1F /* ioapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ioapi.c; sourceTree = "<group>"; };
+		F5629EBD1AEC20F000CC4F1F /* ioapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ioapi.h; sourceTree = "<group>"; };
+		F5629EBE1AEC20F000CC4F1F /* mztools.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mztools.c; sourceTree = "<group>"; };
+		F5629EBF1AEC20F000CC4F1F /* mztools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mztools.h; sourceTree = "<group>"; };
+		F5629EC01AEC20F000CC4F1F /* unzip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = unzip.c; sourceTree = "<group>"; };
+		F5629EC11AEC20F000CC4F1F /* unzip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unzip.h; sourceTree = "<group>"; };
+		F5629EC21AEC20F000CC4F1F /* zip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = zip.c; sourceTree = "<group>"; };
+		F5629EC31AEC20F000CC4F1F /* zip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zip.h; sourceTree = "<group>"; };
 		F5714FD91AB9D77B00AF3A51 /* MWHttpDownloader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWHttpDownloader.cpp; sourceTree = "<group>"; };
 		F5714FDA1AB9D77B00AF3A51 /* MWHttpDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWHttpDownloader.h; sourceTree = "<group>"; };
 		F5714FDB1AB9D77B00AF3A51 /* MWHttpForm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWHttpForm.cpp; sourceTree = "<group>"; };
@@ -669,6 +685,7 @@
 				33A37BEE1A91D3D30042CA97 /* db */,
 				78C7387D1A77EF8F0028FC3A /* scheme */,
 				33C73FF11A7F1BDE0057DA34 /* lua */,
+				F5629EB51AEC1FFD00CC4F1F /* compression */,
 				F5C9F9241AD7B574008FAF9A /* platform */,
 				F5CF4A521ADCE8CD00D0AF87 /* texture */,
 				F57150941AB9E70900AF3A51 /* utils */,
@@ -788,6 +805,40 @@
 			);
 			name = Resources;
 			path = ../Resources;
+			sourceTree = "<group>";
+		};
+		F5629EB51AEC1FFD00CC4F1F /* compression */ = {
+			isa = PBXGroup;
+			children = (
+				F5629EB91AEC208B00CC4F1F /* zip */,
+			);
+			path = compression;
+			sourceTree = "<group>";
+		};
+		F5629EB91AEC208B00CC4F1F /* zip */ = {
+			isa = PBXGroup;
+			children = (
+				F5629EBA1AEC20F000CC4F1F /* minizip */,
+				F5629EB61AEC202A00CC4F1F /* MWZipData.cpp */,
+				F5629EB71AEC202A00CC4F1F /* MWZipData.h */,
+			);
+			name = zip;
+			sourceTree = "<group>";
+		};
+		F5629EBA1AEC20F000CC4F1F /* minizip */ = {
+			isa = PBXGroup;
+			children = (
+				F5629EBB1AEC20F000CC4F1F /* crypt.h */,
+				F5629EBC1AEC20F000CC4F1F /* ioapi.c */,
+				F5629EBD1AEC20F000CC4F1F /* ioapi.h */,
+				F5629EBE1AEC20F000CC4F1F /* mztools.c */,
+				F5629EBF1AEC20F000CC4F1F /* mztools.h */,
+				F5629EC01AEC20F000CC4F1F /* unzip.c */,
+				F5629EC11AEC20F000CC4F1F /* unzip.h */,
+				F5629EC21AEC20F000CC4F1F /* zip.c */,
+				F5629EC31AEC20F000CC4F1F /* zip.h */,
+			);
+			path = minizip;
 			sourceTree = "<group>";
 		};
 		F5714FD81AB9D77B00AF3A51 /* http */ = {
@@ -1138,8 +1189,10 @@
 				33250DD11A91E39A00D1668B /* JSONNode.cpp in Sources */,
 				F5CF4A6D1ADCF1EC00D0AF87 /* MWGifSprite.cpp in Sources */,
 				33250DCD1A91E39A00D1668B /* JSONChildren.cpp in Sources */,
+				F5629EC51AEC20F000CC4F1F /* mztools.c in Sources */,
 				33250DCC1A91E39A00D1668B /* JSONAllocator.cpp in Sources */,
 				F5CF4A611ADCE8CD00D0AF87 /* gif_err.c in Sources */,
+				F5629EC61AEC20F000CC4F1F /* unzip.c in Sources */,
 				F5CF4A601ADCE8CD00D0AF87 /* egif_lib.c in Sources */,
 				78C738801A77EF9B0028FC3A /* MWGameScene.cpp in Sources */,
 				F5C9F92C1AD7B99A008FAF9A /* MWSystemHelperStrategyIOS.mm in Sources */,
@@ -1148,6 +1201,7 @@
 				F5C9F9271AD7B5B6008FAF9A /* MWSystemHelper.cpp in Sources */,
 				33250DD01A91E39A00D1668B /* JSONMemory.cpp in Sources */,
 				F5CF4A681ADCE9EA00D0AF87 /* MWGifFrame.cpp in Sources */,
+				F5629EC71AEC20F000CC4F1F /* zip.c in Sources */,
 				33250DD61A91E39A00D1668B /* JSONWorker.cpp in Sources */,
 				33250DC81A91E39A00D1668B /* MWJsonFormatter.cpp in Sources */,
 				33250DD71A91E39A00D1668B /* JSONWriter.cpp in Sources */,
@@ -1175,6 +1229,7 @@
 				F5714FE21AB9D77B00AF3A51 /* MWHttpGetService.cpp in Sources */,
 				33A37BF61A91D3D30042CA97 /* sqlite3.c in Sources */,
 				33250DCA1A91E39A00D1668B /* MWJsonStructure.cpp in Sources */,
+				F5629EC41AEC20F000CC4F1F /* ioapi.c in Sources */,
 				F5CF4A631ADCE8CD00D0AF87 /* gif_hash.c in Sources */,
 				5023812417EBBCAC00990C9B /* main.m in Sources */,
 				78C738941A77F7440028FC3A /* MWBinaryData.cpp in Sources */,
@@ -1182,6 +1237,7 @@
 				33250DD31A91E39A00D1668B /* JSONPreparse.cpp in Sources */,
 				33BC563A1A7B99D400EBCA2A /* MWStack.cpp in Sources */,
 				5023811817EBBCAC00990C9B /* AppController.mm in Sources */,
+				F5629EB81AEC202A00CC4F1F /* MWZipData.cpp in Sources */,
 				F53535A51AB4512D00EF7298 /* MWNetProtocol.cpp in Sources */,
 				3382D9F71A80F64C00A3702F /* FrameworkErrors.cpp in Sources */,
 				33250DC91A91E39A00D1668B /* MWJsonParser.cpp in Sources */,

@@ -40,7 +40,7 @@ bool AppDelegate::applicationDidFinishLaunching()
     
     auto pScene = Scene::create();
     auto pLayer = LayerColor::create(Color4B(255, 0, 0, 200));
-    auto pGif = mwframework::MWGifSprite::createWithFile("res/GIF/006.gif");
+    auto pGif = mwframework::MWGifSprite::createWithFile("res/GIF/643.gif");
     pGif->setPosition(Director::getInstance()->getWinSize().width * 0.5, Director::getInstance()->getWinSize().height * 0.5);
     pGif->setSpeedRatio(1.0f);
     pGif->setScale(2.5, 2.5);
