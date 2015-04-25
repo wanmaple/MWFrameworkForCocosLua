@@ -76,7 +76,7 @@ void MWGameScene::onEnter()
     Scene::onEnter();
     
     // open scheduler to check memory.
-    Director::getInstance()->getScheduler()->schedule(MW_CALLBACK_1(MWGameScene::checkMemory, this), this, 60, CC_REPEAT_FOREVER, 60, false, MEMORY_SCHEDULER_NAME);
+    Director::getInstance()->getScheduler()->schedule(MW_CALLBACK_1(MWGameScene::checkMemory, this), this, 10, CC_REPEAT_FOREVER, 60, false, MEMORY_SCHEDULER_NAME);
     
 #if MW_ENABLE_SCRIPT_BINDING
     if (_scriptType == kScriptTypeLua) {

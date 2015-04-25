@@ -39,15 +39,20 @@ bool AppDelegate::applicationDidFinishLaunching()
     lua_module_register(L);
     
     auto pScene = Scene::create();
-    auto pLayer = Layer::create();
-    auto pGif = mwframework::MWGifSprite::createWithFile("res/GIF/006.gif");
-    pGif->setPosition(400, 200);
+    auto pLayer = LayerColor::create(Color4B(255, 0, 0, 200));
+    auto pGif = mwframework::MWGifSprite::createWithFile("res/GIF/003.gif");
+    pGif->setPosition(Director::getInstance()->getWinSize().width * 0.5, Director::getInstance()->getWinSize().height * 0.5);
     pGif->setSpeedRatio(1.0f);
+    pGif->setScale(2.5, 2.5);
     pLayer->addChild(pGif);
     pScene->addChild(pLayer);
     Director::getInstance()->runWithScene(pScene);
+//    pGif->stop();
     
-    CCLOG("%s\n", mwframework::MWArrayList::create()->toString().c_str());
+    Director::getInstance()->getScheduler()->schedule([this] (float dt) {
+        printf("Used memory: %lf MB\n", mwframework::MWSystemHelper::getInstance()->getCurrentUsedMemory());
+    }, this, 5.0f, CC_REPEAT_FOREVER, 0.0f, false, "MEMORY_SCHEDULER");
+    
     
     return true;
 

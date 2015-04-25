@@ -11,12 +11,18 @@ using namespace std;
 
 MW_FRAMEWORK_BEGIN
 
+typedef struct {
+    MW_BYTE r;
+    MW_BYTE g;
+    MW_BYTE b;
+    MW_BYTE a;
+} RGBA, *PRGBA, *LPRGBA;
+
 /** Global helper attributes and functions **/
 static GifFileType *g_hGif = nullptr;
-static MW_UINT *g_buffer = nullptr;
-static MW_UINT *g_backUp = nullptr;
-static int g_currentIndex = -1;
-static int g_lastDrawIndex = -1;
+static PRGBA g_buffer = nullptr;
+static PRGBA g_firstTemplateBuffer = nullptr;
+static PRGBA g_lastReserveBuffer = nullptr;
 static bool g_bgColorInited = false;
 
 static int DecodeGifCallback(GifFileType *hGif, GifByteType *buffer, int size)
@@ -31,9 +37,20 @@ static int DecodeGifCallback(GifFileType *hGif, GifByteType *buffer, int size)
     return size;
 }
 
-static MW_UINT GetBackgroundColor()
+static RGBA PackRGBA(MW_BYTE r, MW_BYTE g, MW_BYTE b, MW_BYTE a)
 {
-    static MW_UINT bgRgba;
+    RGBA color;
+    color.r = r;
+    color.g = g;
+    color.b = b;
+    color.a = a;
+    
+    return color;
+}
+
+static RGBA GetBackgroundColor()
+{
+    static RGBA bgRgba;
     if (g_bgColorInited) {
         return bgRgba;
     }
@@ -41,36 +58,36 @@ static MW_UINT GetBackgroundColor()
     GifColorType defaultColor = { 0x0, 0x0, 0x0 };
     GifColorType bgColor = g_hGif->SColorMap ? g_hGif->SColorMap->Colors[g_hGif->SBackGroundColor] : defaultColor;
     // convert to RGBA8888 format.
-    MW_UINT r, g, b, a;
+    MW_BYTE r, g, b, a;
     r = bgColor.Red;
     g = bgColor.Green;
     b = bgColor.Blue;
     a = 0xff;
-    bgRgba = (a << 24) | (b << 16) | (g << 8) | r;
+    bgRgba = PackRGBA(r, g, b, a);
+    CCLOG("BG COLOR: r: %d g: %d b: %d a: %d", r, g, b, a);
     
     return bgRgba;
 }
 
-static void ClearWithBackgroundColor(MW_UINT *buffer)
+static void ClearWithColor(RGBA *buffer, RGBA color)
 {
     int bgWidth = g_hGif->SWidth;
     int bgHeight = g_hGif->SHeight;
-    MW_UINT bgRgba = GetBackgroundColor();
     
     // first row.
     for (int i = 0; i < bgWidth; ++i) {
-        buffer[i] = bgRgba;
+        buffer[i] = color;
     }
     // copy the first row to the rest rows.
     for (int i = 1; i < bgHeight; ++i) {
-        memcpy(buffer + i * bgWidth, buffer, bgWidth);
+        memcpy(buffer + i * bgWidth, buffer, bgWidth * sizeof(RGBA));
     }
 }
 
-static void ClearRectWithColor(MW_UINT *buffer, int left, int top, int width, int height, MW_UINT color)
+static void ClearRectWithColor(RGBA *buffer, int left, int top, int width, int height, RGBA color)
 {
     int bgWidth = g_hGif->SWidth;
-    MW_UINT *pDstPtr = buffer + top * bgWidth + left;
+    RGBA *pDstPtr = buffer + top * bgWidth + left;
     for (int y = 0; y < height; ++y) {
         for (int x = 0; x < width; ++x) {
             pDstPtr[x] = color;
@@ -124,59 +141,7 @@ static bool CheckWhetherCovered(const SavedImage *targetImg, const SavedImage *c
     return false;
 }
 
-static void DisposeFrame(const SavedImage *currentImg, const SavedImage *nextImg, MW_UINT bgColor)
-{
-    // we can skip the disposal process if next frame is not transparent and cover the current area completely.
-    bool isCurrentTransparent;
-    int currentDisposal;
-    GetTransparencyAndDisposal(currentImg, &isCurrentTransparent, &currentDisposal);
-    bool isNextTransparent;
-    int nextDisposal;
-    GetTransparencyAndDisposal(nextImg, &isNextTransparent, &nextDisposal);
-    
-    // 0       /* No disposal specified. */
-    // 1       /* Leave image in place */
-    // 2       /* Set area to background color */
-    // 3       /* Restore to previous content */
-    if ((currentDisposal == 2 || currentDisposal == 3) && (isNextTransparent || !CheckWhetherCovered(nextImg, currentImg))) {
-        if (currentDisposal == 2) {
-            // restore.
-            ClearRectWithColor(g_buffer, currentImg->ImageDesc.Left, currentImg->ImageDesc.Top, currentImg->ImageDesc.Width, currentImg->ImageDesc.Height, bgColor);
-        } else if (currentDisposal == 3) {
-            // swap from the back up.
-            MW_UINT *pTmp = g_buffer;
-            g_buffer = g_backUp;
-            g_backUp = pTmp;
-        }
-    }
-    
-    // save current image if the disposal of next frame is 3.
-    if (nextDisposal == 3) {
-        int bgWidth = g_hGif->SWidth;
-        int bgHeight = g_hGif->SHeight;
-        MW_UINT len = bgWidth * bgHeight * sizeof(MW_UINT);
-        memcpy(g_backUp, g_buffer, len);
-    }
-}
-
-static bool CheckWhetherWillBeCleared(const SavedImage *img)
-{
-    ExtensionBlock *pEb = nullptr;
-    for (int i = 0; i < img->ExtensionBlockCount; ++i) {
-        pEb = img->ExtensionBlocks + i;
-        if (pEb->Function == GRAPHICS_EXT_FUNC_CODE && pEb->ByteCount == 4) {
-            int disposal = (pEb->Bytes[0] >> 2) & 0x7;
-            if (disposal == 2 || disposal == 3) {
-                return true;
-            }
-        }
-    }
-    
-    return false;
-}
-
-
-static void DrawFrame(MW_UINT *buffer, const SavedImage *img, const ColorMapObject *colorMap)
+static void DrawFrame(RGBA *buffer, const SavedImage *img, const ColorMapObject *colorMap, PRGBA bgColor = nullptr)
 {
     // find transparency index.
     int transparentIndex = -1;
@@ -209,18 +174,22 @@ static void DrawFrame(MW_UINT *buffer, const SavedImage *img, const ColorMapObje
     int height = img->ImageDesc.Height;
     MW_BYTE *pRawData = img->RasterBits;
     // calculate the offset, retrieve data from raw data
-    MW_UINT *pImgPtr = g_buffer + top * bgWidth + left;
+    RGBA *pImgPtr = g_buffer + top * bgWidth + left;
     MW_BYTE *pRawPtr = pRawData;
     int rawIndex;
     GifColorType *pColorMap = colorMap->Colors;
     GifColorType color;
-    MW_UINT r, g, b, a;
+    CCLOG("Transparent color: r: %d g: %d b: %d", pColorMap[transparentIndex].Red, pColorMap[transparentIndex].Green, pColorMap[transparentIndex].Blue);
+    MW_BYTE r, g, b, a;
     for (int y = 0; y < height; ++y) {
         for (int x = 0; x < width; ++x) {
             rawIndex = pRawPtr[x];
             // check whether it is the transparent pixel
-            if (transparentIndex > 0 && transparentIndex == rawIndex) {
+            if (transparentIndex >= 0 && transparentIndex == rawIndex) {
                 // skip the current pixel.
+                if (bgColor) {
+                    pImgPtr[x] = *bgColor;
+                }
                 continue;
             }
             color = pColorMap[rawIndex];
@@ -228,7 +197,7 @@ static void DrawFrame(MW_UINT *buffer, const SavedImage *img, const ColorMapObje
             g = color.Green;
             b = color.Blue;
             a = 0xff;
-            pImgPtr[x] = (a << 24) | (b << 16) | (g << 8) | r;
+            pImgPtr[x] = PackRGBA(r, g, b, a);
         }
         // shift the pointer
         pImgPtr += bgWidth;
@@ -297,17 +266,21 @@ bool MWGifSprite::initWithRawData(MWBinaryData *imgData)
         free(g_buffer);
         g_buffer = nullptr;
     }
-    if (g_backUp) {
-        free(g_backUp);
-        g_backUp = nullptr;
+    if (g_firstTemplateBuffer) {
+        free(g_firstTemplateBuffer);
+        g_firstTemplateBuffer = nullptr;
     }
-    g_currentIndex = g_lastDrawIndex = -1;
+    if (g_lastReserveBuffer) {
+        free(g_lastReserveBuffer);
+        g_lastReserveBuffer = nullptr;
+    }
     g_bgColorInited = false;
+    
     // close gif
     int err;
     DGifCloseFile(g_hGif, &err);
     g_hGif = nullptr;
-
+    
     this->setSpriteFrame(static_cast<MWGifFrame *>(_gifFrames->objectAtIndex(0))->getSpriteFrame());
     
     this->play();
@@ -339,9 +312,13 @@ MWGifSprite::~MWGifSprite()
         free(g_buffer);
         g_buffer = nullptr;
     }
-    if (g_backUp) {
-        free(g_backUp);
-        g_backUp = nullptr;
+    if (g_firstTemplateBuffer) {
+        free(g_firstTemplateBuffer);
+        g_firstTemplateBuffer = nullptr;
+    }
+    if (g_lastReserveBuffer) {
+        free(g_lastReserveBuffer);
+        g_lastReserveBuffer = nullptr;
     }
 }
 
@@ -442,19 +419,19 @@ bool MWGifSprite::openGif(void *imgData)
         return false;
     }
     g_hGif = hGif;
+    CCLOG("GIF size: %d, %d", g_hGif->SWidth, g_hGif->SHeight);
     
     return true;
 }
 
-MWGifFrame *MWGifSprite::generateFrameAtIndex(int i)
+MWGifFrame *MWGifSprite::generateFrameAtIndex(int index)
 {
-    if (!g_hGif || i < 0 || i >= g_hGif->ImageCount) {
+    if (!g_hGif || index < 0 || index >= g_hGif->ImageCount) {
         return nullptr;
     }
     
     // duration
-    MW_UINT duration = GetDuration(&g_hGif->SavedImages[i]);
-    g_currentIndex = i;
+    MW_UINT duration = GetDuration(&g_hGif->SavedImages[index]);
     
     // gif width and height
     int bgWidth = g_hGif->SWidth;
@@ -463,67 +440,106 @@ MWGifFrame *MWGifSprite::generateFrameAtIndex(int i)
         return nullptr;
     }
     
-    if (g_lastDrawIndex >= 0 && g_lastDrawIndex == g_currentIndex) {
-        return this->createGifFrame(this->createTextureByRawData(g_buffer), duration);
-    }
-    
-    int startIndex = g_lastDrawIndex + 1;
-    if (g_lastDrawIndex < 0 || !g_buffer) {
+    MW_UINT len = bgWidth * bgHeight * sizeof(MW_UINT);
+    if (!g_buffer) {
         // first time, do initialization.
-        MW_UINT len = bgWidth * bgHeight * sizeof(MW_UINT);
         // RGBA8888 format.
-        g_buffer = (unsigned int *) malloc(len);
-        g_backUp = (unsigned int *) malloc(len);
-        startIndex = 0;
-    } else if (startIndex > g_currentIndex) {
-        // rewind to first frame for repeat.
-        startIndex = 0;
-    }
-    
-    int lastIndex = g_currentIndex;
-    if (lastIndex < 0) {
-        // first time
-        lastIndex = 0;
-    } else if (lastIndex > g_hGif->ImageCount - 1) {
-        // this block must not be reached.
-        lastIndex = g_hGif->ImageCount - 1;
+        g_buffer = (PRGBA) malloc(len);
     }
     
     bool tran;
     int tmpDisposal;
-    GetTransparencyAndDisposal(&g_hGif->SavedImages[i], &tran, &tmpDisposal);
-    CCLOG("%d", tmpDisposal);
+    GetTransparencyAndDisposal(&g_hGif->SavedImages[index], &tran, &tmpDisposal);
+    GraphicsControlBlock gcb;
+    DGifSavedExtensionToGCB(g_hGif, index, &gcb);
+    CCLOG("%d\t%d", tmpDisposal, gcb.DisposalMode);
     
     // get bg color.
-    static MW_UINT paintColor;
-    // draw each frame, not an intelligent way.
-    for (int i = startIndex; i <= lastIndex; ++i) {
-        const SavedImage *pImg = &g_hGif->SavedImages[i];
-        if (i == 0) {
-            bool isTransparent;
-            int disposal;
-            GetTransparencyAndDisposal(pImg, &isTransparent, &disposal);
-            if (!isTransparent && g_hGif->SColorMap) {
-                paintColor = GetBackgroundColor();
+    RGBA paintColor = GetBackgroundColor();
+    const SavedImage *pCurrentImg = &g_hGif->SavedImages[index];
+    // check bg transparency.
+    bool isCurrentFrameTransparent;
+    int currentFrameDisposal;
+    GetTransparencyAndDisposal(pCurrentImg, &isCurrentFrameTransparent, &currentFrameDisposal);
+    if (isCurrentFrameTransparent) {
+        paintColor = { 0 };
+    }
+    
+    if (index == 0) {
+        // first time
+        // clear with bg color.
+        ClearWithColor(g_buffer, paintColor);
+        
+        // draw frame.
+        DrawFrame(g_buffer, pCurrentImg, g_hGif->SColorMap);
+        
+        // whether is the first template frame.
+        if (currentFrameDisposal == 2) {
+            if (!g_firstTemplateBuffer) {
+                g_firstTemplateBuffer = (PRGBA) malloc(len);
             }
+            // save the template
+            memcpy(g_firstTemplateBuffer, g_buffer, len);
+            ClearRectWithColor(g_firstTemplateBuffer, pCurrentImg->ImageDesc.Left, pCurrentImg->ImageDesc.Top, pCurrentImg->ImageDesc.Width, pCurrentImg->ImageDesc.Height, paintColor);
+        }
+    } else {
+        const SavedImage *pLastImg = &g_hGif->SavedImages[index - 1];
+        bool isLastFrameTransparent;
+        int lastFrameDisposal;
+        GetTransparencyAndDisposal(pLastImg, &isLastFrameTransparent, &lastFrameDisposal);
+        
+        // 0       /* No disposal specified. */
+        // 1       /* Leave image in place */
+        // 2       /* Set area to background color */
+        // 3       /* Restore to previous content */
+        if (lastFrameDisposal == 0) {
+            // won't do any dispose behaviors. just over write the old frame.
             // clear with bg color.
-            ClearWithBackgroundColor(g_buffer);
-            ClearWithBackgroundColor(g_backUp);
-        } else {
-            // dispose previous frame before move to next frame.
-            const SavedImage *pPrev = &g_hGif->SavedImages[i - 1];
-            DisposeFrame(pImg, pPrev, paintColor);
+            ClearWithColor(g_buffer, paintColor);
+            
+            // draw frame.
+            DrawFrame(g_buffer, pCurrentImg, g_hGif->SColorMap);
+        } else if (lastFrameDisposal == 1) {
+            // draw the frame directly on the last frame.
+            // draw frame.
+            DrawFrame(g_buffer, pCurrentImg, g_hGif->SColorMap);
+        } else if (lastFrameDisposal == 2) {
+            // use first template image, then draw the frame.
+            memcpy(g_buffer, g_firstTemplateBuffer, len);
+            // draw frame.
+            DrawFrame(g_buffer, pCurrentImg, g_hGif->SColorMap);
+        } else if (lastFrameDisposal == 3) {
+            // restore to the last reserve image.
+            memcpy(g_buffer, g_lastReserveBuffer, len);
+            // draw frame.
+            DrawFrame(g_buffer, pCurrentImg, g_hGif->SColorMap);
         }
         
-        // we can skip this process if the current index is not the last and disposal method is 2 or 3.
-        if (i == lastIndex || !CheckWhetherWillBeCleared(pImg)) {
-            // draw frame.
-            DrawFrame(g_buffer, pImg, g_hGif->SColorMap);
+        // whether is the first template frame.
+        if (currentFrameDisposal == 2 and lastFrameDisposal != 2) {
+            if (!g_firstTemplateBuffer) {
+                g_firstTemplateBuffer = (PRGBA) malloc(len);
+            }
+            // save the template
+            memcpy(g_firstTemplateBuffer, g_buffer, len);
+            ClearRectWithColor(g_firstTemplateBuffer, pCurrentImg->ImageDesc.Left, pCurrentImg->ImageDesc.Top, pCurrentImg->ImageDesc.Width, pCurrentImg->ImageDesc.Height, paintColor);
         }
     }
     
-    // save last index
-    g_lastDrawIndex = lastIndex;
+    if (index < g_hGif->ImageCount - 1) {
+        bool isNextFrameTransaprent;
+        int nextFrameDisposal;
+        GetTransparencyAndDisposal(&g_hGif->SavedImages[index + 1], &isNextFrameTransaprent, &nextFrameDisposal);
+        
+        // whether to reserve the current frame?
+        if (currentFrameDisposal != 3 && nextFrameDisposal == 3) {
+            // back up the current frame.
+            if (!g_lastReserveBuffer) {
+                g_lastReserveBuffer = (PRGBA) malloc(len);
+            }
+            memcpy(g_lastReserveBuffer, g_buffer, len);
+        }
+    }
     
     // create texture
     auto pTexture = this->createTextureByRawData(g_buffer);
@@ -536,7 +552,7 @@ Texture2D *MWGifSprite::createTextureByRawData(void *imgData)
 {
     int bgWidth = g_hGif->SWidth;
     int bgHeight = g_hGif->SHeight;
-    int len = bgWidth * bgHeight * sizeof(MW_UINT);
+    int len = bgWidth * bgHeight * sizeof(RGBA);
     auto pTexture = new Texture2D();
     pTexture->initWithData(imgData, len, Texture2D::PixelFormat::RGBA8888, bgWidth, bgHeight, Size(bgWidth, bgHeight));
     pTexture->autorelease();
