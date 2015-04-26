@@ -40,11 +40,26 @@ bool AppDelegate::applicationDidFinishLaunching()
     
     auto pScene = Scene::create();
     auto pLayer = LayerColor::create(Color4B(255, 0, 0, 200));
-    auto pGif = mwframework::MWGifSprite::createWithFile("res/GIF/643.gif");
+    auto pGif = mwframework::MWGifSprite::createWithFile("res/GIF/493.gif");
     pGif->setPosition(Director::getInstance()->getWinSize().width * 0.5, Director::getInstance()->getWinSize().height * 0.5);
     pGif->setSpeedRatio(1.0f);
     pGif->setScale(2.5, 2.5);
     pLayer->addChild(pGif);
+    auto pGif2 = mwframework::MWGifSprite::createWithFile("res/GIF/483.gif");
+    pGif2->setPosition(Director::getInstance()->getWinSize().width * 0.3, Director::getInstance()->getWinSize().height * 0.3);
+    pGif2->setSpeedRatio(1.0f);
+    pGif2->setScale(2.5, 2.5);
+    pLayer->addChild(pGif2);
+    auto pGif3 = mwframework::MWGifSprite::createWithFile("res/GIF/484.gif");
+    pGif3->setPosition(Director::getInstance()->getWinSize().width * 0.7, Director::getInstance()->getWinSize().height * 0.3);
+    pGif3->setSpeedRatio(1.0f);
+    pGif3->setScale(2.5, 2.5);
+    pLayer->addChild(pGif3);
+    auto pGif4 = mwframework::MWGifSprite::createWithFile("res/GIF/487_o.gif");
+    pGif4->setPosition(Director::getInstance()->getWinSize().width * 0.5, Director::getInstance()->getWinSize().height * 0.85);
+    pGif4->setSpeedRatio(1.0f);
+    pGif4->setScale(2.5, 2.5);
+    pLayer->addChild(pGif4);
     pScene->addChild(pLayer);
     Director::getInstance()->runWithScene(pScene);
 //    pGif->stop();
