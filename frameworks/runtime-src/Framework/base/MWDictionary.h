@@ -104,6 +104,9 @@ public:
         return _innerMap.empty();
     }
     
+    // overload []
+    cocos2d::Ref *operator[](const std::string &key);
+    
     /**
      * ICloneable overrides.
      */

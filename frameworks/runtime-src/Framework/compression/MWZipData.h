@@ -18,7 +18,7 @@ MW_FRAMEWORK_BEGIN
 class MW_DLL MWZipData : public MWObject
 {
 public:
-    MWZipData *createWithFile(const std::string &filePath, const std::string &password = "");
+    static MWZipData *createWithFile(const std::string &filePath, const std::string &password = "");
     
     virtual ~MWZipData();
     

@@ -55,7 +55,10 @@ bool AppDelegate::applicationDidFinishLaunching()
     pGif3->setSpeedRatio(1.0f);
     pGif3->setScale(2.5, 2.5);
     pLayer->addChild(pGif3);
-    auto pGif4 = mwframework::MWGifSprite::createWithFile("res/GIF/487_o.gif");
+//    auto pGif4 = mwframework::MWGifSprite::createWithFile("res/GIF/487_o.gif");
+    auto gifZip = mwframework::MWZipData::createWithFile("res/GIF/pokemon_gif5.rc", "7ujm,lp-");
+    auto data = gifZip->getCompressedFileData("487_o.gif");
+    auto pGif4 = mwframework::MWGifSprite::createWithRawData(data);
     pGif4->setPosition(Director::getInstance()->getWinSize().width * 0.5, Director::getInstance()->getWinSize().height * 0.85);
     pGif4->setSpeedRatio(1.0f);
     pGif4->setScale(2.5, 2.5);

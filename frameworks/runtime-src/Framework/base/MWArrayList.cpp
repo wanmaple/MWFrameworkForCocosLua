@@ -289,6 +289,11 @@ void MWArrayList::clear()
     _innerVector.clear();
 }
 
+Ref *MWArrayList::operator[](int index)
+{
+    return this->objectAtIndex(index);
+}
+
 MWArrayList *MWArrayList::clone()
 {
     auto pCopy = new (nothrow) MWArrayList();

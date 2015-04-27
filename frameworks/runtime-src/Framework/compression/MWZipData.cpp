@@ -26,7 +26,8 @@ MWZipData *MWZipData::createWithFile(const std::string &filePath, const std::str
 
 bool MWZipData::initWithFile(const std::string &filePath, const std::string &password)
 {
-    g_hZip = unzOpen64(filePath.c_str());
+    auto abosultePath = FileUtils::getInstance()->fullPathForFilename(filePath);
+    g_hZip = unzOpen64(abosultePath.c_str());
     if (!g_hZip) {
         return false;
     }
@@ -72,11 +73,11 @@ MWBinaryData *MWZipData::getCompressedFileData(const std::string &compressedFile
     if (result != UNZ_OK) {
         return nullptr;
     }
-    MW_ULONG dataSize = fi.compressed_size;
+    MW_ULONG dataSize = fi.uncompressed_size;
     MW_BYTE *data = (MW_BYTE *) malloc(dataSize);
     // read the data.
     while (true) {
-        int size = unzReadCurrentFile(g_hZip, data, (MW_UINT) dataSize);
+        int size = unzReadCurrentFile(g_hZip, data, dataSize);
         if (size < 0) {
             free(data);
             unzCloseCurrentFile(g_hZip);

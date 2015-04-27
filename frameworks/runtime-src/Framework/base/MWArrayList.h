@@ -147,6 +147,9 @@ public:
         return _innerVector.empty();
     }
     
+    // overload []
+    cocos2d::Ref *operator[](int index);
+    
     /**
      * ICloneable overrides.
      */

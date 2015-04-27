@@ -145,6 +145,11 @@ bool MWDictionary::hasKey(const std::string &key)
     return _innerMap.find(key) != _innerMap.end();
 }
 
+Ref *MWDictionary::operator[](const std::string &key)
+{
+    return this->objectForKey(key);
+}
+
 MWDictionary *MWDictionary::clone()
 {
     auto pCopy = new (nothrow) MWDictionary();

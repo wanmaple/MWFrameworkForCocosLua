@@ -263,6 +263,9 @@ bool MWGifSprite::initWithRawData(MWBinaryData *imgData)
     if (!Sprite::init()) {
         return false;
     }
+    if (!imgData || !imgData->getData() || imgData->getSize() <= 0) {
+        return false;
+    }
     if (!this->openGif(imgData->getData())) {
         return false;
     }
