@@ -217,11 +217,6 @@ public:
     virtual ~MWHttpDownloader();
     
     /**
-     * Downloader delegate getter and setter.
-     */
-    MW_SYNTHESIZE(MWHttpDownloaderDelegate*, _delegate, Delegate);
-    
-    /**
      * Destroy all tasks.
      */
     void destroy();
@@ -257,6 +252,11 @@ public:
     }
     
     void onDownloadUpdated(float dt);
+    
+    /**
+     * Downloader delegate getter and setter.
+     */
+    MW_SYNTHESIZE(MWHttpDownloaderDelegate*, _delegate, Delegate);
     
 protected:
     bool _initThread();

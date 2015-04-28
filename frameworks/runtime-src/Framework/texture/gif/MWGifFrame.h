@@ -26,8 +26,6 @@ public:
     
     ~MWGifFrame();
     
-    MW_SYNTHESIZE(MW_UINT, _duration, Duration);
-    
     /**
      * Sprite frame getter and setter.
      */
@@ -36,6 +34,8 @@ public:
         return _spriteFrame;
     }
     void setSpriteFrame(cocos2d::SpriteFrame *spriteFrame) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
+    
+    MW_SYNTHESIZE(MW_UINT, _duration, Duration);
     
 protected:
     MWGifFrame();

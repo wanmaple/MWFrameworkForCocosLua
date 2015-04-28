@@ -145,7 +145,7 @@ bool MWDictionary::hasKey(const std::string &key)
     return _innerMap.find(key) != _innerMap.end();
 }
 
-Ref *MWDictionary::operator[](const std::string &key)
+Ref *MWDictionary::operator[](const std::string &key) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION)
 {
     return this->objectForKey(key);
 }

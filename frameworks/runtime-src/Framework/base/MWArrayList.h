@@ -148,7 +148,7 @@ public:
     }
     
     // overload []
-    cocos2d::Ref *operator[](int index);
+    cocos2d::Ref *operator[](int index) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
     
     /**
      * ICloneable overrides.

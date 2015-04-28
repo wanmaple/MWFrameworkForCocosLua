@@ -289,7 +289,7 @@ void MWArrayList::clear()
     _innerVector.clear();
 }
 
-Ref *MWArrayList::operator[](int index)
+Ref *MWArrayList::operator[](int index) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION)
 {
     return this->objectAtIndex(index);
 }

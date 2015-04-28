@@ -290,7 +290,34 @@ bool MWGifSprite::initWithRawData(MWBinaryData *imgData)
     g_hGif = nullptr;
     
     this->setSpriteFrame(static_cast<MWGifFrame *>(_gifFrames->objectAtIndex(0))->getSpriteFrame());
+    this->play();
     
+    return true;
+}
+
+MWGifSprite *MWGifSprite::createWithFrames(mwframework::MWArrayList *frames)
+{
+    auto pRet = new (nothrow) MWGifSprite();
+    if (pRet && pRet->initWithFrames(frames)) {
+        pRet->autorelease();
+        return pRet;
+    }
+    CC_SAFE_RELEASE(pRet);
+    return nullptr;
+}
+
+bool MWGifSprite::initWithFrames(mwframework::MWArrayList *frames)
+{
+    if (!Sprite::init()) {
+        return false;
+    }
+    if (!frames || frames->count() <= 0) {
+        return false;
+    }
+    _gifFrames = frames;
+    CC_SAFE_RETAIN(_gifFrames);
+    
+    this->setSpriteFrame(static_cast<MWGifFrame *>(_gifFrames->objectAtIndex(0))->getSpriteFrame());
     this->play();
     
     return true;

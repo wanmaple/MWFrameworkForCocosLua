@@ -24,6 +24,7 @@
 // texture extensions
 #include "texture/gif/MWGifFrame.h"
 #include "texture/gif/MWGifSprite.h"
+#include "texture/gif/MWGifFramesCache.h"
 
 // json.
 #include "json/MWJsonElement.h"

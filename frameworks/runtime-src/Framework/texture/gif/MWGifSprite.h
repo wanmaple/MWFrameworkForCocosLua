@@ -20,6 +20,7 @@ class MWGifFrame;
  */
 class MW_DLL MWGifSprite : public cocos2d::Sprite
 {
+    friend class MWGifFramesCache;
 public:
     /**
      * Create gif sprite by a gif image path.
@@ -69,6 +70,10 @@ public:
     MW_SYNTHESIZE(float, _speedRatio, SpeedRatio);
     
 protected:
+    // for frame cache.
+    static MWGifSprite *createWithFrames(MWArrayList *frames);
+    bool initWithFrames(MWArrayList *frames);
+    
     bool initWithFile(const std::string &gifPath);
     bool initWithRawData(MWBinaryData *imgData);
     
