@@ -18,10 +18,23 @@ MW_FRAMEWORK_BEGIN
 class MW_DLL MWZipData : public MWObject
 {
 public:
+    /**
+     * Wrapper the zip data from the file and password if required.
+     *
+     * @param filePath The zip file path.
+     * @param password The zip password.
+     */
     static MWZipData *createWithFile(const std::string &filePath, const std::string &password = "");
     
+    /**
+     * ZipData destructor.
+     */
     virtual ~MWZipData();
-    
+    /**
+     * Get the total raw data of the compressed file.
+     *
+     * @param compressedFile Compressed file path.
+     */
     MWBinaryData *getCompressedFileData(const std::string &compressedFile);
     
 protected:

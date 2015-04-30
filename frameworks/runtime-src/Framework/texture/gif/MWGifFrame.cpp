@@ -6,6 +6,7 @@ using namespace cocos2d;
 using namespace std;
 
 MW_FRAMEWORK_BEGIN
+
 MWGifFrame *MWGifFrame::create(SpriteFrame *spriteFrame, MW_UINT duration)
 {
     auto pRet = new (nothrow) MWGifFrame();

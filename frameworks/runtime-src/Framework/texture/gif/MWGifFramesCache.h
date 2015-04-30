@@ -1,7 +1,7 @@
 /******************************
- Description: GIF sprite.
+ Description: GIF frame cache.
  Author: M.Wan
- Date: 4/14/2015
+ Date: 4/24/2015
  ******************************/
 
 #ifndef __TEXTURE_GIF_GIF_FRAMES_CACHE__

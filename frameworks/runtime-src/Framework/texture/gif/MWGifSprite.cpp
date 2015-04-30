@@ -19,13 +19,13 @@ typedef struct {
 } RGBA, *PRGBA, *LPRGBA;
 
 /** Global helper attributes and functions **/
-static GifFileType *g_hGif = nullptr;
-static PRGBA g_buffer = nullptr;
-static PRGBA g_lastTemplateBuffer = nullptr;
-static PRGBA g_lastReserveBuffer = nullptr;
-static bool g_bgColorInited = false;
+MW_LOCAL GifFileType *g_hGif = nullptr;
+MW_LOCAL PRGBA g_buffer = nullptr;
+MW_LOCAL PRGBA g_lastTemplateBuffer = nullptr;
+MW_LOCAL PRGBA g_lastReserveBuffer = nullptr;
+MW_LOCAL bool g_bgColorInited = false;
 
-static int DecodeGifCallback(GifFileType *hGif, GifByteType *buffer, int size)
+MW_LOCAL int DecodeGifCallback(GifFileType *hGif, GifByteType *buffer, int size)
 {
     // save the raw data to gif userdata.
     char *pRawData = (char *)hGif->UserData;
@@ -37,7 +37,7 @@ static int DecodeGifCallback(GifFileType *hGif, GifByteType *buffer, int size)
     return size;
 }
 
-static RGBA PackRGBA(MW_BYTE r, MW_BYTE g, MW_BYTE b, MW_BYTE a)
+MW_LOCAL RGBA PackRGBA(MW_BYTE r, MW_BYTE g, MW_BYTE b, MW_BYTE a)
 {
     RGBA color;
     color.r = r;
@@ -48,7 +48,7 @@ static RGBA PackRGBA(MW_BYTE r, MW_BYTE g, MW_BYTE b, MW_BYTE a)
     return color;
 }
 
-static RGBA GetBackgroundColor()
+MW_LOCAL RGBA GetBackgroundColor()
 {
     static RGBA bgRgba;
     if (g_bgColorInited) {
@@ -69,7 +69,7 @@ static RGBA GetBackgroundColor()
     return bgRgba;
 }
 
-static void ClearWithColor(RGBA *buffer, RGBA color)
+MW_LOCAL void ClearWithColor(RGBA *buffer, RGBA color)
 {
     int bgWidth = g_hGif->SWidth;
     int bgHeight = g_hGif->SHeight;
@@ -84,7 +84,7 @@ static void ClearWithColor(RGBA *buffer, RGBA color)
     }
 }
 
-static void ClearRectWithColor(RGBA *buffer, int left, int top, int width, int height, RGBA color)
+MW_LOCAL void ClearRectWithColor(RGBA *buffer, int left, int top, int width, int height, RGBA color)
 {
     int bgWidth = g_hGif->SWidth;
     RGBA *pDstPtr = buffer + top * bgWidth + left;
@@ -97,7 +97,7 @@ static void ClearRectWithColor(RGBA *buffer, int left, int top, int width, int h
     }
 }
 
-static MW_UINT GetDuration(const SavedImage *img)
+MW_LOCAL MW_UINT GetDuration(const SavedImage *img)
 {
     // get the duration at the specified gif image.
     MW_UINT duration = 0;
@@ -118,7 +118,7 @@ static MW_UINT GetDuration(const SavedImage *img)
     return duration;
 }
 
-static void GetTransparencyAndDisposal(const SavedImage *img, bool *isTransparent, int *disposal)
+MW_LOCAL void GetTransparencyAndDisposal(const SavedImage *img, bool *isTransparent, int *disposal)
 {
     *isTransparent = false;
     *disposal = 0;
@@ -133,7 +133,7 @@ static void GetTransparencyAndDisposal(const SavedImage *img, bool *isTransparen
 }
 
 // check if the covered image is completely covered by target image.
-static bool CheckWhetherCovered(const SavedImage *targetImg, const SavedImage *coveredImg)
+MW_LOCAL bool CheckWhetherCovered(const SavedImage *targetImg, const SavedImage *coveredImg)
 {
     if (targetImg->ImageDesc.Left <= coveredImg->ImageDesc.Left && coveredImg->ImageDesc.Left + coveredImg->ImageDesc.Width <= targetImg->ImageDesc.Left + targetImg->ImageDesc.Width && targetImg->ImageDesc.Top <= coveredImg->ImageDesc.Top && coveredImg->ImageDesc.Top + coveredImg->ImageDesc.Height <= targetImg->ImageDesc.Top + targetImg->ImageDesc.Height) {
         return true;
@@ -141,7 +141,7 @@ static bool CheckWhetherCovered(const SavedImage *targetImg, const SavedImage *c
     return false;
 }
 
-static void DrawFrame(RGBA *buffer, const SavedImage *img, const ColorMapObject *colorMap, PRGBA bgColor = nullptr)
+MW_LOCAL void DrawFrame(RGBA *buffer, const SavedImage *img, const ColorMapObject *colorMap, PRGBA bgColor = nullptr)
 {
     // find transparency index.
     int transparentIndex = -1;
@@ -205,7 +205,7 @@ static void DrawFrame(RGBA *buffer, const SavedImage *img, const ColorMapObject 
     }
 }
 
-static void FreeBuffers()
+MW_LOCAL void FreeBuffers()
 {
     // clean the buffer
     if (g_buffer) {

@@ -9,6 +9,7 @@
 
 #define MW_DLL
 #define MW_INTERFACE
+#define MW_LOCAL static
 
 /**
  * Basic types.

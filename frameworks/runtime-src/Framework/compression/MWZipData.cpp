@@ -10,8 +10,8 @@ using namespace std;
 
 MW_FRAMEWORK_BEGIN
 
-static unzFile g_hZip = nullptr;
-static unz_global_info64 g_globalInfo;
+MW_LOCAL unzFile g_hZip = nullptr;
+MW_LOCAL unz_global_info64 g_globalInfo;
 
 MWZipData *MWZipData::createWithFile(const std::string &filePath, const std::string &password)
 {
@@ -60,7 +60,12 @@ MWZipData::~MWZipData()
 MWBinaryData *MWZipData::getCompressedFileData(const std::string &compressedFile)
 {
     unz_file_info64 fi;
-    int result = unzGetCurrentFileInfo64(g_hZip, &fi, const_cast<char *>(compressedFile.c_str()), compressedFile.size(), nullptr, 0, nullptr, 0);
+    // locate file.
+    int result = unzLocateFile(g_hZip, compressedFile.c_str(), false);
+    if (result != UNZ_OK) {
+        return nullptr;
+    }
+    result = unzGetCurrentFileInfo64(g_hZip, &fi, const_cast<char *>(compressedFile.c_str()), compressedFile.size(), nullptr, 0, nullptr, 0);
     if (result != UNZ_OK) {
         return nullptr;
     }
