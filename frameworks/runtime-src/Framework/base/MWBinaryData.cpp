@@ -49,4 +49,9 @@ MW_ULONG MWBinaryData::getSize() const
     return _size;
 }
 
+bool MWBinaryData::isValid()
+{
+    return _data && _size > 0;
+}
+
 MW_FRAMEWORK_END

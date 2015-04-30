@@ -22,9 +22,14 @@ public:
      * Wrapper the zip data from the file and password if required.
      *
      * @param filePath The zip file path.
-     * @param password The zip password.
      */
-    static MWZipData *createWithFile(const std::string &filePath, const std::string &password = "");
+    static MWZipData *createWithExistingFile(const std::string &filePath);
+    /**
+     * Create an empty zip.
+     *
+     * @param filePath The zip file path to create.
+     */
+    static MWZipData *createWithNewFile(const std::string &filePath);
     
     /**
      * ZipData destructor.
@@ -35,14 +40,23 @@ public:
      *
      * @param compressedFile Compressed file path.
      */
-    MWBinaryData *getCompressedFileData(const std::string &compressedFile);
+    MWBinaryData *getCompressedFileData(const std::string &compressedFile, const std::string &password = "");
+    
+    /**
+     * Compress new file into the zip.
+     *
+     * @param name The compressed file name.
+     * @param fileData The data to compress.
+     * @param Add a password if desired.
+     * @param level Compressed level 0-9.
+     */
+    bool zipNewFile(const std::string &name, MWBinaryData *fileData, const std::string &password = "", int level = 5);
     
 protected:
     MWZipData();
     
-    bool initWithFile(const std::string &filePath, const std::string &password);
-    
-    std::string _password;
+    bool initWithExistingFile(const std::string &filePath);
+    bool initWithNewFile(const std::string &filePath);
     
 };
 

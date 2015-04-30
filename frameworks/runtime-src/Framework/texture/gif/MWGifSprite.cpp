@@ -4,6 +4,8 @@
 #include "gif_lib/gif_lib.h"
 #include <new>
 
+#include "../../platform/MWIOUtils.h"
+
 #define GIF_DEFAULT_FRAME_UNIT_TIMES 100
 
 using namespace cocos2d;
@@ -238,11 +240,12 @@ MWGifSprite *MWGifSprite::createWithFile(const std::string &gifPath)
 
 bool MWGifSprite::initWithFile(const std::string &gifPath)
 {
-    Data data = FileUtils::getInstance()->getDataFromFile(FileUtils::getInstance()->fullPathForFilename(gifPath));
-    if (!data.getBytes() || data.getSize() <= 0) {
-        return false;
-    }
-    auto pData = MWBinaryData::create(data.getBytes(), data.getSize());
+//    Data data = FileUtils::getInstance()->getDataFromFile(FileUtils::getInstance()->fullPathForFilename(gifPath));
+//    if (!data.getBytes() || data.getSize() <= 0) {
+//        return false;
+//    }
+//    auto pData = MWBinaryData::create(data.getBytes(), data.getSize());
+    auto pData = MWIOUtils::getInstance()->getDataFromFile(gifPath);
     
     return this->initWithRawData(pData);
 }

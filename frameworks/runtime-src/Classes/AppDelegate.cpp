@@ -40,7 +40,8 @@ bool AppDelegate::applicationDidFinishLaunching()
     
     auto pScene = Scene::create();
     auto pLayer = LayerColor::create(Color4B(255, 0, 0, 200));
-    auto pGif = mwframework::MWGifSprite::createWithFile("res/GIF/493.gif");
+    auto pZip = mwframework::MWZipData::createWithExistingFile("res/493.zip");
+    auto pGif = mwframework::MWGifSprite::createWithRawData(pZip->getCompressedFileData("493.gif"));
     pGif->setPosition(Director::getInstance()->getWinSize().width * 0.5, Director::getInstance()->getWinSize().height * 0.5);
     pGif->setSpeedRatio(1.0f);
     pGif->setScale(2.5f, 2.5f);
@@ -55,9 +56,8 @@ bool AppDelegate::applicationDidFinishLaunching()
     pGif3->setSpeedRatio(1.0f);
     pGif3->setScale(2.5f, 2.5f);
     pLayer->addChild(pGif3);
-//    auto pGif4 = mwframework::MWGifSprite::createWithFile("res/GIF/487_o.gif");
-    auto gifZip = mwframework::MWZipData::createWithFile("res/GIF/pokemon_gif5.rc", "7ujm,lp-");
-    auto data = gifZip->getCompressedFileData("487_o.gif");
+    auto gifZip = mwframework::MWZipData::createWithExistingFile("res/GIF/pokemon_gif5.rc");
+    auto data = gifZip->getCompressedFileData("487_o.gif", "7ujm,lp-");
     auto pGif4 = mwframework::MWGifSprite::createWithRawData(data);
     pGif4->setPosition(Director::getInstance()->getWinSize().width * 0.5, Director::getInstance()->getWinSize().height * 0.85);
     pGif4->setSpeedRatio(1.0f);
@@ -65,7 +65,11 @@ bool AppDelegate::applicationDidFinishLaunching()
     pLayer->addChild(pGif4);
     pScene->addChild(pLayer);
     Director::getInstance()->runWithScene(pScene);
-//    pGif->stop();
+    
+    mwframework::MWIOUtils::getInstance()->createDirectory("res/aa/bb/cc");
+    CCLOG("%s", mwframework::MWIOUtils::getInstance()->resourcePath("res/aa/bb/cc/111.txt").c_str());
+    mwframework::MWIOUtils::getInstance()->createFile("res/aa/bb/cc/111.txt");
+    mwframework::MWIOUtils::getInstance()->writeDataToFile("abcdefg", 7, "res/aa/bb/cc/111.txt");
     
     Director::getInstance()->getScheduler()->schedule([this] (float dt) {
         printf("Used memory: %lf MB\n", mwframework::MWSystemHelper::getInstance()->getCurrentUsedMemory());

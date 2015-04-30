@@ -50,6 +50,11 @@ public:
      */
     MW_ULONG getSize() const;
     
+    /**
+     * Whether it is valid.
+     */
+    bool isValid();
+    
 private:
     bool init(MW_RAW_DATA data, MW_ULONG size);
     

@@ -24,6 +24,15 @@ class MWIOUtils
     MW_SINGLETON(MWIOUtils);
 public:
     /**
+     * Get the absolute path to the relative resource path.
+     *
+     * @param path Relative path to the resource folder.
+     *
+     * @return The absolute path.
+     */
+    std::string resourcePath(const std::string &path);
+    
+    /**
      * Check whether the specified file does exist.
      *
      * @param path File path to check.
@@ -31,15 +40,6 @@ public:
      * @return A boolean value.
      */
     bool fileExists(const std::string &path);
-    
-    /**
-     * Check whether the directory does exist.
-     *
-     * @param path Directory path to check.
-     *
-     * @return A boolean value.
-     */
-    bool directoryExists(const std::string &path);
     
     /**
      * Move file from old path to new path.
@@ -62,25 +62,42 @@ public:
     bool copyFile(const std::string &oldPath, const std::string &newPath);
     
     /**
+     * Get the raw data from the specified file.
+     *
+     * @param filePath Source file path.
+     *
+     * @return The raw data of the specified file, or nullptr if it failed to read.
+     */
+    MWBinaryData *getDataFromFile(const std::string &filePath);
+    
+    /**
      * Write content to the specified file.
      *
      * @param content File content to write.
      * @param length Content size.
      * @param filePath Destination file path.
      * @param isAppend Whether to append the content at the end of the file.
-     *
      * @return Operation result.
      */
-    bool writeDataToFile(const unsigned char *content, unsigned long length, const std::string &filePath, bool isAppend = false);
+    bool writeDataToFile(const MW_RAW_DATA content, MW_ULONG length, const std::string &filePath, bool isAppend = false);
     
     /**
-     * Remove file from the specified path.
+     * Remove the specified file.
      *
      * @param filePath Destination file path.
      *
      * @return Operation result.
      */
     bool removeFile(const std::string &filePath);
+    
+    /**
+     * Create a new file.
+     *
+     * @param filePath The new file path.
+     *
+     * @return Operation result.
+     */
+    bool createFile(const std::string &filePath);
     
     /**
      * Create a new directory.
