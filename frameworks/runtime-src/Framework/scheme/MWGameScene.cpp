@@ -75,7 +75,7 @@ void MWGameScene::onEnter()
 {
     Scene::onEnter();
     
-#ifndef DISABLE_MEMORY_DETECTION
+#ifndef MW_DISABLE_MEMORY_DETECTION
     // open scheduler to check memory.
     Director::getInstance()->getScheduler()->schedule(MW_CALLBACK_1(MWGameScene::checkMemory, this), this, 10, CC_REPEAT_FOREVER, 60, false, MEMORY_SCHEDULER_NAME);
 #endif
@@ -102,7 +102,7 @@ void MWGameScene::onExit()
     // unload all view controllers.
     this->unloadAllViewControllers();
     
-#ifndef DISABLE_MEMORY_DETECTION
+#ifndef MW_DISABLE_MEMORY_DETECTION
     // close the memory scheduler
     Director::getInstance()->getScheduler()->unschedule(MEMORY_SCHEDULER_NAME, this);
 #endif
