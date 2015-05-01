@@ -1,2 +1,4 @@
 # MWFramework2.0
-MWFramework 2.0 version
+
+Game framework for cocos2d-x 3.x.
+It will include lua and javascript framework.
