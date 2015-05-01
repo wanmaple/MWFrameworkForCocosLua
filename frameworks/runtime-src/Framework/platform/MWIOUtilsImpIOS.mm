@@ -59,6 +59,9 @@ MWBinaryData *MWIOUtils::getDataFromFile(const std::string &filePath)
     string absolutePath = this->resourcePath(filePath);
     
     FILE *hFile = fopen(absolutePath.c_str(), "rb");
+    if (!hFile) {
+        return nullptr;
+    }
     fseek(hFile, 0, SEEK_END);
     MW_ULONG size = ftell(hFile);
     fseek(hFile, 0, SEEK_SET);
