@@ -41,7 +41,9 @@ bool AppDelegate::applicationDidFinishLaunching()
     auto pScene = Scene::create();
     auto pLayer = LayerColor::create(Color4B(255, 0, 0, 200));
     auto pZip = mwframework::MWZipData::createWithExistingFile("res/493.zip");
+    pZip->beginUnzip();
     auto pGif = mwframework::MWGifSprite::createWithRawData(pZip->getCompressedFileData("493.gif"));
+    pZip->endUnzip();
     pGif->setPosition(Director::getInstance()->getWinSize().width * 0.5, Director::getInstance()->getWinSize().height * 0.5);
     pGif->setSpeedRatio(1.0f);
     pGif->setScale(2.5f, 2.5f);
@@ -57,7 +59,9 @@ bool AppDelegate::applicationDidFinishLaunching()
     pGif3->setScale(2.5f, 2.5f);
     pLayer->addChild(pGif3);
     auto gifZip = mwframework::MWZipData::createWithExistingFile("res/GIF/pokemon_gif5.rc");
+    gifZip->beginUnzip();
     auto data = gifZip->getCompressedFileData("487_o.gif", "7ujm,lp-");
+    gifZip->endUnzip();
     auto pGif4 = mwframework::MWGifSprite::createWithRawData(data);
     pGif4->setPosition(Director::getInstance()->getWinSize().width * 0.5, Director::getInstance()->getWinSize().height * 0.85);
     pGif4->setSpeedRatio(1.0f);
@@ -67,9 +71,22 @@ bool AppDelegate::applicationDidFinishLaunching()
     Director::getInstance()->runWithScene(pScene);
     
     mwframework::MWIOUtils::getInstance()->createDirectory("res/aa/bb/cc");
-    CCLOG("%s", mwframework::MWIOUtils::getInstance()->resourcePath("res/aa/bb/cc/111.txt").c_str());
+    CCLOG("%s", mwframework::MWIOUtils::getInstance()->resourcePath("res").c_str());
     mwframework::MWIOUtils::getInstance()->createFile("res/aa/bb/cc/111.txt");
     mwframework::MWIOUtils::getInstance()->writeDataToFile("abcdefg", 7, "res/aa/bb/cc/111.txt");
+    CCLOG("%d   %d", mwframework::MWIOUtils::getInstance()->fileExists("res/aa/bb/cc/111.txt"), mwframework::MWIOUtils::getInstance()->fileExists("res/aa"));
+    
+    auto newZip = mwframework::MWZipData::createWithNewFile("res/temp.zip");
+    newZip->beginZip();
+    newZip->zipNewFile("aaa.gif", mwframework::MWIOUtils::getInstance()->getDataFromFile("res/GIF/150.gif"));
+    newZip->endZip();
+    newZip->beginUnzip();
+    auto newData = newZip->getCompressedFileData("aaa.gif");
+    newZip->endUnzip();
+    auto pNewGif = mwframework::MWGifSprite::createWithRawData(newData);
+    pNewGif->setScale(2.5f, 2.5f);
+    pNewGif->setPosition(200, 200);
+    pLayer->addChild(pNewGif);
     
     Director::getInstance()->getScheduler()->schedule([this] (float dt) {
         printf("Used memory: %lf MB\n", mwframework::MWSystemHelper::getInstance()->getCurrentUsedMemory());

@@ -14,8 +14,8 @@ using namespace std;
 
 MW_FRAMEWORK_BEGIN
 
-MW_LOCAL unzFile g_hZip = nullptr;
-MW_LOCAL unz_global_info64 g_globalInfo;
+MW_LOCAL zipFile g_hZip = nullptr;
+MW_LOCAL unzFile g_hUnz = nullptr;
 
 MWZipData *MWZipData::createWithExistingFile(const std::string &filePath)
 {
@@ -31,16 +31,13 @@ MWZipData *MWZipData::createWithExistingFile(const std::string &filePath)
 bool MWZipData::initWithExistingFile(const std::string &filePath)
 {
     auto absolutePath = FileUtils::getInstance()->fullPathForFilename(filePath);
-    g_hZip = unzOpen64(absolutePath.c_str());
-    if (!g_hZip) {
+    _filePath = absolutePath;
+    g_hUnz = unzOpen64(absolutePath.c_str());
+    if (!g_hUnz) {
         return false;
     }
-    int result = unzGetGlobalInfo64(g_hZip, &g_globalInfo);
-    if (result != UNZ_OK) {
-        unzClose(g_hZip);
-        g_hZip = nullptr;
-        return false;
-    }
+    unzClose(g_hUnz);
+    g_hUnz = nullptr;
     
     return true;
 }
@@ -58,13 +55,16 @@ MWZipData *MWZipData::createWithNewFile(const std::string &filePath)
 
 bool MWZipData::initWithNewFile(const std::string &filePath)
 {
-    if (!MWIOUtils::getInstance()->fileExists(filePath)) {
-        if (!MWIOUtils::getInstance()->createFile(filePath)) {
-            return false;
-        }
-        return this->initWithExistingFile(filePath);
+    auto absolutePath = MWIOUtils::getInstance()->resourcePath(filePath);
+    _filePath = absolutePath;
+    g_hZip = zipOpen64(absolutePath.c_str(), 0);
+    if (!g_hZip) {
+        return false;
     }
-    return false;
+    zipClose(g_hZip, nullptr);
+    g_hZip = nullptr;
+    
+    return true;
 }
 
 MWZipData::MWZipData()
@@ -74,29 +74,49 @@ MWZipData::MWZipData()
 
 MWZipData::~MWZipData()
 {
+    if (g_hUnz) {
+        unzClose(g_hUnz);
+        g_hUnz = nullptr;
+    }
     if (g_hZip) {
-        unzClose(g_hZip);
+        zipClose(g_hZip, nullptr);
         g_hZip = nullptr;
     }
 }
 
+void MWZipData::beginUnzip()
+{
+    g_hUnz = unzOpen64(_filePath.c_str());
+}
+
+void MWZipData::endUnzip()
+{
+    unzClose(g_hUnz);
+    g_hUnz = nullptr;
+}
+
 MWBinaryData *MWZipData::getCompressedFileData(const std::string &compressedFile, const std::string &password)
 {
+    if (!g_hUnz) {
+        CCLOG("Did you call the beginUnzip at first?");
+        return nullptr;
+    }
+    
     unz_file_info64 fi;
     // locate file.
-    int result = unzLocateFile(g_hZip, compressedFile.c_str(), false);
+    int result = unzLocateFile(g_hUnz, compressedFile.c_str(), false);
     if (result != UNZ_OK) {
         return nullptr;
     }
-    result = unzGetCurrentFileInfo64(g_hZip, &fi, const_cast<char *>(compressedFile.c_str()), compressedFile.size(), nullptr, 0, nullptr, 0);
+    result = unzGetCurrentFileInfo64(g_hUnz, &fi, const_cast<char *>(compressedFile.c_str()), compressedFile.size(), nullptr, 0, nullptr, 0);
     if (result != UNZ_OK) {
         return nullptr;
     }
     // only consider file.
     if (password.size() > 0) {
-        result = unzOpenCurrentFilePassword(g_hZip, password.c_str());
+        result = unzOpenCurrentFilePassword(g_hUnz, password.c_str());
     } else {
-        result = unzOpenCurrentFile(g_hZip);
+        result = unzOpenCurrentFile(g_hUnz);
     }
     if (result != UNZ_OK) {
         return nullptr;
@@ -105,7 +125,7 @@ MWBinaryData *MWZipData::getCompressedFileData(const std::string &compressedFile
     MW_BYTE *data = (MW_BYTE *) malloc(dataSize);
     // read the data.
     while (true) {
-        int size = unzReadCurrentFile(g_hZip, data, (MW_UINT) dataSize);
+        int size = unzReadCurrentFile(g_hUnz, data, (MW_UINT) dataSize);
         if (size < 0) {
             free(data);
             unzCloseCurrentFile(g_hZip);
@@ -114,11 +134,22 @@ MWBinaryData *MWZipData::getCompressedFileData(const std::string &compressedFile
             break;
         }
     }
-    unzCloseCurrentFile(g_hZip);
+    unzCloseCurrentFile(g_hUnz);
     
     auto pBinaryData = MWBinaryData::create(data, dataSize);
     
     return pBinaryData;
+}
+
+void MWZipData::beginZip()
+{
+    g_hZip = zipOpen64(_filePath.c_str(), 0);
+}
+
+void MWZipData::endZip()
+{
+    zipClose(g_hZip, nullptr);
+    g_hZip = nullptr;
 }
 
 bool MWZipData::zipNewFile(const std::string &name, mwframework::MWBinaryData *fileData, const std::string &password, int level)
@@ -132,13 +163,21 @@ bool MWZipData::zipNewFile(const std::string &name, mwframework::MWBinaryData *f
         level = 9;
     }
     
+    if (!g_hZip) {
+        CCLOG("Did you call the beginZip at first?");
+        return false;
+    }
+    
     zip_fileinfo fi = { 0 };
-    int result = zipOpenNewFileInZip4(g_hZip, name.c_str(), &fi, nullptr, 0, nullptr, 0, nullptr, Z_DEFAULT_COMPRESSION, level, 0, -MAX_WBITS, DEF_MEM_LEVEL, Z_DEFAULT_STRATEGY, (password.size() > 0 ? password.c_str() : nullptr), 0, 0, 0);
+    int result = zipOpenNewFileInZip4(g_hZip, name.c_str(), &fi, nullptr, 0, nullptr, 0, nullptr, Z_DEFLATED, level, 0, -MAX_WBITS, DEF_MEM_LEVEL, Z_DEFAULT_STRATEGY, (password.size() > 0 ? password.c_str() : nullptr), 0, 0, 0);
     if (result != UNZ_OK) {
         return false;
     }
     
-    return zipWriteInFileInZip(g_hZip, fileData->getData(), (MW_UINT) fileData->getSize());
+    result = zipWriteInFileInZip(g_hZip, fileData->getData(), (MW_UINT) fileData->getSize());
+    zipCloseFileInZip(g_hZip);
+    
+    return result;
 }
 
 MW_FRAMEWORK_END

@@ -35,10 +35,18 @@ public:
      * ZipData destructor.
      */
     virtual ~MWZipData();
+    
+    void beginUnzip();
+    void endUnzip();
+    
+    void beginZip();
+    void endZip();
+    
     /**
      * Get the total raw data of the compressed file.
      *
      * @param compressedFile Compressed file path.
+     * @password The compressed password if required.
      */
     MWBinaryData *getCompressedFileData(const std::string &compressedFile, const std::string &password = "");
     
@@ -57,6 +65,8 @@ protected:
     
     bool initWithExistingFile(const std::string &filePath);
     bool initWithNewFile(const std::string &filePath);
+    
+    std::string _filePath;
     
 };
 

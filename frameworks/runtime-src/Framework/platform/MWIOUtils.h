@@ -16,7 +16,7 @@ MW_FRAMEWORK_BEGIN
 /**
  * A helper class to handle io operations.
  */
-class MWIOUtils
+class MW_DLL MWIOUtils
 {
     /**
      * IOUtils is a singleton.

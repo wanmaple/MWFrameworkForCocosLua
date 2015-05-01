@@ -66,7 +66,6 @@ MW_LOCAL RGBA GetBackgroundColor()
     b = bgColor.Blue;
     a = 0xff;
     bgRgba = PackRGBA(r, g, b, a);
-    CCLOG("BG COLOR: r: %d g: %d b: %d a: %d", r, g, b, a);
     
     return bgRgba;
 }
@@ -181,7 +180,7 @@ MW_LOCAL void DrawFrame(RGBA *buffer, const SavedImage *img, const ColorMapObjec
     int rawIndex;
     GifColorType *pColorMap = colorMap->Colors;
     GifColorType color;
-    CCLOG("Transparent color: r: %d g: %d b: %d", pColorMap[transparentIndex].Red, pColorMap[transparentIndex].Green, pColorMap[transparentIndex].Blue);
+//    CCLOG("Transparent color: r: %d g: %d b: %d", pColorMap[transparentIndex].Red, pColorMap[transparentIndex].Green, pColorMap[transparentIndex].Blue);
     MW_BYTE r, g, b, a;
     for (int y = 0; y < height; ++y) {
         for (int x = 0; x < width; ++x) {
@@ -446,7 +445,7 @@ bool MWGifSprite::openGif(void *imgData)
         return false;
     }
     g_hGif = hGif;
-    CCLOG("GIF size: %d, %d", g_hGif->SWidth, g_hGif->SHeight);
+//    CCLOG("GIF size: %d, %d", g_hGif->SWidth, g_hGif->SHeight);
     
     return true;
 }
@@ -479,7 +478,7 @@ MWGifFrame *MWGifSprite::generateFrameAtIndex(int index)
     GetTransparencyAndDisposal(&g_hGif->SavedImages[index], &tran, &tmpDisposal);
     GraphicsControlBlock gcb;
     DGifSavedExtensionToGCB(g_hGif, index, &gcb);
-    CCLOG("%d\t%d", tmpDisposal, gcb.DisposalMode);
+//    CCLOG("%d\t%d", tmpDisposal, gcb.DisposalMode);
     
     // get bg color.
     RGBA paintColor = GetBackgroundColor();
