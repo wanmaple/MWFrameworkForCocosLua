@@ -36,10 +36,25 @@ public:
      */
     virtual ~MWZipData();
     
+    /**
+     * Prepare to unzip from the zip.
+     * @note You have to call this before using "getCompressedFileData", otherwise you will failed to get the correct data.
+     */
     void beginUnzip();
+    /**
+     * Stop to do unzip operations.
+     * @note Don't forget to end after all unzip operations are done, otherwise you will failed to do other operations after that.
+     */
     void endUnzip();
-    
+    /**
+     * Prepare to zip new file to the zip.
+     * @note You have to call this before using "zipNewFile", otherwise you will failed to add the data to the zip.
+     */
     void beginZip();
+    /**
+     * Stop to do zip operations.
+     * @note Don't forget to end after all zip operations are done, otherwise you will failed to do other operations after that.
+     */
     void endZip();
     
     /**
