@@ -94,7 +94,7 @@ public:
      */
     inline MW_UINT count()
     {
-        return _innerMap.size();
+        return (MW_UINT) _innerMap.size();
     }
     /**
      * Whether the map is empty?
