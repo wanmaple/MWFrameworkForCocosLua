@@ -171,7 +171,7 @@ public:
      *
      * @return Return json string format.
      */
-    std::string toString();
+    virtual std::string toString() override;
     /**
      * Convert to pretty string.
      *
@@ -360,7 +360,7 @@ public:
      *
      * @return Return json string format.
      */
-    std::string toString();
+    virtual std::string toString() override;
     /**
      * Convert to pretty string.
      *

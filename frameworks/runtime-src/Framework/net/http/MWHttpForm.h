@@ -54,7 +54,7 @@ public:
      *
      * @return String connected with parameters.
      */
-    std::string toString();
+    virtual std::string toString() override;
     
 protected:
     bool _init();
