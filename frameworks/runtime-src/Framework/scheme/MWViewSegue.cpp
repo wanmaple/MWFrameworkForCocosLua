@@ -5,7 +5,9 @@
 #include "MWGameView.h"
 #include "MWGameScene.h"
 #include "MWViewController.h"
+#if MW_ENABLE_SCRIPT_BINDING
 #include "../lua/MWLuaUtils.h"
+#endif
 
 using namespace cocos2d;
 using namespace std;

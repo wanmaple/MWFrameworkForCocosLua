@@ -52,6 +52,8 @@
 #include "net/http/MWHttpDownloader.h"
 
 // lua related.
+#if MW_ENABLE_SCRIPT_BINDING
 #include "lua/MWLuaUtils.h"
+#endif
 
 #endif

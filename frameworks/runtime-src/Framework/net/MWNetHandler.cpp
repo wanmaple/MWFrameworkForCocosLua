@@ -1,7 +1,9 @@
 #include "MWNetHandler.h"
 
 #include "cocos2d.h"
+#if MW_ENABLE_SCRIPT_BINDING
 #include "../lua/MWLuaUtils.h"
+#endif
 
 #include <new>
 

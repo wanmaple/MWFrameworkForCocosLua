@@ -8,7 +8,9 @@ using namespace std;
 MW_FRAMEWORK_BEGIN
 
 MWObject::MWObject()
+#if MW_ENABLE_SCRIPT_BINDING
 : _scriptType(kScriptTypeNone)
+#endif
 {
 #if MW_ENABLE_SCRIPT_BINDING
     ScriptEngineProtocol *pEngine = ScriptEngineManager::getInstance()->getScriptEngine();
