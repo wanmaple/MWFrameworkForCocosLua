@@ -7,6 +7,7 @@
 // platform.
 #include "platform/MWSystemHelperStrategy.h"
 #include "platform/MWSystemHelper.h"
+#include "platform/MWIOUtilsStrategy.h"
 #include "platform/MWIOUtils.h"
 
 // core scheme.

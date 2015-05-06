@@ -13,6 +13,8 @@
 
 MW_FRAMEWORK_BEGIN
 
+class MWIOUtilsStrategy;
+
 /**
  * A helper class to handle io operations.
  */
@@ -23,6 +25,8 @@ class MW_DLL MWIOUtils
      */
     MW_SINGLETON(MWIOUtils);
 public:
+    ~MWIOUtils();
+    
     /**
      * Get the absolute path to the relative resource path.
      *
@@ -107,6 +111,9 @@ public:
      * @return Operation result.
      */
     bool createDirectory(const std::string &directoryPath);
+    
+protected:
+    MWIOUtilsStrategy *_strategy;
 };
 
 MW_FRAMEWORK_END

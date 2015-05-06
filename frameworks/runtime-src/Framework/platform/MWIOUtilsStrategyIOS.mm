@@ -1,6 +1,6 @@
 #if CC_TARGET_PLATFORM == CC_PLATFORM_IOS
 
-#include "MWIOUtils.h"
+#include "MWIOUtilsStrategyIOS.h"
 
 #include <sys/uio.h>
 #include <sys/types.h>
@@ -16,11 +16,7 @@ using namespace std;
 
 MW_FRAMEWORK_BEGIN
 
-MWIOUtils::MWIOUtils()
-{
-}
-
-string MWIOUtils::resourcePath(const std::string &path)
+string MWIOUtilsStrategyIos::resourcePath(const std::string &path)
 {
     NSString *fname = [NSString stringWithCString:path.c_str() encoding:NSUTF8StringEncoding];
     NSString *absolutePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:fname];
@@ -28,7 +24,7 @@ string MWIOUtils::resourcePath(const std::string &path)
     return string([absolutePath cStringUsingEncoding:NSUTF8StringEncoding]);
 }
 
-bool MWIOUtils::fileExists(const std::string &path)
+bool MWIOUtilsStrategyIos::fileExists(const std::string &path)
 {
     string absolutePath = this->resourcePath(path);
     
@@ -38,7 +34,7 @@ bool MWIOUtils::fileExists(const std::string &path)
     return result && !isDirectory;
 }
 
-bool MWIOUtils::moveFile(const std::string &oldPath, const std::string &newPath)
+bool MWIOUtilsStrategyIos::moveFile(const std::string &oldPath, const std::string &newPath)
 {
     string oldAbsolutePath = this->resourcePath(oldPath);
     string newAbsolutePath = this->resourcePath(newPath);
@@ -46,7 +42,7 @@ bool MWIOUtils::moveFile(const std::string &oldPath, const std::string &newPath)
     return [[NSFileManager defaultManager] moveItemAtPath:[NSString stringWithCString:oldAbsolutePath.c_str() encoding:NSUTF8StringEncoding] toPath:[NSString stringWithCString:newAbsolutePath.c_str() encoding:NSUTF8StringEncoding] error:nil];
 }
 
-bool MWIOUtils::copyFile(const std::string &oldPath, const std::string &newPath)
+bool MWIOUtilsStrategyIos::copyFile(const std::string &oldPath, const std::string &newPath)
 {
     string oldAbsolutePath = this->resourcePath(oldPath);
     string newAbsolutePath = this->resourcePath(newPath);
@@ -54,7 +50,7 @@ bool MWIOUtils::copyFile(const std::string &oldPath, const std::string &newPath)
     return [[NSFileManager defaultManager] copyItemAtPath:[NSString stringWithCString:oldAbsolutePath.c_str() encoding:NSUTF8StringEncoding] toPath:[NSString stringWithCString:newAbsolutePath.c_str() encoding:NSUTF8StringEncoding] error:nil];
 }
 
-MWBinaryData *MWIOUtils::getDataFromFile(const std::string &filePath)
+MWBinaryData *MWIOUtilsStrategyIos::getDataFromFile(const std::string &filePath)
 {
     string absolutePath = this->resourcePath(filePath);
     
@@ -75,7 +71,7 @@ MWBinaryData *MWIOUtils::getDataFromFile(const std::string &filePath)
     return MWBinaryData::create(pBuffer, size);
 }
 
-bool MWIOUtils::writeDataToFile(const MW_RAW_DATA content, MW_ULONG length, const std::string &filePath, bool isAppend)
+bool MWIOUtilsStrategyIos::writeDataToFile(const MW_RAW_DATA content, MW_ULONG length, const std::string &filePath, bool isAppend)
 {
     string absolutePath = this->resourcePath(filePath);
     
@@ -95,7 +91,7 @@ bool MWIOUtils::writeDataToFile(const MW_RAW_DATA content, MW_ULONG length, cons
     return true;
 }
 
-bool MWIOUtils::removeFile(const std::string &filePath)
+bool MWIOUtilsStrategyIos::removeFile(const std::string &filePath)
 {
     string absolutePath = this->resourcePath(filePath);
     
@@ -106,14 +102,14 @@ bool MWIOUtils::removeFile(const std::string &filePath)
     return false;
 }
 
-bool MWIOUtils::createFile(const std::string &filePath)
+bool MWIOUtilsStrategyIos::createFile(const std::string &filePath)
 {
     string absolutePath = this->resourcePath(filePath);
     
     return [[NSFileManager defaultManager] createFileAtPath:[NSString stringWithCString:absolutePath.c_str() encoding:NSUTF8StringEncoding] contents:nil attributes:nil];
 }
 
-bool MWIOUtils::createDirectory(const std::string &directoryPath)
+bool MWIOUtilsStrategyIos::createDirectory(const std::string &directoryPath)
 {
     string absolutePath = this->resourcePath(directoryPath);
     

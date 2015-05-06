@@ -32,6 +32,11 @@
 #endif
 
 /**
+ * Remove unused warnings.
+ */
+#define MW_UNUSED_PARAM(param) (void)param;
+
+/**
  * Whether should throw an exception? default true.
  */
 #define MW_WHETHER_THROW_EXCEPTION 1

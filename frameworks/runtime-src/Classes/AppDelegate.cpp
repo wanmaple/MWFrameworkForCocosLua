@@ -89,7 +89,7 @@ bool AppDelegate::applicationDidFinishLaunching()
     pLayer->addChild(pNewGif);
     
     auto pSvg = mwframework::MWSvgSprite::createWithFile("res/tiger.svg", 111111);
-    pSvg->setVectorScale(5.0f);
+    pSvg->setVectorScale(2.0f);
     pSvg->setPosition(Director::getInstance()->getWinSize().width * 0.5, Director::getInstance()->getWinSize().height * 0.5);
     pLayer->addChild(pSvg);
     

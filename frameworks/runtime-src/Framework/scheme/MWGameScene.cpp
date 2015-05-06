@@ -214,7 +214,6 @@ void MWGameScene::unloadViewController(mwframework::MWViewController *controller
     if (_viewControllers->hasKey(controller->getIdentifier())) {
         controller->view()->removeFromParent();
         controller->_scene = nullptr;
-        controller->_identifer = "";
         controller->viewDidUnload();
         // what to do after the unloading
         MWViewSegue *pSegue = controller->segue();
