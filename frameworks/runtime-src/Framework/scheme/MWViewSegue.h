@@ -54,22 +54,6 @@ protected:
     bool init();
 };
 
-/**
- * Modaled view segue.
- */
-class MW_DLL MWModalViewSegue : public MWViewSegue
-{
-public:
-    /**
-     * Create a modal view segue.
-     *
-     * @return MWModalViewSegue instance which is autoreleased.
-     */
-    static MWModalViewSegue *create();
-    
-    virtual void viewReadyToSegue(MWGameView *view) override;
-};
-
 MW_FRAMEWORK_END
 
 #endif

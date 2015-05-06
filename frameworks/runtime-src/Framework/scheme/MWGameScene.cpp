@@ -41,7 +41,7 @@ MWGameScene *MWGameScene::createWithParams(mwframework::MWDictionary *params)
 bool MWGameScene::init(MWDictionary *params)
 {
     _viewControllers = new (nothrow) MWDictionary();
-    if (_params && _viewControllers) {
+    if (_viewControllers) {
         if (params) {
             _params = params->clone();
             // the copy is autoreleased.

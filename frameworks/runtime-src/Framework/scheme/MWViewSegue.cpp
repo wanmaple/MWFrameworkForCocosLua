@@ -90,28 +90,4 @@ void MWViewSegue::viewDidSegueBack(mwframework::MWGameScene *scene)
 #endif
 }
 
-/****************************************** MODAL VIEW SEGUE ******************************************/
-MWModalViewSegue *MWModalViewSegue::create()
-{
-    auto pRet = new (nothrow) MWModalViewSegue();
-    if (pRet && pRet->init()) {
-        pRet->autorelease();
-        return pRet;
-    }
-    CC_SAFE_RELEASE(pRet);
-    return nullptr;
-}
-
-void MWModalViewSegue::viewReadyToSegue(mwframework::MWGameView *view)
-{
-    if (!view) {
-        CCLOG("Invalid view parameter.");
-        return;
-    }
-    
-    view->setModaled(true);
-    
-    MWViewSegue::viewReadyToSegue(view);
-}
-
 MW_FRAMEWORK_END
