@@ -88,10 +88,14 @@ bool AppDelegate::applicationDidFinishLaunching()
     pNewGif->setPosition(200, 200);
     pLayer->addChild(pNewGif);
     
+    auto pSvg = mwframework::MWSvgSprite::createWithFile("res/tiger.svg", 111111);
+    pSvg->setVectorScale(5.0f);
+    pSvg->setPosition(Director::getInstance()->getWinSize().width * 0.5, Director::getInstance()->getWinSize().height * 0.5);
+    pLayer->addChild(pSvg);
+    
     Director::getInstance()->getScheduler()->schedule([this] (float dt) {
         printf("Used memory: %lf MB\n", mwframework::MWSystemHelper::getInstance()->getCurrentUsedMemory());
     }, this, 5.0f, CC_REPEAT_FOREVER, 0.0f, false, "MEMORY_SCHEDULER");
-    
     
     return true;
 

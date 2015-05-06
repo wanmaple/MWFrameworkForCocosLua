@@ -124,6 +124,7 @@
 		F5CF4A651ADCE8CD00D0AF87 /* quantize.c in Sources */ = {isa = PBXBuildFile; fileRef = F5CF4A5E1ADCE8CD00D0AF87 /* quantize.c */; };
 		F5CF4A681ADCE9EA00D0AF87 /* MWGifFrame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5CF4A661ADCE9EA00D0AF87 /* MWGifFrame.cpp */; };
 		F5CF4A6D1ADCF1EC00D0AF87 /* MWGifSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5CF4A6B1ADCF1EC00D0AF87 /* MWGifSprite.cpp */; };
+		F5DDB31E1AFA2C0B00642E89 /* MWSvgSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5DDB31C1AFA2C0B00642E89 /* MWSvgSprite.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -397,6 +398,10 @@
 		F5CF4A671ADCE9EA00D0AF87 /* MWGifFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWGifFrame.h; sourceTree = "<group>"; };
 		F5CF4A6B1ADCF1EC00D0AF87 /* MWGifSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWGifSprite.cpp; sourceTree = "<group>"; };
 		F5CF4A6C1ADCF1EC00D0AF87 /* MWGifSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWGifSprite.h; sourceTree = "<group>"; };
+		F5DDB31A1AFA2B4600642E89 /* nanosvg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nanosvg.h; sourceTree = "<group>"; };
+		F5DDB31B1AFA2B4600642E89 /* nanosvgrast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nanosvgrast.h; sourceTree = "<group>"; };
+		F5DDB31C1AFA2C0B00642E89 /* MWSvgSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWSvgSprite.cpp; sourceTree = "<group>"; };
+		F5DDB31D1AFA2C0B00642E89 /* MWSvgSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWSvgSprite.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -950,6 +955,7 @@
 			isa = PBXGroup;
 			children = (
 				F5CF4A531ADCE8CD00D0AF87 /* gif */,
+				F5DDB3181AFA2B4600642E89 /* svg */,
 			);
 			path = texture;
 			sourceTree = "<group>";
@@ -983,6 +989,25 @@
 				F5CF4A5E1ADCE8CD00D0AF87 /* quantize.c */,
 			);
 			path = gif_lib;
+			sourceTree = "<group>";
+		};
+		F5DDB3181AFA2B4600642E89 /* svg */ = {
+			isa = PBXGroup;
+			children = (
+				F5DDB3191AFA2B4600642E89 /* nanosvg */,
+				F5DDB31C1AFA2C0B00642E89 /* MWSvgSprite.cpp */,
+				F5DDB31D1AFA2C0B00642E89 /* MWSvgSprite.h */,
+			);
+			path = svg;
+			sourceTree = "<group>";
+		};
+		F5DDB3191AFA2B4600642E89 /* nanosvg */ = {
+			isa = PBXGroup;
+			children = (
+				F5DDB31A1AFA2B4600642E89 /* nanosvg.h */,
+				F5DDB31B1AFA2B4600642E89 /* nanosvgrast.h */,
+			);
+			path = nanosvg;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1246,6 +1271,7 @@
 				F5629EB81AEC202A00CC4F1F /* MWZipData.cpp in Sources */,
 				F53535A51AB4512D00EF7298 /* MWNetProtocol.cpp in Sources */,
 				3382D9F71A80F64C00A3702F /* FrameworkErrors.cpp in Sources */,
+				F5DDB31E1AFA2C0B00642E89 /* MWSvgSprite.cpp in Sources */,
 				33250DC91A91E39A00D1668B /* MWJsonParser.cpp in Sources */,
 				F53535B51AB45A4100EF7298 /* MWNetFilter.cpp in Sources */,
 				F5714FE11AB9D77B00AF3A51 /* MWHttpForm.cpp in Sources */,

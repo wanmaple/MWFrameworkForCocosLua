@@ -66,9 +66,10 @@ MWBinaryData *MWIOUtils::getDataFromFile(const std::string &filePath)
     MW_ULONG size = ftell(hFile);
     fseek(hFile, 0, SEEK_SET);
     
-    MW_BYTE *pBuffer = (MW_BYTE *) malloc(size * sizeof(MW_BYTE));
+    MW_BYTE *pBuffer = (MW_BYTE *) malloc((size + 1) * sizeof(MW_BYTE));
     
     fread(pBuffer, sizeof(MW_BYTE), size, hFile);
+    pBuffer[size] = '\0';
     fclose(hFile);
     
     return MWBinaryData::create(pBuffer, size);
