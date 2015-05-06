@@ -460,6 +460,7 @@
 		33250D901A91E39A00D1668B /* json */ = {
 			isa = PBXGroup;
 			children = (
+				33250D991A91E39A00D1668B /* libjson */,
 				33250D911A91E39A00D1668B /* MWJsonElement.cpp */,
 				33250D921A91E39A00D1668B /* MWJsonElement.h */,
 				33250D931A91E39A00D1668B /* MWJsonFormatter.cpp */,
@@ -468,7 +469,6 @@
 				33250D961A91E39A00D1668B /* MWJsonParser.h */,
 				33250D971A91E39A00D1668B /* MWJsonStructure.cpp */,
 				33250D981A91E39A00D1668B /* MWJsonStructure.h */,
-				33250D991A91E39A00D1668B /* libjson */,
 			);
 			path = json;
 			sourceTree = "<group>";
