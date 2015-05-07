@@ -75,6 +75,8 @@ public:
      */
     const char *stringValue();
     
+    std::string toString() override;
+    
 private:
     bool _val;
 };
@@ -117,6 +119,8 @@ public:
      */
     const char *stringValue();
     
+    std::string toString() override;
+    
 private:
     double _val;
 };
@@ -158,6 +162,8 @@ public:
      * @return String of number.
      */
     const char *stringValue();
+    
+    std::string toString() override;
     
 private:
     std::string _val;

@@ -107,7 +107,7 @@ void MWNetCenter::addNetService(const std::string &serviceId, mwframework::MWNet
     if (serviceId.size() <= 0 || !service) {
         MW_THROW_EXCEPTION(1006);
     }
-    if (_serviceMap->objectForKey(serviceId)) {
+    if (_serviceMap->hasKey(serviceId)) {
         MW_THROW_EXCEPTION(5003);
     }
     _serviceMap->setObjectForKey(serviceId, service);
@@ -125,7 +125,7 @@ void MWNetCenter::addNetProtocol(const std::string &protocolId, const std::strin
     if (protocolId.size() <= 0 || serviceId.size() <= 0 || !handler) {
         MW_THROW_EXCEPTION(1006);
     }
-    if (!_serviceMap->objectForKey(serviceId)) {
+    if (!_serviceMap->hasKey(serviceId)) {
         MW_THROW_EXCEPTION(5001);
     }
     auto pProtocol = MWNetProtocol::create(protocolId, serviceId, handler);

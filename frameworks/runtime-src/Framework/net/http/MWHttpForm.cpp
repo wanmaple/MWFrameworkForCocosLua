@@ -59,6 +59,9 @@ void MWHttpForm::removeParam(const std::string &paramName) MW_NOEXCEPTION(MW_WHE
 
 std::string MWHttpForm::toString()
 {
+    if (_params.size() <= 0) {
+        return "";
+    }
     std::string paramUrl;
     auto end = --_params.end();
     for (auto iter = _params.begin(); iter != _params.end(); ++iter)

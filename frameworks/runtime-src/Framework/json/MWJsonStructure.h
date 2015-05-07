@@ -11,6 +11,8 @@
 #include <string>
 #include <vector>
 
+#include "base/CCRef.h"
+
 MW_FRAMEWORK_BEGIN
 
 class MWJsonArray;
@@ -146,6 +148,15 @@ public:
      * @return Return json array of key.
      */
     MWJsonArray *getJsonArray(const std::string &key) const;
+    
+    /**
+     * Get any object of the specified key.
+     *
+     * @param key Key to consult.
+     *
+     * @return Return object of key.
+     */
+    MWObject *getObject(const std::string &key) const;
     
     /**
      * Remove value of the specified key.
@@ -342,6 +353,15 @@ public:
      * @return Specified value.
      */
     MWJsonArray *getJsonArrayAt(MW_UINT index);
+    
+    /**
+     * Get any object at specified index.
+     *
+     * @param index Index to consult.
+     *
+     * @return Specified value.
+     */
+    MWObject *getObjectAt(MW_UINT index);
     
     /**
      * Remove the object at specified index.

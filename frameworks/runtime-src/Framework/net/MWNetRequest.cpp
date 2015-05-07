@@ -19,7 +19,7 @@ MWNetRequest *MWNetRequest::create(const std::string &protocolId, const std::str
 
 bool MWNetRequest::init(const std::string &protocolId, const std::string &body)
 {
-    if (protocolId.size() <= 0 || body.size() <= 0) {
+    if (protocolId.size() <= 0) {
         return false;
     }
     

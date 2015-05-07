@@ -86,7 +86,11 @@ void MWHttpPostService::onHttpRequestCompleted(HttpClient *client, HttpResponse 
     if (!response->isSucceed())
     {
 //        CCLOG("Response failed. Error: %s", response->getErrorBuffer());
-        auto pResponse = MWNetResponse::create(pUserRequest->getProtocolId(), response->getErrorBuffer(), pUserRequest);
+        string error = "unknown error occured.";
+        if (response->getErrorBuffer() && strlen(response->getErrorBuffer()) > 0) {
+            error = response->getErrorBuffer();
+        }
+        auto pResponse = MWNetResponse::create(pUserRequest->getProtocolId(), error, pUserRequest);
         MWNetCenter::getInstance()->dispatchFailedMessage(pResponse);
         // retained once when sending request, so release it here.
         pUserRequest->release();
@@ -108,7 +112,7 @@ void MWHttpPostService::onHttpRequestCompleted(HttpClient *client, HttpResponse 
 MWHttpForm *MWHttpPostService::_createForm(const std::string &body)
 {
     CCASSERT(_strategy, "A transfer rule is required!");
-    std::map<std::string, std::string> params = _strategy->transferParameters();
+    std::map<std::string, std::string> params = _strategy->transferParameters(body);
     // Put parameters to the form.
     MWHttpForm *pForm = MWHttpForm::create();
     for (auto &pair : params) {

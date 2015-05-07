@@ -29,7 +29,7 @@ public:
      *
      * @return The mapping of your transfer parameters in http.
      */
-    virtual std::map<std::string, std::string> transferParameters() = 0;
+    virtual std::map<std::string, std::string> transferParameters(const std::string &body) = 0;
 };
 
 MW_FRAMEWORK_END

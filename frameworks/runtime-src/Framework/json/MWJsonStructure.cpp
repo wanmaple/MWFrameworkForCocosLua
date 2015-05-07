@@ -3,6 +3,8 @@
 #include "MWJsonParser.h"
 #include "MWJsonFormatter.h"
 
+using namespace cocos2d;
+
 MW_FRAMEWORK_BEGIN
 
 /** JsonObject implementation **/
@@ -101,6 +103,11 @@ void MWJsonObject::putJsonArray(const std::string &key, MWJsonArray *value)
 MWJsonArray *MWJsonObject::getJsonArray(const std::string &key) const
 {
     return dynamic_cast<MWJsonArray*>(_dataHolder->objectForKey(key));
+}
+
+MWObject *MWJsonObject::getObject(const std::string &key) const
+{
+    return static_cast<MWObject *>(_dataHolder->objectForKey(key));
 }
 
 void MWJsonObject::remove(const std::string &key)
@@ -284,6 +291,11 @@ void MWJsonArray::insertJsonArray(MWJsonArray *value, MW_UINT index)
 MWJsonArray *MWJsonArray::getJsonArrayAt(MW_UINT index)
 {
     return dynamic_cast<MWJsonArray*>(_dataHolder->objectAtIndex(index));
+}
+
+MWObject *MWJsonArray::getObjectAt(unsigned int index)
+{
+    return static_cast<MWObject *>(_dataHolder->objectAtIndex(index));
 }
 
 void MWJsonArray::removeAt(MW_UINT index)

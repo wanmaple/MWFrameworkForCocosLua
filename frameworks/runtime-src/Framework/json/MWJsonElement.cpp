@@ -45,6 +45,11 @@ const char *MWJsonBoolean::stringValue()
     }
 }
 
+string MWJsonBoolean::toString()
+{
+    return this->stringValue();
+}
+
 MWJsonNumber *MWJsonNumber::create(double value)
 {
     auto pElement = new (nothrow) MWJsonNumber(value);
@@ -82,6 +87,11 @@ const char *MWJsonNumber::stringValue()
     return str.c_str();
 }
 
+string MWJsonNumber::toString()
+{
+    return this->stringValue();
+}
+
 MWJsonString *MWJsonString::create(const string &value)
 {
     auto pElement = new (nothrow) MWJsonString(value);
@@ -117,6 +127,11 @@ double MWJsonString::numberValue()
 const char *MWJsonString::stringValue()
 {
     return _val.c_str();
+}
+
+string MWJsonString::toString()
+{
+    return _val;
 }
 
 MW_FRAMEWORK_END

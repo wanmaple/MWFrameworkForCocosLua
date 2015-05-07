@@ -6,6 +6,8 @@
 
 #include "mwframework.h"
 
+#include "TestScene.h"
+
 using namespace CocosDenshion;
 
 USING_NS_CC;
@@ -38,73 +40,19 @@ bool AppDelegate::applicationDidFinishLaunching()
     lua_State* L = engine->getLuaStack()->getLuaState();
     lua_module_register(L);
     
-    auto pScene = Scene::create();
-    auto pLayer = LayerColor::create(Color4B(255, 0, 0, 200));
-    auto pZip = mwframework::MWZipData::createWithExistingFile("res/493.zip");
-    pZip->beginUnzip();
-    auto pGif = mwframework::MWGifSprite::createWithRawData(pZip->getCompressedFileData("493.gif"));
-    pZip->endUnzip();
-    pGif->setPosition(Director::getInstance()->getWinSize().width * 0.5, Director::getInstance()->getWinSize().height * 0.5);
-    pGif->setSpeedRatio(1.0f);
-    pGif->setScale(2.5f, 2.5f);
-    pLayer->addChild(pGif);
-    auto pGif2 = mwframework::MWGifSprite::createWithFile("res/GIF/483.gif");
-    pGif2->setPosition(Director::getInstance()->getWinSize().width * 0.3, Director::getInstance()->getWinSize().height * 0.3);
-    pGif2->setSpeedRatio(1.0f);
-    pGif2->setScale(2.5f, 2.5f);
-    pLayer->addChild(pGif2);
-    auto pGif3 = mwframework::MWGifSprite::createWithFile("res/GIF/484.gif");
-    pGif3->setPosition(Director::getInstance()->getWinSize().width * 0.7, Director::getInstance()->getWinSize().height * 0.3);
-    pGif3->setSpeedRatio(1.0f);
-    pGif3->setScale(2.5f, 2.5f);
-    pLayer->addChild(pGif3);
-    auto gifZip = mwframework::MWZipData::createWithExistingFile("res/GIF/pokemon_gif5.rc");
-    gifZip->beginUnzip();
-    auto data = gifZip->getCompressedFileData("487_o.gif", "7ujm,lp-");
-    gifZip->endUnzip();
-    auto pGif4 = mwframework::MWGifSprite::createWithRawData(data);
-    pGif4->setPosition(Director::getInstance()->getWinSize().width * 0.5, Director::getInstance()->getWinSize().height * 0.85);
-    pGif4->setSpeedRatio(1.0f);
-    pGif4->setScale(2.5f, 2.5f);
-    pLayer->addChild(pGif4);
-    pScene->addChild(pLayer);
-    Director::getInstance()->runWithScene(pScene);
-    
-    mwframework::MWIOUtils::getInstance()->createDirectory("res/aa/bb/cc");
-    CCLOG("%s", mwframework::MWIOUtils::getInstance()->resourcePath("res").c_str());
-    mwframework::MWIOUtils::getInstance()->createFile("res/aa/bb/cc/111.txt");
-    mwframework::MWIOUtils::getInstance()->writeDataToFile("abcdefg", 7, "res/aa/bb/cc/111.txt");
-    CCLOG("%d   %d", mwframework::MWIOUtils::getInstance()->fileExists("res/aa/bb/cc/111.txt"), mwframework::MWIOUtils::getInstance()->fileExists("res/aa"));
-    
-    auto newZip = mwframework::MWZipData::createWithNewFile("res/temp.zip");
-    newZip->beginZip();
-    newZip->zipNewFile("aaa.gif", mwframework::MWIOUtils::getInstance()->getDataFromFile("res/GIF/150.gif"));
-    newZip->endZip();
-    newZip->beginUnzip();
-    auto newData = newZip->getCompressedFileData("aaa.gif");
-    newZip->endUnzip();
-    auto pNewGif = mwframework::MWGifSprite::createWithRawData(newData);
-    pNewGif->setScale(2.5f, 2.5f);
-    pNewGif->setPosition(200, 200);
-    pLayer->addChild(pNewGif);
-    
-    auto pSvg = mwframework::MWSvgSprite::createWithFile("res/tiger.svg", 111111);
-    pSvg->setVectorScale(2.0f);
-    pSvg->setPosition(Director::getInstance()->getWinSize().width * 0.5, Director::getInstance()->getWinSize().height * 0.5);
-    pLayer->addChild(pSvg);
+    auto pTestScene = TestScene::create();
+    Director::getInstance()->runWithScene(pTestScene);
     
     Director::getInstance()->getScheduler()->schedule([this] (float dt) {
         printf("Used memory: %lf MB\n", mwframework::MWSystemHelper::getInstance()->getCurrentUsedMemory());
     }, this, 5.0f, CC_REPEAT_FOREVER, 0.0f, false, "MEMORY_SCHEDULER");
-    
-    return true;
 
     // If you want to use Quick-Cocos2d-X, please uncomment below code
     // register_all_quick_manual(L);
 
-    if (engine->executeScriptFile("src/main.lua")) {
-        return false;
-    }
+//    if (engine->executeScriptFile("src/main.lua")) {
+//        return false;
+//    }
 
     return true;
 }
