@@ -48,6 +48,7 @@ protected:
     bool initWithFile(const std::string &file);
     
     sqlite3 *_db;
+    std::string _keyName;
 };
 
 MW_FRAMEWORK_END

@@ -13,6 +13,7 @@ MWSqliteDb::~MWSqliteDb()
 {
     if (_db)
     {
+        g_dbCache.removeObjectForKey(_keyName);
         sqlite3_close(_db);
     }
 }
@@ -40,6 +41,7 @@ MWSqliteDb *MWSqliteDb::openDb(const std::string &dbPath)
 bool MWSqliteDb::initWithFile(const std::string &file)
 {
     int res = sqlite3_open(file.c_str(), &_db);
+    _keyName = file;
     if (res == SQLITE_OK)
     {
         return true;
