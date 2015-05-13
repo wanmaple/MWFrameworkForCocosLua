@@ -24,6 +24,13 @@ public:
     ~MWSystemHelper();
     
     /**
+     * Get the current timestamp of ms unit.
+     *
+     * @param content The content to copy.
+     */
+    MW_ULONG millisecondsNow();
+    
+    /**
      * Copy the content to the system paste board.
      *
      * @param content The content to copy.

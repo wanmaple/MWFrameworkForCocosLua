@@ -11,8 +11,7 @@
 
 MW_FRAMEWORK_BEGIN
 
-class MWGameView;
-class MWGameScene;
+class MWViewController;
 
 class MW_INTERFACE MWViewSegueDelegate
 {
@@ -22,15 +21,15 @@ public:
     /**
      * Define how to initialize the view before loading a view controller.
      */
-    virtual void viewReadyToSegue(MWGameView *view) = 0;
+    virtual void viewReadyToSegue(MWViewController *controller) = 0;
     /**
      * What to do after loading a view controller.
      */
-    virtual void viewDidSegue(MWGameScene *scene) = 0;
+    virtual void viewDidSegue(MWViewController *controller) = 0;
     /**
      * What to do after unloading a view controller.
      */
-    virtual void viewDidSegueBack(MWGameScene *scene) = 0;
+    virtual void viewDidSegueBack(MWViewController *controller) = 0;
 };
 
 /**
@@ -46,9 +45,9 @@ public:
      */
     static MWViewSegue *create();
     
-    virtual void viewReadyToSegue(MWGameView *view) override;
-    virtual void viewDidSegue(MWGameScene *scene) override;
-    virtual void viewDidSegueBack(MWGameScene *scene) override;
+    virtual void viewReadyToSegue(MWViewController *controller) override;
+    virtual void viewDidSegue(MWViewController *controller) override;
+    virtual void viewDidSegueBack(MWViewController *controller) override;
     
 protected:
     bool init();

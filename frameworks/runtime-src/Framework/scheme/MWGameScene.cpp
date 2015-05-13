@@ -192,14 +192,14 @@ void MWGameScene::loadViewController(mwframework::MWViewController *controller, 
     // initialize the view
     MWViewSegue *pSegue = controller->segue();
     if (pSegue) {
-        pSegue->viewReadyToSegue(controller->view());
+        pSegue->viewReadyToSegue(controller);
     }
     controller->viewDidLoad();
     this->addChild(controller->view());
     _viewControllers->setObjectForKey(identifier, controller);
     // what to do after the loading
     if (pSegue) {
-        pSegue->viewDidSegue(this);
+        pSegue->viewDidSegue(controller);
     }
     
     this->detectMemory();
@@ -218,7 +218,7 @@ void MWGameScene::unloadViewController(mwframework::MWViewController *controller
         // what to do after the unloading
         MWViewSegue *pSegue = controller->segue();
         if (pSegue) {
-            pSegue->viewDidSegueBack(this);
+            pSegue->viewDidSegueBack(controller);
         }
         _viewControllers->removeObjectForKey(controller->getIdentifier());
     }

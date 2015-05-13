@@ -30,9 +30,9 @@ bool MWViewSegue::init()
     return true;
 }
 
-void MWViewSegue::viewReadyToSegue(mwframework::MWGameView *view)
+void MWViewSegue::viewReadyToSegue(MWViewController *controller)
 {
-    if (!view) {
+    if (!controller) {
         CCLOG("Invalid view parameter.");
         return;
     }
@@ -40,9 +40,9 @@ void MWViewSegue::viewReadyToSegue(mwframework::MWGameView *view)
 #if MW_ENABLE_SCRIPT_BINDING
     if (_scriptType == kScriptTypeLua) {
         auto pParams = MWArrayList::create();
-        pParams->appendObject(view);
+        pParams->appendObject(controller);
         auto pParamTypes = MWArrayList::create();
-        pParamTypes->appendObject(__String::create("mw.GameView"));
+        pParamTypes->appendObject(__String::create("mw.ViewController"));
         MWLuaUtils::getInstance()->executePeertableFunction(this, "viewReadyToSegue", pParams, pParamTypes, false);
     } else if (_scriptType == kScriptTypeJavascript) {
         // js todo
@@ -50,9 +50,9 @@ void MWViewSegue::viewReadyToSegue(mwframework::MWGameView *view)
 #endif
 }
 
-void MWViewSegue::viewDidSegue(mwframework::MWGameScene *scene)
+void MWViewSegue::viewDidSegue(MWViewController *controller)
 {
-    if (!scene) {
+    if (!controller) {
         CCLOG("Invalid scene parameter.");
         return;
     }
@@ -60,9 +60,9 @@ void MWViewSegue::viewDidSegue(mwframework::MWGameScene *scene)
 #if MW_ENABLE_SCRIPT_BINDING
     if (_scriptType == kScriptTypeLua) {
         auto pParams = MWArrayList::create();
-        pParams->appendObject(scene);
+        pParams->appendObject(controller);
         auto pParamTypes = MWArrayList::create();
-        pParamTypes->appendObject(__String::create("mw.GameScene"));
+        pParamTypes->appendObject(__String::create("mw.ViewController"));
         MWLuaUtils::getInstance()->executePeertableFunction(this, "viewDidSegue", pParams, pParamTypes, false);
     } else if (_scriptType == kScriptTypeJavascript) {
         // js todo
@@ -70,9 +70,9 @@ void MWViewSegue::viewDidSegue(mwframework::MWGameScene *scene)
 #endif
 }
 
-void MWViewSegue::viewDidSegueBack(mwframework::MWGameScene *scene)
+void MWViewSegue::viewDidSegueBack(MWViewController *controller)
 {
-    if (!scene) {
+    if (!controller) {
         CCLOG("Invalid scene parameter.");
         return;
     }
@@ -80,9 +80,9 @@ void MWViewSegue::viewDidSegueBack(mwframework::MWGameScene *scene)
 #if MW_ENABLE_SCRIPT_BINDING
     if (_scriptType == kScriptTypeLua) {
         auto pParams = MWArrayList::create();
-        pParams->appendObject(scene);
+        pParams->appendObject(controller);
         auto pParamTypes = MWArrayList::create();
-        pParamTypes->appendObject(__String::create("mw.GameScene"));
+        pParamTypes->appendObject(__String::create("mw.ViewController"));
         MWLuaUtils::getInstance()->executePeertableFunction(this, "viewDidSegueBack", pParams, pParamTypes, false);
     } else if (_scriptType == kScriptTypeJavascript) {
         // js todo

@@ -19,6 +19,13 @@ MWSystemHelper::~MWSystemHelper()
     CC_SAFE_DELETE(_strategy);
 }
 
+MW_ULONG MWSystemHelper::millisecondsNow()
+{
+    timeval now;
+    gettimeofday(&now, nullptr);
+    return now.tv_sec * 1000 + now.tv_usec / 1000;
+}
+
 void MWSystemHelper::copyToPasteBoard(const std::string &content)
 {
     if (_strategy) {

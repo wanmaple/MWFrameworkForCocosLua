@@ -33,6 +33,7 @@ bool MWViewController::init(MWViewSegue *segue)
 MWViewController::MWViewController()
 : _scene(nullptr)
 , _view(nullptr)
+, _segue(nullptr)
 , _identifer()
 {
 }

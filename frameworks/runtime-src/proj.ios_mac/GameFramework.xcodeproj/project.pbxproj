@@ -1511,7 +1511,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(SRCROOT)/../../runtime-src/Framework/net/http/curl/prebuilt/ios",
-					"/Users/Maple/Documents/MWFramework2.0/frameworks/runtime-src/Framework/protobuf/protobuf_lib/lib",
+					"$(SRCROOT)/../../runtime-src/Framework/protobuf/protobuf_lib/lib",
 				);
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1537,7 +1537,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(SRCROOT)/../../runtime-src/Framework/net/http/curl/prebuilt/ios",
-					"/Users/Maple/Documents/MWFramework2.0/frameworks/runtime-src/Framework/protobuf/protobuf_lib/lib",
+					"$(SRCROOT)/../../runtime-src/Framework/protobuf/protobuf_lib/lib",
 				);
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
