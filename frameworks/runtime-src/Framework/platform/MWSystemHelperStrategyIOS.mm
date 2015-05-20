@@ -28,7 +28,7 @@ double MWSystemHelperStrategyIos::getCurrentUsedMemory()
         return -1;
     }
     
-    return taskInfo.resident_size / 1024.0f / 1024.0f;
+    return (double) taskInfo.resident_size / 1024.0f / 1024.0f;
 }
 
 MW_FRAMEWORK_END
