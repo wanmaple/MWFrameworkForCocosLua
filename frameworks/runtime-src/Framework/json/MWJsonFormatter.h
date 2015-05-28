@@ -8,7 +8,6 @@
 #define __JSON_JSONFORMATTER__
 
 #include "../base/mwbase.h"
-#include "libjson/libjson.h"
 #include <string>
 
 MW_FRAMEWORK_BEGIN
@@ -33,9 +32,9 @@ public:
     std::string format(cocos2d::Ref *json, bool isPretty = false);
     
 private:
-    JSONNODE *formatToJsonNode(cocos2d::Ref *json);
-    JSONNODE *formatJsonObjectToJsonNode(MWJsonObject *json);
-    JSONNODE *formatJsonArrayToJsonNode(MWJsonArray *json);
+    void *formatToJsonNode(cocos2d::Ref *json);
+    void *formatJsonObjectToJsonNode(MWJsonObject *json);
+    void *formatJsonArrayToJsonNode(MWJsonArray *json);
 };
 
 MW_FRAMEWORK_END

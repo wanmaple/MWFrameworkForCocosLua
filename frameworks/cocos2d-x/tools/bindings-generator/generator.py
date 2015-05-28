@@ -673,6 +673,7 @@ class NativeClass(object):
             self.target_class_name = re.sub('^' + generator.remove_prefix, '', registration_name)
         else:
             self.target_class_name = registration_name
+        # print >> sys.stderr, registration_name
         self.namespaced_class_name = get_namespaced_name(cursor)
         self.namespace_name        = get_namespace_name(cursor)
         self.parse()
@@ -980,7 +981,7 @@ class Generator(object):
     def get_class_or_rename_class(self, class_name):
 
         if self.rename_classes.has_key(class_name):
-            # print >> sys.stderr, "will rename %s to %s" % (method_name, self.rename_functions[class_name][method_name])
+            print >> sys.stderr, "will rename %s to %s" % (class_name, self.rename_classes[class_name])
             return self.rename_classes[class_name]
         return class_name
 
@@ -1100,6 +1101,14 @@ class Generator(object):
         self.impl_file.close()
         self.head_file.close()
         self.doc_file.close()
+
+        # add by wx
+        tmp = open(implfilepath)
+        alltext = tmp.read().replace('mw.MW', 'mw.').replace('"MW', '"')
+        tmp.close()
+        tmp = open(implfilepath, "w")
+        tmp.write(alltext)
+        tmp.close()
 
     def _pretty_print(self, diagnostics):
         print("====\nErrors in parsing headers:")

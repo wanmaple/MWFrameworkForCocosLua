@@ -39,10 +39,6 @@ public:
     static MWGameScene *createWithParams(MWDictionary *params);
     
     /**
-     * MWGameScene constructor.
-     */
-    MWGameScene();
-    /**
      * MWGameScene destructor.
      */
     virtual ~MWGameScene();
@@ -114,6 +110,8 @@ public:
     
 protected:
     virtual bool init(MWDictionary *params = nullptr);
+    
+    MWGameScene();
     
     void detectMemory();
     void checkMemory(float dt);

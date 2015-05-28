@@ -1,0 +1,14 @@
+
+--------------------------------
+-- @module MWViewSegue
+-- @extend MWObject,MWViewSegueDelegate
+-- @parent_module mw
+
+--------------------------------
+-- Create a view segue.<br>
+-- return MWViewSegue instance which is autoreleased.
+-- @function [parent=#MWViewSegue] create 
+-- @param self
+-- @return MWViewSegue#MWViewSegue ret (return value: mw.MWViewSegue)
+        
+return nil

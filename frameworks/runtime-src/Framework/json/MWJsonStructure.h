@@ -23,10 +23,6 @@ class MW_DLL MWJsonObject : public MWObject
     friend class MWJsonFormatter;
 public:
     /**
-     * JsonObject constructor
-     */
-    MWJsonObject();
-    /**
      * JsonObject destructor
      */
     ~MWJsonObject();
@@ -199,6 +195,8 @@ public:
 protected:
     bool init();
     
+    MWJsonObject();
+    
     MWDictionary *_dataHolder;
 };
 
@@ -206,10 +204,6 @@ class MW_DLL MWJsonArray : public MWObject
 {
     friend class MWJsonFormatter;
 public:
-    /**
-     * JsonArray constructor
-     */
-    MWJsonArray();
     /**
      * JsonArray destructor
      */
@@ -396,6 +390,8 @@ public:
     
 protected:
     bool init();
+    
+    MWJsonArray();
     
     MWArrayList *_dataHolder;
 };

@@ -9,6 +9,12 @@ MW_FRAMEWORK_BEGIN
 
 static MWDictionary g_dbCache;
 
+MWSqliteDb::MWSqliteDb()
+: _db(nullptr)
+{
+    
+}
+
 MWSqliteDb::~MWSqliteDb()
 {
     if (_db)

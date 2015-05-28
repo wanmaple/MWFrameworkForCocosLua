@@ -24,7 +24,7 @@ MWException::MWException(int errCode, const char *msg)
     
 }
 
-const char *MWException::what() const _NOEXCEPT
+const char *MWException::what() const
 {
     char buffer[1024];
     sprintf(buffer, "Error message: %s\tError code: %d", _errorMsg.c_str(), _errorCode);

@@ -29,10 +29,7 @@
 #include "texture/svg/MWSvgSprite.h"
 
 // json.
-#include "json/MWJsonElement.h"
 #include "json/MWJsonStructure.h"
-#include "json/MWJsonFormatter.h"
-#include "json/MWJsonParser.h"
 
 // utils
 #include "utils/MWUUIDGenerator.h"
@@ -56,6 +53,7 @@
 // lua related.
 #if MW_ENABLE_SCRIPT_BINDING
 #include "lua/MWLuaUtils.h"
+#include "lua/auto/lua_mwframework_auto.hpp"
 #endif
 
 #endif

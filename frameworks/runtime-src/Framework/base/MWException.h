@@ -14,7 +14,7 @@
 
 MW_FRAMEWORK_BEGIN
 
-class MW_DLL MWException : public MWObject, public std::exception
+class MW_DLL MWException : public MWObject
 {
 public:
     /**
@@ -46,10 +46,7 @@ public:
         return _errorCode;
     }
     
-    /**
-     * std::exception overrides.
-     */
-    virtual const char *what() const _NOEXCEPT override;
+    const char *what() const;
     
 protected:
     int _errorCode;

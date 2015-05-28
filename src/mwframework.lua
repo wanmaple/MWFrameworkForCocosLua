@@ -1,0 +1,8 @@
+require "framework.class"
+require "framework.luaclass"
+require "framework.bit"
+require "framework.system"
+require "framework.baseclasses"
+require "framework.basic"
+require "framework.model"
+require "framework.notifier"

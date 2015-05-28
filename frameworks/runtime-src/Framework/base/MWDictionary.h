@@ -105,7 +105,7 @@ public:
     }
     
     // overload []
-    cocos2d::Ref *operator[](const std::string &key) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
+//    cocos2d::Ref *operator[](const std::string &key) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
     
     /**
      * ICloneable overrides.

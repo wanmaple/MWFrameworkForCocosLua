@@ -31,16 +31,14 @@ public:
     static MWGameView *create();
     
     /**
-     * MWGameView constructor.
-     */
-    MWGameView();
-    /**
      * MWGameView destructor.
      */
     virtual ~MWGameView();
     
 protected:
     bool init();
+    
+    MWGameView();
 };
 
 MW_FRAMEWORK_END

@@ -220,6 +220,42 @@ MW_UINT MWArrayList::lastIndexOfObject(double obj)
     return -1;
 }
 
+MW_UINT MWArrayList::lastIndexOfObject(bool obj)
+{
+    __Bool *pBool = nullptr;
+    // Be aware of reverse order of unsigned types.
+    for (MW_UINT i = this->count() - 1; (int)i >= 0; --i) {
+        pBool = dynamic_cast<__Bool*>(_innerVector[i]);
+        if (pBool && pBool->getValue() == obj) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+MW_UINT MWArrayList::lastIndexOfObject(const std::string &obj)
+{
+    __String *pStr = nullptr;
+    // Be aware of reverse order of unsigned types.
+    for (MW_UINT i = this->count() - 1; (int)i >= 0; --i) {
+        pStr = dynamic_cast<__String*>(_innerVector[i]);
+        if (pStr && string(pStr->getCString()) == obj) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+MW_UINT MWArrayList::lastIndexOfObject(cocos2d::Ref *obj)
+{
+    for (MW_UINT i = this->count() - 1; (int)i >= 0; --i) {
+        if (_innerVector[i] == obj) {
+            return i;
+        }
+    }
+    return -1;
+}
+
 bool MWArrayList::removeObject(double obj)
 {
     __Double *pNum = nullptr;
@@ -289,10 +325,10 @@ void MWArrayList::clear()
     _innerVector.clear();
 }
 
-Ref *MWArrayList::operator[](int index) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION)
-{
-    return this->objectAtIndex(index);
-}
+//Ref *MWArrayList::operator[](int index) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION)
+//{
+//    return this->objectAtIndex(index);
+//}
 
 MWArrayList *MWArrayList::clone()
 {

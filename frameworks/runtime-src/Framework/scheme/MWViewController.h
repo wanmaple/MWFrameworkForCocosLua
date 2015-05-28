@@ -47,10 +47,6 @@ public:
     static MWViewController *create(MWViewSegue *segue = nullptr);
     
     /**
-     * MWViewController constructor.
-     */
-    MWViewController();
-    /**
      * MWViewController destructor.
      */
     virtual ~MWViewController();
@@ -99,6 +95,8 @@ public:
     
 protected:
     virtual bool init(MWViewSegue *segue);
+    
+    MWViewController();
     
     MWGameScene *_scene;
     MWGameView *_view;
