@@ -54,6 +54,7 @@
 #if MW_ENABLE_SCRIPT_BINDING
 #include "lua/MWLuaUtils.h"
 #include "lua/auto/lua_mwframework_auto.hpp"
+#include "lua/manual/lua_mwframework_manual.hpp"
 #endif
 
 #endif

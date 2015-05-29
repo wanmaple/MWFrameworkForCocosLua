@@ -25,47 +25,29 @@
 -- @param self
         
 --------------------------------
--- @overload self, string, bool         
--- @overload self, string, double         
--- @overload self, string, string         
--- @overload self, string, cc.Ref         
--- @function [parent=#MWDictionary] setObjectForKey
+-- Overload methods to set new value to the specified key.<br>
+-- note If the key doesn't exist, it will generate a new pair to the map.<br>
+-- param key Dictionary key.<br>
+-- param val Dictionary value.
+-- @function [parent=#MWDictionary] setObjectForKey 
 -- @param self
 -- @param #string key
 -- @param #cc.Ref val
-
---------------------------------
--- Whether the map is empty?
--- @function [parent=#MWDictionary] empty 
--- @param self
--- @return bool#bool ret (return value: bool)
         
 --------------------------------
--- 
+-- Get the value of the specified key, it will throw an exception if the key doesn't exist.<br>
+-- param key Dictionary key to consult.<br>
+-- return Dictionary value.
 -- @function [parent=#MWDictionary] objectForKey 
 -- @param self
 -- @param #string key
 -- @return Ref#Ref ret (return value: cc.Ref)
         
 --------------------------------
--- ICloneable overrides.
--- @function [parent=#MWDictionary] clone 
+-- Whether the map is empty?
+-- @function [parent=#MWDictionary] empty 
 -- @param self
--- @return MWDictionary#MWDictionary ret (return value: mw.MWDictionary)
-        
---------------------------------
--- 
--- @function [parent=#MWDictionary] booleanForKey 
--- @param self
--- @param #string key
 -- @return bool#bool ret (return value: bool)
-        
---------------------------------
--- 
--- @function [parent=#MWDictionary] stringForKey 
--- @param self
--- @param #string key
--- @return string#string ret (return value: string)
         
 --------------------------------
 -- Whether the map contains the specified key?
@@ -75,13 +57,10 @@
 -- @return bool#bool ret (return value: bool)
         
 --------------------------------
--- Get the value of the specified key, it will throw an exception if the key doesn't exist.<br>
--- param key Dictionary key to consult.<br>
--- return Dictionary value.
--- @function [parent=#MWDictionary] numberForKey 
+-- ICloneable overrides.
+-- @function [parent=#MWDictionary] clone 
 -- @param self
--- @param #string key
--- @return double#double ret (return value: double)
+-- @return MWDictionary#MWDictionary ret (return value: mw.MWDictionary)
         
 --------------------------------
 -- Create a dictionary structure.<br>

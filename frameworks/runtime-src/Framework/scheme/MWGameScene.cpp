@@ -140,17 +140,17 @@ void MWGameScene::onExitTransitionDidStart()
 
 void MWGameScene::addParameter(const std::string &key, double param)
 {
-    _params->setObjectForKey(key, param);
+    _params->setObjectForKey(key, __Double::create(param));
 }
 
 void MWGameScene::addParameter(const std::string &key, bool param)
 {
-    _params->setObjectForKey(key, param);
+    _params->setObjectForKey(key, __Bool::create(param));
 }
 
 void MWGameScene::addParameter(const std::string &key, const std::string &param)
 {
-    _params->setObjectForKey(key, param);
+    _params->setObjectForKey(key, __String::create(param));
 }
 
 void MWGameScene::addParameter(const std::string &key, cocos2d::Ref *param)
@@ -160,17 +160,17 @@ void MWGameScene::addParameter(const std::string &key, cocos2d::Ref *param)
 
 double MWGameScene::getNumberParameter(const std::string &key) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION)
 {
-    return _params->numberForKey(key);
+    return static_cast<__Double *>(_params->objectForKey(key))->getValue();
 }
 
 bool MWGameScene::getBooleanParameter(const std::string &key) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION)
 {
-    return _params->booleanForKey(key);
+    return static_cast<__Bool *>(_params->objectForKey(key))->getValue();
 }
 
 std::string MWGameScene::getStringParameter(const std::string &key) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION)
 {
-    return _params->stringForKey(key);
+    return static_cast<__String *>(_params->objectForKey(key))->getCString();
 }
 
 cocos2d::Ref *MWGameScene::getRefParameter(const std::string &key) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION)

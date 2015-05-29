@@ -28,11 +28,11 @@ public:
     std::string getPackagePath();
     
     /**
-     * Set lua search paths.
+     * Add new lua search paths.
      *
      * @param paths Set lua search paths.
      */
-    void setPackagePaths(const std::vector<std::string> &paths);
+    void addPackagePaths(const std::vector<std::string> &paths);
     
     /**
      * Execute a lua script.

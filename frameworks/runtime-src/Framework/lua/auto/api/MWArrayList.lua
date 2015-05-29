@@ -11,15 +11,15 @@
 -- @return unsigned int#unsigned int ret (return value: unsigned int)
         
 --------------------------------
--- @overload self, bool, unsigned int         
--- @overload self, double, unsigned int         
--- @overload self, string, unsigned int         
--- @overload self, cc.Ref, unsigned int         
--- @function [parent=#MWArrayList] setObjectAtIndex
+-- Overload methods to set new value at the specified index.<br>
+-- note If the index is out of range, it will throw an exception.<br>
+-- param val List value.<br>
+-- param index List index.
+-- @function [parent=#MWArrayList] setObjectAtIndex 
 -- @param self
 -- @param #cc.Ref val
 -- @param #unsigned int index
-
+        
 --------------------------------
 -- Remove object at specified index, you will get a false if the index is out of range.<br>
 -- param key List index to remove.<br>
@@ -30,38 +30,50 @@
 -- @return bool#bool ret (return value: bool)
         
 --------------------------------
--- @overload self, bool         
--- @overload self, double         
--- @overload self, string         
--- @overload self, cc.Ref         
--- @function [parent=#MWArrayList] appendObject
+-- Overload methods to append value to the list.<br>
+-- param val List value to append.
+-- @function [parent=#MWArrayList] appendObject 
 -- @param self
 -- @param #cc.Ref val
-
+        
 --------------------------------
--- @overload self, bool         
--- @overload self, double         
--- @overload self, string         
--- @overload self, cc.Ref         
--- @function [parent=#MWArrayList] lastIndexOfObject
+-- Overload methods to get the last index of the specified value.<br>
+-- note It will return -1 if it's not found.<br>
+-- param obj Object to consult.<br>
+-- return Consult result.
+-- @function [parent=#MWArrayList] lastIndexOfObject 
 -- @param self
 -- @param #cc.Ref obj
 -- @return unsigned int#unsigned int ret (return value: unsigned int)
-
+        
 --------------------------------
--- @overload self, bool         
--- @overload self, double         
--- @overload self, string         
--- @overload self, cc.Ref         
--- @function [parent=#MWArrayList] indexOfObject
+-- Overload methods to get the first index of the specified value.<br>
+-- note It will return -1 if it's not found.<br>
+-- param obj Object to consult.<br>
+-- return Consult result.
+-- @function [parent=#MWArrayList] indexOfObject 
 -- @param self
 -- @param #cc.Ref obj
 -- @return unsigned int#unsigned int ret (return value: unsigned int)
-
+        
 --------------------------------
--- Clear all objects.
--- @function [parent=#MWArrayList] clear 
+-- Overload methods to insert the value before the specified index.<br>
+-- note If the index is out of range, it will throw an exception.<br>
+-- param val List value to add.<br>
+-- param index List index to insert.
+-- @function [parent=#MWArrayList] insertObjectAtIndex 
 -- @param self
+-- @param #cc.Ref val
+-- @param #unsigned int index
+        
+--------------------------------
+-- Overload methods to remove specified object in the list.<br>
+-- param obj Object to remove.<br>
+-- return Remove result.
+-- @function [parent=#MWArrayList] removeObject 
+-- @param self
+-- @param #cc.Ref obj
+-- @return bool#bool ret (return value: bool)
         
 --------------------------------
 -- ICloneable overrides.
@@ -70,47 +82,9 @@
 -- @return MWArrayList#MWArrayList ret (return value: mw.MWArrayList)
         
 --------------------------------
--- @overload self, bool, unsigned int         
--- @overload self, double, unsigned int         
--- @overload self, string, unsigned int         
--- @overload self, cc.Ref, unsigned int         
--- @function [parent=#MWArrayList] insertObjectAtIndex
+-- Clear all objects.
+-- @function [parent=#MWArrayList] clear 
 -- @param self
--- @param #cc.Ref val
--- @param #unsigned int index
-
---------------------------------
--- Get the value at the specified index, it will throw an exception if the key doesn't exist.<br>
--- param index List index.<br>
--- return List value at the index.
--- @function [parent=#MWArrayList] numberAtIndex 
--- @param self
--- @param #unsigned int index
--- @return double#double ret (return value: double)
-        
---------------------------------
--- @overload self, bool         
--- @overload self, double         
--- @overload self, string         
--- @overload self, cc.Ref         
--- @function [parent=#MWArrayList] removeObject
--- @param self
--- @param #cc.Ref obj
--- @return bool#bool ret (return value: bool)
-
---------------------------------
--- 
--- @function [parent=#MWArrayList] booleanAtIndex 
--- @param self
--- @param #unsigned int index
--- @return bool#bool ret (return value: bool)
-        
---------------------------------
--- 
--- @function [parent=#MWArrayList] stringAtIndex 
--- @param self
--- @param #unsigned int index
--- @return string#string ret (return value: string)
         
 --------------------------------
 -- Whether the list is empty?
@@ -119,7 +93,9 @@
 -- @return bool#bool ret (return value: bool)
         
 --------------------------------
--- 
+-- Get the value at the specified index, it will throw an exception if the key doesn't exist.<br>
+-- param index List index.<br>
+-- return List value at the index.
 -- @function [parent=#MWArrayList] objectAtIndex 
 -- @param self
 -- @param #unsigned int index

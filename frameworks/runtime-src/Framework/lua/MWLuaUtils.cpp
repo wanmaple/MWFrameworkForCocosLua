@@ -32,7 +32,7 @@ std::string MWLuaUtils::getPackagePath()
     return path;
 }
 
-void MWLuaUtils::setPackagePaths(const std::vector<std::string> &paths)
+void MWLuaUtils::addPackagePaths(const std::vector<std::string> &paths)
 {
     if (g_defaultPackagePath.size() <= 0)
     {
@@ -205,6 +205,13 @@ bool MWLuaUtils::hasFunction(void *userdata, const std::string &functionName)
 
 void *MWLuaUtils::executeFunction(MWArrayList *params, MWArrayList *paramTypes, bool hasReturnValue)
 {
+    if (!params) {
+        params = MWArrayList::create();
+    }
+    if (!paramTypes) {
+        paramTypes = MWArrayList::create();
+    }
+    
     auto pEngine = LuaEngine::getInstance();
     lua_State *pState = pEngine->getLuaStack()->getLuaState();
     

@@ -1,5 +1,5 @@
 /******************************
- Description: Segue provides a way how to initialize the game view when loading a view controller.
+ Description: Segue provides a way how to handle the game view when loading or unloading a view controller.
  Author: M.Wan
  Date: 4/13/2015
  ******************************/

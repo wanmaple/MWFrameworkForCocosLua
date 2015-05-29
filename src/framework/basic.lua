@@ -68,15 +68,6 @@ function FallInRandom(numerator, denominator)
 	return randomNum <= numerator
 end
 
--- check whether a rect contains a point.
-function ContainsPoint(rect, pos)
-	return pos.x >= rect.x and pos.x <= rect.x + rect.width and pos.y >= rect.y and pos.y <= rect.y + rect.height
-end
-
-function PositionEquals(pos1, pos2)
-	return pos1.x == pos2.x and pos1.y == pos2.y
-end
-
 -- return an array which contains all UTF-8 substrings from a string, from the first character.
 function GenerateAllUTF8Substrings(text)
 	if type(text) ~= "string" then
@@ -116,28 +107,10 @@ function CreateAnimation(frameName, frameCount, timeline, seperator)
 		local frame = cc.SpriteFrameCache:getInstance():getSpriteFrame(frameName .. seperator .. tostring(i) .. ".png")
 		table.insert(frames, frame)
 	end
-	table.insert(frames, cc.SpriteFrameCache:getInstance():getSpriteFrame(frameName .. seperator .. 1 .. ".png"))
 	local animation = cc.Animation:createWithSpriteFrames(frames, timeline)
 	local animate = cc.Animate:create(animation)
 
 	return animate
-end
-
--- add frames to the cache
-function LoadSpriteFrames(frames)
-	for i = 1, #frames, 2 do
-		log(string.format("Load sprite frame: %s", frames[i]))
-		cc.SpriteFrameCache:getInstance():addSpriteFrames(frames[i], frames[i + 1])
-	end
-end
-
--- remove frames
-function RemoveSpriteFrames(frames)	
-	for i = 1, #frames, 2 do
-		log(string.format("Remove sprite frame: %s", frames[i]))
-		cc.SpriteFrameCache:getInstance():removeSpriteFramesFromFile(frames[i])
-		cc.SpriteFrameCache:getInstance():removeSpriteFramesFromTexture(frames[i + 1])
-	end
 end
 
 -- use coroutine to run multiple actions

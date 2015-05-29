@@ -30,7 +30,7 @@ string MWObject::toString()
     stringstream ss;
     ss << typeid(this).name();
     ss << "\t0x";
-    ss << (MW_ULONG)this;
+    ss << string(__String::createWithFormat("%x", (MW_ULONG)this)->getCString());
     return ss.str();
 }
 

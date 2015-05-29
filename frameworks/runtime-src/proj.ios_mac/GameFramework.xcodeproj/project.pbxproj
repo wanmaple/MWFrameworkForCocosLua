@@ -134,6 +134,7 @@
 		F5DDB3301AFB393400642E89 /* TestSvgViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5DDB32E1AFB393400642E89 /* TestSvgViewController.cpp */; };
 		F5DDB3331AFB39EB00642E89 /* TestHttpViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5DDB3311AFB39EB00642E89 /* TestHttpViewController.cpp */; };
 		F5ECA03C1B16CBE000C6023A /* lua_mwframework_auto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5ECA01E1B16CBE000C6023A /* lua_mwframework_auto.cpp */; };
+		F5ECA0421B180D4500C6023A /* lua_mwframework_manual.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5ECA0401B180D4500C6023A /* lua_mwframework_manual.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -432,6 +433,8 @@
 		F5DDB3321AFB39EB00642E89 /* TestHttpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestHttpViewController.h; sourceTree = "<group>"; };
 		F5ECA01E1B16CBE000C6023A /* lua_mwframework_auto.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lua_mwframework_auto.cpp; sourceTree = "<group>"; };
 		F5ECA01F1B16CBE000C6023A /* lua_mwframework_auto.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lua_mwframework_auto.hpp; sourceTree = "<group>"; };
+		F5ECA0401B180D4500C6023A /* lua_mwframework_manual.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lua_mwframework_manual.cpp; sourceTree = "<group>"; };
+		F5ECA0411B180D4500C6023A /* lua_mwframework_manual.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lua_mwframework_manual.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -659,6 +662,7 @@
 			isa = PBXGroup;
 			children = (
 				F5ECA0001B16CBE000C6023A /* auto */,
+				F5ECA03F1B180D4500C6023A /* manual */,
 				33C73FF21A7F1BED0057DA34 /* MWLuaUtils.cpp */,
 				33C73FF31A7F1BED0057DA34 /* MWLuaUtils.h */,
 			);
@@ -1096,6 +1100,15 @@
 			path = auto;
 			sourceTree = "<group>";
 		};
+		F5ECA03F1B180D4500C6023A /* manual */ = {
+			isa = PBXGroup;
+			children = (
+				F5ECA0401B180D4500C6023A /* lua_mwframework_manual.cpp */,
+				F5ECA0411B180D4500C6023A /* lua_mwframework_manual.hpp */,
+			);
+			path = manual;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1333,6 +1346,7 @@
 				33B78CB91A790DF9003FC84B /* MWDictionary.cpp in Sources */,
 				F535359D1AB448FD00EF7298 /* MWNetRequest.cpp in Sources */,
 				F53535AD1AB455AE00EF7298 /* MWNetCenter.cpp in Sources */,
+				F5ECA0421B180D4500C6023A /* lua_mwframework_manual.cpp in Sources */,
 				33BC56371A7B933000EBCA2A /* MWQueue.cpp in Sources */,
 				33250DCF1A91E39A00D1668B /* JSONIterators.cpp in Sources */,
 				33250DD51A91E39A00D1668B /* JSONValidator.cpp in Sources */,

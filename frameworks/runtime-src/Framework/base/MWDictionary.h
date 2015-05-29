@@ -54,9 +54,6 @@ public:
      * @param key Dictionary key.
      * @param val Dictionary value.
      */
-    void setObjectForKey(const std::string &key, double val);
-    void setObjectForKey(const std::string &key, bool val);
-    void setObjectForKey(const std::string &key, const std::string &val);
     void setObjectForKey(const std::string &key, cocos2d::Ref *val);
     
     /**
@@ -66,9 +63,6 @@ public:
      *
      * @return Dictionary value.
      */
-    double numberForKey(const std::string &key) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
-    bool booleanForKey(const std::string &key) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
-    std::string stringForKey(const std::string &key) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
     cocos2d::Ref *objectForKey(const std::string &key) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
     
     /**

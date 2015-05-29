@@ -2,6 +2,7 @@ cc.FileUtils:getInstance():addSearchPath("src")
 cc.FileUtils:getInstance():addSearchPath("res")
 
 require "cocos.init"
+require "mwframework"
 
 -- for CCLuaEngine traceback
 local function __G__TRACKBACK__(msg)
@@ -30,7 +31,7 @@ function Game:init()
         director:setOpenGLView(glview)
     end
 
-    glview:setDesignResolutionSize(960, 640, cc.ResolutionPolicy.NO_BORDER)
+    glview:setDesignResolutionSize(900, 640, cc.ResolutionPolicy.NO_BORDER)
 
     --turn on display FPS
     director:setDisplayStats(true)
@@ -40,20 +41,8 @@ function Game:init()
 end
 
 function Game:run()
-    local scene = mw.GameScene:create()
-    local layer = cc.Layer:create()
-    scene:addChild(layer)
-
-    local pZip = mw.ZipData:createWithExistingFile("res/493.zip")
-    pZip:beginUnzip()
-    local pGif = mw.GifSprite:createWithRawData(pZip:getCompressedFileData("493.gif"))
-    pZip:endUnzip()
-    pGif:setPosition(winSize.width * 0.5, winSize.height * 0.5)
-    pGif:setScale(2)
-    pGif:setSpeedRatio(1.5)
-    layer:addChild(pGif)
-
-    cc.Director:getInstance():runWithScene(scene)
+    require "scenes/TestScene"
+    ReplaceScene(TestScene, { STRING = "abc", NUMBER = 123, BOOLEAN = true, REF = mw.ArrayList:create() })
 end
 
 function Game:start()

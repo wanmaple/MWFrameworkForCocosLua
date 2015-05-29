@@ -40,21 +40,17 @@ bool AppDelegate::applicationDidFinishLaunching()
     lua_State* L = engine->getLuaStack()->getLuaState();
     lua_module_register(L);
     
-//    auto pTestScene = TestScene::create();
-//    Director::getInstance()->runWithScene(pTestScene);
-//    
-//    Director::getInstance()->getScheduler()->schedule([this] (float dt) {
-//        printf("Used memory: %lf MB\n", mwframework::MWSystemHelper::getInstance()->getCurrentUsedMemory());
-//    }, this, 5.0f, CC_REPEAT_FOREVER, 0.0f, false, "MEMORY_SCHEDULER");
-
-    // If you want to use Quick-Cocos2d-X, please uncomment below code
-    // register_all_quick_manual(L);
-    
+#if MW_ENABLE_SCRIPT_BINDING
     register_all_mwframework(L);
+    register_all_mwframework_manual(L);
+    
+//    std::vector<std::string> paths = { "./src/?.lua" };
+//    mwframework::MWLuaUtils::getInstance()->addPackagePaths(paths);
 
     if (engine->executeScriptFile("src/main.lua")) {
         return false;
     }
+#endif
 
     return true;
 }

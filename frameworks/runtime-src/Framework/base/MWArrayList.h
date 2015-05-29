@@ -42,9 +42,6 @@ public:
      *
      * @param val List value to append.
      */
-    void appendObject(double val);
-    void appendObject(bool val);
-    void appendObject(const std::string &val);
     void appendObject(cocos2d::Ref *val);
     
     /**
@@ -54,9 +51,6 @@ public:
      * @param val List value.
      * @param index List index.
      */
-    void setObjectAtIndex(double val, MW_UINT index) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
-    void setObjectAtIndex(bool val, MW_UINT index) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
-    void setObjectAtIndex(const std::string &val, MW_UINT index) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
     void setObjectAtIndex(cocos2d::Ref *val, MW_UINT index) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
     
     /**
@@ -66,9 +60,6 @@ public:
      * @param val List value to add.
      * @param index List index to insert.
      */
-    void insertObjectAtIndex(double val, MW_UINT index) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
-    void insertObjectAtIndex(bool val, MW_UINT index) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
-    void insertObjectAtIndex(const std::string &val, MW_UINT index) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
     void insertObjectAtIndex(cocos2d::Ref *val, MW_UINT index) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
     
     /**
@@ -78,9 +69,6 @@ public:
      *
      * @return List value at the index.
      */
-    double numberAtIndex(MW_UINT index) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
-    bool booleanAtIndex(MW_UINT index) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
-    std::string stringAtIndex(MW_UINT index) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
     cocos2d::Ref *objectAtIndex(MW_UINT index) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
     
     /**
@@ -91,9 +79,6 @@ public:
      *
      * @return Consult result.
      */
-    MW_UINT indexOfObject(double obj);
-    MW_UINT indexOfObject(bool obj);
-    MW_UINT indexOfObject(const std::string &obj);
     MW_UINT indexOfObject(cocos2d::Ref *obj);
     /**
      * Overload methods to get the last index of the specified value.
@@ -103,9 +88,6 @@ public:
      *
      * @return Consult result.
      */
-    MW_UINT lastIndexOfObject(double obj);
-    MW_UINT lastIndexOfObject(bool obj);
-    MW_UINT lastIndexOfObject(const std::string &obj);
     MW_UINT lastIndexOfObject(cocos2d::Ref *obj);
     
     /**
@@ -115,9 +97,6 @@ public:
      *
      * @return Remove result.
      */
-    bool removeObject(double obj);
-    bool removeObject(bool obj);
-    bool removeObject(const std::string &obj);
     bool removeObject(cocos2d::Ref *obj);
     /**
      * Remove object at specified index, you will get a false if the index is out of range.

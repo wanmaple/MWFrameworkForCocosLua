@@ -1,6 +1,6 @@
 #include "base/ccConfig.h"
-#ifndef __mwframework_h__
-#define __mwframework_h__
+#ifndef __mwframework_manual_h__
+#define __mwframework_manual_h__
 
 #ifdef __cplusplus
 extern "C" {
@@ -10,7 +10,14 @@ extern "C" {
 }
 #endif
 
-int register_all_mwframework(lua_State* tolua_S);
+int register_all_mwframework_manual(lua_State *tolua_S);
+
+
+
+
+
+
+
 
 
 

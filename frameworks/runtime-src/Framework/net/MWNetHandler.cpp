@@ -1,6 +1,7 @@
 #include "MWNetHandler.h"
 
 #include "cocos2d.h"
+#include "MWNetResponse.h"
 #if MW_ENABLE_SCRIPT_BINDING
 #include "../lua/MWLuaUtils.h"
 #endif
@@ -29,7 +30,7 @@ void MWNetHandler::handleSuccessfulMessage(mwframework::MWNetResponse *response)
         MWArrayList *pParams = MWArrayList::create();
         pParams->appendObject(response);
         MWArrayList *pParamTypes = MWArrayList::create();
-        pParamTypes->appendObject("mw.NetResponse");
+        pParamTypes->appendObject(__String::create("mw.NetResponse"));
         MWLuaUtils::getInstance()->executePeertableFunction(this, "handleSuccessfulMessage", pParams, pParamTypes, false);
     } else if (_scriptType == kScriptTypeJavascript) {
         // todo js
@@ -44,7 +45,7 @@ void MWNetHandler::handleFailedMessage(mwframework::MWNetResponse *response)
         MWArrayList *pParams = MWArrayList::create();
         pParams->appendObject(response);
         MWArrayList *pParamTypes = MWArrayList::create();
-        pParamTypes->appendObject("mw.NetResponse");
+        pParamTypes->appendObject(__String::create("mw.NetResponse"));
         MWLuaUtils::getInstance()->executePeertableFunction(this, "handleFailedMessage", pParams, pParamTypes, false);
     } else if (_scriptType == kScriptTypeJavascript) {
         // todo js

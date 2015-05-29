@@ -141,45 +141,6 @@ int lua_mwframework_MWBinaryData_isValid(lua_State* tolua_S)
 
     return 0;
 }
-int lua_mwframework_MWBinaryData_create(lua_State* tolua_S)
-{
-    int argc = 0;
-    bool ok  = true;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_Error tolua_err;
-#endif
-
-#if COCOS2D_DEBUG >= 1
-    if (!tolua_isusertable(tolua_S,1,"mw.BinaryData",0,&tolua_err)) goto tolua_lerror;
-#endif
-
-    argc = lua_gettop(tolua_S) - 1;
-
-    if (argc == 2)
-    {
-        void* arg0;
-        unsigned long arg1;
-        #pragma warning NO CONVERSION TO NATIVE FOR void*
-		ok = false;
-        ok &= luaval_to_ulong(tolua_S, 3, &arg1, "mw.BinaryData:create");
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWBinaryData_create'", nullptr);
-            return 0;
-        }
-        mwframework::MWBinaryData* ret = mwframework::MWBinaryData::create(arg0, arg1);
-        object_to_luaval<mwframework::MWBinaryData>(tolua_S, "mw.BinaryData",(mwframework::MWBinaryData*)ret);
-        return 1;
-    }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d\n ", "mw.BinaryData:create",argc, 2);
-    return 0;
-#if COCOS2D_DEBUG >= 1
-    tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWBinaryData_create'.",&tolua_err);
-#endif
-    return 0;
-}
 static int lua_mwframework_MWBinaryData_finalize(lua_State* tolua_S)
 {
     printf("luabindings: finalizing LUA object (MWBinaryData)");
@@ -215,7 +176,6 @@ int lua_register_mwframework_MWBinaryData(lua_State* tolua_S)
 
     tolua_beginmodule(tolua_S,"BinaryData");
         tolua_function(tolua_S,"isValid",lua_mwframework_MWBinaryData_isValid);
-        tolua_function(tolua_S,"create", lua_mwframework_MWBinaryData_create);
     tolua_endmodule(tolua_S);
     std::string typeName = typeid(mwframework::MWBinaryData).name();
     g_luaType[typeName] = "mw.BinaryData";
@@ -589,97 +549,6 @@ int lua_mwframework_MWDictionary_setObjectForKey(lua_State* tolua_S)
     int argc = 0;
     mwframework::MWDictionary* cobj = nullptr;
     bool ok  = true;
-#if COCOS2D_DEBUG >= 1
-    tolua_Error tolua_err;
-#endif
-
-#if COCOS2D_DEBUG >= 1
-    if (!tolua_isusertype(tolua_S,1,"mw.Dictionary",0,&tolua_err)) goto tolua_lerror;
-#endif
-    cobj = (mwframework::MWDictionary*)tolua_tousertype(tolua_S,1,0);
-#if COCOS2D_DEBUG >= 1
-    if (!cobj)
-    {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWDictionary_setObjectForKey'", nullptr);
-        return 0;
-    }
-#endif
-    argc = lua_gettop(tolua_S)-1;
-    do{
-        if (argc == 2) {
-            std::string arg0;
-            ok &= luaval_to_std_string(tolua_S, 2,&arg0, "mw.Dictionary:setObjectForKey");
-
-            if (!ok) { break; }
-            bool arg1;
-            ok &= luaval_to_boolean(tolua_S, 3,&arg1, "mw.Dictionary:setObjectForKey");
-
-            if (!ok) { break; }
-            cobj->setObjectForKey(arg0, arg1);
-            return 0;
-        }
-    }while(0);
-    ok  = true;
-    do{
-        if (argc == 2) {
-            std::string arg0;
-            ok &= luaval_to_std_string(tolua_S, 2,&arg0, "mw.Dictionary:setObjectForKey");
-
-            if (!ok) { break; }
-            double arg1;
-            ok &= luaval_to_number(tolua_S, 3,&arg1, "mw.Dictionary:setObjectForKey");
-
-            if (!ok) { break; }
-            cobj->setObjectForKey(arg0, arg1);
-            return 0;
-        }
-    }while(0);
-    ok  = true;
-    do{
-        if (argc == 2) {
-            std::string arg0;
-            ok &= luaval_to_std_string(tolua_S, 2,&arg0, "mw.Dictionary:setObjectForKey");
-
-            if (!ok) { break; }
-            std::string arg1;
-            ok &= luaval_to_std_string(tolua_S, 3,&arg1, "mw.Dictionary:setObjectForKey");
-
-            if (!ok) { break; }
-            cobj->setObjectForKey(arg0, arg1);
-            return 0;
-        }
-    }while(0);
-    ok  = true;
-    do{
-        if (argc == 2) {
-            std::string arg0;
-            ok &= luaval_to_std_string(tolua_S, 2,&arg0, "mw.Dictionary:setObjectForKey");
-
-            if (!ok) { break; }
-            cocos2d::Ref* arg1;
-            ok &= luaval_to_object<cocos2d::Ref>(tolua_S, 3, "cc.Ref",&arg1);
-
-            if (!ok) { break; }
-            cobj->setObjectForKey(arg0, arg1);
-            return 0;
-        }
-    }while(0);
-    ok  = true;
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n",  "mw.Dictionary:setObjectForKey",argc, 2);
-    return 0;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWDictionary_setObjectForKey'.",&tolua_err);
-#endif
-
-    return 0;
-}
-int lua_mwframework_MWDictionary_empty(lua_State* tolua_S)
-{
-    int argc = 0;
-    mwframework::MWDictionary* cobj = nullptr;
-    bool ok  = true;
 
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
@@ -695,29 +564,34 @@ int lua_mwframework_MWDictionary_empty(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWDictionary_empty'", nullptr);
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWDictionary_setObjectForKey'", nullptr);
         return 0;
     }
 #endif
 
     argc = lua_gettop(tolua_S)-1;
-    if (argc == 0) 
+    if (argc == 2) 
     {
+        std::string arg0;
+        cocos2d::Ref* arg1;
+
+        ok &= luaval_to_std_string(tolua_S, 2,&arg0, "mw.Dictionary:setObjectForKey");
+
+        ok &= luaval_to_object<cocos2d::Ref>(tolua_S, 3, "cc.Ref",&arg1);
         if(!ok)
         {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWDictionary_empty'", nullptr);
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWDictionary_setObjectForKey'", nullptr);
             return 0;
         }
-        bool ret = cobj->empty();
-        tolua_pushboolean(tolua_S,(bool)ret);
-        return 1;
+        cobj->setObjectForKey(arg0, arg1);
+        return 0;
     }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.Dictionary:empty",argc, 0);
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.Dictionary:setObjectForKey",argc, 2);
     return 0;
 
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWDictionary_empty'.",&tolua_err);
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWDictionary_setObjectForKey'.",&tolua_err);
 #endif
 
     return 0;
@@ -772,7 +646,7 @@ int lua_mwframework_MWDictionary_objectForKey(lua_State* tolua_S)
 
     return 0;
 }
-int lua_mwframework_MWDictionary_clone(lua_State* tolua_S)
+int lua_mwframework_MWDictionary_empty(lua_State* tolua_S)
 {
     int argc = 0;
     mwframework::MWDictionary* cobj = nullptr;
@@ -792,7 +666,7 @@ int lua_mwframework_MWDictionary_clone(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWDictionary_clone'", nullptr);
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWDictionary_empty'", nullptr);
         return 0;
     }
 #endif
@@ -802,119 +676,19 @@ int lua_mwframework_MWDictionary_clone(lua_State* tolua_S)
     {
         if(!ok)
         {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWDictionary_clone'", nullptr);
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWDictionary_empty'", nullptr);
             return 0;
         }
-        mwframework::MWDictionary* ret = cobj->clone();
-        object_to_luaval<mwframework::MWDictionary>(tolua_S, "mw.Dictionary",(mwframework::MWDictionary*)ret);
-        return 1;
-    }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.Dictionary:clone",argc, 0);
-    return 0;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWDictionary_clone'.",&tolua_err);
-#endif
-
-    return 0;
-}
-int lua_mwframework_MWDictionary_booleanForKey(lua_State* tolua_S)
-{
-    int argc = 0;
-    mwframework::MWDictionary* cobj = nullptr;
-    bool ok  = true;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_Error tolua_err;
-#endif
-
-
-#if COCOS2D_DEBUG >= 1
-    if (!tolua_isusertype(tolua_S,1,"mw.Dictionary",0,&tolua_err)) goto tolua_lerror;
-#endif
-
-    cobj = (mwframework::MWDictionary*)tolua_tousertype(tolua_S,1,0);
-
-#if COCOS2D_DEBUG >= 1
-    if (!cobj) 
-    {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWDictionary_booleanForKey'", nullptr);
-        return 0;
-    }
-#endif
-
-    argc = lua_gettop(tolua_S)-1;
-    if (argc == 1) 
-    {
-        std::string arg0;
-
-        ok &= luaval_to_std_string(tolua_S, 2,&arg0, "mw.Dictionary:booleanForKey");
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWDictionary_booleanForKey'", nullptr);
-            return 0;
-        }
-        bool ret = cobj->booleanForKey(arg0);
+        bool ret = cobj->empty();
         tolua_pushboolean(tolua_S,(bool)ret);
         return 1;
     }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.Dictionary:booleanForKey",argc, 1);
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.Dictionary:empty",argc, 0);
     return 0;
 
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWDictionary_booleanForKey'.",&tolua_err);
-#endif
-
-    return 0;
-}
-int lua_mwframework_MWDictionary_stringForKey(lua_State* tolua_S)
-{
-    int argc = 0;
-    mwframework::MWDictionary* cobj = nullptr;
-    bool ok  = true;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_Error tolua_err;
-#endif
-
-
-#if COCOS2D_DEBUG >= 1
-    if (!tolua_isusertype(tolua_S,1,"mw.Dictionary",0,&tolua_err)) goto tolua_lerror;
-#endif
-
-    cobj = (mwframework::MWDictionary*)tolua_tousertype(tolua_S,1,0);
-
-#if COCOS2D_DEBUG >= 1
-    if (!cobj) 
-    {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWDictionary_stringForKey'", nullptr);
-        return 0;
-    }
-#endif
-
-    argc = lua_gettop(tolua_S)-1;
-    if (argc == 1) 
-    {
-        std::string arg0;
-
-        ok &= luaval_to_std_string(tolua_S, 2,&arg0, "mw.Dictionary:stringForKey");
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWDictionary_stringForKey'", nullptr);
-            return 0;
-        }
-        std::string ret = cobj->stringForKey(arg0);
-        tolua_pushcppstring(tolua_S,ret);
-        return 1;
-    }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.Dictionary:stringForKey",argc, 1);
-    return 0;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWDictionary_stringForKey'.",&tolua_err);
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWDictionary_empty'.",&tolua_err);
 #endif
 
     return 0;
@@ -969,7 +743,7 @@ int lua_mwframework_MWDictionary_hasKey(lua_State* tolua_S)
 
     return 0;
 }
-int lua_mwframework_MWDictionary_numberForKey(lua_State* tolua_S)
+int lua_mwframework_MWDictionary_clone(lua_State* tolua_S)
 {
     int argc = 0;
     mwframework::MWDictionary* cobj = nullptr;
@@ -989,32 +763,29 @@ int lua_mwframework_MWDictionary_numberForKey(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWDictionary_numberForKey'", nullptr);
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWDictionary_clone'", nullptr);
         return 0;
     }
 #endif
 
     argc = lua_gettop(tolua_S)-1;
-    if (argc == 1) 
+    if (argc == 0) 
     {
-        std::string arg0;
-
-        ok &= luaval_to_std_string(tolua_S, 2,&arg0, "mw.Dictionary:numberForKey");
         if(!ok)
         {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWDictionary_numberForKey'", nullptr);
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWDictionary_clone'", nullptr);
             return 0;
         }
-        double ret = cobj->numberForKey(arg0);
-        tolua_pushnumber(tolua_S,(lua_Number)ret);
+        mwframework::MWDictionary* ret = cobj->clone();
+        object_to_luaval<mwframework::MWDictionary>(tolua_S, "mw.Dictionary",(mwframework::MWDictionary*)ret);
         return 1;
     }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.Dictionary:numberForKey",argc, 1);
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.Dictionary:clone",argc, 0);
     return 0;
 
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWDictionary_numberForKey'.",&tolua_err);
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWDictionary_clone'.",&tolua_err);
 #endif
 
     return 0;
@@ -1127,13 +898,10 @@ int lua_register_mwframework_MWDictionary(lua_State* tolua_S)
         tolua_function(tolua_S,"removeObjectForKey",lua_mwframework_MWDictionary_removeObjectForKey);
         tolua_function(tolua_S,"clear",lua_mwframework_MWDictionary_clear);
         tolua_function(tolua_S,"setObjectForKey",lua_mwframework_MWDictionary_setObjectForKey);
-        tolua_function(tolua_S,"empty",lua_mwframework_MWDictionary_empty);
         tolua_function(tolua_S,"objectForKey",lua_mwframework_MWDictionary_objectForKey);
-        tolua_function(tolua_S,"clone",lua_mwframework_MWDictionary_clone);
-        tolua_function(tolua_S,"booleanForKey",lua_mwframework_MWDictionary_booleanForKey);
-        tolua_function(tolua_S,"stringForKey",lua_mwframework_MWDictionary_stringForKey);
+        tolua_function(tolua_S,"empty",lua_mwframework_MWDictionary_empty);
         tolua_function(tolua_S,"hasKey",lua_mwframework_MWDictionary_hasKey);
-        tolua_function(tolua_S,"numberForKey",lua_mwframework_MWDictionary_numberForKey);
+        tolua_function(tolua_S,"clone",lua_mwframework_MWDictionary_clone);
         tolua_function(tolua_S,"create", lua_mwframework_MWDictionary_create);
     tolua_endmodule(tolua_S);
     std::string typeName = typeid(mwframework::MWDictionary).name();
@@ -1194,83 +962,44 @@ int lua_mwframework_MWArrayList_setObjectAtIndex(lua_State* tolua_S)
     int argc = 0;
     mwframework::MWArrayList* cobj = nullptr;
     bool ok  = true;
+
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
 #endif
 
+
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"mw.ArrayList",0,&tolua_err)) goto tolua_lerror;
 #endif
+
     cobj = (mwframework::MWArrayList*)tolua_tousertype(tolua_S,1,0);
+
 #if COCOS2D_DEBUG >= 1
-    if (!cobj)
+    if (!cobj) 
     {
         tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWArrayList_setObjectAtIndex'", nullptr);
         return 0;
     }
 #endif
+
     argc = lua_gettop(tolua_S)-1;
-    do{
-        if (argc == 2) {
-            bool arg0;
-            ok &= luaval_to_boolean(tolua_S, 2,&arg0, "mw.ArrayList:setObjectAtIndex");
+    if (argc == 2) 
+    {
+        cocos2d::Ref* arg0;
+        unsigned int arg1;
 
-            if (!ok) { break; }
-            unsigned int arg1;
-            ok &= luaval_to_uint32(tolua_S, 3,&arg1, "mw.ArrayList:setObjectAtIndex");
+        ok &= luaval_to_object<cocos2d::Ref>(tolua_S, 2, "cc.Ref",&arg0);
 
-            if (!ok) { break; }
-            cobj->setObjectAtIndex(arg0, arg1);
+        ok &= luaval_to_uint32(tolua_S, 3,&arg1, "mw.ArrayList:setObjectAtIndex");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWArrayList_setObjectAtIndex'", nullptr);
             return 0;
         }
-    }while(0);
-    ok  = true;
-    do{
-        if (argc == 2) {
-            double arg0;
-            ok &= luaval_to_number(tolua_S, 2,&arg0, "mw.ArrayList:setObjectAtIndex");
-
-            if (!ok) { break; }
-            unsigned int arg1;
-            ok &= luaval_to_uint32(tolua_S, 3,&arg1, "mw.ArrayList:setObjectAtIndex");
-
-            if (!ok) { break; }
-            cobj->setObjectAtIndex(arg0, arg1);
-            return 0;
-        }
-    }while(0);
-    ok  = true;
-    do{
-        if (argc == 2) {
-            std::string arg0;
-            ok &= luaval_to_std_string(tolua_S, 2,&arg0, "mw.ArrayList:setObjectAtIndex");
-
-            if (!ok) { break; }
-            unsigned int arg1;
-            ok &= luaval_to_uint32(tolua_S, 3,&arg1, "mw.ArrayList:setObjectAtIndex");
-
-            if (!ok) { break; }
-            cobj->setObjectAtIndex(arg0, arg1);
-            return 0;
-        }
-    }while(0);
-    ok  = true;
-    do{
-        if (argc == 2) {
-            cocos2d::Ref* arg0;
-            ok &= luaval_to_object<cocos2d::Ref>(tolua_S, 2, "cc.Ref",&arg0);
-
-            if (!ok) { break; }
-            unsigned int arg1;
-            ok &= luaval_to_uint32(tolua_S, 3,&arg1, "mw.ArrayList:setObjectAtIndex");
-
-            if (!ok) { break; }
-            cobj->setObjectAtIndex(arg0, arg1);
-            return 0;
-        }
-    }while(0);
-    ok  = true;
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n",  "mw.ArrayList:setObjectAtIndex",argc, 2);
+        cobj->setObjectAtIndex(arg0, arg1);
+        return 0;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.ArrayList:setObjectAtIndex",argc, 2);
     return 0;
 
 #if COCOS2D_DEBUG >= 1
@@ -1335,67 +1064,41 @@ int lua_mwframework_MWArrayList_appendObject(lua_State* tolua_S)
     int argc = 0;
     mwframework::MWArrayList* cobj = nullptr;
     bool ok  = true;
+
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
 #endif
 
+
 #if COCOS2D_DEBUG >= 1
     if (!tolua_isusertype(tolua_S,1,"mw.ArrayList",0,&tolua_err)) goto tolua_lerror;
 #endif
+
     cobj = (mwframework::MWArrayList*)tolua_tousertype(tolua_S,1,0);
+
 #if COCOS2D_DEBUG >= 1
-    if (!cobj)
+    if (!cobj) 
     {
         tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWArrayList_appendObject'", nullptr);
         return 0;
     }
 #endif
+
     argc = lua_gettop(tolua_S)-1;
-    do{
-        if (argc == 1) {
-            bool arg0;
-            ok &= luaval_to_boolean(tolua_S, 2,&arg0, "mw.ArrayList:appendObject");
+    if (argc == 1) 
+    {
+        cocos2d::Ref* arg0;
 
-            if (!ok) { break; }
-            cobj->appendObject(arg0);
+        ok &= luaval_to_object<cocos2d::Ref>(tolua_S, 2, "cc.Ref",&arg0);
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWArrayList_appendObject'", nullptr);
             return 0;
         }
-    }while(0);
-    ok  = true;
-    do{
-        if (argc == 1) {
-            double arg0;
-            ok &= luaval_to_number(tolua_S, 2,&arg0, "mw.ArrayList:appendObject");
-
-            if (!ok) { break; }
-            cobj->appendObject(arg0);
-            return 0;
-        }
-    }while(0);
-    ok  = true;
-    do{
-        if (argc == 1) {
-            std::string arg0;
-            ok &= luaval_to_std_string(tolua_S, 2,&arg0, "mw.ArrayList:appendObject");
-
-            if (!ok) { break; }
-            cobj->appendObject(arg0);
-            return 0;
-        }
-    }while(0);
-    ok  = true;
-    do{
-        if (argc == 1) {
-            cocos2d::Ref* arg0;
-            ok &= luaval_to_object<cocos2d::Ref>(tolua_S, 2, "cc.Ref",&arg0);
-
-            if (!ok) { break; }
-            cobj->appendObject(arg0);
-            return 0;
-        }
-    }while(0);
-    ok  = true;
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n",  "mw.ArrayList:appendObject",argc, 1);
+        cobj->appendObject(arg0);
+        return 0;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.ArrayList:appendObject",argc, 1);
     return 0;
 
 #if COCOS2D_DEBUG >= 1
@@ -1406,164 +1109,6 @@ int lua_mwframework_MWArrayList_appendObject(lua_State* tolua_S)
     return 0;
 }
 int lua_mwframework_MWArrayList_lastIndexOfObject(lua_State* tolua_S)
-{
-    int argc = 0;
-    mwframework::MWArrayList* cobj = nullptr;
-    bool ok  = true;
-#if COCOS2D_DEBUG >= 1
-    tolua_Error tolua_err;
-#endif
-
-#if COCOS2D_DEBUG >= 1
-    if (!tolua_isusertype(tolua_S,1,"mw.ArrayList",0,&tolua_err)) goto tolua_lerror;
-#endif
-    cobj = (mwframework::MWArrayList*)tolua_tousertype(tolua_S,1,0);
-#if COCOS2D_DEBUG >= 1
-    if (!cobj)
-    {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWArrayList_lastIndexOfObject'", nullptr);
-        return 0;
-    }
-#endif
-    argc = lua_gettop(tolua_S)-1;
-    do{
-        if (argc == 1) {
-            bool arg0;
-            ok &= luaval_to_boolean(tolua_S, 2,&arg0, "mw.ArrayList:lastIndexOfObject");
-
-            if (!ok) { break; }
-            unsigned int ret = cobj->lastIndexOfObject(arg0);
-            tolua_pushnumber(tolua_S,(lua_Number)ret);
-            return 1;
-        }
-    }while(0);
-    ok  = true;
-    do{
-        if (argc == 1) {
-            double arg0;
-            ok &= luaval_to_number(tolua_S, 2,&arg0, "mw.ArrayList:lastIndexOfObject");
-
-            if (!ok) { break; }
-            unsigned int ret = cobj->lastIndexOfObject(arg0);
-            tolua_pushnumber(tolua_S,(lua_Number)ret);
-            return 1;
-        }
-    }while(0);
-    ok  = true;
-    do{
-        if (argc == 1) {
-            std::string arg0;
-            ok &= luaval_to_std_string(tolua_S, 2,&arg0, "mw.ArrayList:lastIndexOfObject");
-
-            if (!ok) { break; }
-            unsigned int ret = cobj->lastIndexOfObject(arg0);
-            tolua_pushnumber(tolua_S,(lua_Number)ret);
-            return 1;
-        }
-    }while(0);
-    ok  = true;
-    do{
-        if (argc == 1) {
-            cocos2d::Ref* arg0;
-            ok &= luaval_to_object<cocos2d::Ref>(tolua_S, 2, "cc.Ref",&arg0);
-
-            if (!ok) { break; }
-            unsigned int ret = cobj->lastIndexOfObject(arg0);
-            tolua_pushnumber(tolua_S,(lua_Number)ret);
-            return 1;
-        }
-    }while(0);
-    ok  = true;
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n",  "mw.ArrayList:lastIndexOfObject",argc, 1);
-    return 0;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWArrayList_lastIndexOfObject'.",&tolua_err);
-#endif
-
-    return 0;
-}
-int lua_mwframework_MWArrayList_indexOfObject(lua_State* tolua_S)
-{
-    int argc = 0;
-    mwframework::MWArrayList* cobj = nullptr;
-    bool ok  = true;
-#if COCOS2D_DEBUG >= 1
-    tolua_Error tolua_err;
-#endif
-
-#if COCOS2D_DEBUG >= 1
-    if (!tolua_isusertype(tolua_S,1,"mw.ArrayList",0,&tolua_err)) goto tolua_lerror;
-#endif
-    cobj = (mwframework::MWArrayList*)tolua_tousertype(tolua_S,1,0);
-#if COCOS2D_DEBUG >= 1
-    if (!cobj)
-    {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWArrayList_indexOfObject'", nullptr);
-        return 0;
-    }
-#endif
-    argc = lua_gettop(tolua_S)-1;
-    do{
-        if (argc == 1) {
-            bool arg0;
-            ok &= luaval_to_boolean(tolua_S, 2,&arg0, "mw.ArrayList:indexOfObject");
-
-            if (!ok) { break; }
-            unsigned int ret = cobj->indexOfObject(arg0);
-            tolua_pushnumber(tolua_S,(lua_Number)ret);
-            return 1;
-        }
-    }while(0);
-    ok  = true;
-    do{
-        if (argc == 1) {
-            double arg0;
-            ok &= luaval_to_number(tolua_S, 2,&arg0, "mw.ArrayList:indexOfObject");
-
-            if (!ok) { break; }
-            unsigned int ret = cobj->indexOfObject(arg0);
-            tolua_pushnumber(tolua_S,(lua_Number)ret);
-            return 1;
-        }
-    }while(0);
-    ok  = true;
-    do{
-        if (argc == 1) {
-            std::string arg0;
-            ok &= luaval_to_std_string(tolua_S, 2,&arg0, "mw.ArrayList:indexOfObject");
-
-            if (!ok) { break; }
-            unsigned int ret = cobj->indexOfObject(arg0);
-            tolua_pushnumber(tolua_S,(lua_Number)ret);
-            return 1;
-        }
-    }while(0);
-    ok  = true;
-    do{
-        if (argc == 1) {
-            cocos2d::Ref* arg0;
-            ok &= luaval_to_object<cocos2d::Ref>(tolua_S, 2, "cc.Ref",&arg0);
-
-            if (!ok) { break; }
-            unsigned int ret = cobj->indexOfObject(arg0);
-            tolua_pushnumber(tolua_S,(lua_Number)ret);
-            return 1;
-        }
-    }while(0);
-    ok  = true;
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n",  "mw.ArrayList:indexOfObject",argc, 1);
-    return 0;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWArrayList_indexOfObject'.",&tolua_err);
-#endif
-
-    return 0;
-}
-int lua_mwframework_MWArrayList_clear(lua_State* tolua_S)
 {
     int argc = 0;
     mwframework::MWArrayList* cobj = nullptr;
@@ -1583,28 +1128,184 @@ int lua_mwframework_MWArrayList_clear(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWArrayList_clear'", nullptr);
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWArrayList_lastIndexOfObject'", nullptr);
         return 0;
     }
 #endif
 
     argc = lua_gettop(tolua_S)-1;
-    if (argc == 0) 
+    if (argc == 1) 
     {
+        cocos2d::Ref* arg0;
+
+        ok &= luaval_to_object<cocos2d::Ref>(tolua_S, 2, "cc.Ref",&arg0);
         if(!ok)
         {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWArrayList_clear'", nullptr);
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWArrayList_lastIndexOfObject'", nullptr);
             return 0;
         }
-        cobj->clear();
-        return 0;
+        unsigned int ret = cobj->lastIndexOfObject(arg0);
+        tolua_pushnumber(tolua_S,(lua_Number)ret);
+        return 1;
     }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.ArrayList:clear",argc, 0);
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.ArrayList:lastIndexOfObject",argc, 1);
     return 0;
 
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWArrayList_clear'.",&tolua_err);
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWArrayList_lastIndexOfObject'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWArrayList_indexOfObject(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWArrayList* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.ArrayList",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWArrayList*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWArrayList_indexOfObject'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 1) 
+    {
+        cocos2d::Ref* arg0;
+
+        ok &= luaval_to_object<cocos2d::Ref>(tolua_S, 2, "cc.Ref",&arg0);
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWArrayList_indexOfObject'", nullptr);
+            return 0;
+        }
+        unsigned int ret = cobj->indexOfObject(arg0);
+        tolua_pushnumber(tolua_S,(lua_Number)ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.ArrayList:indexOfObject",argc, 1);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWArrayList_indexOfObject'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWArrayList_insertObjectAtIndex(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWArrayList* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.ArrayList",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWArrayList*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWArrayList_insertObjectAtIndex'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 2) 
+    {
+        cocos2d::Ref* arg0;
+        unsigned int arg1;
+
+        ok &= luaval_to_object<cocos2d::Ref>(tolua_S, 2, "cc.Ref",&arg0);
+
+        ok &= luaval_to_uint32(tolua_S, 3,&arg1, "mw.ArrayList:insertObjectAtIndex");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWArrayList_insertObjectAtIndex'", nullptr);
+            return 0;
+        }
+        cobj->insertObjectAtIndex(arg0, arg1);
+        return 0;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.ArrayList:insertObjectAtIndex",argc, 2);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWArrayList_insertObjectAtIndex'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWArrayList_removeObject(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWArrayList* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.ArrayList",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWArrayList*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWArrayList_removeObject'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 1) 
+    {
+        cocos2d::Ref* arg0;
+
+        ok &= luaval_to_object<cocos2d::Ref>(tolua_S, 2, "cc.Ref",&arg0);
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWArrayList_removeObject'", nullptr);
+            return 0;
+        }
+        bool ret = cobj->removeObject(arg0);
+        tolua_pushboolean(tolua_S,(bool)ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.ArrayList:removeObject",argc, 1);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWArrayList_removeObject'.",&tolua_err);
 #endif
 
     return 0;
@@ -1656,98 +1357,7 @@ int lua_mwframework_MWArrayList_clone(lua_State* tolua_S)
 
     return 0;
 }
-int lua_mwframework_MWArrayList_insertObjectAtIndex(lua_State* tolua_S)
-{
-    int argc = 0;
-    mwframework::MWArrayList* cobj = nullptr;
-    bool ok  = true;
-#if COCOS2D_DEBUG >= 1
-    tolua_Error tolua_err;
-#endif
-
-#if COCOS2D_DEBUG >= 1
-    if (!tolua_isusertype(tolua_S,1,"mw.ArrayList",0,&tolua_err)) goto tolua_lerror;
-#endif
-    cobj = (mwframework::MWArrayList*)tolua_tousertype(tolua_S,1,0);
-#if COCOS2D_DEBUG >= 1
-    if (!cobj)
-    {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWArrayList_insertObjectAtIndex'", nullptr);
-        return 0;
-    }
-#endif
-    argc = lua_gettop(tolua_S)-1;
-    do{
-        if (argc == 2) {
-            bool arg0;
-            ok &= luaval_to_boolean(tolua_S, 2,&arg0, "mw.ArrayList:insertObjectAtIndex");
-
-            if (!ok) { break; }
-            unsigned int arg1;
-            ok &= luaval_to_uint32(tolua_S, 3,&arg1, "mw.ArrayList:insertObjectAtIndex");
-
-            if (!ok) { break; }
-            cobj->insertObjectAtIndex(arg0, arg1);
-            return 0;
-        }
-    }while(0);
-    ok  = true;
-    do{
-        if (argc == 2) {
-            double arg0;
-            ok &= luaval_to_number(tolua_S, 2,&arg0, "mw.ArrayList:insertObjectAtIndex");
-
-            if (!ok) { break; }
-            unsigned int arg1;
-            ok &= luaval_to_uint32(tolua_S, 3,&arg1, "mw.ArrayList:insertObjectAtIndex");
-
-            if (!ok) { break; }
-            cobj->insertObjectAtIndex(arg0, arg1);
-            return 0;
-        }
-    }while(0);
-    ok  = true;
-    do{
-        if (argc == 2) {
-            std::string arg0;
-            ok &= luaval_to_std_string(tolua_S, 2,&arg0, "mw.ArrayList:insertObjectAtIndex");
-
-            if (!ok) { break; }
-            unsigned int arg1;
-            ok &= luaval_to_uint32(tolua_S, 3,&arg1, "mw.ArrayList:insertObjectAtIndex");
-
-            if (!ok) { break; }
-            cobj->insertObjectAtIndex(arg0, arg1);
-            return 0;
-        }
-    }while(0);
-    ok  = true;
-    do{
-        if (argc == 2) {
-            cocos2d::Ref* arg0;
-            ok &= luaval_to_object<cocos2d::Ref>(tolua_S, 2, "cc.Ref",&arg0);
-
-            if (!ok) { break; }
-            unsigned int arg1;
-            ok &= luaval_to_uint32(tolua_S, 3,&arg1, "mw.ArrayList:insertObjectAtIndex");
-
-            if (!ok) { break; }
-            cobj->insertObjectAtIndex(arg0, arg1);
-            return 0;
-        }
-    }while(0);
-    ok  = true;
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n",  "mw.ArrayList:insertObjectAtIndex",argc, 2);
-    return 0;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWArrayList_insertObjectAtIndex'.",&tolua_err);
-#endif
-
-    return 0;
-}
-int lua_mwframework_MWArrayList_numberAtIndex(lua_State* tolua_S)
+int lua_mwframework_MWArrayList_clear(lua_State* tolua_S)
 {
     int argc = 0;
     mwframework::MWArrayList* cobj = nullptr;
@@ -1767,211 +1377,28 @@ int lua_mwframework_MWArrayList_numberAtIndex(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     if (!cobj) 
     {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWArrayList_numberAtIndex'", nullptr);
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWArrayList_clear'", nullptr);
         return 0;
     }
 #endif
 
     argc = lua_gettop(tolua_S)-1;
-    if (argc == 1) 
+    if (argc == 0) 
     {
-        unsigned int arg0;
-
-        ok &= luaval_to_uint32(tolua_S, 2,&arg0, "mw.ArrayList:numberAtIndex");
         if(!ok)
         {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWArrayList_numberAtIndex'", nullptr);
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWArrayList_clear'", nullptr);
             return 0;
         }
-        double ret = cobj->numberAtIndex(arg0);
-        tolua_pushnumber(tolua_S,(lua_Number)ret);
-        return 1;
-    }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.ArrayList:numberAtIndex",argc, 1);
-    return 0;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWArrayList_numberAtIndex'.",&tolua_err);
-#endif
-
-    return 0;
-}
-int lua_mwframework_MWArrayList_removeObject(lua_State* tolua_S)
-{
-    int argc = 0;
-    mwframework::MWArrayList* cobj = nullptr;
-    bool ok  = true;
-#if COCOS2D_DEBUG >= 1
-    tolua_Error tolua_err;
-#endif
-
-#if COCOS2D_DEBUG >= 1
-    if (!tolua_isusertype(tolua_S,1,"mw.ArrayList",0,&tolua_err)) goto tolua_lerror;
-#endif
-    cobj = (mwframework::MWArrayList*)tolua_tousertype(tolua_S,1,0);
-#if COCOS2D_DEBUG >= 1
-    if (!cobj)
-    {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWArrayList_removeObject'", nullptr);
+        cobj->clear();
         return 0;
     }
-#endif
-    argc = lua_gettop(tolua_S)-1;
-    do{
-        if (argc == 1) {
-            bool arg0;
-            ok &= luaval_to_boolean(tolua_S, 2,&arg0, "mw.ArrayList:removeObject");
-
-            if (!ok) { break; }
-            bool ret = cobj->removeObject(arg0);
-            tolua_pushboolean(tolua_S,(bool)ret);
-            return 1;
-        }
-    }while(0);
-    ok  = true;
-    do{
-        if (argc == 1) {
-            double arg0;
-            ok &= luaval_to_number(tolua_S, 2,&arg0, "mw.ArrayList:removeObject");
-
-            if (!ok) { break; }
-            bool ret = cobj->removeObject(arg0);
-            tolua_pushboolean(tolua_S,(bool)ret);
-            return 1;
-        }
-    }while(0);
-    ok  = true;
-    do{
-        if (argc == 1) {
-            std::string arg0;
-            ok &= luaval_to_std_string(tolua_S, 2,&arg0, "mw.ArrayList:removeObject");
-
-            if (!ok) { break; }
-            bool ret = cobj->removeObject(arg0);
-            tolua_pushboolean(tolua_S,(bool)ret);
-            return 1;
-        }
-    }while(0);
-    ok  = true;
-    do{
-        if (argc == 1) {
-            cocos2d::Ref* arg0;
-            ok &= luaval_to_object<cocos2d::Ref>(tolua_S, 2, "cc.Ref",&arg0);
-
-            if (!ok) { break; }
-            bool ret = cobj->removeObject(arg0);
-            tolua_pushboolean(tolua_S,(bool)ret);
-            return 1;
-        }
-    }while(0);
-    ok  = true;
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n",  "mw.ArrayList:removeObject",argc, 1);
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.ArrayList:clear",argc, 0);
     return 0;
 
 #if COCOS2D_DEBUG >= 1
     tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWArrayList_removeObject'.",&tolua_err);
-#endif
-
-    return 0;
-}
-int lua_mwframework_MWArrayList_booleanAtIndex(lua_State* tolua_S)
-{
-    int argc = 0;
-    mwframework::MWArrayList* cobj = nullptr;
-    bool ok  = true;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_Error tolua_err;
-#endif
-
-
-#if COCOS2D_DEBUG >= 1
-    if (!tolua_isusertype(tolua_S,1,"mw.ArrayList",0,&tolua_err)) goto tolua_lerror;
-#endif
-
-    cobj = (mwframework::MWArrayList*)tolua_tousertype(tolua_S,1,0);
-
-#if COCOS2D_DEBUG >= 1
-    if (!cobj) 
-    {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWArrayList_booleanAtIndex'", nullptr);
-        return 0;
-    }
-#endif
-
-    argc = lua_gettop(tolua_S)-1;
-    if (argc == 1) 
-    {
-        unsigned int arg0;
-
-        ok &= luaval_to_uint32(tolua_S, 2,&arg0, "mw.ArrayList:booleanAtIndex");
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWArrayList_booleanAtIndex'", nullptr);
-            return 0;
-        }
-        bool ret = cobj->booleanAtIndex(arg0);
-        tolua_pushboolean(tolua_S,(bool)ret);
-        return 1;
-    }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.ArrayList:booleanAtIndex",argc, 1);
-    return 0;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWArrayList_booleanAtIndex'.",&tolua_err);
-#endif
-
-    return 0;
-}
-int lua_mwframework_MWArrayList_stringAtIndex(lua_State* tolua_S)
-{
-    int argc = 0;
-    mwframework::MWArrayList* cobj = nullptr;
-    bool ok  = true;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_Error tolua_err;
-#endif
-
-
-#if COCOS2D_DEBUG >= 1
-    if (!tolua_isusertype(tolua_S,1,"mw.ArrayList",0,&tolua_err)) goto tolua_lerror;
-#endif
-
-    cobj = (mwframework::MWArrayList*)tolua_tousertype(tolua_S,1,0);
-
-#if COCOS2D_DEBUG >= 1
-    if (!cobj) 
-    {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWArrayList_stringAtIndex'", nullptr);
-        return 0;
-    }
-#endif
-
-    argc = lua_gettop(tolua_S)-1;
-    if (argc == 1) 
-    {
-        unsigned int arg0;
-
-        ok &= luaval_to_uint32(tolua_S, 2,&arg0, "mw.ArrayList:stringAtIndex");
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWArrayList_stringAtIndex'", nullptr);
-            return 0;
-        }
-        std::string ret = cobj->stringAtIndex(arg0);
-        tolua_pushcppstring(tolua_S,ret);
-        return 1;
-    }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.ArrayList:stringAtIndex",argc, 1);
-    return 0;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWArrayList_stringAtIndex'.",&tolua_err);
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWArrayList_clear'.",&tolua_err);
 #endif
 
     return 0;
@@ -2183,13 +1610,10 @@ int lua_register_mwframework_MWArrayList(lua_State* tolua_S)
         tolua_function(tolua_S,"appendObject",lua_mwframework_MWArrayList_appendObject);
         tolua_function(tolua_S,"lastIndexOfObject",lua_mwframework_MWArrayList_lastIndexOfObject);
         tolua_function(tolua_S,"indexOfObject",lua_mwframework_MWArrayList_indexOfObject);
-        tolua_function(tolua_S,"clear",lua_mwframework_MWArrayList_clear);
-        tolua_function(tolua_S,"clone",lua_mwframework_MWArrayList_clone);
         tolua_function(tolua_S,"insertObjectAtIndex",lua_mwframework_MWArrayList_insertObjectAtIndex);
-        tolua_function(tolua_S,"numberAtIndex",lua_mwframework_MWArrayList_numberAtIndex);
         tolua_function(tolua_S,"removeObject",lua_mwframework_MWArrayList_removeObject);
-        tolua_function(tolua_S,"booleanAtIndex",lua_mwframework_MWArrayList_booleanAtIndex);
-        tolua_function(tolua_S,"stringAtIndex",lua_mwframework_MWArrayList_stringAtIndex);
+        tolua_function(tolua_S,"clone",lua_mwframework_MWArrayList_clone);
+        tolua_function(tolua_S,"clear",lua_mwframework_MWArrayList_clear);
         tolua_function(tolua_S,"empty",lua_mwframework_MWArrayList_empty);
         tolua_function(tolua_S,"objectAtIndex",lua_mwframework_MWArrayList_objectAtIndex);
         tolua_function(tolua_S,"create", lua_mwframework_MWArrayList_create);
