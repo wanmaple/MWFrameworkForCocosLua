@@ -4030,42 +4030,6 @@ int lua_mwframework_MWGameScene_create(lua_State* tolua_S)
 #endif
     return 0;
 }
-int lua_mwframework_MWGameScene_createWithParams(lua_State* tolua_S)
-{
-    int argc = 0;
-    bool ok  = true;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_Error tolua_err;
-#endif
-
-#if COCOS2D_DEBUG >= 1
-    if (!tolua_isusertable(tolua_S,1,"mw.GameScene",0,&tolua_err)) goto tolua_lerror;
-#endif
-
-    argc = lua_gettop(tolua_S) - 1;
-
-    if (argc == 1)
-    {
-        mwframework::MWDictionary* arg0;
-        ok &= luaval_to_object<mwframework::MWDictionary>(tolua_S, 2, "mw.Dictionary",&arg0);
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWGameScene_createWithParams'", nullptr);
-            return 0;
-        }
-        mwframework::MWGameScene* ret = mwframework::MWGameScene::createWithParams(arg0);
-        object_to_luaval<mwframework::MWGameScene>(tolua_S, "mw.GameScene",(mwframework::MWGameScene*)ret);
-        return 1;
-    }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d\n ", "mw.GameScene:createWithParams",argc, 1);
-    return 0;
-#if COCOS2D_DEBUG >= 1
-    tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWGameScene_createWithParams'.",&tolua_err);
-#endif
-    return 0;
-}
 static int lua_mwframework_MWGameScene_finalize(lua_State* tolua_S)
 {
     printf("luabindings: finalizing LUA object (MWGameScene)");
@@ -4114,7 +4078,6 @@ int lua_register_mwframework_MWGameScene(lua_State* tolua_S)
         tolua_function(tolua_S,"unloadViewControllerByIdentifier",lua_mwframework_MWGameScene_unloadViewControllerByIdentifier);
         tolua_function(tolua_S,"getNumberParameter",lua_mwframework_MWGameScene_getNumberParameter);
         tolua_function(tolua_S,"create", lua_mwframework_MWGameScene_create);
-        tolua_function(tolua_S,"createWithParams", lua_mwframework_MWGameScene_createWithParams);
     tolua_endmodule(tolua_S);
     std::string typeName = typeid(mwframework::MWGameScene).name();
     g_luaType[typeName] = "mw.GameScene";

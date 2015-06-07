@@ -105,13 +105,4 @@
 -- @param self
 -- @return MWGameScene#MWGameScene ret (return value: mw.MWGameScene)
         
---------------------------------
--- Create a game scene with user params.<br>
--- param params User parameters to pass to the scene.<br>
--- return MWGameScene instance with params which is autoreleased.
--- @function [parent=#MWGameScene] createWithParams 
--- @param self
--- @param #mw.MWDictionary params
--- @return MWGameScene#MWGameScene ret (return value: mw.MWGameScene)
-        
 return nil
