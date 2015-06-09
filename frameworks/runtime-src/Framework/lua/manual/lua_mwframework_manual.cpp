@@ -86,6 +86,13 @@ MW_LOCAL int tolua_mwframework_MWGameScene_createWithParams(lua_State *tolua_S)
             goto tolua_lerror;
         }
         
+        // 1 - table
+        lua_pushnumber(tolua_S, 1);
+        lua_gettable(tolua_S, 2);
+        if (!lua_istable(tolua_S, -1)) {
+            goto tolua_lerror;
+        }
+        
         auto params = mwframework::MWDictionary::create();
         
         std::string key;
@@ -96,38 +103,34 @@ MW_LOCAL int tolua_mwframework_MWGameScene_createWithParams(lua_State *tolua_S)
             printf("%s - %s\n",
                    lua_typename(tolua_S, lua_type(tolua_S, -2)),
                    lua_typename(tolua_S, lua_type(tolua_S, -1)));
-//            cocos2d::Ref *value = nullptr;
-//            if (tolua_isnumber(tolua_S, -1, 0, &tolua_err)) {
-//                value = __Double::create(tolua_tonumber(tolua_S, -1, 0));
-//            } else if (tolua_isboolean(tolua_S, -1, 0, &tolua_err)) {
-//                value = __Bool::create(tolua_toboolean(tolua_S, -1, 0));
-//            } else if (tolua_isstring(tolua_S, -1, 0, &tolua_err)) {
-//                value = __String::create(tolua_tostring(tolua_S, -1, nullptr));
-//            } else if (tolua_isusertype(tolua_S, -1, "cc.Ref", 0, &tolua_err)) {
-//                value = (cocos2d::Ref *) tolua_tousertype(tolua_S, -1, nullptr);
-//            } else {
-//                continue;
-//            }
-//            
-//            lua_pop(tolua_S, 1);
-//            
-//            // we only consider string keys.
-//            if (tolua_isstring(tolua_S, -1, 0, &tolua_err)) {
-//                lua_pushvalue(tolua_S, -1);
-//                key = tolua_tostring(tolua_S, -1, nullptr);
-//                printf("KEY: %s\n", key.c_str());
-//                
-//                if (value) {
-//                    params->setObjectForKey(key, value);
-//                }
-//            } else {
-//                continue;
-//            }
+            cocos2d::Ref *value = nullptr;
+            if (tolua_isnumber(tolua_S, -1, 0, &tolua_err)) {
+                value = __Double::create(tolua_tonumber(tolua_S, -1, 0));
+            } else if (tolua_isboolean(tolua_S, -1, 0, &tolua_err)) {
+                value = __Bool::create(tolua_toboolean(tolua_S, -1, 0));
+            } else if (tolua_isstring(tolua_S, -1, 0, &tolua_err)) {
+                value = __String::create(tolua_tostring(tolua_S, -1, nullptr));
+            } else if (tolua_isusertype(tolua_S, -1, "cc.Ref", 0, &tolua_err)) {
+                value = static_cast<cocos2d::Ref *>(tolua_tousertype(tolua_S, -1, nullptr));
+            }
+            
+            lua_pop(tolua_S, 1);
+            
+            // we only consider string keys.
+            if (tolua_isstring(tolua_S, -1, 0, &tolua_err)) {
+                lua_pushvalue(tolua_S, -1);
+                key = tolua_tostring(tolua_S, -1, nullptr);
+                printf("KEY: %s\n", key.c_str());
+                
+                if (value) {
+                    params->setObjectForKey(key, value);
+                }
+            }
             
             lua_pop(tolua_S, 1);
         }
         
-        lua_pop(tolua_S, 1);
+        lua_pop(tolua_S, 2);
         
         auto ret = mwframework::MWGameScene::createWithParams(params);
         object_to_luaval<mwframework::MWGameScene>(tolua_S, "mw.GameScene", (mwframework::MWGameScene *) ret);

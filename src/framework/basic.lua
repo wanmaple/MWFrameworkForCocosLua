@@ -52,12 +52,7 @@ function ReplaceScene(scene, params)
 	if type(scene) == "string" then
 		scene = _G[scene]
 	end
-	local newScene = nil
-	if params and type(params) == "table" then
-		newScene = scene["createWithParams"](scene, params)
-	else
-		newScene = scene["create"](scene)
-	end
+	local newScene = scene["create"](scene, params)
 
 	local currentScene = cc.Director:getInstance():getRunningScene()
 	if currentScene then

@@ -42,7 +42,7 @@ end
 
 function Game:run()
     require "scenes/TestScene"
-    ReplaceScene(TestScene, { STRING = "abc", NUMBER = 123, BOOLEAN = true, REF = mw.ArrayList:create() })
+    ReplaceScene(TestScene, { STRING = "abc", NUMBER = 123, BOOLEAN = true, REF = mw.ArrayList:new() })
 end
 
 function Game:start()
