@@ -58,7 +58,7 @@ static int lua_mwframework_MWObject_finalize(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
     if (
-    !tolua_isusertype(tolua_S,1,"Object",0,&tolua_err) ||
+    !tolua_isusertype(tolua_S,1,"mw.Object",0,&tolua_err) ||
     !tolua_isnoobj(tolua_S,2,&tolua_err)
     )
         goto tolua_lerror;
@@ -147,7 +147,7 @@ static int lua_mwframework_MWBinaryData_finalize(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
     if (
-    !tolua_isusertype(tolua_S,1,"BinaryData",0,&tolua_err) ||
+    !tolua_isusertype(tolua_S,1,"mw.BinaryData",0,&tolua_err) ||
     !tolua_isnoobj(tolua_S,2,&tolua_err)
     )
         goto tolua_lerror;
@@ -362,7 +362,7 @@ static int lua_mwframework_MWException_finalize(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
     if (
-    !tolua_isusertype(tolua_S,1,"Exception",0,&tolua_err) ||
+    !tolua_isusertype(tolua_S,1,"mw.Exception",0,&tolua_err) ||
     !tolua_isnoobj(tolua_S,2,&tolua_err)
     )
         goto tolua_lerror;
@@ -865,7 +865,7 @@ static int lua_mwframework_MWDictionary_finalize(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
     if (
-    !tolua_isusertype(tolua_S,1,"Dictionary",0,&tolua_err) ||
+    !tolua_isusertype(tolua_S,1,"mw.Dictionary",0,&tolua_err) ||
     !tolua_isnoobj(tolua_S,2,&tolua_err)
     )
         goto tolua_lerror;
@@ -1575,7 +1575,7 @@ static int lua_mwframework_MWArrayList_finalize(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
     if (
-    !tolua_isusertype(tolua_S,1,"ArrayList",0,&tolua_err) ||
+    !tolua_isusertype(tolua_S,1,"mw.ArrayList",0,&tolua_err) ||
     !tolua_isnoobj(tolua_S,2,&tolua_err)
     )
         goto tolua_lerror;
@@ -2029,7 +2029,7 @@ static int lua_mwframework_MWQueue_finalize(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
     if (
-    !tolua_isusertype(tolua_S,1,"Queue",0,&tolua_err) ||
+    !tolua_isusertype(tolua_S,1,"mw.Queue",0,&tolua_err) ||
     !tolua_isnoobj(tolua_S,2,&tolua_err)
     )
         goto tolua_lerror;
@@ -2478,7 +2478,7 @@ static int lua_mwframework_MWStack_finalize(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
     if (
-    !tolua_isusertype(tolua_S,1,"Stack",0,&tolua_err) ||
+    !tolua_isusertype(tolua_S,1,"mw.Stack",0,&tolua_err) ||
     !tolua_isnoobj(tolua_S,2,&tolua_err)
     )
         goto tolua_lerror;
@@ -2705,7 +2705,7 @@ static int lua_mwframework_MWSystemHelper_finalize(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
     if (
-    !tolua_isusertype(tolua_S,1,"SystemHelper",0,&tolua_err) ||
+    !tolua_isusertype(tolua_S,1,"mw.SystemHelper",0,&tolua_err) ||
     !tolua_isnoobj(tolua_S,2,&tolua_err)
     )
         goto tolua_lerror;
@@ -3271,7 +3271,7 @@ static int lua_mwframework_MWIOUtils_finalize(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
     if (
-    !tolua_isusertype(tolua_S,1,"IOUtils",0,&tolua_err) ||
+    !tolua_isusertype(tolua_S,1,"mw.IOUtils",0,&tolua_err) ||
     !tolua_isnoobj(tolua_S,2,&tolua_err)
     )
         goto tolua_lerror;
@@ -4036,7 +4036,7 @@ static int lua_mwframework_MWGameScene_finalize(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
     if (
-    !tolua_isusertype(tolua_S,1,"GameScene",0,&tolua_err) ||
+    !tolua_isusertype(tolua_S,1,"mw.GameScene",0,&tolua_err) ||
     !tolua_isnoobj(tolua_S,2,&tolua_err)
     )
         goto tolua_lerror;
@@ -4326,7 +4326,7 @@ static int lua_mwframework_MWViewController_finalize(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
     if (
-    !tolua_isusertype(tolua_S,1,"ViewController",0,&tolua_err) ||
+    !tolua_isusertype(tolua_S,1,"mw.ViewController",0,&tolua_err) ||
     !tolua_isnoobj(tolua_S,2,&tolua_err)
     )
         goto tolua_lerror;
@@ -4406,7 +4406,7 @@ static int lua_mwframework_MWGameView_finalize(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
     if (
-    !tolua_isusertype(tolua_S,1,"GameView",0,&tolua_err) ||
+    !tolua_isusertype(tolua_S,1,"mw.GameView",0,&tolua_err) ||
     !tolua_isnoobj(tolua_S,2,&tolua_err)
     )
         goto tolua_lerror;
@@ -4482,7 +4482,7 @@ static int lua_mwframework_MWViewSegue_finalize(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
     if (
-    !tolua_isusertype(tolua_S,1,"ViewSegue",0,&tolua_err) ||
+    !tolua_isusertype(tolua_S,1,"mw.ViewSegue",0,&tolua_err) ||
     !tolua_isnoobj(tolua_S,2,&tolua_err)
     )
         goto tolua_lerror;
@@ -4618,56 +4618,6 @@ int lua_mwframework_MWSqliteDb_endTransaction(lua_State* tolua_S)
 
     return 0;
 }
-int lua_mwframework_MWSqliteDb_executeQuery(lua_State* tolua_S)
-{
-    int argc = 0;
-    mwframework::MWSqliteDb* cobj = nullptr;
-    bool ok  = true;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_Error tolua_err;
-#endif
-
-
-#if COCOS2D_DEBUG >= 1
-    if (!tolua_isusertype(tolua_S,1,"mw.SqliteDb",0,&tolua_err)) goto tolua_lerror;
-#endif
-
-    cobj = (mwframework::MWSqliteDb*)tolua_tousertype(tolua_S,1,0);
-
-#if COCOS2D_DEBUG >= 1
-    if (!cobj) 
-    {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWSqliteDb_executeQuery'", nullptr);
-        return 0;
-    }
-#endif
-
-    argc = lua_gettop(tolua_S)-1;
-    if (argc == 1) 
-    {
-        std::string arg0;
-
-        ok &= luaval_to_std_string(tolua_S, 2,&arg0, "mw.SqliteDb:executeQuery");
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWSqliteDb_executeQuery'", nullptr);
-            return 0;
-        }
-        mwframework::MWArrayList* ret = cobj->executeQuery(arg0);
-        object_to_luaval<mwframework::MWArrayList>(tolua_S, "mw.ArrayList",(mwframework::MWArrayList*)ret);
-        return 1;
-    }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.SqliteDb:executeQuery",argc, 1);
-    return 0;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWSqliteDb_executeQuery'.",&tolua_err);
-#endif
-
-    return 0;
-}
 int lua_mwframework_MWSqliteDb_beginTransaction(lua_State* tolua_S)
 {
     int argc = 0;
@@ -4790,7 +4740,7 @@ static int lua_mwframework_MWSqliteDb_finalize(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
     if (
-    !tolua_isusertype(tolua_S,1,"SqliteDb",0,&tolua_err) ||
+    !tolua_isusertype(tolua_S,1,"mw.SqliteDb",0,&tolua_err) ||
     !tolua_isnoobj(tolua_S,2,&tolua_err)
     )
         goto tolua_lerror;
@@ -4820,7 +4770,6 @@ int lua_register_mwframework_MWSqliteDb(lua_State* tolua_S)
     tolua_beginmodule(tolua_S,"SqliteDb");
         tolua_function(tolua_S,"executeNonQuery",lua_mwframework_MWSqliteDb_executeNonQuery);
         tolua_function(tolua_S,"endTransaction",lua_mwframework_MWSqliteDb_endTransaction);
-        tolua_function(tolua_S,"executeQuery",lua_mwframework_MWSqliteDb_executeQuery);
         tolua_function(tolua_S,"beginTransaction",lua_mwframework_MWSqliteDb_beginTransaction);
         tolua_function(tolua_S,"openDb", lua_mwframework_MWSqliteDb_openDb);
         tolua_function(tolua_S,"clearConnectionCache", lua_mwframework_MWSqliteDb_clearConnectionCache);
@@ -5256,7 +5205,7 @@ static int lua_mwframework_MWZipData_finalize(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
     if (
-    !tolua_isusertype(tolua_S,1,"ZipData",0,&tolua_err) ||
+    !tolua_isusertype(tolua_S,1,"mw.ZipData",0,&tolua_err) ||
     !tolua_isnoobj(tolua_S,2,&tolua_err)
     )
         goto tolua_lerror;
@@ -5535,7 +5484,7 @@ static int lua_mwframework_MWGifFrame_finalize(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
     if (
-    !tolua_isusertype(tolua_S,1,"GifFrame",0,&tolua_err) ||
+    !tolua_isusertype(tolua_S,1,"mw.GifFrame",0,&tolua_err) ||
     !tolua_isnoobj(tolua_S,2,&tolua_err)
     )
         goto tolua_lerror;
@@ -5918,53 +5867,6 @@ int lua_mwframework_MWGifSprite_stop(lua_State* tolua_S)
 
     return 0;
 }
-int lua_mwframework_MWGifSprite_getFrames(lua_State* tolua_S)
-{
-    int argc = 0;
-    mwframework::MWGifSprite* cobj = nullptr;
-    bool ok  = true;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_Error tolua_err;
-#endif
-
-
-#if COCOS2D_DEBUG >= 1
-    if (!tolua_isusertype(tolua_S,1,"mw.GifSprite",0,&tolua_err)) goto tolua_lerror;
-#endif
-
-    cobj = (mwframework::MWGifSprite*)tolua_tousertype(tolua_S,1,0);
-
-#if COCOS2D_DEBUG >= 1
-    if (!cobj) 
-    {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWGifSprite_getFrames'", nullptr);
-        return 0;
-    }
-#endif
-
-    argc = lua_gettop(tolua_S)-1;
-    if (argc == 0) 
-    {
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWGifSprite_getFrames'", nullptr);
-            return 0;
-        }
-        mwframework::MWArrayList* ret = cobj->getFrames();
-        object_to_luaval<mwframework::MWArrayList>(tolua_S, "mw.ArrayList",(mwframework::MWArrayList*)ret);
-        return 1;
-    }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.GifSprite:getFrames",argc, 0);
-    return 0;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWGifSprite_getFrames'.",&tolua_err);
-#endif
-
-    return 0;
-}
 int lua_mwframework_MWGifSprite_createWithFile(lua_State* tolua_S)
 {
     int argc = 0;
@@ -6079,7 +5981,7 @@ static int lua_mwframework_MWGifSprite_finalize(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
     if (
-    !tolua_isusertype(tolua_S,1,"GifSprite",0,&tolua_err) ||
+    !tolua_isusertype(tolua_S,1,"mw.GifSprite",0,&tolua_err) ||
     !tolua_isnoobj(tolua_S,2,&tolua_err)
     )
         goto tolua_lerror;
@@ -6114,7 +6016,6 @@ int lua_register_mwframework_MWGifSprite(lua_State* tolua_S)
         tolua_function(tolua_S,"resume",lua_mwframework_MWGifSprite_resume);
         tolua_function(tolua_S,"getSpeedRatio",lua_mwframework_MWGifSprite_getSpeedRatio);
         tolua_function(tolua_S,"stop",lua_mwframework_MWGifSprite_stop);
-        tolua_function(tolua_S,"getFrames",lua_mwframework_MWGifSprite_getFrames);
         tolua_function(tolua_S,"createWithFile", lua_mwframework_MWGifSprite_createWithFile);
         tolua_function(tolua_S,"createWithFrames", lua_mwframework_MWGifSprite_createWithFrames);
         tolua_function(tolua_S,"createWithRawData", lua_mwframework_MWGifSprite_createWithRawData);
@@ -6397,7 +6298,7 @@ static int lua_mwframework_MWGifFramesCache_finalize(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
     if (
-    !tolua_isusertype(tolua_S,1,"GifFramesCache",0,&tolua_err) ||
+    !tolua_isusertype(tolua_S,1,"mw.GifFramesCache",0,&tolua_err) ||
     !tolua_isnoobj(tolua_S,2,&tolua_err)
     )
         goto tolua_lerror;
@@ -6641,7 +6542,7 @@ static int lua_mwframework_MWSvgSprite_finalize(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
     if (
-    !tolua_isusertype(tolua_S,1,"SvgSprite",0,&tolua_err) ||
+    !tolua_isusertype(tolua_S,1,"mw.SvgSprite",0,&tolua_err) ||
     !tolua_isnoobj(tolua_S,2,&tolua_err)
     )
         goto tolua_lerror;
@@ -7638,7 +7539,7 @@ static int lua_mwframework_MWJsonObject_finalize(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
     if (
-    !tolua_isusertype(tolua_S,1,"JsonObject",0,&tolua_err) ||
+    !tolua_isusertype(tolua_S,1,"mw.JsonObject",0,&tolua_err) ||
     !tolua_isnoobj(tolua_S,2,&tolua_err)
     )
         goto tolua_lerror;
@@ -8846,7 +8747,7 @@ static int lua_mwframework_MWJsonArray_finalize(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
     if (
-    !tolua_isusertype(tolua_S,1,"JsonArray",0,&tolua_err) ||
+    !tolua_isusertype(tolua_S,1,"mw.JsonArray",0,&tolua_err) ||
     !tolua_isnoobj(tolua_S,2,&tolua_err)
     )
         goto tolua_lerror;
@@ -8992,7 +8893,7 @@ static int lua_mwframework_MWUUIDGenerator_finalize(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
     if (
-    !tolua_isusertype(tolua_S,1,"UUIDGenerator",0,&tolua_err) ||
+    !tolua_isusertype(tolua_S,1,"mw.UUIDGenerator",0,&tolua_err) ||
     !tolua_isnoobj(tolua_S,2,&tolua_err)
     )
         goto tolua_lerror;
@@ -9082,7 +8983,7 @@ static int lua_mwframework_MWNetHandler_finalize(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
     if (
-    !tolua_isusertype(tolua_S,1,"NetHandler",0,&tolua_err) ||
+    !tolua_isusertype(tolua_S,1,"mw.NetHandler",0,&tolua_err) ||
     !tolua_isnoobj(tolua_S,2,&tolua_err)
     )
         goto tolua_lerror;
@@ -9354,7 +9255,7 @@ static int lua_mwframework_MWNetRequest_finalize(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
     if (
-    !tolua_isusertype(tolua_S,1,"NetRequest",0,&tolua_err) ||
+    !tolua_isusertype(tolua_S,1,"mw.NetRequest",0,&tolua_err) ||
     !tolua_isnoobj(tolua_S,2,&tolua_err)
     )
         goto tolua_lerror;
@@ -9679,7 +9580,7 @@ static int lua_mwframework_MWNetResponse_finalize(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
     if (
-    !tolua_isusertype(tolua_S,1,"NetResponse",0,&tolua_err) ||
+    !tolua_isusertype(tolua_S,1,"mw.NetResponse",0,&tolua_err) ||
     !tolua_isnoobj(tolua_S,2,&tolua_err)
     )
         goto tolua_lerror;
@@ -10005,7 +9906,7 @@ static int lua_mwframework_MWNetProtocol_finalize(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
     if (
-    !tolua_isusertype(tolua_S,1,"NetProtocol",0,&tolua_err) ||
+    !tolua_isusertype(tolua_S,1,"mw.NetProtocol",0,&tolua_err) ||
     !tolua_isnoobj(tolua_S,2,&tolua_err)
     )
         goto tolua_lerror;
@@ -10643,7 +10544,7 @@ static int lua_mwframework_MWNetCenter_finalize(lua_State* tolua_S)
 #if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
     if (
-    !tolua_isusertype(tolua_S,1,"NetCenter",0,&tolua_err) ||
+    !tolua_isusertype(tolua_S,1,"mw.NetCenter",0,&tolua_err) ||
     !tolua_isnoobj(tolua_S,2,&tolua_err)
     )
         goto tolua_lerror;

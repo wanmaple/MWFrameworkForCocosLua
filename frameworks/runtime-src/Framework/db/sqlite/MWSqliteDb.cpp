@@ -28,20 +28,19 @@ MWSqliteDb *MWSqliteDb::openDb(const std::string &dbPath)
 {
     std::string filePath = FileUtils::getInstance()->fullPathForFilename(dbPath.c_str());
     // check from cache.
-    MWSqliteDb *pSqlite = (MWSqliteDb*)g_dbCache.objectForKey(filePath);
-    if (pSqlite)
-    {
-        return pSqlite;
+    MWSqliteDb *pSqlite = nullptr;
+    if (g_dbCache.hasKey(filePath)) {
+        return (MWSqliteDb*)g_dbCache.objectForKey(filePath);
+    } else {
+        pSqlite = new (nothrow) MWSqliteDb();
+        if (pSqlite && pSqlite->initWithFile(filePath)) {
+            pSqlite->autorelease();
+            g_dbCache.setObjectForKey(filePath, pSqlite);
+            return pSqlite;
+        }
+        CC_SAFE_RELEASE(pSqlite);
+        return nullptr;
     }
-    
-    pSqlite = new (nothrow) MWSqliteDb();
-    if (pSqlite && pSqlite->initWithFile(filePath)) {
-        pSqlite->autorelease();
-        g_dbCache.setObjectForKey(filePath, pSqlite);
-        return pSqlite;
-    }
-    CC_SAFE_RELEASE(pSqlite);
-    return nullptr;
 }
 
 bool MWSqliteDb::initWithFile(const std::string &file)

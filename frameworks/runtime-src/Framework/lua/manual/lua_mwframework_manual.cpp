@@ -4,6 +4,7 @@
 #include "LuaBasicConversions.h"
 #include <vector>
 
+/******** MWDictionary extension ********/
 MW_LOCAL int tolua_mwframework_MWDictionary_allKeys(lua_State *tolua_S)
 {
     if (!tolua_S)
@@ -56,7 +57,7 @@ MW_LOCAL int tolua_mwframework_MWDictionary_allKeys(lua_State *tolua_S)
         
         return 1;
     }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.MWDictionary:allKeys", argc, 0);
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.Dictionary:allKeys", argc, 0);
     return 0;
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
@@ -65,6 +66,7 @@ tolua_lerror:
     return 0;
 }
 
+/******** MWGameScene extension ********/
 MW_LOCAL int tolua_mwframework_MWGameScene_createWithParams(lua_State *tolua_S)
 {
     if (!tolua_S)
@@ -100,17 +102,17 @@ MW_LOCAL int tolua_mwframework_MWGameScene_createWithParams(lua_State *tolua_S)
         lua_pushnil(tolua_S);       // L: usertable, params, nil
         while (lua_next(tolua_S, -2)) {
             // what's the value type?
-            printf("%s - %s\n",
-                   lua_typename(tolua_S, lua_type(tolua_S, -2)),
-                   lua_typename(tolua_S, lua_type(tolua_S, -1)));
+//            printf("%s - %s\n",
+//                   lua_typename(tolua_S, lua_type(tolua_S, -2)),
+//                   lua_typename(tolua_S, lua_type(tolua_S, -1)));
             cocos2d::Ref *value = nullptr;
-            if (tolua_isnumber(tolua_S, -1, 0, &tolua_err)) {
+            if (tolua_isnumber(tolua_S, 5, 0, &tolua_err)) {
                 value = __Double::create(tolua_tonumber(tolua_S, -1, 0));
-            } else if (tolua_isboolean(tolua_S, -1, 0, &tolua_err)) {
+            } else if (tolua_isboolean(tolua_S, 5, 0, &tolua_err)) {
                 value = __Bool::create(tolua_toboolean(tolua_S, -1, 0));
-            } else if (tolua_isstring(tolua_S, -1, 0, &tolua_err)) {
+            } else if (tolua_isstring(tolua_S, 5, 0, &tolua_err)) {
                 value = __String::create(tolua_tostring(tolua_S, -1, nullptr));
-            } else if (tolua_isusertype(tolua_S, -1, "cc.Ref", 0, &tolua_err)) {
+            } else if (tolua_isusertype(tolua_S, 5, "cc.Ref", 0, &tolua_err)) {
                 value = static_cast<cocos2d::Ref *>(tolua_tousertype(tolua_S, -1, nullptr));
             }
             
@@ -120,7 +122,7 @@ MW_LOCAL int tolua_mwframework_MWGameScene_createWithParams(lua_State *tolua_S)
             if (tolua_isstring(tolua_S, -1, 0, &tolua_err)) {
                 lua_pushvalue(tolua_S, -1);
                 key = tolua_tostring(tolua_S, -1, nullptr);
-                printf("KEY: %s\n", key.c_str());
+//                printf("KEY: %s\n", key.c_str());
                 
                 if (value) {
                     params->setObjectForKey(key, value);
@@ -140,6 +142,217 @@ MW_LOCAL int tolua_mwframework_MWGameScene_createWithParams(lua_State *tolua_S)
 #if COCOS2D_DEBUG >= 1
 tolua_lerror:
     tolua_error(tolua_S, "#ferror in function 'tolua_mwframework_MWGameScene_createWithParams'.", &tolua_err);
+#endif
+    return 0;
+}
+
+/******** MWJsonObject extension ********/
+MW_LOCAL int tolua_mwframework_MWJsonObject_allKeys(lua_State *tolua_S)
+{
+    if (!tolua_S)
+        return 0;
+    
+    int argc = 0;
+    bool ok  = true;
+    mwframework::MWJsonObject *cobj = nullptr;
+    
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+    
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S, 1, "mw.JsonObject", 0, &tolua_err)) goto tolua_lerror;
+#endif
+    
+    cobj = (mwframework::MWJsonObject *) tolua_tousertype(tolua_S, 1, 0);
+    
+#if COCOS2D_DEBUG >= 1
+    if (!cobj)
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'tolua_mwframework_MWJsonObject_allKeys'", NULL);
+        return 0;
+    }
+#endif
+    
+    argc = lua_gettop(tolua_S) - 1;
+    if (argc == 0)
+    {
+        if(!ok)
+            return 0;
+        
+        std::vector<const std::string> ret = cobj->allKeys();
+        
+        lua_newtable(tolua_S);
+        
+        if (ret.empty())
+            return 1;
+        
+        auto iter = ret.begin();
+        int  indexTable = 1;
+        for ( ; iter != ret.end(); ++iter)
+        {
+            lua_pushnumber(tolua_S, (lua_Number) indexTable);
+            tolua_pushstring(tolua_S, (*iter).c_str());
+            lua_rawset(tolua_S, -3);
+            ++indexTable;
+        }
+        
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.JsonObject:allKeys", argc, 0);
+    return 0;
+#if COCOS2D_DEBUG >= 1
+tolua_lerror:
+    tolua_error(tolua_S, "#ferror in function 'tolua_mwframework_MWJsonObject_allKeys'.", &tolua_err);
+#endif
+    return 0;
+}
+
+/******** MWSqliteDb extension ********/
+MW_LOCAL int tolua_mwframework_MWSqliteDb_executeQuery(lua_State *tolua_S)
+{
+    if (!tolua_S)
+        return 0;
+    
+    int argc = 0;
+    bool ok  = true;
+    mwframework::MWSqliteDb *cobj = nullptr;
+    
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+    
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S, 1, "mw.SqliteDb", 0, &tolua_err)) goto tolua_lerror;
+#endif
+    
+    cobj = (mwframework::MWSqliteDb *) tolua_tousertype(tolua_S, 1, 0);
+    
+#if COCOS2D_DEBUG >= 1
+    if (!cobj)
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'tolua_mwframework_MWSqliteDb_executeQuery'", NULL);
+        return 0;
+    }
+#endif
+    
+    argc = lua_gettop(tolua_S) - 1;
+    if (argc == 1)
+    {
+        if(!ok)
+            return 0;
+        
+        std::string arg0;
+        
+        ok &= luaval_to_std_string(tolua_S, 2, &arg0, "mw.SqliteDb:executeQuery");
+        if (!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWSqliteDb_executeQuery'", nullptr);
+            return 0;
+        }
+        
+        mwframework::MWArrayList *ret = cobj->executeQuery(arg0);
+        
+        lua_newtable(tolua_S);      // L: userdata, array
+        
+        for (int i = 0; i < ret->count(); ++i) {
+            lua_pushnumber(tolua_S, i + 1);     // L: userdata, array, index
+            lua_newtable(tolua_S);      // L: userdata, array, index, dict
+            
+            mwframework::MWDictionary *pDict = static_cast<mwframework::MWDictionary *>(ret->objectAtIndex(i));
+            auto keys = pDict->allKeys();
+            for (auto key : keys) {
+                lua_pushstring(tolua_S, key.c_str());       // L: userdata, array, index, dict, key
+                cocos2d::Ref *pVal = pDict->objectForKey(key);
+                __Integer *pNum = nullptr;
+                __Double *pNum2 = nullptr;
+                __String *pStr = nullptr;
+                if ((pNum = dynamic_cast<__Integer *>(pVal)) || (pNum2 = dynamic_cast<__Double *>(pVal))) {
+                    double val;
+                    if (pNum) {
+                        val = pNum->getValue();
+                    } else if (pNum2) {
+                        val = pNum2->getValue();
+                    }
+                    lua_pushnumber(tolua_S, val);       // L: userdata, array, index, dict, key, val
+                    lua_rawset(tolua_S, -3);        // L: userdata, array, index, dict
+                } else if ((pStr = dynamic_cast<__String *>(pDict->objectForKey(key)))) {
+                    std::string val = pStr->getCString();
+                    
+                    lua_pushstring(tolua_S, val.c_str());   // L: userdata, array, index, dict, key, val
+                    lua_rawset(tolua_S, -3);    // L: userdata, array, index, dict
+                } else {
+                    CCASSERT(false, "Invalid query.");
+                }
+            }
+            lua_rawset(tolua_S, -3);        // L: userdata, array
+        }
+        
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.SqliteDb:executeQuery", argc, 0);
+    return 0;
+#if COCOS2D_DEBUG >= 1
+tolua_lerror:
+    tolua_error(tolua_S, "#ferror in function 'tolua_mwframework_MWSqliteDb_executeQuery'.", &tolua_err);
+#endif
+    return 0;
+}
+
+/******** MWGifSprite extension ********/
+MW_LOCAL int tolua_mwframework_MWGifSprite_getFrames(lua_State *tolua_S)
+{
+    if (!tolua_S)
+        return 0;
+    
+    int argc = 0;
+    bool ok  = true;
+    mwframework::MWGifSprite *cobj = nullptr;
+    
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+    
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S, 1, "mw.GifSprite", 0, &tolua_err)) goto tolua_lerror;
+#endif
+    
+    cobj = (mwframework::MWGifSprite *) tolua_tousertype(tolua_S, 1, 0);
+    
+#if COCOS2D_DEBUG >= 1
+    if (!cobj)
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'tolua_mwframework_MWGifSprite_getFrames'", NULL);
+        return 0;
+    }
+#endif
+    
+    argc = lua_gettop(tolua_S) - 1;
+    if (argc == 0)
+    {
+        if(!ok)
+            return 0;
+        
+        mwframework::MWArrayList *ret = cobj->getFrames();
+        
+        lua_newtable(tolua_S);
+        
+        if (ret->empty())
+            return 1;
+        
+        for (int i = 0; i < ret->count(); ++i) {
+            lua_pushnumber(tolua_S, i + 1);
+            tolua_pushusertype(tolua_S, ret->objectAtIndex(i), "mw.GifFrame");
+            lua_rawset(tolua_S, -3);
+        }
+        
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.GifSprite:getFrames", argc, 0);
+    return 0;
+#if COCOS2D_DEBUG >= 1
+tolua_lerror:
+    tolua_error(tolua_S, "#ferror in function 'tolua_mwframework_MWGifSprite_getFrames'.", &tolua_err);
 #endif
     return 0;
 }
@@ -168,6 +381,39 @@ MW_LOCAL void extendMWGameScene(lua_State *tolua_S)
     lua_pop(tolua_S, 1);
 }
 
+MW_LOCAL void extendMWJsonObject(lua_State *tolua_S)
+{
+    lua_pushstring(tolua_S, "mw.JsonObject");
+    lua_rawget(tolua_S, LUA_REGISTRYINDEX);
+    if (lua_istable(tolua_S, -1)) {
+        lua_pushstring(tolua_S, "allKeys");
+        lua_pushcfunction(tolua_S, tolua_mwframework_MWJsonObject_allKeys);
+        lua_rawset(tolua_S, -3);
+    }
+}
+
+MW_LOCAL void extendMWSqliteDb(lua_State *tolua_S)
+{
+    lua_pushstring(tolua_S, "mw.SqliteDb");
+    lua_rawget(tolua_S, LUA_REGISTRYINDEX);
+    if (lua_istable(tolua_S, -1)) {
+        lua_pushstring(tolua_S, "executeQuery");
+        lua_pushcfunction(tolua_S, tolua_mwframework_MWSqliteDb_executeQuery);
+        lua_rawset(tolua_S, -3);
+    }
+}
+
+MW_LOCAL void extendMWGifSprite(lua_State *tolua_S)
+{
+    lua_pushstring(tolua_S, "mw.GifSprite");
+    lua_rawget(tolua_S, LUA_REGISTRYINDEX);
+    if (lua_istable(tolua_S, -1)) {
+        lua_pushstring(tolua_S, "getFrames");
+        lua_pushcfunction(tolua_S, tolua_mwframework_MWGifSprite_getFrames);
+        lua_rawset(tolua_S, -3);
+    }
+}
+
 TOLUA_API int register_all_mwframework_manual(lua_State *tolua_S)
 {
 	tolua_open(tolua_S);
@@ -177,6 +423,9 @@ TOLUA_API int register_all_mwframework_manual(lua_State *tolua_S)
 
     extendMWDictionary(tolua_S);
     extendMWGameScene(tolua_S);
+    extendMWJsonObject(tolua_S);
+    extendMWSqliteDb(tolua_S);
+    extendMWGifSprite(tolua_S);
 
 	tolua_endmodule(tolua_S);
 	return 1;

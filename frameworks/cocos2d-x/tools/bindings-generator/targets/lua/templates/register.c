@@ -15,7 +15,7 @@ static int lua_${generator.prefix}_${current_class.class_name}_finalize(lua_Stat
 \#if COCOS2D_DEBUG >= 1
     tolua_Error tolua_err;
     if (
-    !tolua_isusertype(tolua_S,1,"${current_class.class_name}",0,&tolua_err) ||
+    !tolua_isusertype(tolua_S,1,"mw.${current_class.class_name}",0,&tolua_err) ||
     !tolua_isnoobj(tolua_S,2,&tolua_err)
     )
         goto tolua_lerror;

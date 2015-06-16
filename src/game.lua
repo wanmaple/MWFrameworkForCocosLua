@@ -26,7 +26,7 @@ function Game:init()
     -- initialize director
     local director = cc.Director:getInstance()
     local glview = director:getOpenGLView()
-    if nil == glview then
+    if glview == nil then
         glview = cc.GLViewImpl:createWithRect("TestFramework", cc.rect(0, 0, 900, 640))
         director:setOpenGLView(glview)
     end

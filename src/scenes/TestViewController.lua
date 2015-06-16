@@ -21,7 +21,23 @@ function TestViewController:viewDidLoad()
 		tolua.cast(sp, "mw.GifSprite")
 		sp:setPosition(winSize.width * (0.25 + (i - 1) * 0.5), winSize.height * 0.5)
 		self:view():addChild(sp)
+
+		-- local frames = sp:getFrames()
+		-- for _, frame in ipairs(frames) do
+		-- 	print("#####", tolua.type(frame), frame:getDuration())
+		-- end
 	end
+
+	print("NUMBER: ", self:scene():getNumberParameter("NUMBER"))
+	print("STRING: ", self:scene():getStringParameter("STRING"))
+	print("BOOLEAN: ", self:scene():getBooleanParameter("BOOLEAN"))
+	print("REF: ", self:scene():getRefParameter("REF"))
+
+	local db = mw.SqliteDb:openDb("src/icon.jpg")
+	local t = db:executeQuery("select * from [Vip]");
+	-- table.dump(t)
+
+	print("UUID: ", mw.UUIDGenerator:getInstance():generateUUID())
 end
 
 function TestViewController:viewDidUnload()

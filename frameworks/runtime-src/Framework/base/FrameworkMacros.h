@@ -48,7 +48,11 @@
 /**
  * Throw framework defined exception with an existed error code.
  */
+#if MW_WHETHER_THROW_EXCEPTION
 #define MW_THROW_EXCEPTION(__ERROR_CODE__) throw mwframework::MWException::create(__ERROR_CODE__, MW_GET_ERROR_STRING(__ERROR_CODE__));
+#else
+#define MW_THROW_EXCEPTION(__ERROR_CODE__)
+#endif
 
 /**
  * Framework namespace header.

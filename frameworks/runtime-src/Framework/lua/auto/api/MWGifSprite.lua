@@ -45,12 +45,6 @@
 -- @param self
         
 --------------------------------
--- 
--- @function [parent=#MWGifSprite] getFrames 
--- @param self
--- @return MWArrayList#MWArrayList ret (return value: mw.MWArrayList)
-        
---------------------------------
 -- Create gif sprite by a gif image path.<br>
 -- param gifPath GIF file path.
 -- @function [parent=#MWGifSprite] createWithFile 

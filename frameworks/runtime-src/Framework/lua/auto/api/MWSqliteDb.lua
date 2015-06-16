@@ -19,13 +19,6 @@
 -- @return bool#bool ret (return value: bool)
         
 --------------------------------
--- IDbBase overrides.
--- @function [parent=#MWSqliteDb] executeQuery 
--- @param self
--- @param #string sql
--- @return MWArrayList#MWArrayList ret (return value: mw.MWArrayList)
-        
---------------------------------
 -- 
 -- @function [parent=#MWSqliteDb] beginTransaction 
 -- @param self
