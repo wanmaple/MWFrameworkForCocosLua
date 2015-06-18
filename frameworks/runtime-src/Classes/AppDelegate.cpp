@@ -41,11 +41,13 @@ bool AppDelegate::applicationDidFinishLaunching()
     lua_module_register(L);
     
 #if MW_ENABLE_SCRIPT_BINDING
+#ifdef DEBUG
+    lua_pushboolean(L, true);
+    lua_setglobal(L, "DEBUG");
+#endif
+    
     register_all_mwframework(L);
     register_all_mwframework_manual(L);
-    
-//    std::vector<std::string> paths = { "./src/?.lua" };
-//    mwframework::MWLuaUtils::getInstance()->addPackagePaths(paths);
 
     if (engine->executeScriptFile("src/main.lua")) {
         return false;

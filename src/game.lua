@@ -1,7 +1,6 @@
 cc.FileUtils:getInstance():addSearchPath("src")
 cc.FileUtils:getInstance():addSearchPath("res")
 
-require "cocos.init"
 require "mwframework"
 
 -- for CCLuaEngine traceback
@@ -42,7 +41,7 @@ end
 
 function Game:run()
     require "scenes/TestScene"
-    ReplaceScene(TestScene, { STRING = "abc", NUMBER = 123, BOOLEAN = true, REF = mw.ArrayList:new() })
+    ReplaceScene(TestScene, { STRING = "abc", NUMBER = 123, BOOLEAN = true, REF = mw.ArrayList:create() })
 end
 
 function Game:start()

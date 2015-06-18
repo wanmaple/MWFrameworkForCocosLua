@@ -4,7 +4,7 @@
 	Date: 04/26/2014
 ]]
 
-function log(...)
+function mw.log(...)
 	if DEBUG then
 		print(os.date("%X"), string.format(...))
 	end
@@ -98,7 +98,7 @@ function table.select(table, selector, ...)
 	end
 
 	local newTable = {}
-	for _, v in pairs(table) do
+	for _, v in ipairs(table) do
 		if selector(v, ...) then
 			_G["table"].insert(newTable, v)
 		end
@@ -113,7 +113,7 @@ function table.cast(table, caster, ...)
 	end
 
 	local newTable = {}
-	for _, v in pairs(table) do
+	for _, v in ipairs(table) do
 		local item = caster(v, ...)
 		_G["table"].insert(newTable, item)
 	end
@@ -126,7 +126,7 @@ function table.contains(table, selector, ...)
 		return false
 	end
 
-	for _, v in pairs(table) do
+	for _, v in ipairs(table) do
 		if selector(v, ...) then
 			return true
 		end
@@ -140,12 +140,12 @@ function table.find(table, selector, ...)
 		return false
 	end
 
-	for k, v in pairs(table) do
+	for _, v in ipairs(table) do
 		if selector(v, ...) then
-			return v, k
+			return v
 		end
 	end
-	return nil, nil
+	return nil
 end
 
 -- remove the object which satisfied the condition

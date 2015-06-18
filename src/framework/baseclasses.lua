@@ -43,7 +43,7 @@ class("clsGameScene", {
 			if #args > 0 then
 				return mw.GameScene:createWithParams(args)
 			else
-				return mw.GameScene:create(...)
+				return mw.GameScene:create()
 			end
 		end
 	})

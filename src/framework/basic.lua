@@ -18,9 +18,8 @@ function GetType(instance)
 		return instance.__className
 	elseif type(instance) == "userdata" then
 		return tolua.type(instance)
-	else
-		return type(instance)
 	end
+	return type(instance)
 end
 
 -- return instance function pointer

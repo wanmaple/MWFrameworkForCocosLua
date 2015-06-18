@@ -28,16 +28,16 @@ function TestViewController:viewDidLoad()
 		-- end
 	end
 
-	print("NUMBER: ", self:scene():getNumberParameter("NUMBER"))
-	print("STRING: ", self:scene():getStringParameter("STRING"))
-	print("BOOLEAN: ", self:scene():getBooleanParameter("BOOLEAN"))
-	print("REF: ", self:scene():getRefParameter("REF"))
+	mw.log("NUMBER: %d", self:scene():getNumberParameter("NUMBER"))
+	mw.log("STRING: %s", self:scene():getStringParameter("STRING"))
+	mw.log("BOOLEAN: %s", tostring(self:scene():getBooleanParameter("BOOLEAN")))
+	mw.log("REF: %s", GetType(self:scene():getRefParameter("REF")))
 
 	local db = mw.SqliteDb:openDb("src/icon.jpg")
 	local t = db:executeQuery("select * from [Vip]");
 	-- table.dump(t)
 
-	print("UUID: ", mw.UUIDGenerator:getInstance():generateUUID())
+	mw.log("UUID: %s", mw.UUIDGenerator:getInstance():generateUUID())
 end
 
 function TestViewController:viewDidUnload()
