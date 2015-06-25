@@ -720,7 +720,6 @@
 			children = (
 				78C738821A77F17A0028FC3A /* base */,
 				F59B05F21AB36718001204D1 /* net */,
-				F55008031AFB7AEE00271FA2 /* protobuf */,
 				33250D901A91E39A00D1668B /* json */,
 				33A37BEE1A91D3D30042CA97 /* db */,
 				78C7387D1A77EF8F0028FC3A /* scheme */,
@@ -850,13 +849,6 @@
 			);
 			name = Resources;
 			path = ../Resources;
-			sourceTree = "<group>";
-		};
-		F55008031AFB7AEE00271FA2 /* protobuf */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = protobuf;
 			sourceTree = "<group>";
 		};
 		F5629EB51AEC1FFD00CC4F1F /* compression */ = {
@@ -1520,10 +1512,7 @@
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/../Framework/protobuf/protobuf_lib/include";
 				INFOPLIST_FILE = ios/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(SRCROOT)/../../runtime-src/Framework/net/http/curl/prebuilt/ios",
-					"$(SRCROOT)/../../runtime-src/Framework/protobuf/protobuf_lib/lib",
-				);
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../../runtime-src/Framework/net/http/curl/prebuilt/ios";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../../cocos2d-x/cocos/platform/ios";
@@ -1546,10 +1535,7 @@
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/../Framework/protobuf/protobuf_lib/include";
 				INFOPLIST_FILE = ios/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(SRCROOT)/../../runtime-src/Framework/net/http/curl/prebuilt/ios",
-					"$(SRCROOT)/../../runtime-src/Framework/protobuf/protobuf_lib/lib",
-				);
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../../runtime-src/Framework/net/http/curl/prebuilt/ios";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../../cocos2d-x/cocos/platform/ios";

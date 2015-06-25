@@ -673,7 +673,6 @@ class NativeClass(object):
             self.target_class_name = re.sub('^' + generator.remove_prefix, '', registration_name)
         else:
             self.target_class_name = registration_name
-        # print >> sys.stderr, registration_name
         self.namespaced_class_name = get_namespaced_name(cursor)
         self.namespace_name        = get_namespace_name(cursor)
         self.parse()
