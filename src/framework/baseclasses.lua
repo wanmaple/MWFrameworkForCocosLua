@@ -59,3 +59,9 @@ class("clsViewSegue", {
 			return mw.ViewSegue:create()
 		end
 	})
+
+class("clsNetHandler", {
+		create = function()
+			return mw.NetHandler:create()
+		end
+	})
