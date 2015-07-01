@@ -101,4 +101,18 @@ bool MWIOUtils::createDirectory(const std::string &directoryPath)
     return false;
 }
 
+std::string MWIOUtils::splicePath(const std::string &path1, const std::string &path2)
+{
+    if (path1.size() <= 0) {
+        return path1;
+    }
+    std::string newPath = path1;
+    if (path1.at(path1.size() - 1) != '/') {
+        newPath.append("/");
+    }
+    newPath.append(path2);
+    
+    return newPath;
+}
+
 MW_FRAMEWORK_END

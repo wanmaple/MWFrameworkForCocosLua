@@ -110,6 +110,9 @@
 		F57150931AB9E4B900AF3A51 /* libcurl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F57150921AB9E4B900AF3A51 /* libcurl.a */; };
 		F5950CBE1AFA8E2800A73190 /* MWIOUtilsStrategyIOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = F5950CBD1AFA8E2800A73190 /* MWIOUtilsStrategyIOS.mm */; };
 		F5950CC01AFA8F8B00A73190 /* MWIOUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5950CBF1AFA8F8B00A73190 /* MWIOUtils.cpp */; };
+		F5A5F00C1B44281D0060AE8E /* md5.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5A5F00A1B44281D0060AE8E /* md5.cpp */; };
+		F5A5F00F1B4428B70060AE8E /* MWCipherMachine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5A5F00D1B4428B70060AE8E /* MWCipherMachine.cpp */; };
+		F5A5F0121B442B910060AE8E /* MWAssetManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5A5F0101B442B910060AE8E /* MWAssetManager.cpp */; };
 		F5A79BB71AEF7B9E0040F7BE /* MWGifFramesCache.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5A79BB51AEF7B9E0040F7BE /* MWGifFramesCache.cpp */; };
 		F5C9F9271AD7B5B6008FAF9A /* MWSystemHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5C9F9251AD7B5B6008FAF9A /* MWSystemHelper.cpp */; };
 		F5C9F92C1AD7B99A008FAF9A /* MWSystemHelperStrategyIOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = F5C9F92B1AD7B99A008FAF9A /* MWSystemHelperStrategyIOS.mm */; };
@@ -385,6 +388,12 @@
 		F5950CBD1AFA8E2800A73190 /* MWIOUtilsStrategyIOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MWIOUtilsStrategyIOS.mm; sourceTree = "<group>"; };
 		F5950CBF1AFA8F8B00A73190 /* MWIOUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWIOUtils.cpp; sourceTree = "<group>"; };
 		F59B05F41AB367EF001204D1 /* MWNetService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MWNetService.h; path = net/MWNetService.h; sourceTree = "<group>"; };
+		F5A5F00A1B44281D0060AE8E /* md5.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = md5.cpp; sourceTree = "<group>"; };
+		F5A5F00B1B44281D0060AE8E /* md5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = md5.h; sourceTree = "<group>"; };
+		F5A5F00D1B4428B70060AE8E /* MWCipherMachine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWCipherMachine.cpp; sourceTree = "<group>"; };
+		F5A5F00E1B4428B70060AE8E /* MWCipherMachine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWCipherMachine.h; sourceTree = "<group>"; };
+		F5A5F0101B442B910060AE8E /* MWAssetManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWAssetManager.cpp; sourceTree = "<group>"; };
+		F5A5F0111B442B910060AE8E /* MWAssetManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWAssetManager.h; sourceTree = "<group>"; };
 		F5A79BB51AEF7B9E0040F7BE /* MWGifFramesCache.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWGifFramesCache.cpp; sourceTree = "<group>"; };
 		F5A79BB61AEF7B9E0040F7BE /* MWGifFramesCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWGifFramesCache.h; sourceTree = "<group>"; };
 		F5C9F9251AD7B5B6008FAF9A /* MWSystemHelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWSystemHelper.cpp; sourceTree = "<group>"; };
@@ -722,6 +731,7 @@
 				F59B05F21AB36718001204D1 /* net */,
 				33250D901A91E39A00D1668B /* json */,
 				33A37BEE1A91D3D30042CA97 /* db */,
+				F5A5F0081B44281D0060AE8E /* encryption */,
 				78C7387D1A77EF8F0028FC3A /* scheme */,
 				33C73FF11A7F1BDE0057DA34 /* lua */,
 				F5629EB51AEC1FFD00CC4F1F /* compression */,
@@ -948,6 +958,8 @@
 			children = (
 				F5CF4A4A1ADBF3BC00D0AF87 /* MWUUIDGenerator.cpp */,
 				F5CF4A4B1ADBF3BC00D0AF87 /* MWUUIDGenerator.h */,
+				F5A5F0101B442B910060AE8E /* MWAssetManager.cpp */,
+				F5A5F0111B442B910060AE8E /* MWAssetManager.h */,
 			);
 			path = utils;
 			sourceTree = "<group>";
@@ -971,6 +983,25 @@
 				F59B05F41AB367EF001204D1 /* MWNetService.h */,
 			);
 			name = net;
+			sourceTree = "<group>";
+		};
+		F5A5F0081B44281D0060AE8E /* encryption */ = {
+			isa = PBXGroup;
+			children = (
+				F5A5F0091B44281D0060AE8E /* libmd5 */,
+				F5A5F00D1B4428B70060AE8E /* MWCipherMachine.cpp */,
+				F5A5F00E1B4428B70060AE8E /* MWCipherMachine.h */,
+			);
+			path = encryption;
+			sourceTree = "<group>";
+		};
+		F5A5F0091B44281D0060AE8E /* libmd5 */ = {
+			isa = PBXGroup;
+			children = (
+				F5A5F00A1B44281D0060AE8E /* md5.cpp */,
+				F5A5F00B1B44281D0060AE8E /* md5.h */,
+			);
+			path = libmd5;
 			sourceTree = "<group>";
 		};
 		F5C9F9241AD7B574008FAF9A /* platform */ = {
@@ -1299,6 +1330,7 @@
 				F5629EC51AEC20F000CC4F1F /* mztools.c in Sources */,
 				33250DCC1A91E39A00D1668B /* JSONAllocator.cpp in Sources */,
 				F5CF4A611ADCE8CD00D0AF87 /* gif_err.c in Sources */,
+				F5A5F0121B442B910060AE8E /* MWAssetManager.cpp in Sources */,
 				F5629EC61AEC20F000CC4F1F /* unzip.c in Sources */,
 				F5CF4A601ADCE8CD00D0AF87 /* egif_lib.c in Sources */,
 				78C738801A77EF9B0028FC3A /* MWGameScene.cpp in Sources */,
@@ -1313,6 +1345,7 @@
 				F5CF4A681ADCE9EA00D0AF87 /* MWGifFrame.cpp in Sources */,
 				F5629EC71AEC20F000CC4F1F /* zip.c in Sources */,
 				33250DD61A91E39A00D1668B /* JSONWorker.cpp in Sources */,
+				F5A5F00F1B4428B70060AE8E /* MWCipherMachine.cpp in Sources */,
 				F5DDB3331AFB39EB00642E89 /* TestHttpViewController.cpp in Sources */,
 				33250DC81A91E39A00D1668B /* MWJsonFormatter.cpp in Sources */,
 				33250DD71A91E39A00D1668B /* JSONWriter.cpp in Sources */,
@@ -1353,6 +1386,7 @@
 				F53535A51AB4512D00EF7298 /* MWNetProtocol.cpp in Sources */,
 				3382D9F71A80F64C00A3702F /* FrameworkErrors.cpp in Sources */,
 				F5DDB31E1AFA2C0B00642E89 /* MWSvgSprite.cpp in Sources */,
+				F5A5F00C1B44281D0060AE8E /* md5.cpp in Sources */,
 				33250DC91A91E39A00D1668B /* MWJsonParser.cpp in Sources */,
 				F53535B51AB45A4100EF7298 /* MWNetFilter.cpp in Sources */,
 				F5714FE11AB9D77B00AF3A51 /* MWHttpForm.cpp in Sources */,

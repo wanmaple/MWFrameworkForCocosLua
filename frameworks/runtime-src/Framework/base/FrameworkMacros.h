@@ -9,6 +9,7 @@
 
 #define MW_DLL
 #define MW_INTERFACE
+#define MW_ENUM enum class
 #define MW_LOCAL static
 
 /**
@@ -39,7 +40,7 @@
 /**
  * Whether should throw an exception? default true.
  */
-#define MW_WHETHER_THROW_EXCEPTION 1
+#define MW_WHETHER_THROW_EXCEPTION 0
 #define MW_NOEXCEPTION(__EXPRESSION__) noexcept(__EXPRESSION__)
 /**
  * Get the related error string of specified error code.
@@ -51,7 +52,7 @@
 #if MW_WHETHER_THROW_EXCEPTION
 #define MW_THROW_EXCEPTION(__ERROR_CODE__) throw mwframework::MWException::create(__ERROR_CODE__, MW_GET_ERROR_STRING(__ERROR_CODE__));
 #else
-#define MW_THROW_EXCEPTION(__ERROR_CODE__)
+#define MW_THROW_EXCEPTION(__ERROR_CODE__) CCASSERT(false, MW_GET_ERROR_STRING(__ERROR_CODE__));
 #endif
 
 /**

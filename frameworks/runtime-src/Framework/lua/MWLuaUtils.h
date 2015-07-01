@@ -4,8 +4,8 @@
  Date: 2/2/2015
  ******************************/
 
-#ifndef __LUA_LUAUTILS
-#define __LUA_LUAUTILS
+#ifndef __LUA_LUAUTILS__
+#define __LUA_LUAUTILS__
 
 #include "../base/mwbase.h"
 #include <vector>
@@ -85,4 +85,4 @@ protected:
 
 MW_FRAMEWORK_END
 
-#endif /* defined(__LUA_LUAUTILS) */
+#endif /* defined(__LUA_LUAUTILS__) */

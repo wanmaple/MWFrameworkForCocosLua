@@ -31,7 +31,7 @@ bool MWIOUtilsStrategyIos::fileExists(const std::string &path)
     BOOL isDirectory = NO;
     BOOL result = [[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithCString:absolutePath.c_str() encoding:NSUTF8StringEncoding] isDirectory:&isDirectory];
     
-    return result && !isDirectory;
+    return result;
 }
 
 bool MWIOUtilsStrategyIos::moveFile(const std::string &oldPath, const std::string &newPath)

@@ -112,6 +112,8 @@ public:
      */
     bool createDirectory(const std::string &directoryPath);
     
+    std::string splicePath(const std::string &path1, const std::string &path2);
+    
 protected:
     MWIOUtilsStrategy *_strategy;
 };
