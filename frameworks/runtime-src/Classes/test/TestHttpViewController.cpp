@@ -17,7 +17,7 @@ using namespace mwframework;
 using namespace cocos2d;
 using namespace std;
 
-class JsonHttpTransferStrategy : public MWHttpTransferStrategy
+class JsonHttpTransferStrategy : public IHttpTransferStrategy
 {
 public:
     std::map<std::string, std::string> transferParameters(const std::string &body) override

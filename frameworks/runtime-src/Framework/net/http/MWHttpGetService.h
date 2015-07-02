@@ -14,7 +14,7 @@
 #include "HttpRequest.h"
 #include "HttpResponse.h"
 #include "../MWNetService.h"
-#include "MWHttpTransferStrategy.h"
+#include "IHttpTransferStrategy.h"
 #include <string>
 
 MW_FRAMEWORK_BEGIN
@@ -72,7 +72,7 @@ public:
      *
      * @param Transfer strategy.
      */
-    inline void setTransferRule(MWHttpTransferStrategy *strategy)
+    inline void setTransferRule(IHttpTransferStrategy *strategy)
     {
         _strategy = strategy;
     }
@@ -85,7 +85,7 @@ protected:
     void onHttpRequestCompleted(cocos2d::network::HttpClient *client, cocos2d::network::HttpResponse *response);
     
     std::string _serviceAddr;
-    MWHttpTransferStrategy *_strategy;
+    IHttpTransferStrategy *_strategy;
 };
 
 MW_FRAMEWORK_END

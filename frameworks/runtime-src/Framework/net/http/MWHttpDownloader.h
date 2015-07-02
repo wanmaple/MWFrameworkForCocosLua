@@ -16,16 +16,18 @@
 #include <sys/stat.h>
 #include <errno.h>
 
+#define DEFAULT_RETRY_DOWNLOAD_TIMES 3
+
 MW_FRAMEWORK_BEGIN
 
 class MWHttpDownloader;
 
 class MWDownloadTask;
 
-class MW_INTERFACE MWHttpDownloaderDelegate
+class MW_INTERFACE IHttpDownloaderDelegate
 {
 public:
-    virtual ~MWHttpDownloaderDelegate() {}
+    virtual ~IHttpDownloaderDelegate() {}
     
     /**
      * Delegate when the download task starts.
@@ -72,7 +74,7 @@ public:
      *
      * @return DownloadTask object.
      */
-    static MWDownloadTask *create(const std::string &url, const std::string &savePath, cocos2d::Ref *userdata = nullptr, bool canResume = true, int retryTimes = 3);
+    static MWDownloadTask *create(const std::string &url, const std::string &savePath, cocos2d::Ref *userdata = nullptr, bool canResume = true, int retryTimes = DEFAULT_RETRY_DOWNLOAD_TIMES);
     
     /**
      * DownloadTask constructor.
@@ -83,7 +85,7 @@ public:
      * @param canResume Whether support the breakpoint resuming.
      * @param retryTimes Retry count when downloading failed.
      */
-    explicit MWDownloadTask(const std::string &url, const std::string &savePath, cocos2d::Ref *userdata = nullptr, bool canResume = true, int retryTimes = 3);
+    explicit MWDownloadTask(const std::string &url, const std::string &savePath, cocos2d::Ref *userdata = nullptr, bool canResume = true, int retryTimes = DEFAULT_RETRY_DOWNLOAD_TIMES);
     /**
      * DownloadTask destructor.
      */
@@ -230,7 +232,7 @@ public:
      * @param canResume Whether support the breakpoint resuming.
      * @param retryTimes Retry count when downloading failed.
      */
-    void beginDownloading(const std::string &url, const std::string &savePath, cocos2d::Ref *userdata, bool supportResume, int retryTimes);
+    void beginDownloading(const std::string &url, const std::string &savePath, cocos2d::Ref *userdata = nullptr, bool supportResume = true, int retryTimes = DEFAULT_RETRY_DOWNLOAD_TIMES);
     
     /**
      * Retry failed task.
@@ -256,7 +258,7 @@ public:
     /**
      * Downloader delegate getter and setter.
      */
-    MW_SYNTHESIZE(MWHttpDownloaderDelegate*, _delegate, Delegate);
+    MW_SYNTHESIZE(IHttpDownloaderDelegate*, _delegate, Delegate);
     
 protected:
     bool _initThread();

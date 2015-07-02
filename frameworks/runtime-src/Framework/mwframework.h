@@ -31,8 +31,12 @@
 // json.
 #include "json/MWJsonStructure.h"
 
+// encryption.
+#include "encryption/MWCipherMachine.h"
+
 // utils
 #include "utils/MWUUIDGenerator.h"
+#include "utils/MWAssetManager.h"
 
 // net.
 #include "net/MWNetService.h"
@@ -45,7 +49,7 @@
 
 // http
 #include "net/http/MWHttpForm.h"
-#include "net/http/MWHttpTransferStrategy.h"
+#include "net/http/IHttpTransferStrategy.h"
 #include "net/http/MWHttpGetService.h"
 #include "net/http/MWHttpPostService.h"
 #include "net/http/MWHttpDownloader.h"

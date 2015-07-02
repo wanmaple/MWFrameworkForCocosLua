@@ -368,7 +368,7 @@
 		F5714FDC1AB9D77B00AF3A51 /* MWHttpForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWHttpForm.h; sourceTree = "<group>"; };
 		F5714FDD1AB9D77B00AF3A51 /* MWHttpGetService.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWHttpGetService.cpp; sourceTree = "<group>"; };
 		F5714FDE1AB9D77B00AF3A51 /* MWHttpGetService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWHttpGetService.h; sourceTree = "<group>"; };
-		F5714FDF1AB9D77B00AF3A51 /* MWHttpTransferStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWHttpTransferStrategy.h; sourceTree = "<group>"; };
+		F5714FDF1AB9D77B00AF3A51 /* IHttpTransferStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IHttpTransferStrategy.h; sourceTree = "<group>"; };
 		F5714FF31AB9E47A00AF3A51 /* curl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = curl.h; sourceTree = "<group>"; };
 		F5714FF41AB9E47A00AF3A51 /* curlbuild.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = curlbuild.h; sourceTree = "<group>"; };
 		F5714FF51AB9E47A00AF3A51 /* curlrules.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = curlrules.h; sourceTree = "<group>"; };
@@ -907,7 +907,7 @@
 				F5CF4A501ADCE52C00D0AF87 /* MWHttpPostService.h */,
 				F5714FDD1AB9D77B00AF3A51 /* MWHttpGetService.cpp */,
 				F5714FDE1AB9D77B00AF3A51 /* MWHttpGetService.h */,
-				F5714FDF1AB9D77B00AF3A51 /* MWHttpTransferStrategy.h */,
+				F5714FDF1AB9D77B00AF3A51 /* IHttpTransferStrategy.h */,
 			);
 			name = http;
 			path = net/http;

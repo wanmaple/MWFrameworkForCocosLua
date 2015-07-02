@@ -17,7 +17,7 @@ class MW_DLL MWCipherMachine
     MW_SINGLETON(MWCipherMachine);
 public:
     std::string encipherMd5(const std::string &content);
-    std::string decipherMd5(const std::string &content);
+    std::string encipherMd5(MWBinaryData * rawData);
 };
 
 MW_FRAMEWORK_END

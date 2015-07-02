@@ -8,6 +8,7 @@
 #define __UTILS_ASSET_MANAGER__
 
 #include "../base/mwbase.h"
+#include "../net/http/MWHttpDownloader.h"
 #include <string>
 #include <vector>
 #include <unordered_map>
@@ -15,7 +16,6 @@
 MW_FRAMEWORK_BEGIN
 
 class MWJsonObject;
-class MWHttpDownloader;
 
 MW_ENUM EAssetUpdateErrorType
 {
@@ -51,7 +51,7 @@ public:
     virtual void onFileDownloading(const std::string &filePath, float progress) = 0;
 };
 
-class MW_DLL MWAssetManager
+class MW_DLL MWAssetManager : public IHttpDownloaderDelegate
 {
     MW_SINGLETON(MWAssetManager);
 public:
@@ -65,14 +65,6 @@ public:
      * Update search path.
      */
     void configSearchPath();
-    /**
-     * File list from bundle/apk.
-     */
-    void setCopyFileList(const std::vector<std::string> &fileList);
-    /**
-     * Copy files from bundle/apk.
-     */
-    void copyFiles(const std::vector<std::string> &fileList);
     /**
      * Check version.
      */
@@ -99,13 +91,14 @@ public:
     void flush();
     
     void setAssetRootUrl(const std::string &assetRootUrl);
+    
     inline std::string getAssetRootPath()
     {
         return _assetRootUrl;
     }
     inline void setAssetUpdateDelegate(IAssetUpdateDelegate *delegate)
     {
-        _delegate = delegate;
+        _assetUpdateDelegate = delegate;
     }
     inline bool isDevelopMode()
     {
@@ -116,14 +109,46 @@ public:
         _isDevelopMode = isDevelopMode;
     }
     
+    // overrides
+    /**
+     * Delegate when the download task starts.
+     *
+     * @param downloader Related downloader of the task.
+     */
+    void onDownloadStarted(MWHttpDownloader *downloader);
+    /**
+     * Delegate when the download task executes.
+     *
+     * @param downloader Related downloader of the task.
+     * @param progress Downloading progress.
+     */
+    void onDownloading(MWHttpDownloader *downloader, float progress);
+    /**
+     * Delegate when the download task completes.
+     *
+     * @param downloader Related downloader of the task.
+     */
+    void onDownloadCompleted(MWHttpDownloader *downloader);
+    /**
+     * Delegate when the download task fails.
+     *
+     * @param downloader Related downloader of the task.
+     * @param errorMsg Encountered error message.
+     */
+    void onDownloadFailed(MWHttpDownloader *downloader, const std::string &errorMsg);
+    
     // Program version.
     MW_SYNTHESIZE(float, _programVersion, ProgramVersion);
-    // Asset version.
-    MW_SYNTHESIZE(float, _assetVersion, AssetVersion);
+    // Bundle version.
+    MW_SYNTHESIZE(float, _bundleAssetVersion, BundleAssetVersion);
     // Local asset path.
     MW_SYNTHESIZE_PASS_BY_CONST_REF(std::string, _localAssetPath, LocalAssetPath);
     // Local asset version.
     MW_SYNTHESIZE_READONLY(float, _localVersion, LocalVersion);
+    // Server asset directory.
+    MW_SYNTHESIZE_PASS_BY_CONST_REF(std::string, _serverAssetDir, ServerAssetDirectory);
+    // Local asset directory.
+    MW_SYNTHESIZE_PASS_BY_CONST_REF(std::string, _localAssetDir, LocalAssetDirectory);
     
 private:
     enum DownloadFileType {
@@ -140,14 +165,13 @@ private:
     void downloadVersionFile();
     void downloadConfigFile();
     void downloadModuleFile();
-    void downloadProtocolFile();
     void processAfterVersionFileDownload();
     void processAfterConfigFileDownload();
     void processAfterProtocolFileDownload();
     void checkMainModule();
     void processAfterSingleModleFileDownload(const std::string &moduleName);
     void saveVersion(float version);
-    const char *fullLocalAssetPath(const std::string &filePath);
+    std::string fullLocalAssetPath(const std::string &filePath);
     void reportError(EAssetUpdateErrorType errorType , const std::string &errorMsg);
     void removeModuleFromUpdatingList(const std::string &moduleName);
     bool isFileUpdated(const std::string &filePath);
@@ -158,15 +182,15 @@ private:
     std::unordered_map<std::string, std::vector<std::string> > _downloadCache;
     std::vector<std::string> _updatingModuleList;
     bool _moduleUpdating;
-    std::vector<std::string> _copyFileList;
     float _minProgramVersion;
     std::string _programUpdateUrl;
     MWJsonObject *_jsonConfig;
     MWJsonObject *_jsonBundleMd5;
     bool _globalMd5NeedFlush;
     MWHttpDownloader *_downloader;
+    DownloadFileType _downloadFileType;
     
-    IAssetUpdateDelegate *_delegate;
+    IAssetUpdateDelegate *_assetUpdateDelegate;
 };
 
 MW_FRAMEWORK_END

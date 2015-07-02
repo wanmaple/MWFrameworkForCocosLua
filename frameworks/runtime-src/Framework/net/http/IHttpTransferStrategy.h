@@ -16,13 +16,13 @@ MW_FRAMEWORK_BEGIN
 /**
  * Tell me how to transfer parameters to http.
  */
-class MW_INTERFACE MWHttpTransferStrategy
+class MW_INTERFACE IHttpTransferStrategy
 {
 public:
     /**
      * HttpTransferStrategy destructor.
      */
-    virtual ~MWHttpTransferStrategy() {}
+    virtual ~IHttpTransferStrategy() {}
     
     /**
      * How to get url parameters to transfer based on your rule?
