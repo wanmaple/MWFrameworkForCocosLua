@@ -108,6 +108,7 @@
 		F5714FE21AB9D77B00AF3A51 /* MWHttpGetService.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5714FDD1AB9D77B00AF3A51 /* MWHttpGetService.cpp */; };
 		F57150931AB9E4B900AF3A51 /* libcurl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F57150921AB9E4B900AF3A51 /* libcurl.a */; };
 		F57BF7C51B536F0700F2A2EC /* MWHttpDownloader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F57BF7C41B536F0700F2A2EC /* MWHttpDownloader.cpp */; };
+		F57BF7C81B53B9F900F2A2EC /* MWAssetManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F57BF7C61B53B9F900F2A2EC /* MWAssetManager.cpp */; };
 		F5950CBE1AFA8E2800A73190 /* MWIOUtilsStrategyIOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = F5950CBD1AFA8E2800A73190 /* MWIOUtilsStrategyIOS.mm */; };
 		F5950CC01AFA8F8B00A73190 /* MWIOUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5950CBF1AFA8F8B00A73190 /* MWIOUtils.cpp */; };
 		F5A5F00C1B44281D0060AE8E /* md5.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5A5F00A1B44281D0060AE8E /* md5.cpp */; };
@@ -378,6 +379,8 @@
 		F5714FFB1AB9E47A00AF3A51 /* typecheck-gcc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "typecheck-gcc.h"; sourceTree = "<group>"; };
 		F57150921AB9E4B900AF3A51 /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl.a; path = ../Framework/net/http/curl/prebuilt/ios/libcurl.a; sourceTree = "<group>"; };
 		F57BF7C41B536F0700F2A2EC /* MWHttpDownloader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWHttpDownloader.cpp; sourceTree = "<group>"; };
+		F57BF7C61B53B9F900F2A2EC /* MWAssetManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWAssetManager.cpp; sourceTree = "<group>"; };
+		F57BF7C71B53B9F900F2A2EC /* MWAssetManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWAssetManager.h; sourceTree = "<group>"; };
 		F58964EC1AFB8689005BEA54 /* libprotobuf-lite.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libprotobuf-lite.a"; path = "../Framework/protobuf/protobuf_lib/lib/libprotobuf-lite.a"; sourceTree = "<group>"; };
 		F58964EE1AFB8911005BEA54 /* libprotobuf.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libprotobuf.a; path = ../Framework/protobuf/protobuf_lib/lib/libprotobuf.a; sourceTree = "<group>"; };
 		F58964F01AFB89CA005BEA54 /* libprotobuf.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libprotobuf.9.dylib; path = ../Framework/protobuf/protobuf_lib/lib/libprotobuf.9.dylib; sourceTree = "<group>"; };
@@ -953,6 +956,8 @@
 		F57150941AB9E70900AF3A51 /* utils */ = {
 			isa = PBXGroup;
 			children = (
+				F57BF7C61B53B9F900F2A2EC /* MWAssetManager.cpp */,
+				F57BF7C71B53B9F900F2A2EC /* MWAssetManager.h */,
 				F5CF4A4A1ADBF3BC00D0AF87 /* MWUUIDGenerator.cpp */,
 				F5CF4A4B1ADBF3BC00D0AF87 /* MWUUIDGenerator.h */,
 			);
@@ -1325,6 +1330,7 @@
 				33250DCC1A91E39A00D1668B /* JSONAllocator.cpp in Sources */,
 				F57BF7C51B536F0700F2A2EC /* MWHttpDownloader.cpp in Sources */,
 				F5CF4A611ADCE8CD00D0AF87 /* gif_err.c in Sources */,
+				F57BF7C81B53B9F900F2A2EC /* MWAssetManager.cpp in Sources */,
 				F5629EC61AEC20F000CC4F1F /* unzip.c in Sources */,
 				F5CF4A601ADCE8CD00D0AF87 /* egif_lib.c in Sources */,
 				78C738801A77EF9B0028FC3A /* MWGameScene.cpp in Sources */,

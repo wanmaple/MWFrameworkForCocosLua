@@ -254,7 +254,7 @@ void MWAssetManager::onDownloadFailed(mwframework::MWHttpDownloader *downloader,
     
     CCLOG("Download file error: %s", errorMsg.c_str());
     
-    if (_downloader->retryTask(userdata)) {
+    if (_downloader->retry(userdata)) {
         
     }
 }
