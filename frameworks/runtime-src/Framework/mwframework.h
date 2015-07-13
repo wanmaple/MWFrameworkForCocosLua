@@ -36,7 +36,7 @@
 
 // utils
 #include "utils/MWUUIDGenerator.h"
-#include "utils/MWAssetManager.h"
+//#include "utils/MWAssetManager.h"
 
 // net.
 #include "net/MWNetService.h"

@@ -14,16 +14,16 @@ using namespace cocos2d;
 using namespace std;
 
 #define TEMP_FILE_SUFFIX ".tmp"
-#define MWHttpDownloader_SEMAPHORE_NAME "http_downloader_sem"
+#define MWHTTPDOWNLOADER_SEMAPHORE_NAME "http_downloader_sem"
 #define DOWNLOADING_UNRESPONSE_TIMES 10
 
 MW_FRAMEWORK_BEGIN
 
-static string g_downloaderSemName = string(MWHttpDownloader_SEMAPHORE_NAME);
+static string g_downloaderSemName = string(MWHTTPDOWNLOADER_SEMAPHORE_NAME);
 
 void *downloadThread(void *userdata)
 {
-    MWHttpDownloader *pDownloader = (MWHttpDownloader*)userdata;
+    MWHttpDownloader *pDownloader = (MWHttpDownloader *) userdata;
     
     while (!pDownloader->_needQuit) {
         // wait for new task
@@ -34,13 +34,13 @@ void *downloadThread(void *userdata)
         MWDownloadTask *pTask = nullptr;
         pthread_mutex_lock(&pDownloader->_taskMutex);
         if (pDownloader->_taskQueue->count() > 0) {
-            pTask = (MWDownloadTask*)pDownloader->_taskQueue->front();
+            pTask = (MWDownloadTask *) pDownloader->_taskQueue->front();
             pDownloader->_taskQueue->dequeue();
         }
         pthread_mutex_unlock(&pDownloader->_taskMutex);
         
         if (pTask) {
-            pDownloader->_currentTask = pTask;
+            pDownloader->_setCurrentTask(pTask);
             pDownloader->_executeTask();
         }
         pDownloader->_downloading = false;
@@ -51,7 +51,7 @@ void *downloadThread(void *userdata)
 
 size_t onReceiveData(void *buffer, size_t size, size_t writeSize, void *userdata)
 {
-    MWHttpDownloader *pDownloader = (MWHttpDownloader*)userdata;
+    MWHttpDownloader *pDownloader = (MWHttpDownloader *) userdata;
     MWDownloadTask *pTask = pDownloader->_currentTask;
     
     size_t written = fwrite(buffer, size, writeSize, pTask->_saveFile);
@@ -60,11 +60,11 @@ size_t onReceiveData(void *buffer, size_t size, size_t writeSize, void *userdata
 
 int onProgress(void *userdata, double totalToDownload, double downloaded, double totalToUpload, double uploaded)
 {
-    MWHttpDownloader *pDownloader = (MWHttpDownloader*)userdata;
+    MWHttpDownloader *pDownloader = (MWHttpDownloader *) userdata;
     MWDownloadTask *pTask = pDownloader->_currentTask;
     
     // When the nonresponse count exceeds the DOWNLOADING_UNRESPONSE_TIMES, treat this as download exception.
-    if (pTask->_lastDownloadedBytes == (ssize_t)downloaded) {
+    if (pTask->_lastDownloadedBytes == (ssize_t) downloaded) {
         ++pTask->_unreceivedDataTimes;
     } else {
         pTask->_unreceivedDataTimes = 0;
@@ -81,7 +81,7 @@ int onProgress(void *userdata, double totalToDownload, double downloaded, double
     } else if (progress > 1) {
         progress = 1;
     }
-    pDownloader->_addDownloadEvent(MWDownloadEventType::DOWNLOAD_INPROGRESS, pTask, progress);
+    pDownloader->_addDownloadEvent(EDownloadEventType::DOWNLOAD_INPROGRESS, pTask, progress);
     
     return 0;
 }
@@ -89,7 +89,7 @@ int onProgress(void *userdata, double totalToDownload, double downloaded, double
 /************************ MWDownloadTask Implementation ************************/
 MWDownloadTask::MWDownloadTask(const string &url, const string &savePath, Ref *userdata, bool supportResume, int retryTimes)
 : _url(url)
-, _path(savePath)
+, _savePath(savePath)
 , _supportResume(supportResume)
 , _userdata(nullptr)
 , _breakpointBytes(0)
@@ -136,7 +136,7 @@ void MWDownloadTask::setUserdata(cocos2d::Ref *userdata)
 }
 
 /************************ MWDownloadEvent Implementation ************************/
-MWDownloadEvent *MWDownloadEvent::create(MWDownloadEventType eventType, MWDownloadTask *task)
+MWDownloadEvent *MWDownloadEvent::create(EDownloadEventType eventType, MWDownloadTask *task)
 {
     auto pEvent = new (nothrow) MWDownloadEvent(eventType, task);
     if (pEvent) {
@@ -147,12 +147,13 @@ MWDownloadEvent *MWDownloadEvent::create(MWDownloadEventType eventType, MWDownlo
     return nullptr;
 }
 
-MWDownloadEvent::MWDownloadEvent(MWDownloadEventType eventType, MWDownloadTask *task)
+MWDownloadEvent::MWDownloadEvent(EDownloadEventType eventType, MWDownloadTask *task)
 : _type(eventType)
-, _task(task)
+, _task(nullptr)
 , _progress(0.0f)
 , _errorMsg()
 {
+    this->setRelatedTask(task);
 }
 
 MWDownloadEvent::~MWDownloadEvent()
@@ -169,7 +170,7 @@ MWHttpDownloader::MWHttpDownloader()
 , _currentTask(nullptr)
 , _delegate(nullptr)
 , _downloading(false)
-, _newTaskSem()
+, _needRetry(false)
 , _eventMutex()
 {
 }
@@ -201,8 +202,7 @@ void MWHttpDownloader::destroy()
 void MWHttpDownloader::beginDownloading(const std::string &url, const std::string &savePath, cocos2d::Ref *userdata, bool supportResume, int retryTimes)
 {
     if (url.size() == 0 || savePath.size() == 0) {
-        CCLOG("Invalid url and save path.");
-        return;
+        MW_THROW_EXCEPTION(5014);
     }
     
     // init thread
@@ -225,25 +225,52 @@ void MWHttpDownloader::beginDownloading(const std::string &url, const std::strin
     sem_post(_newTaskSemPtr);
 }
 
+bool MWHttpDownloader::retry(cocos2d::Ref *userdata)
+{
+    if (this->_needRetry) {
+        MWDownloadTask *pRetryTask = this->_currentTask;
+        if (pRetryTask && pRetryTask->_retryTimes > 0) {
+            pRetryTask->_retryOnce();
+            
+            auto pTask = MWDownloadTask::create(pRetryTask->getUrl(), pRetryTask->getSavePath(), userdata, pRetryTask->_supportResume, pRetryTask->_retryTimes);
+            pthread_mutex_lock(&_taskMutex);
+            _taskQueue->enqueue(pTask);
+            pthread_mutex_unlock(&_taskMutex);
+            
+            sem_post(_newTaskSemPtr);
+            
+            return true;
+        } else {
+            CC_SAFE_RELEASE(pRetryTask);
+        }
+    }
+    
+    return false;
+}
+
 void MWHttpDownloader::onDownloadUpdated(float dt)
 {
     if (_delegate) {
         pthread_mutex_lock(&_eventMutex);
-        MWDownloadEvent *pEvent = nullptr;
-        while (_eventQueue->count() > 0) {
-            pEvent = (MWDownloadEvent*)_eventQueue->front();
-            _eventQueue->dequeue();
-            if (pEvent->getType() == MWDownloadEventType::DOWNLOAD_STARTED) {
-                _delegate->onDownloadStarted(this);
-            } else if (pEvent->getType() == MWDownloadEventType::DOWNLOAD_INPROGRESS) {
-                _delegate->onDownloading(this, pEvent->getProgress());
-            } else if (pEvent->getType() == MWDownloadEventType::DOWNLOAD_SUCCESS) {
-                _delegate->onDownloadCompleted(this);
-            } else if (pEvent->getType() == MWDownloadEventType::DOWNLOAD_FAILED) {
-                _delegate->onDownloadFailed(this, pEvent->getErrorMessage());
-            }
-        }
+        MWQueue *pCopyQueue = _eventQueue->clone();
+        _eventQueue->clear();
         pthread_mutex_unlock(&_eventMutex);
+        
+        MWDownloadEvent *pEvent = nullptr;
+        while (pCopyQueue->count() > 0) {
+            pEvent = (MWDownloadEvent *) pCopyQueue->front();
+            Ref *userdata = pEvent->getRelatedTask()->getUserdata();
+            if (pEvent->getType() == EDownloadEventType::DOWNLOAD_STARTED) {
+                _delegate->onDownloadStarted(this, userdata);
+            } else if (pEvent->getType() == EDownloadEventType::DOWNLOAD_INPROGRESS) {
+                _delegate->onDownloading(this, pEvent->getProgress(), userdata);
+            } else if (pEvent->getType() == EDownloadEventType::DOWNLOAD_SUCCESS) {
+                _delegate->onDownloadCompleted(this, userdata);
+            } else if (pEvent->getType() == EDownloadEventType::DOWNLOAD_FAILED) {
+                _delegate->onDownloadFailed(this, pEvent->getErrorMessage(), userdata);
+            }
+            pCopyQueue->dequeue();
+        }
     }
 }
 
@@ -262,12 +289,13 @@ bool MWHttpDownloader::_initThread()
         return false;
     }
 #else
-    int semRet = sem_init(&_newTaskSem, 0, 0);
+    sem_t newTaskSem;
+    int semRet = sem_init(&newTaskSem, 0, 0);
     if (semRet < 0) {
         CCLOG("Create complete task semaphore failed.");
         return false;
     }
-    _newTaskSemPtr = &_newTaskSem;
+    _newTaskSemPtr = &newTaskSem;
 #endif
     
     pthread_create(&_networkThread, nullptr, &downloadThread, this);
@@ -280,7 +308,7 @@ bool MWHttpDownloader::_initThread()
 
 bool MWHttpDownloader::_initTask()
 {
-    string tmpFullPath = _currentTask->getPath();
+    string tmpFullPath = _currentTask->getSavePath();
     
     // the save path should be a file path.
     if (tmpFullPath[tmpFullPath.size() - 1] == '/') {
@@ -289,8 +317,8 @@ bool MWHttpDownloader::_initTask()
     }
     
     // create directory
-    tmpFullPath = tmpFullPath.substr(0, tmpFullPath.find_last_of('/'));
-    if (!MWIOUtils::getInstance()->createDirectory(tmpFullPath)) {
+    string dirPath = tmpFullPath.substr(0, tmpFullPath.find_last_of('/'));
+    if (!MWIOUtils::getInstance()->createDirectory(dirPath)) {
         CCLOG("Create download directory failed.");
         return false;
     }
@@ -324,23 +352,32 @@ void MWHttpDownloader::_executeTask()
 {
     CCLOG("Begin downloading file: [%s]", _currentTask->getUrl());
     
-    this->_addDownloadEvent(MWDownloadEventType::DOWNLOAD_STARTED, _currentTask, 0);
+    this->_addDownloadEvent(EDownloadEventType::DOWNLOAD_STARTED, _currentTask, 0);
+    this->setNeedRetry(false);
     
     bool ret = true;
     do {
         ret = this->_initTask();
         if (!ret) {
-            this->_addDownloadEvent(MWDownloadEventType::DOWNLOAD_FAILED, _currentTask, 0, "Error code: 1001. Init task failed.");
+            this->setNeedRetry(true);
+            this->_addDownloadEvent(EDownloadEventType::DOWNLOAD_FAILED, _currentTask, 0, GetErrorString(5011));
             break;
         }
         ret = this->_download();
         if (!ret) {
-            this->_addDownloadEvent(MWDownloadEventType::DOWNLOAD_FAILED, _currentTask, 0, "Error code: 1002. Download failed.");
+            this->setNeedRetry(true);
+            this->_addDownloadEvent(EDownloadEventType::DOWNLOAD_FAILED, _currentTask, 0, GetErrorString(5012));
             break;
+        }
+        // close file handle to ensure the move operation.
+        if (_currentTask->_saveFile) {
+            fclose(_currentTask->_saveFile);
+            _currentTask->_saveFile = nullptr;
         }
         ret = this->_finishDownloading();
         if (!ret) {
-            this->_addDownloadEvent(MWDownloadEventType::DOWNLOAD_FAILED, _currentTask, 0, "Error code: 1003. Rename downloaded file failed.");
+            this->setNeedRetry(true);
+            this->_addDownloadEvent(EDownloadEventType::DOWNLOAD_FAILED, _currentTask, 0, GetErrorString(5013));
             break;
         }
     } while (false);
@@ -352,7 +389,7 @@ void MWHttpDownloader::_executeTask()
     }
     
     if (ret) {
-        this->_addDownloadEvent(MWDownloadEventType::DOWNLOAD_SUCCESS, _currentTask, 1);
+        this->_addDownloadEvent(EDownloadEventType::DOWNLOAD_SUCCESS, _currentTask, 1);
     }
 }
 
@@ -426,10 +463,19 @@ bool MWHttpDownloader::_download()
 
 bool MWHttpDownloader::_finishDownloading()
 {
-    string tmpFullPath = _currentTask->getPath();
+    string tmpFullPath = _currentTask->getSavePath();
+    
+    // delete the save file which does already exist.
+    if (MWIOUtils::getInstance()->fileExists(tmpFullPath)) {
+        if (!MWIOUtils::getInstance()->removeFile(tmpFullPath)) {
+            CCLOG("Remove existed file failed.");
+            return false;
+        }
+    }
+    
     tmpFullPath.append(TEMP_FILE_SUFFIX);
     
-    if (!MWIOUtils::getInstance()->moveFile(tmpFullPath, _currentTask->getPath())) {
+    if (!MWIOUtils::getInstance()->moveFile(tmpFullPath, _currentTask->getSavePath())) {
         CCLOG("Rename downloaded file failed.");
         return false;
     }
@@ -437,7 +483,7 @@ bool MWHttpDownloader::_finishDownloading()
     return true;
 }
 
-void MWHttpDownloader::_addDownloadEvent(MWDownloadEventType eventType, MWDownloadTask *task, float progress, const std::string &error)
+void MWHttpDownloader::_addDownloadEvent(EDownloadEventType eventType, MWDownloadTask *task, float progress, const std::string &error)
 {
     auto pEvent = MWDownloadEvent::create(eventType, task);
     pEvent->setProgress(progress);
@@ -446,6 +492,15 @@ void MWHttpDownloader::_addDownloadEvent(MWDownloadEventType eventType, MWDownlo
     pthread_mutex_lock(&_eventMutex);
     _eventQueue->enqueue(pEvent);
     pthread_mutex_unlock(&_eventMutex);
+}
+
+void MWHttpDownloader::_setCurrentTask(mwframework::MWDownloadTask *task)
+{
+    if (_currentTask != task) {
+        CC_SAFE_RELEASE(_currentTask);
+        _currentTask = task;
+        CC_SAFE_RETAIN(_currentTask);
+    }
 }
 
 MW_FRAMEWORK_END

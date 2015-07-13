@@ -115,27 +115,27 @@ public:
      *
      * @param downloader Related downloader of the task.
      */
-    void onDownloadStarted(MWHttpDownloader *downloader);
+    void onDownloadStarted(MWHttpDownloader *downloader, cocos2d::Ref *userdata);
     /**
      * Delegate when the download task executes.
      *
      * @param downloader Related downloader of the task.
      * @param progress Downloading progress.
      */
-    void onDownloading(MWHttpDownloader *downloader, float progress);
+    void onDownloading(MWHttpDownloader *downloader, float progress, cocos2d::Ref *userdata);
     /**
      * Delegate when the download task completes.
      *
      * @param downloader Related downloader of the task.
      */
-    void onDownloadCompleted(MWHttpDownloader *downloader);
+    void onDownloadCompleted(MWHttpDownloader *downloader, cocos2d::Ref *userdata);
     /**
      * Delegate when the download task fails.
      *
      * @param downloader Related downloader of the task.
      * @param errorMsg Encountered error message.
      */
-    void onDownloadFailed(MWHttpDownloader *downloader, const std::string &errorMsg);
+    void onDownloadFailed(MWHttpDownloader *downloader, const std::string &errorMsg, cocos2d::Ref *userdata);
     
     // Program version.
     MW_SYNTHESIZE(float, _programVersion, ProgramVersion);
@@ -156,7 +156,6 @@ private:
         VERSION_FILE = 1,
         CONFIG_FILE = 2,
         MODULE_FILE = 3,
-        PROTOCOL_FILE = 4,
     };
     
     void clearSearchPath();
@@ -167,7 +166,6 @@ private:
     void downloadModuleFile();
     void processAfterVersionFileDownload();
     void processAfterConfigFileDownload();
-    void processAfterProtocolFileDownload();
     void checkMainModule();
     void processAfterSingleModleFileDownload(const std::string &moduleName);
     void saveVersion(float version);

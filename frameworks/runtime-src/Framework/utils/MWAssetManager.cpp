@@ -194,7 +194,69 @@ void MWAssetManager::downloadModuleFile()
         return;
     }
     
+    // retreive first module
+    string moduleName = _updatingModuleList[0];
     
+    // check download cache
+    if (_downloadCache.find(moduleName) == _downloadCache.end() || _downloadCache[moduleName].size() <= 0) {
+        return;
+    }
+    
+    auto downloadFileList = _downloadCache[moduleName];
+    string filePath = downloadFileList[0];
+    
+    if (this->isFileUpdated(filePath)) {
+        CCLOG("Already updated by other module: %s", filePath.c_str());
+        this->processAfterSingleModleFileDownload(moduleName);
+        return;
+    }
+    
+    _moduleUpdating = true;
+    
+    // download
+    string downloadPath = MWIOUtils::getInstance()->splicePath(_assetRootUrl, _serverAssetDir);
+    downloadPath = MWIOUtils::getInstance()->splicePath(downloadPath, filePath);
+    
+    string savePath = this->fullLocalAssetPath(filePath);
+    
+    _downloadFileType = MODULE_FILE;
+    
+    _downloader->beginDownloading(downloadPath, savePath, __String::create(moduleName), false);
+}
+
+void MWAssetManager::onDownloadStarted(mwframework::MWHttpDownloader *downloader, cocos2d::Ref *userdata)
+{
+    MW_UNUSED_PARAM(downloader);
+    
+    if (_downloadFileType == BUNDLE_MD5_FILE) {
+        this->mergeMd5File();
+        this->downloadVersionFile();
+    } else if (_downloadFileType == VERSION_FILE) {
+        this->processAfterVersionFileDownload();
+    } else if (_downloadFileType == CONFIG_FILE) {
+        this->processAfterConfigFileDownload();
+    } else if (_downloadFileType == MODULE_FILE) {
+        __String *pStr = static_cast<__String *>(userdata);
+        this->processAfterSingleModleFileDownload(pStr->getCString());
+    }
+}
+
+void MWAssetManager::onDownloading(mwframework::MWHttpDownloader *downloader, float progress, cocos2d::Ref *userdata)
+{
+    MW_UNUSED_PARAM(downloader);
+    MW_UNUSED_PARAM(progress);
+    MW_UNUSED_PARAM(userdata);
+}
+
+void MWAssetManager::onDownloadFailed(mwframework::MWHttpDownloader *downloader, const std::string &errorMsg, cocos2d::Ref *userdata)
+{
+    MW_UNUSED_PARAM(downloader);
+    
+    CCLOG("Download file error: %s", errorMsg.c_str());
+    
+    if (_downloader->retryTask(userdata)) {
+        
+    }
 }
 
 MW_FRAMEWORK_END

@@ -21,7 +21,6 @@
 MW_FRAMEWORK_BEGIN
 
 class MWHttpDownloader;
-
 class MWDownloadTask;
 
 class MW_INTERFACE IHttpDownloaderDelegate
@@ -34,27 +33,27 @@ public:
      *
      * @param downloader Related downloader of the task.
      */
-    virtual void onDownloadStarted(MWHttpDownloader *downloader) = 0;
+    virtual void onDownloadStarted(MWHttpDownloader *downloader, cocos2d::Ref *userdata) = 0;
     /**
      * Delegate when the download task executes.
      *
      * @param downloader Related downloader of the task.
      * @param progress Downloading progress.
      */
-    virtual void onDownloading(MWHttpDownloader *downloader, float progress) = 0;
+    virtual void onDownloading(MWHttpDownloader *downloader, float progress, cocos2d::Ref *userdata) = 0;
     /**
      * Delegate when the download task completes.
      *
      * @param downloader Related downloader of the task.
      */
-    virtual void onDownloadCompleted(MWHttpDownloader *downloader) = 0;
+    virtual void onDownloadCompleted(MWHttpDownloader *downloader, cocos2d::Ref *userdata) = 0;
     /**
      * Delegate when the download task fails.
      *
      * @param downloader Related downloader of the task.
      * @param errorMsg Encountered error message.
      */
-    virtual void onDownloadFailed(MWHttpDownloader *downloader, const std::string &errorMsg) = 0;
+    virtual void onDownloadFailed(MWHttpDownloader *downloader, const std::string &errorMsg, cocos2d::Ref *userdata) = 0;
 };
 
 class MW_DLL MWDownloadTask : public MWObject
@@ -105,9 +104,9 @@ public:
      *
      * @return Local download path.
      */
-    inline const char *getPath()
+    inline const char *getSavePath()
     {
-        return _path.c_str();
+        return _savePath.c_str();
     }
     /**
      * Whether supports breakpoint resume feature.
@@ -138,7 +137,7 @@ protected:
     int _retryOnce();
     
     std::string _url;
-    std::string _path;
+    std::string _savePath;
     bool _supportResume;
     cocos2d::Ref *_userdata;
     
@@ -149,7 +148,7 @@ protected:
     volatile int _retryTimes;
 };
 
-enum class MWDownloadEventType
+enum class EDownloadEventType
 {
     DOWNLOAD_STARTED = 0,
     DOWNLOAD_INPROGRESS,
@@ -168,7 +167,7 @@ public:
      *
      * @return DownloadEvent object.
      */
-    static MWDownloadEvent *create(MWDownloadEventType eventType, MWDownloadTask *task);
+    static MWDownloadEvent *create(EDownloadEventType eventType, MWDownloadTask *task);
     
     /**
      * DownloadEvent constructor.
@@ -176,7 +175,7 @@ public:
      * @param eventType Download event type.
      * @param task Related download task.ß
      */
-    MWDownloadEvent(MWDownloadEventType eventType, MWDownloadTask *task);
+    MWDownloadEvent(EDownloadEventType eventType, MWDownloadTask *task);
     /**
      * DownloadEvent destructor.
      */
@@ -185,7 +184,7 @@ public:
     /**
      * DownloadEvent getter and setter.
      */
-    MW_SYNTHESIZE(MWDownloadEventType, _type, Type);
+    MW_SYNTHESIZE(EDownloadEventType, _type, Type);
     /**
      * Related task getter and setter.
      */
@@ -241,7 +240,7 @@ public:
      *
      * @return Whether the operation is supported.
      */
-    bool retryTask(cocos2d::Ref *userdata);
+    bool retry(cocos2d::Ref *userdata);
     
     /**
      * Whether the downloader is downloading.
@@ -260,6 +259,8 @@ public:
      */
     MW_SYNTHESIZE(IHttpDownloaderDelegate*, _delegate, Delegate);
     
+    MW_SYNTHESIZE(bool, _needRetry, NeedRetry);
+    
 protected:
     bool _initThread();
     void _executeTask();
@@ -268,7 +269,9 @@ protected:
     bool _download();
     bool _finishDownloading();
     
-    void _addDownloadEvent(MWDownloadEventType eventType, MWDownloadTask *task, float progress, const std::string &error = "");
+    void _setCurrentTask(MWDownloadTask *task);
+    
+    void _addDownloadEvent(EDownloadEventType eventType, MWDownloadTask *task, float progress, const std::string &error = "");
     
     bool _inited;       // whether inited.
     MWQueue *_taskQueue;
@@ -282,7 +285,7 @@ protected:
     pthread_mutex_t _taskMutex;
     pthread_mutex_t _eventMutex;
     sem_t *_newTaskSemPtr;
-    sem_t _newTaskSem;
+//    sem_t _newTaskSem;
 };
 
 MW_FRAMEWORK_END
