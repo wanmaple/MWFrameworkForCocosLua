@@ -5,7 +5,7 @@
 #include "cocos2d.h"
 
 #define AM_VERSION_FILE "version.bin"
-#define AM_GLOBAL_MD5_FILE "global.md5.bin"
+//#define AM_GLOBAL_MD5_FILE "global.md5.bin"
 #define AM_BUNDLE_MD5_DIRECTORY "BundleMd5"
 #define AM_BUNDLE_MD5_FILE "bundle.md5.bin"
 #define AM_ASSET_CONFIG_FILE "asset.config.bin"
