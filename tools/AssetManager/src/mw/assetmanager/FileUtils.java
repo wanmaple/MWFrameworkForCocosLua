@@ -136,6 +136,7 @@ public class FileUtils {
         }
         File dir = new File(dirPath);
         if (dir.isDirectory() && dir.exists()) {
+            this.removeAllFiles(dirPath);
             ret = dir.delete();
         }
         
@@ -162,8 +163,8 @@ public class FileUtils {
                 tempFile.delete();  
             }  
             if (tempFile.isDirectory()) {  
-                this.removeAllFiles(dirPath + "/" + fileList[i]);  
-                this.removeDirectory(dirPath + "/" + fileList[i]);  
+                this.removeAllFiles(tempFile.getAbsolutePath());  
+                this.removeDirectory(tempFile.getAbsolutePath());  
             }  
         }  
     }  
@@ -178,6 +179,11 @@ public class FileUtils {
                 ByteBuffer buffer = ByteBuffer.allocate((int)channel.size());
                 while (channel.read(buffer) > 0) {
                     // Do nothing.
+                }
+                // create dir if non-exist
+                String dirPath = newPath.substring(0, newPath.lastIndexOf(File.separator));
+                if (!new File(dirPath).exists()) {
+                    this.createDirectory(dirPath);
                 }
                 FileOutputStream fos = new FileOutputStream(newPath);
                 fos.write(buffer.array());

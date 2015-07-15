@@ -313,19 +313,13 @@ public class MainFrame extends javax.swing.JFrame {
         String assetPath = txtAssetPath.getText();
         
         String uploadDirPath = versionPath;
-        String logDirPath = versionPath;
         if (versionPath.endsWith(File.separator)) {
             uploadDirPath += UPLOAD_DIR + File.separator;
-            logDirPath += CHANGE_LOG_DIR + File.separator;
         } else {
             uploadDirPath += File.separator + UPLOAD_DIR + File.separator;
-            logDirPath += File.separator + CHANGE_LOG_DIR + File.separator;
         }
         if (!new File(uploadDirPath).exists()) {
             FileUtils.getInstance().createDirectory(uploadDirPath);
-        }
-        if (!new File(logDirPath).exists()) {
-            FileUtils.getInstance().createDirectory(logDirPath);
         }
         
         String oldAssetConfigPath = uploadDirPath + ASSET_CONFIG_FILE_NAME;
@@ -379,6 +373,94 @@ public class MainFrame extends javax.swing.JFrame {
         FileUtils.getInstance().writeDataToFile(newAssetConfigPath, json.toString().getBytes());
         FileUtils.getInstance().writeDataToFile(oldAssetConfigPath, json.toString().getBytes());
         
+        this.log("操作成功。");
+    }
+    
+    private void generateBundleMd5()
+    {
+        this.log("正在生成Asset的md5文件...");
+        
+        String versionPath = txtVersionPath.getText();
+        String newVersion = txtNewVersion.getText();
+        
+        String bundleMd5Path = versionPath;
+        String uploadBundleMd5Path = versionPath;
+        if (versionPath.endsWith(File.separator)) {
+            bundleMd5Path += BUNDLE_MD5_DIR + File.separator + newVersion + File.separator;
+            uploadBundleMd5Path += UPLOAD_DIR + File.separator + BUNDLE_MD5_DIR + File.separator;
+        } else {
+            bundleMd5Path += File.separator + BUNDLE_MD5_DIR + File.separator + newVersion + File.separator;
+            uploadBundleMd5Path += File.separator + UPLOAD_DIR + File.separator + BUNDLE_MD5_DIR + File.separator;
+        }
+        if (!new File(bundleMd5Path).exists()) {
+            FileUtils.getInstance().createDirectory(bundleMd5Path);
+        }
+        if (new File(uploadBundleMd5Path).exists()) {
+            FileUtils.getInstance().removeDirectory(uploadBundleMd5Path);
+        }
+        uploadBundleMd5Path += newVersion + File.separator + BUNDLE_MD5_FILE_NAME;
+        
+        String bundleMd5FilePath = bundleMd5Path + BUNDLE_MD5_FILE_NAME;
+        JSONObject md5List = new JSONObject();
+        Set<String> keys = _newMd5Map.keySet();
+        for (String key : keys) {
+            md5List.put(key, _newMd5Map.get(key));
+        }
+        
+        FileUtils.getInstance().writeDataToFile(bundleMd5FilePath, md5List.toString().getBytes());
+        FileUtils.getInstance().copyFile(bundleMd5FilePath, uploadBundleMd5Path);
+        
+        this.log("操作成功。");
+    }
+    
+    private void generateNewVersionFile(double newVersion)
+    {
+        this.log("正在生成新版本文件...");
+        
+        String minProgramVersion = txtMinProgramVersion.getText().trim();
+        String programUpdateUrl = txtProgramUpdateUrl.getText().trim();
+        String versionPath = txtVersionPath.getText();
+        
+        JSONObject jsonVersion = new JSONObject();
+        jsonVersion.put("version", String.format("%.2f", newVersion));
+        jsonVersion.put("min_cpp_version", minProgramVersion);
+        jsonVersion.put("cpp_update_url", programUpdateUrl);
+//        byte[] bytes = AesUtils.getInstance().encipher(jsonVersion.toString(), AES_KEY);
+        
+        String newVersionPath = versionPath;
+        String uploadVersionPath = versionPath;
+        if (versionPath.endsWith(File.separator)) {
+            newVersionPath += VERSION_FILE_NAME;
+            uploadVersionPath += UPLOAD_DIR + File.separator + VERSION_FILE_NAME;
+        } else {
+            newVersionPath += File.separator + VERSION_FILE_NAME;
+            uploadVersionPath += File.separator + UPLOAD_DIR + File.separator + VERSION_FILE_NAME;
+        }
+        FileUtils.getInstance().writeDataToFile(newVersionPath, jsonVersion.toString().getBytes());
+        FileUtils.getInstance().writeDataToFile(uploadVersionPath, jsonVersion.toString().getBytes());
+        
+        this.log("操作成功。");
+    }
+    
+    private void generateUploadFiles()
+    {
+        this.log("正在生成增量资源包...");
+        
+        String versionPath = txtVersionPath.getText();
+        String assetPath = txtAssetPath.getText();
+        
+        String logDirPath = versionPath;
+        if (versionPath.endsWith(File.separator)) {
+            logDirPath += CHANGE_LOG_DIR + File.separator;
+        } else {
+            logDirPath += File.separator + CHANGE_LOG_DIR + File.separator;
+        }
+        if (!new File(logDirPath).exists()) {
+            FileUtils.getInstance().createDirectory(logDirPath);
+        }
+        
+        String newVersion = txtNewVersion.getText();
+        
         // Change log
         String logFileName = lblCurrentVersion.getText() + "-" + newVersion + ".txt";
         String logFilePath = logDirPath + logFileName;
@@ -416,71 +498,28 @@ public class MainFrame extends javax.swing.JFrame {
         
         FileUtils.getInstance().writeDataToFile(logFilePath, sb.toString().getBytes());
         
-        this.log("操作成功。");
-    }
-    
-    private void generateBundleMd5()
-    {
-        this.log("正在生成Asset的md5文件...");
-        
-        String versionPath = txtVersionPath.getText();
-        String assetPath = txtAssetPath.getText();
-        String newVersion = txtNewVersion.getText();
-        
-        String bundleMd5Path = versionPath;
+        // Upload resources
+        String uploadResourcesPath = versionPath;
         if (versionPath.endsWith(File.separator)) {
-            bundleMd5Path += BUNDLE_MD5_DIR + File.separator + newVersion + File.separator;
+            uploadResourcesPath += UPLOAD_DIR + File.separator + UPLOAD_RESOURCES_DIR + File.separator;
         } else {
-            bundleMd5Path += File.separator + BUNDLE_MD5_DIR + File.separator + newVersion + File.separator;
+            uploadResourcesPath += File.separator + UPLOAD_DIR + File.separator + UPLOAD_RESOURCES_DIR + File.separator;
         }
-        if (!new File(bundleMd5Path).exists()) {
-            FileUtils.getInstance().createDirectory(bundleMd5Path);
+        if (new File(uploadResourcesPath).exists()) {
+            FileUtils.getInstance().removeDirectory(uploadResourcesPath);
         }
+        FileUtils.getInstance().createDirectory(uploadResourcesPath);
         
-        String bundleMd5FilePath = bundleMd5Path + BUNDLE_MD5_FILE_NAME;
-        JSONObject md5List = new JSONObject();
-        Set<String> keys = _newMd5Map.keySet();
-        for (String key : keys) {
-            md5List.put(key, _newMd5Map.get(key));
+        if (!assetPath.endsWith(File.separator)) {
+            assetPath += File.separator;
         }
         
-        FileUtils.getInstance().writeDataToFile(bundleMd5FilePath, md5List.toString().getBytes());
-        
-        this.log("操作成功。");
-    }
-    
-    private void generateNewVersionFile(double newVersion)
-    {
-        this.log("正在生成新版本文件...");
-        
-        String minProgramVersion = txtMinProgramVersion.getText().trim();
-        String programUpdateUrl = txtProgramUpdateUrl.getText().trim();
-        String versionPath = txtVersionPath.getText();
-        
-        JSONObject jsonVersion = new JSONObject();
-        jsonVersion.put("version", String.format("%.2f", newVersion));
-        jsonVersion.put("min_cpp_version", minProgramVersion);
-        jsonVersion.put("cpp_update_url", programUpdateUrl);
-//        byte[] bytes = AesUtils.getInstance().encipher(jsonVersion.toString(), AES_KEY);
-        
-        String newVersionPath = versionPath;
-        String uploadVersionPath = versionPath;
-        if (versionPath.endsWith(File.separator)) {
-            newVersionPath += VERSION_FILE_NAME;
-            uploadVersionPath += UPLOAD_DIR + File.separator + VERSION_FILE_NAME;
-        } else {
-            newVersionPath += File.separator + VERSION_FILE_NAME;
-            uploadVersionPath += File.separator + UPLOAD_DIR + File.separator + VERSION_FILE_NAME;
+        for (String rpath : addFiles) {
+            FileUtils.getInstance().copyFile(assetPath + rpath, uploadResourcesPath + rpath);
         }
-        FileUtils.getInstance().writeDataToFile(newVersionPath, jsonVersion.toString().getBytes());
-        FileUtils.getInstance().writeDataToFile(uploadVersionPath, jsonVersion.toString().getBytes());
-        
-        this.log("操作成功。");
-    }
-    
-    private void generateUploadFiles()
-    {
-        this.log("正在生成增量资源包...");
+        for (String rpath : modifyFiles) {
+            FileUtils.getInstance().copyFile(assetPath + rpath, uploadResourcesPath + rpath);
+        }
         
         this.log("操作成功。");
     }
@@ -565,7 +604,8 @@ public class MainFrame extends javax.swing.JFrame {
     private final String BUNDLE_MD5_DIR = "BundleMd5";
     private final String CHANGE_LOG_DIR = "ChangeLog";
     private final String UPLOAD_DIR = "Upload";
-    private final String AES_KEY = "vgy78ik,";
+    private final String UPLOAD_RESOURCES_DIR = "Resources";
+//    private final String AES_KEY = "vgy78ik,";
     
     /**
      * @param args the command line arguments
