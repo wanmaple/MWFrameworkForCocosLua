@@ -85,11 +85,11 @@ bool AppDelegate::applicationDidFinishLaunching()
     lua_State* L = engine->getLuaStack()->getLuaState();
     lua_module_register(L);
     
-    std::string savePath = cocos2d::FileUtils::getInstance()->getWritablePath() + string("Resource/icon.jpg");
-    CCLOG("%s", savePath.c_str());
-    auto downloader = new mwframework::MWHttpDownloader();
-    downloader->setDelegate(new TestDownloadDelegate());
-    downloader->beginDownloading("http://120.25.123.138/mobile/Resource/icon.jpg", savePath, __String::create(savePath), false);
+//    std::string savePath = cocos2d::FileUtils::getInstance()->getWritablePath() + string("Resource/icon.jpg");
+//    CCLOG("%s", savePath.c_str());
+//    auto downloader = new mwframework::MWHttpDownloader();
+//    downloader->setDelegate(new TestDownloadDelegate());
+//    downloader->beginDownloading("http://120.25.123.138/mobile/Resource/icon.jpg", savePath, __String::create(savePath), false);
     
 #if MW_ENABLE_SCRIPT_BINDING
 #ifdef DEBUG

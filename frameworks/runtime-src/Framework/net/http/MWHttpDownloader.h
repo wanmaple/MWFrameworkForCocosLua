@@ -148,7 +148,7 @@ protected:
     volatile int _retryTimes;
 };
 
-enum class EDownloadEventType
+MW_ENUM EDownloadEventType
 {
     DOWNLOAD_STARTED = 0,
     DOWNLOAD_INPROGRESS,
