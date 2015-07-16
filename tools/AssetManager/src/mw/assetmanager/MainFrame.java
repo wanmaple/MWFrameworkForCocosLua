@@ -289,7 +289,7 @@ public class MainFrame extends javax.swing.JFrame {
         
         String versionPath = txtVersionPath.getText();
         String assetPath = txtAssetPath.getText();
-        String newVersion = txtNewVersion.getText();
+        String newVersion = String.format("%.2f", Double.valueOf(txtNewVersion.getText().trim()));
         
         String versionDir = versionPath;
         if (versionPath.endsWith(File.separator)) {
@@ -333,19 +333,21 @@ public class MainFrame extends javax.swing.JFrame {
             Set<String> keys = files.keySet();
             String md5 = null;
             for (String key : keys) {
-                md5 = files.getString(key);
-                _oldMd5Map.put(key, md5);
+                JSONArray info = files.getJSONArray(key);
+                _oldMd5Map.put(key, info.getString(0));
             }
         }
         
         this._newMd5Map = new HashMap<String, String>();
+        this._newFileSizeMap = new HashMap<String, Long>();
         
         File assetDir = new File(assetPath);
         int fileCount = 0;
         for (File file : assetDir.listFiles()) {
             fileCount += this.generateMd5ForEachFile(file, "", 0);
+            this.generateFileSizeForEachFile(file, "");
         }
-        String newVersion = txtNewVersion.getText();
+        String newVersion = String.format("%.2f", Double.valueOf(txtNewVersion.getText().trim()));
         
         JSONObject json = new JSONObject();
         json.put("fileCount", fileCount);
@@ -353,10 +355,17 @@ public class MainFrame extends javax.swing.JFrame {
         JSONObject md5Vals = new JSONObject();
         Set<String> keys = this._newMd5Map.keySet();
         JSONArray ary = new JSONArray();
+        long totalSize = 0;
         for (String key : keys) {
-            md5Vals.put(key, _newMd5Map.get(key));
+            JSONArray info = new JSONArray();
+            info.add(_newMd5Map.get(key));
+            long size = _newFileSizeMap.get(key);
+            info.add(size);
+            totalSize += size;
+            md5Vals.put(key, info);
             ary.add(key);
         }
+        json.put("totalSize", totalSize);
         json.put("files", md5Vals);
         JSONObject modules = new JSONObject();
         modules.put(MAIN_MODULE_NAME, ary);
@@ -381,7 +390,7 @@ public class MainFrame extends javax.swing.JFrame {
         this.log("正在生成Asset的md5文件...");
         
         String versionPath = txtVersionPath.getText();
-        String newVersion = txtNewVersion.getText();
+        String newVersion = String.format("%.2f", Double.valueOf(txtNewVersion.getText().trim()));
         
         String bundleMd5Path = versionPath;
         String uploadBundleMd5Path = versionPath;
@@ -459,7 +468,7 @@ public class MainFrame extends javax.swing.JFrame {
             FileUtils.getInstance().createDirectory(logDirPath);
         }
         
-        String newVersion = txtNewVersion.getText();
+        String newVersion = String.format("%.2f", Double.valueOf(txtNewVersion.getText().trim()));
         
         // Change log
         String logFileName = lblCurrentVersion.getText() + "-" + newVersion + ".txt";
@@ -568,6 +577,17 @@ public class MainFrame extends javax.swing.JFrame {
         return fileCount;
     }
     
+    private void generateFileSizeForEachFile(File file, String parentPath) {
+        if (file.isDirectory()) {
+            File[] files = file.listFiles();
+            for (File f : files) {
+                this.generateFileSizeForEachFile(f, parentPath + file.getName() + File.separator);
+            }
+        } else if (file.isFile()) {
+            _newFileSizeMap.put(parentPath + file.getName(), file.length());
+        }
+    }
+    
     private double autoVersion()
     {
         double currentVersion = Double.valueOf(lblCurrentVersion.getText());
@@ -593,6 +613,7 @@ public class MainFrame extends javax.swing.JFrame {
     
     private Map<String, String> _oldMd5Map;
     private Map<String, String> _newMd5Map;
+    private Map<String, Long> _newFileSizeMap;
     private Queue<String> _contents = new LinkedList<String>();
     
     private final String VERSION_FILE_NAME = "version.bin";
@@ -604,7 +625,7 @@ public class MainFrame extends javax.swing.JFrame {
     private final String BUNDLE_MD5_DIR = "BundleMd5";
     private final String CHANGE_LOG_DIR = "ChangeLog";
     private final String UPLOAD_DIR = "Upload";
-    private final String UPLOAD_RESOURCES_DIR = "Resources";
+    private final String UPLOAD_RESOURCES_DIR = "Asset";
 //    private final String AES_KEY = "vgy78ik,";
     
     /**

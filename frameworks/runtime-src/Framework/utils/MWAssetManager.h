@@ -11,6 +11,7 @@
 #include "../net/http/MWHttpDownloader.h"
 #include <string>
 #include <vector>
+#include <queue>
 #include <unordered_map>
 
 MW_FRAMEWORK_BEGIN
@@ -19,9 +20,8 @@ class MWJsonObject;
 
 MW_ENUM EAssetUpdateErrorType
 {
-    VERSION_IS_LATEST = 0,
-    NO_SUCH_MODULE = 1,
-    DOWNLOAD_FAILURE = 2,
+    VERSION_CHECK_FAILURE,
+    FILE_UPDATE_FAILUTE,
 };
 
 class MW_INTERFACE IAssetUpdateDelegate
@@ -34,21 +34,21 @@ public:
      */
     virtual void onVersionCheckCompleted(bool latest, int fileCount, bool needUpdateProgram, const std::string &programUpdateUrl) = 0;
     /**
+     * Delegate when the single file is downloading.
+     */
+    virtual void onAssetFileDownloading(const std::string &filePath, float progress, long totalToDownload) = 0;
+    /**
+     * Delegate when the single file is updated.
+     */
+    virtual void onAssetFileDownloaded(const std::string &filePath) = 0;
+    /**
      * Delegate when the version is updated.
      */
     virtual void onVersionUpdated() = 0;
     /**
-     * Delegate when the module is updated.
+     * Delegate when download failed.
      */
-    virtual void onModuleUpdated(const std::string &moduleName) = 0;
-    /**
-     * Delegate when single file is updated.
-     */
-    virtual void onSingleFileUpdated(const std::string &moduleName, const std::string &filePath) = 0;
-    /**
-     * Delegate when the file is downloading.
-     */
-    virtual void onFileDownloading(const std::string &filePath, float progress) = 0;
+    virtual void onUpdateError(EAssetUpdateErrorType errorType, const std::string &errorMsg) = 0;
 };
 
 class MW_DLL MWAssetManager : public IHttpDownloaderDelegate
@@ -56,6 +56,8 @@ class MW_DLL MWAssetManager : public IHttpDownloaderDelegate
     MW_SINGLETON(MWAssetManager);
 public:
     ~MWAssetManager();
+    
+    void checkVersion();
     
     // overrides
     virtual void onDownloadStarted(MWHttpDownloader *downloader, cocos2d::Ref *userdata);
@@ -71,18 +73,48 @@ public:
     {
         _isDevelopMode = isDevelopMode;
     }
-    
+    inline void setAssetUpdateDelegate(IAssetUpdateDelegate *delegate)
+    {
+        _delegate = delegate;
+    }
     MW_SYNTHESIZE(float, _localVersion, LocalVersion);
     MW_SYNTHESIZE(float, _programVersion, ProgramVersion);
     MW_SYNTHESIZE(float, _bundleResourceVersion, BundleResourceVersion);
+    MW_SYNTHESIZE_PASS_BY_CONST_REF(std::string, _assetRootUrl, AssetRootUrl);
     
 private:
+    enum EDownloadFileType {
+        VERSION_FILE,
+        BUNDLE_MD5_FILE,
+        ASSET_CONFIG_FILE,
+        ASSET_FILE,
+    };
+    
     void _configSearchPath();
-    std::string _fullAssetPath(const std::string &path = "");
+    std::string _fullLocalAssetPath(const std::string &path = "");
+    std::string _fullServerAssetPath(const std::string &path = "");
+    void _setVersionJson(MWJsonObject *jsonVersion);
+    void _setAssetConfigJson(MWJsonObject *jsonAssetConfig);
+    void _mergeBundleMd5File();
+    
+    void _downloadVersionFile();
+    void _processAfterDownloadVersionFile();
+    void _downloadBundleMd5File();
+    void _processAfterDownloadBundleMd5File();
+    void _downloadAssetConfigFile();
+    void _processAfterDownloadAssetConfigFile();
+    void _downloadNextAssetFile();
+    void _saveLatestVersion();
     
     bool _isDevelopMode;
+    EDownloadFileType _downloadFileType;
+    MWJsonObject *_jsonVersion;
+    MWJsonObject *_jsonAssetConfig;
+    std::queue<std::string> _downloadFileList;
     
     MWHttpDownloader * _downloader;
+    
+    IAssetUpdateDelegate *_delegate;
 };
 
 MW_FRAMEWORK_END

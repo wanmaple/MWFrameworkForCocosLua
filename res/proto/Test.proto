@@ -1,7 +1,0 @@
-package mw;
-
-message Test {
-	required string attr1 = 1;
-	required int32 attr2 = 2;
-	optional bool attr3 = 3;
-}
