@@ -34,7 +34,7 @@ public:
      *
      * @param request The request to send.
      */
-    void sendMessage(MWNetRequest *request) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
+    void sendMessage(MWNetRequest *request);
     /**
      * Execute specified command.
      *
@@ -42,20 +42,20 @@ public:
      * @param cmd Command name.
      * @param params Command parameters.
      */
-    void sendCommand(const std::string &serviceId, const std::string &cmd, cocos2d::Ref *params) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
+    void sendCommand(const std::string &serviceId, const std::string &cmd, cocos2d::Ref *params);
     
     /**
      * Dispatch the successful response.
      *
      * @param response Returned response from the server.
      */
-    void dispatchSuccessfulMessage(MWNetResponse *response) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
+    void dispatchSuccessfulMessage(MWNetResponse *response);
     /**
      * Dispatch the failed response.
      *
      * @param response Returned response from the server.
      */
-    void dispatchFailedMessage(MWNetResponse *response) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
+    void dispatchFailedMessage(MWNetResponse *response);
     
     /**
      * Add a new net service.
@@ -63,7 +63,7 @@ public:
      * @param serviceId Service id to add.
      * @param service Service object.
      */
-    void addNetService(const std::string &serviceId, MWNetService *service) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
+    void addNetService(const std::string &serviceId, MWNetService *service);
     /**
      * Remove net service.
      *
@@ -78,13 +78,13 @@ public:
      * @param serviceId Which service id to add.
      * @param handler Related net handler.
      */
-    void addNetProtocol(const std::string &protocolId, const std::string &serviceId, MWNetHandler *handler) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
+    void addNetProtocol(const std::string &protocolId, const std::string &serviceId, MWNetHandler *handler);
     /**
      * Add a new net protocol.
      *
      * @param protocol Protocol object.
      */
-    void addNetProtocol(MWNetProtocol *protocol) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
+    void addNetProtocol(MWNetProtocol *protocol);
     /**
      * Remove the specified protocol.
      *
@@ -97,13 +97,13 @@ public:
      *
      * @param filter Filter to add.
      */
-    void addNetFilter(MWNetFilter *filter) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
+    void addNetFilter(MWNetFilter *filter);
     /**
      * Remove net filter.
      *
      * @param filter Filter to remove.
      */
-    void removeNetFilter(MWNetFilter *filter) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
+    void removeNetFilter(MWNetFilter *filter);
     /**
      * Remove all filters.
      */

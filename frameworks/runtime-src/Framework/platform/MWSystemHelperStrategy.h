@@ -8,6 +8,7 @@
 #define __PLATFORM_SYSTEMHELPER_STRATEGY__
 
 #include "../base/mwbase.h"
+#include "MWSystemHelper.h"
 #include <string>
 
 MW_FRAMEWORK_BEGIN
@@ -19,6 +20,7 @@ public:
     
     virtual void copyToPasteBoard(const std::string &content) = 0;
     virtual double getCurrentUsedMemory() = 0;
+    virtual ENetStatus checkNetStatus() = 0;
 };
 
 MW_FRAMEWORK_END

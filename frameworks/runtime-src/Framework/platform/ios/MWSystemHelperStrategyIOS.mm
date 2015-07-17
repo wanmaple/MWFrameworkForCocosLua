@@ -10,6 +10,8 @@
 #import <sys/sysctl.h>
 #import <mach/mach.h>
 
+#import "Reachability.h"
+
 MW_FRAMEWORK_BEGIN
 
 void MWSystemHelperStrategyIos::copyToPasteBoard(const std::string &content)
@@ -29,6 +31,12 @@ double MWSystemHelperStrategyIos::getCurrentUsedMemory()
     }
     
     return (double) taskInfo.resident_size / 1024.0f / 1024.0f;
+}
+
+ENetStatus MWSystemHelperStrategyIos::checkNetStatus()
+{
+    Reachability *reachability = [Reachability reachabilityWithHostName:@"www.apple.com"];
+    return (ENetStatus) [reachability currentReachabilityStatus];
 }
 
 MW_FRAMEWORK_END

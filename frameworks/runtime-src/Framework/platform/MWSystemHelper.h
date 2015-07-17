@@ -12,6 +12,12 @@
 
 MW_FRAMEWORK_BEGIN
 
+MW_ENUM ENetStatus {
+    NO_NETWORK = 0,
+    WIFI = 1,
+    WWAN = 2,
+};
+
 class MWSystemHelperStrategy;
 
 class MW_DLL MWSystemHelper
@@ -29,6 +35,11 @@ public:
      * @param content The content to copy.
      */
     MW_ULONG millisecondsNow();
+    
+    /**
+     * Get the current net status.
+     */
+    ENetStatus checkNetStatus();
     
     /**
      * Copy the content to the system paste board.

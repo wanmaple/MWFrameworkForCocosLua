@@ -55,7 +55,7 @@ void MWDictionary::setObjectForKey(const std::string &key, cocos2d::Ref *val)
     _innerMap[key] = val;
 }
 
-Ref *MWDictionary::objectForKey(const std::string &key) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION)
+Ref *MWDictionary::objectForKey(const std::string &key)
 {
     // check existence.
     if (!this->hasKey(key)) {
@@ -88,7 +88,7 @@ bool MWDictionary::hasKey(const std::string &key)
     return _innerMap.find(key) != _innerMap.end();
 }
 
-//Ref *MWDictionary::operator[](const std::string &key) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION)
+//Ref *MWDictionary::operator[](const std::string &key)
 //{
 //    return this->objectForKey(key);
 //}

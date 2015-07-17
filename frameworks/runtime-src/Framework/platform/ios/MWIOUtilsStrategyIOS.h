@@ -7,8 +7,8 @@
 #ifndef __PLATFORM_IOUTILS_STRATEGY_IOS__
 #define __PLATFORM_IOUTILS_STRATEGY_IOS__
 
-#include "../base/mwbase.h"
-#include "MWIOUtilsStrategy.h"
+#include "../../base/mwbase.h"
+#include "../MWIOUtilsStrategy.h"
 #include <string>
 
 MW_FRAMEWORK_BEGIN

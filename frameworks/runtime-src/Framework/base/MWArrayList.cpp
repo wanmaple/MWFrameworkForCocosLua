@@ -40,7 +40,7 @@ void MWArrayList::appendObject(cocos2d::Ref *val)
     _innerVector.push_back(val);
 }
 
-void MWArrayList::setObjectAtIndex(cocos2d::Ref *val, unsigned int index) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION)
+void MWArrayList::setObjectAtIndex(cocos2d::Ref *val, unsigned int index)
 {
     // check if the index is out of range.
     if (index >= _innerVector.size()) {
@@ -51,7 +51,7 @@ void MWArrayList::setObjectAtIndex(cocos2d::Ref *val, unsigned int index) MW_NOE
     _innerVector[index] = val;
 }
 
-void MWArrayList::insertObjectAtIndex(cocos2d::Ref *val, unsigned int index) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION)
+void MWArrayList::insertObjectAtIndex(cocos2d::Ref *val, unsigned int index)
 {
     // check parameter.
     if (!val) {
@@ -65,7 +65,7 @@ void MWArrayList::insertObjectAtIndex(cocos2d::Ref *val, unsigned int index) MW_
     _innerVector.insert(_innerVector.begin() + index, val);
 }
 
-cocos2d::Ref *MWArrayList::objectAtIndex(unsigned int index) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION)
+cocos2d::Ref *MWArrayList::objectAtIndex(unsigned int index)
 {
     // check if the index is out of range.
     if (index >= _innerVector.size()) {
@@ -105,7 +105,7 @@ bool MWArrayList::removeObject(cocos2d::Ref *obj)
     return false;
 }
 
-bool MWArrayList::removeObjectAtIndex(unsigned int index) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION)
+bool MWArrayList::removeObjectAtIndex(unsigned int index)
 {
     // check if the index is out of range.
     if (index >= _innerVector.size()) {
@@ -124,7 +124,7 @@ void MWArrayList::clear()
     _innerVector.clear();
 }
 
-//Ref *MWArrayList::operator[](int index) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION)
+//Ref *MWArrayList::operator[](int index)
 //{
 //    return this->objectAtIndex(index);
 //}

@@ -39,6 +39,16 @@ using namespace cocos2d;
 
 MW_FRAMEWORK_BEGIN
 
+#define FLOAT_ACCURACY 0.001
+
+MW_LOCAL bool IsFloatEqual(float num1, float num2)
+{
+    if (abs(num1 - num2) < FLOAT_ACCURACY) {
+        return true;
+    }
+    return false;
+}
+
 MWAssetManager::MWAssetManager()
 : _isDevelopMode(false)
 , _localVersion()
@@ -50,6 +60,8 @@ MWAssetManager::MWAssetManager()
 , _jsonAssetConfig(nullptr)
 , _jsonVersion(nullptr)
 , _downloadFileList()
+, _versionLatest(false)
+, _oldVersion()
 {
     _downloader = new MWHttpDownloader();
     _downloader->setDelegate(this);
@@ -69,8 +81,10 @@ MWAssetManager::~MWAssetManager()
 void MWAssetManager::checkVersion()
 {
     if (_localVersion < _bundleResourceVersion) {
-        this->_configSearchPath();
+        _oldVersion = _localVersion;
+        _localVersion = _bundleResourceVersion;
     }
+    this->_configSearchPath();
     this->_downloadVersionFile();
 }
 
@@ -90,17 +104,18 @@ void MWAssetManager::_processAfterDownloadVersionFile()
     auto jsonVersion = MWJsonObject::createWithFile(versionFilePath);
     this->_setVersionJson(jsonVersion);
     
-    if (jsonVersion->getNumber(AM_MIN_PROGRAM_VERSION_KEY) > _programVersion) {
+    if (!IsFloatEqual(jsonVersion->getNumber(AM_MIN_PROGRAM_VERSION_KEY), _programVersion) &&
+        jsonVersion->getNumber(AM_MIN_PROGRAM_VERSION_KEY) > _programVersion) {
         if (_delegate) {
             _delegate->onVersionCheckCompleted(false, 0, true, jsonVersion->getString(AM_PROGRAM_UPDATE_URL_KEY));
         }
-    } else if (jsonVersion->getNumber(AM_VERSION_KEY) > _localVersion) {
+    } else if (!IsFloatEqual(jsonVersion->getNumber(AM_VERSION_KEY), _localVersion) &&
+               jsonVersion->getNumber(AM_VERSION_KEY) > _localVersion) {
         this->_downloadBundleMd5File();
     } else {
         // already the latest.
-        if (_delegate) {
-            _delegate->onVersionCheckCompleted(true, 0, false, "");
-        }
+        _versionLatest = true;
+        this->_downloadBundleMd5File();
     }
 }
 
@@ -137,13 +152,13 @@ void MWAssetManager::_mergeBundleMd5File()
     auto jsonNewBundleMd5 = MWJsonObject::createWithFile(newBundleMd5Path);
     
     // retreive old bundle md5 file.
-    string oldVersion = __String::createWithFormat("%.2f", _localVersion)->getCString();
+    string oldVersion = __String::createWithFormat("%.2f", _oldVersion)->getCString();
     
     string oldBundleMd5Dir = MWIOUtils::getInstance()->splicePath(FileUtils::getInstance()->getWritablePath(), AM_BUNDLE_MD5_DIRECTORY);
     oldBundleMd5Dir = MWIOUtils::getInstance()->splicePath(oldBundleMd5Dir, oldVersion);
     string oldBundleMd5Path = MWIOUtils::getInstance()->splicePath(oldBundleMd5Dir, AM_BUNDLE_MD5_FILE);
     if (!MWIOUtils::getInstance()->fileExists(oldBundleMd5Path)) {
-        // the first time, don't do anything.
+        // the first time.
         return;
     }
     auto jsonOldBundleMd5 = MWJsonObject::createWithFile(oldBundleMd5Path);
@@ -182,10 +197,14 @@ void MWAssetManager::_processAfterDownloadAssetConfigFile()
     this->_setAssetConfigJson(jsonAssetConfig);
     
     if (_delegate) {
-        _delegate->onVersionCheckCompleted(false, (int) jsonAssetConfig->getNumber(AM_FILE_COUNT_KEY), false, "");
+        _delegate->onVersionCheckCompleted(_versionLatest, (int) _downloadFileList.size(), false, "");
     }
     
-    this->_downloadNextAssetFile();
+    if (!_versionLatest) {
+        this->_downloadNextAssetFile();
+    } else {
+        this->_saveLatestVersion();
+    }
 }
 
 void MWAssetManager::_downloadNextAssetFile()
@@ -207,17 +226,19 @@ void MWAssetManager::_downloadNextAssetFile()
 void MWAssetManager::_saveLatestVersion()
 {
     // remove old bundle md5 file.
-    string oldVersion = __String::createWithFormat("%.2f", _localVersion)->getCString();
-    
-    string oldBundleMd5Dir = MWIOUtils::getInstance()->splicePath(FileUtils::getInstance()->getWritablePath(), AM_BUNDLE_MD5_DIRECTORY);
-    oldBundleMd5Dir = MWIOUtils::getInstance()->splicePath(oldBundleMd5Dir, oldVersion);
-    if (MWIOUtils::getInstance()->fileExists(oldBundleMd5Dir)) {
-        MWIOUtils::getInstance()->removeFile(oldBundleMd5Dir);
+    if (!_versionLatest) {
+        string oldVersion = __String::createWithFormat("%.2f", _oldVersion)->getCString();
+        
+        string oldBundleMd5Dir = MWIOUtils::getInstance()->splicePath(FileUtils::getInstance()->getWritablePath(), AM_BUNDLE_MD5_DIRECTORY);
+        oldBundleMd5Dir = MWIOUtils::getInstance()->splicePath(oldBundleMd5Dir, oldVersion);
+        if (MWIOUtils::getInstance()->fileExists(oldBundleMd5Dir)) {
+            MWIOUtils::getInstance()->removeFile(oldBundleMd5Dir);
+        }
+        
+        _localVersion = _jsonVersion->getNumber(AM_VERSION_KEY);
+        // save to user default.
+        UserDefault::getInstance()->setFloatForKey(AM_USERDEFAULT_LOCAL_VERSION_KEY, _localVersion);
     }
-    
-    _localVersion = _jsonVersion->getNumber(AM_VERSION_KEY);
-    // save to user default.
-    UserDefault::getInstance()->setFloatForKey(AM_USERDEFAULT_LOCAL_VERSION_KEY, _localVersion);
     
     if (_delegate) {
         _delegate->onVersionUpdated();
@@ -275,11 +296,11 @@ void MWAssetManager::_configSearchPath()
         FileUtils::getInstance()->addSearchResolutionsOrder(assetPath, true);
         
         // add lua script package path.
-#if MW_ENABLE_SCRIPT_BINDING
-        vector<string> packages;
-        packages.push_back(srcDir);
-        MWLuaUtils::getInstance()->addPackagePaths(packages);
-#endif
+//#if MW_ENABLE_SCRIPT_BINDING
+//        vector<string> packages;
+//        packages.push_back(srcDir);
+//        MWLuaUtils::getInstance()->addPackagePaths(packages);
+//#endif
     }
 }
 

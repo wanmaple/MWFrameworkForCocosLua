@@ -63,7 +63,7 @@ public:
      *
      * @return Dictionary value.
      */
-    cocos2d::Ref *objectForKey(const std::string &key) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
+    cocos2d::Ref *objectForKey(const std::string &key);
     
     /**
      * Remove the pair of the specified key, you will get a false if there is no such key.
@@ -99,7 +99,7 @@ public:
     }
     
     // overload []
-//    cocos2d::Ref *operator[](const std::string &key) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
+//    cocos2d::Ref *operator[](const std::string &key);
     
     /**
      * ICloneable overrides.

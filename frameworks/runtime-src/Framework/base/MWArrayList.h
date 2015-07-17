@@ -51,7 +51,7 @@ public:
      * @param val List value.
      * @param index List index.
      */
-    void setObjectAtIndex(cocos2d::Ref *val, MW_UINT index) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
+    void setObjectAtIndex(cocos2d::Ref *val, MW_UINT index);
     
     /**
      * Overload methods to insert the value before the specified index.
@@ -60,7 +60,7 @@ public:
      * @param val List value to add.
      * @param index List index to insert.
      */
-    void insertObjectAtIndex(cocos2d::Ref *val, MW_UINT index) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
+    void insertObjectAtIndex(cocos2d::Ref *val, MW_UINT index);
     
     /**
      * Get the value at the specified index, it will throw an exception if the key doesn't exist.
@@ -69,7 +69,7 @@ public:
      *
      * @return List value at the index.
      */
-    cocos2d::Ref *objectAtIndex(MW_UINT index) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
+    cocos2d::Ref *objectAtIndex(MW_UINT index);
     
     /**
      * Overload methods to get the first index of the specified value.
@@ -105,7 +105,7 @@ public:
      *
      * @return Remove result.
      */
-    bool removeObjectAtIndex(MW_UINT index) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
+    bool removeObjectAtIndex(MW_UINT index);
     /**
      * Clear all objects.
      */
@@ -116,7 +116,7 @@ public:
      */
     inline MW_UINT count()
     {
-        return _innerVector.size();
+        return (MW_UINT) _innerVector.size();
     }
     /**
      * Whether the list is empty?
@@ -127,7 +127,7 @@ public:
     }
     
     // overload []
-//    cocos2d::Ref *operator[](int index) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
+//    cocos2d::Ref *operator[](int index);
     
     /**
      * ICloneable overrides.

@@ -111,6 +111,8 @@ private:
     MWJsonObject *_jsonVersion;
     MWJsonObject *_jsonAssetConfig;
     std::queue<std::string> _downloadFileList;
+    bool _versionLatest;
+    float _oldVersion;
     
     MWHttpDownloader * _downloader;
     

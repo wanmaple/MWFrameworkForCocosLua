@@ -48,6 +48,14 @@
 -- @return MWBinaryData#MWBinaryData ret (return value: mw.MWBinaryData)
         
 --------------------------------
+-- 
+-- @function [parent=#MWIOUtils] splicePath 
+-- @param self
+-- @param #string path1
+-- @param #string path2
+-- @return string#string ret (return value: string)
+        
+--------------------------------
 -- Create a new file.<br>
 -- param filePath The new file path.<br>
 -- return Operation result.

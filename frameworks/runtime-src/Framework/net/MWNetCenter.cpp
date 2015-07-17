@@ -25,7 +25,7 @@ MWNetCenter::~MWNetCenter()
     CC_SAFE_DELETE(_filters);
 }
 
-void MWNetCenter::sendMessage(mwframework::MWNetRequest *request) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION)
+void MWNetCenter::sendMessage(mwframework::MWNetRequest *request)
 {
     string protocolId = request->getProtocolId();
     MWNetProtocol *pProtocol = static_cast<MWNetProtocol*>(_protocolMap->objectForKey(protocolId));
@@ -39,7 +39,7 @@ void MWNetCenter::sendMessage(mwframework::MWNetRequest *request) MW_NOEXCEPTION
     pService->sendMessage(request);
 }
 
-void MWNetCenter::sendCommand(const std::string &serviceId, const std::string &cmd, cocos2d::Ref *params) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION)
+void MWNetCenter::sendCommand(const std::string &serviceId, const std::string &cmd, cocos2d::Ref *params)
 {
     MWNetService *pService = static_cast<MWNetService*>(_serviceMap->objectForKey(serviceId));
     if (!pService) {
@@ -48,7 +48,7 @@ void MWNetCenter::sendCommand(const std::string &serviceId, const std::string &c
     pService->executeCommand(cmd, params);
 }
 
-void MWNetCenter::dispatchSuccessfulMessage(mwframework::MWNetResponse *response) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION)
+void MWNetCenter::dispatchSuccessfulMessage(mwframework::MWNetResponse *response)
 {
     if (!response) {
         MW_THROW_EXCEPTION(1006);
@@ -75,7 +75,7 @@ void MWNetCenter::dispatchSuccessfulMessage(mwframework::MWNetResponse *response
     pHandler->handleSuccessfulMessage(response);
 }
 
-void MWNetCenter::dispatchFailedMessage(mwframework::MWNetResponse *response) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION)
+void MWNetCenter::dispatchFailedMessage(mwframework::MWNetResponse *response)
 {
     if (!response) {
         MW_THROW_EXCEPTION(1006);
@@ -102,7 +102,7 @@ void MWNetCenter::dispatchFailedMessage(mwframework::MWNetResponse *response) MW
     pHandler->handleFailedMessage(response);
 }
 
-void MWNetCenter::addNetService(const std::string &serviceId, mwframework::MWNetService *service) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION)
+void MWNetCenter::addNetService(const std::string &serviceId, mwframework::MWNetService *service)
 {
     if (serviceId.size() <= 0 || !service) {
         MW_THROW_EXCEPTION(1006);
@@ -120,7 +120,7 @@ void MWNetCenter::removeNetService(const std::string &serviceId)
     }
 }
 
-void MWNetCenter::addNetProtocol(const std::string &protocolId, const std::string &serviceId, mwframework::MWNetHandler *handler) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION)
+void MWNetCenter::addNetProtocol(const std::string &protocolId, const std::string &serviceId, mwframework::MWNetHandler *handler)
 {
     if (protocolId.size() <= 0 || serviceId.size() <= 0 || !handler) {
         MW_THROW_EXCEPTION(1006);
@@ -132,7 +132,7 @@ void MWNetCenter::addNetProtocol(const std::string &protocolId, const std::strin
     this->addNetProtocol(pProtocol);
 }
 
-void MWNetCenter::addNetProtocol(mwframework::MWNetProtocol *protocol) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION)
+void MWNetCenter::addNetProtocol(mwframework::MWNetProtocol *protocol)
 {
     if (!protocol) {
         MW_THROW_EXCEPTION(1006);
@@ -152,7 +152,7 @@ void MWNetCenter::removeNetProtocol(const std::string &protocolId)
     }
 }
 
-void MWNetCenter::addNetFilter(mwframework::MWNetFilter *filter) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION)
+void MWNetCenter::addNetFilter(mwframework::MWNetFilter *filter)
 {
     if (!filter) {
         MW_THROW_EXCEPTION(1006);
@@ -160,7 +160,7 @@ void MWNetCenter::addNetFilter(mwframework::MWNetFilter *filter) MW_NOEXCEPTION(
     _filters->appendObject(filter);
 }
 
-void MWNetCenter::removeNetFilter(mwframework::MWNetFilter *filter) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION)
+void MWNetCenter::removeNetFilter(mwframework::MWNetFilter *filter)
 {
     if (!filter) {
         MW_THROW_EXCEPTION(1006);

@@ -33,7 +33,7 @@ public:
     {
         return _spriteFrame;
     }
-    void setSpriteFrame(cocos2d::SpriteFrame *spriteFrame) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
+    void setSpriteFrame(cocos2d::SpriteFrame *spriteFrame);
     
     MW_SYNTHESIZE(MW_UINT, _duration, Duration);
     

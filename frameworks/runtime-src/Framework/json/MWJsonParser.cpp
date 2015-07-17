@@ -1,5 +1,6 @@
 #include "MWJsonParser.h"
 #include "MWJsonStructure.h"
+#include "../platform/MWIOUtils.h"
 #include "cocos2d.h"
 
 using namespace cocos2d;
@@ -23,14 +24,13 @@ Ref *MWJsonParser::parseString(const std::string &jsonStr)
 Ref *MWJsonParser::parseFile(const std::string &jsonPath)
 {
     std::string buffer;
-    Data data = FileUtils::getInstance()->getDataFromFile(jsonPath.c_str());
-    unsigned char *lpFileData = data.getBytes();
-    unsigned long fileSize = data.getSize();
-    if (lpFileData) {
-        for (unsigned long i = 0; i < fileSize; ++i) {
-            buffer.push_back(lpFileData[i]);
+    MWBinaryData *pData = MWIOUtils::getInstance()->getDataFromFile(jsonPath);
+    unsigned char * pFileData = reinterpret_cast<unsigned char *>(pData->getData());
+    MW_ULONG fileSize = pData->getSize();
+    if (pFileData) {
+        for (MW_ULONG i = 0; i < fileSize; ++i) {
+            buffer.push_back(pFileData[i]);
         }
-        delete [] lpFileData;
     }
     return this->parseString(buffer);
 }

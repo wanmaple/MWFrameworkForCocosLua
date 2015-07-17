@@ -35,7 +35,7 @@ public:
      * @param paramName Name of parameter.
      * @param paramValue Value of parameter.
      */
-    void putParam(const std::string &paramName, const std::string &paramValue) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
+    void putParam(const std::string &paramName, const std::string &paramValue);
     /**
      * Get the specified parameter value.
      *
@@ -47,7 +47,7 @@ public:
      *
      * @param paramName Name of parameter to get.
      */
-    void removeParam(const std::string &paramName) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
+    void removeParam(const std::string &paramName);
     
     /**
      * Convert object to connection string.

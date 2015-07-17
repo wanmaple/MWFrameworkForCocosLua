@@ -3,6 +3,13 @@ class("TestViewController", clsViewController)
 local winSize = cc.Director:getInstance():getWinSize()
 
 function TestViewController:viewDidLoad()
+	mw.log("Test GameScene parameters...")
+	mw.log("NUMBER: %d", self:scene():getNumberParameter("NUMBER"))
+	mw.log("STRING: %s", self:scene():getStringParameter("STRING"))
+	mw.log("BOOLEAN: %s", tostring(self:scene():getBooleanParameter("BOOLEAN")))
+	mw.log("REF: %s", GetType(self:scene():getRefParameter("REF")))
+
+	mw.log("Test ZipData and GifSprite...")
 	local zipData = mw.ZipData:createWithExistingFile("res/GIF/pokemon_gif5.rc")
 	zipData:beginUnzip()
 	local data1 = zipData:getCompressedFileData("487_o.gif", "7ujm,lp-")
@@ -21,22 +28,20 @@ function TestViewController:viewDidLoad()
 		tolua.cast(sp, "mw.GifSprite")
 		sp:setPosition(winSize.width * (0.25 + (i - 1) * 0.5), winSize.height * 0.5)
 		self:view():addChild(sp)
-
-		-- local frames = sp:getFrames()
-		-- for _, frame in ipairs(frames) do
-		-- 	print("#####", tolua.type(frame), frame:getDuration())
-		-- end
 	end
 
-	mw.log("NUMBER: %d", self:scene():getNumberParameter("NUMBER"))
-	mw.log("STRING: %s", self:scene():getStringParameter("STRING"))
-	mw.log("BOOLEAN: %s", tostring(self:scene():getBooleanParameter("BOOLEAN")))
-	mw.log("REF: %s", GetType(self:scene():getRefParameter("REF")))
+	mw.log("Test Sqlite DB...")
+	local db = mw.SqliteDb:openDb("res/icon.jpg")
+	local t = db:executeQuery("select * from [pet_info] where [id] = '493'");
+	table.dump(t)
 
-	-- local db = mw.SqliteDb:openDb("res/icon.jpg")
-	-- local t = db:executeQuery("select * from [Vip]");
-	-- table.dump(t)
-
+	mw.log("Test some utils...")
+	local reachabilityStrMap = {
+		[0] = "No network.",
+		[1] = "Wifi",
+		[2] = "WWAN",
+	}
+	mw.log("NetStatus: %s", reachabilityStrMap[mw.SystemHelper:getInstance():checkNetStatus()])
 	mw.log("UUID: %s", mw.UUIDGenerator:getInstance():generateUUID())
 end
 

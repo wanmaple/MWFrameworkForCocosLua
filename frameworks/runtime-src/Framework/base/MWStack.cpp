@@ -29,7 +29,7 @@ MWStack::~MWStack()
     this->clear();
 }
 
-void MWStack::push(cocos2d::Ref *val) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION)
+void MWStack::push(cocos2d::Ref *val)
 {
     // check parameter.
     if (!val) {

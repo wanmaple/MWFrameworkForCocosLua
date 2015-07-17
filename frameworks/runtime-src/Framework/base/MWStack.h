@@ -42,7 +42,7 @@ public:
      *
      * @param val Stack value.
      */
-    void push(cocos2d::Ref *val) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
+    void push(cocos2d::Ref *val);
     /**
      * Pop the top the stack.
      * @note It will return false if the stack is empty.

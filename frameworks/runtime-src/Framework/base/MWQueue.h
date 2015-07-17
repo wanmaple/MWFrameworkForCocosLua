@@ -42,7 +42,7 @@ public:
      *
      * @param val Queue value.
      */
-    void enqueue(cocos2d::Ref *val) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
+    void enqueue(cocos2d::Ref *val);
     /**
      * Pop the front of the queue.
      * @note It will return false if the queue is empty.

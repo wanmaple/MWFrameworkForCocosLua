@@ -42,7 +42,7 @@ MWGifFrame::~MWGifFrame()
     CC_SAFE_RELEASE(_spriteFrame);
 }
 
-void MWGifFrame::setSpriteFrame(cocos2d::SpriteFrame *spriteFrame) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION)
+void MWGifFrame::setSpriteFrame(cocos2d::SpriteFrame *spriteFrame)
 {
     if (!spriteFrame) {
         MW_THROW_EXCEPTION(1006);

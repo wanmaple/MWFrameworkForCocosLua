@@ -29,7 +29,7 @@ MWQueue::~MWQueue()
     this->clear();
 }
 
-void MWQueue::enqueue(cocos2d::Ref *val) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION)
+void MWQueue::enqueue(cocos2d::Ref *val)
 {
     // check parameter.
     if (!val) {

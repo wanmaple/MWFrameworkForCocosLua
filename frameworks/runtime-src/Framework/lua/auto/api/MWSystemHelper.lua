@@ -4,6 +4,12 @@
 -- @parent_module mw
 
 --------------------------------
+-- Get the current net status.
+-- @function [parent=#MWSystemHelper] checkNetStatus 
+-- @param self
+-- @return int#int ret (return value: int)
+        
+--------------------------------
 -- Get the current memory occupation (MB).<br>
 -- return The memory occupied by the current process.
 -- @function [parent=#MWSystemHelper] getCurrentUsedMemory 

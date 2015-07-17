@@ -70,10 +70,10 @@ public:
      *
      * @return The parameter value.
      */
-    double getNumberParameter(const std::string &key) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
-    bool getBooleanParameter(const std::string &key) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
-    std::string getStringParameter(const std::string &key) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
-    cocos2d::Ref *getRefParameter(const std::string &key) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
+    double getNumberParameter(const std::string &key);
+    bool getBooleanParameter(const std::string &key);
+    std::string getStringParameter(const std::string &key);
+    cocos2d::Ref *getRefParameter(const std::string &key);
     
     /**
      * Segue a view controller from the root view controller with the way of overlapping.
@@ -81,13 +81,13 @@ public:
      *
      * @param controller The view controller to load.
      */
-    void loadViewController(MWViewController *controller, const std::string &identifier) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
+    void loadViewController(MWViewController *controller, const std::string &identifier);
     /**
      * Unload an existed view controller of the scene.
      *
      * @param controller The view controller to unload.
      */
-    void unloadViewController(MWViewController *controller) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION);
+    void unloadViewController(MWViewController *controller);
     /**
      * Unload a view controller by the identifier.
      *

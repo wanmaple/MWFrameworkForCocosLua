@@ -2,7 +2,7 @@
 
 #include "cocos2d.h"
 #if CC_TARGET_PLATFORM == CC_PLATFORM_IOS
-#include "MWSystemHelperStrategyIOS.h"
+#include "ios/MWSystemHelperStrategyIOS.h"
 #endif
 
 MW_FRAMEWORK_BEGIN
@@ -26,12 +26,20 @@ MW_ULONG MWSystemHelper::millisecondsNow()
     return now.tv_sec * 1000 + now.tv_usec / 1000;
 }
 
+ENetStatus MWSystemHelper::checkNetStatus()
+{
+    if (_strategy) {
+        return _strategy->checkNetStatus();
+    }
+    MW_THROW_EXCEPTION(1012);
+}
+
 void MWSystemHelper::copyToPasteBoard(const std::string &content)
 {
     if (_strategy) {
         _strategy->copyToPasteBoard(content);
     }
-    CCLOG("Unimplemented platform.");
+    MW_THROW_EXCEPTION(1012);
 }
 
 double MWSystemHelper::getCurrentUsedMemory()
@@ -39,8 +47,7 @@ double MWSystemHelper::getCurrentUsedMemory()
     if (_strategy) {
         return _strategy->getCurrentUsedMemory();
     }
-    CCLOG("Unimplemented platform.");
-    return -1;
+    MW_THROW_EXCEPTION(1012);
 }
 
 MW_FRAMEWORK_END

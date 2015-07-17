@@ -26,7 +26,7 @@ MWHttpForm::~MWHttpForm()
 {
 }
 
-void MWHttpForm::putParam(const std::string &paramName, const std::string &paramValue) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION)
+void MWHttpForm::putParam(const std::string &paramName, const std::string &paramValue)
 {
     if (paramName.size() <= 0) {
         MW_THROW_EXCEPTION(1006);
@@ -44,7 +44,7 @@ const char *MWHttpForm::getParam(const std::string &paramName)
     return nullptr;
 }
 
-void MWHttpForm::removeParam(const std::string &paramName) MW_NOEXCEPTION(MW_WHETHER_THROW_EXCEPTION)
+void MWHttpForm::removeParam(const std::string &paramName)
 {
     if (paramName.size() <= 0) {
         MW_THROW_EXCEPTION(1006);
