@@ -6,9 +6,9 @@
 
 #include "mwframework.h"
 
-#define BUNDLE_RESOURCE_VERSION 1.02
+#define BUNDLE_RESOURCE_VERSION 1.00
 #define CPP_PROGRAM_VERSION 0.00
-#define DEVELOP_MODE false
+#define DEVELOP_MODE true
 #define SERVER_ASSET_ROOT_URL "http://120.25.123.138/mobile/asset"
 
 using namespace cocos2d;
@@ -66,24 +66,7 @@ public:
     {
         CCLOG("版本更新完毕.");
         
-        auto engine = LuaEngine::getInstance();
-        ScriptEngineManager::getInstance()->setScriptEngine(engine);
-        lua_State* L = engine->getLuaStack()->getLuaState();
-        lua_module_register(L);
-        
-#ifdef MW_ENABLE_SCRIPT_BINDING
-#ifdef DEBUG
-        lua_pushboolean(L, true);
-        lua_setglobal(L, "DEBUG");
-#endif
-        
-        register_all_mwframework(L);
-        register_all_mwframework_manual(L);
-        
-        if (engine->executeScriptFile("src/main.lua")) {
-            CCLOG("执行main脚本出错...");
-        }
-#endif
+        MWLuaUtils::getInstance()->executeScriptFile("src/main.lua");
     }
     /**
      * Delegate when download failed.
@@ -96,11 +79,6 @@ public:
     void onEnter() override
     {
         CCLOG("%s", FileUtils::getInstance()->getWritablePath().c_str());
-        
-        MWAssetManager::getInstance()->setBundleResourceVersion(BUNDLE_RESOURCE_VERSION);
-        MWAssetManager::getInstance()->setProgramVersion(CPP_PROGRAM_VERSION);
-        MWAssetManager::getInstance()->setDevelopMode(DEVELOP_MODE);
-        MWAssetManager::getInstance()->setAssetRootUrl(SERVER_ASSET_ROOT_URL);
         
         MWAssetManager::getInstance()->setAssetUpdateDelegate(this);
         MWAssetManager::getInstance()->checkVersion();
@@ -132,28 +110,32 @@ bool AppDelegate::applicationDidFinishLaunching()
     FileUtils::getInstance()->addSearchPath("res");
     FileUtils::getInstance()->addSearchPath("src");
     
-#ifdef MW_ENABLE_ASSET_UPDATE
-    Director::getInstance()->runWithScene(UpdateScene::create());
-#else
     auto engine = LuaEngine::getInstance();
     ScriptEngineManager::getInstance()->setScriptEngine(engine);
     lua_State* L = engine->getLuaStack()->getLuaState();
     lua_module_register(L);
+    register_all_mwframework(L);
+    register_all_mwframework_manual(L);
     
-#ifdef MW_ENABLE_SCRIPT_BINDING
 #ifdef DEBUG
     lua_pushboolean(L, true);
     lua_setglobal(L, "DEBUG");
 #endif
     
-    register_all_mwframework(L);
-    register_all_mwframework_manual(L);
-
-    if (engine->executeScriptFile("src/main.lua")) {
-        return false;
+    MWAssetManager::getInstance()->setBundleResourceVersion(BUNDLE_RESOURCE_VERSION);
+    MWAssetManager::getInstance()->setProgramVersion(CPP_PROGRAM_VERSION);
+    MWAssetManager::getInstance()->setDevelopMode(DEVELOP_MODE);
+    MWAssetManager::getInstance()->setAssetRootUrl(SERVER_ASSET_ROOT_URL);
+    
+    if (MWAssetManager::getInstance()->isDevelopMode()) {
+#ifdef MW_ENABLE_SCRIPT_BINDING
+        if (engine->executeScriptFile("src/main.lua")) {
+            return false;
+        }
+#endif
+    } else {
+        Director::getInstance()->runWithScene(UpdateScene::create());
     }
-#endif
-#endif
 
     return true;
 }

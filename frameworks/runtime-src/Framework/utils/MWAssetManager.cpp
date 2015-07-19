@@ -16,10 +16,6 @@
 #define AM_ASSET_CONFIG_FILE "asset.config.bin"
 #define AM_MAIN_MODULE_NAME "am.main"
 
-// asset directorys
-#define AM_ASSET_RESOURCE_DIRECTORY "res"
-#define AM_ASSET_SCRIPT_DIRECTORY "src"
-
 // version description file keys
 #define AM_VERSION_KEY "version"
 #define AM_MIN_PROGRAM_VERSION_KEY "min_cpp_version"
@@ -111,12 +107,31 @@ void MWAssetManager::_processAfterDownloadVersionFile()
         }
     } else if (!IsFloatEqual(jsonVersion->getNumber(AM_VERSION_KEY), _localVersion) &&
                jsonVersion->getNumber(AM_VERSION_KEY) > _localVersion) {
-        this->_downloadBundleMd5File();
+        this->_downloadAssetConfigFile();
     } else {
         // already the latest.
         _versionLatest = true;
-        this->_downloadBundleMd5File();
+        this->_downloadAssetConfigFile();
     }
+}
+
+void MWAssetManager::_downloadAssetConfigFile()
+{
+    _downloadFileType = ASSET_CONFIG_FILE;
+    
+    string downloadPath = MWIOUtils::getInstance()->splicePath(_assetRootUrl, AM_ASSET_CONFIG_FILE);
+    string savePath = MWIOUtils::getInstance()->splicePath(FileUtils::getInstance()->getWritablePath(), AM_ASSET_CONFIG_FILE);
+    
+    _downloader->beginDownloading(downloadPath, savePath);
+}
+
+void MWAssetManager::_processAfterDownloadAssetConfigFile()
+{
+    string assetConfigFilePath = MWIOUtils::getInstance()->splicePath(FileUtils::getInstance()->getWritablePath(), AM_ASSET_CONFIG_FILE);
+    auto jsonAssetConfig = MWJsonObject::createWithFile(assetConfigFilePath);
+    this->_setAssetConfigJson(jsonAssetConfig);
+    
+    this->_downloadBundleMd5File();
 }
 
 void MWAssetManager::_downloadBundleMd5File()
@@ -138,7 +153,16 @@ void MWAssetManager::_downloadBundleMd5File()
 void MWAssetManager::_processAfterDownloadBundleMd5File()
 {
     this->_mergeBundleMd5File();
-    this->_downloadAssetConfigFile();
+    
+    if (_delegate) {
+        _delegate->onVersionCheckCompleted(_versionLatest, (int) _downloadFileList.size(), false, "");
+    }
+    
+    if (!_versionLatest) {
+        this->_downloadNextAssetFile();
+    } else {
+        this->_saveLatestVersion();
+    }
 }
 
 void MWAssetManager::_mergeBundleMd5File()
@@ -159,6 +183,12 @@ void MWAssetManager::_mergeBundleMd5File()
     string oldBundleMd5Path = MWIOUtils::getInstance()->splicePath(oldBundleMd5Dir, AM_BUNDLE_MD5_FILE);
     if (!MWIOUtils::getInstance()->fileExists(oldBundleMd5Path)) {
         // the first time.
+        _downloadFileList = queue<string>();
+        MWJsonObject * modules = _jsonAssetConfig->getJsonObject(AM_MODULES_KEY);
+        MWJsonArray * mainModuleFileList = modules->getJsonArray(AM_MAIN_MODULE_NAME);
+        for (int i = 0; i < mainModuleFileList->count(); ++i) {
+            _downloadFileList.push(mainModuleFileList->getStringAt(i));
+        }
         return;
     }
     auto jsonOldBundleMd5 = MWJsonObject::createWithFile(oldBundleMd5Path);
@@ -177,33 +207,6 @@ void MWAssetManager::_mergeBundleMd5File()
         } else if (jsonNewBundleMd5->getString(key) != jsonOldBundleMd5->getString(key)) {
             _downloadFileList.push(key);
         }
-    }
-}
-
-void MWAssetManager::_downloadAssetConfigFile()
-{
-    _downloadFileType = ASSET_CONFIG_FILE;
-    
-    string downloadPath = MWIOUtils::getInstance()->splicePath(_assetRootUrl, AM_ASSET_CONFIG_FILE);
-    string savePath = MWIOUtils::getInstance()->splicePath(FileUtils::getInstance()->getWritablePath(), AM_ASSET_CONFIG_FILE);
-    
-    _downloader->beginDownloading(downloadPath, savePath);
-}
-
-void MWAssetManager::_processAfterDownloadAssetConfigFile()
-{
-    string assetConfigFilePath = MWIOUtils::getInstance()->splicePath(FileUtils::getInstance()->getWritablePath(), AM_ASSET_CONFIG_FILE);
-    auto jsonAssetConfig = MWJsonObject::createWithFile(assetConfigFilePath);
-    this->_setAssetConfigJson(jsonAssetConfig);
-    
-    if (_delegate) {
-        _delegate->onVersionCheckCompleted(_versionLatest, (int) _downloadFileList.size(), false, "");
-    }
-    
-    if (!_versionLatest) {
-        this->_downloadNextAssetFile();
-    } else {
-        this->_saveLatestVersion();
     }
 }
 
@@ -285,22 +288,19 @@ void MWAssetManager::_configSearchPath()
     }
     // set if non-exist.
     if (!didSet) {
-        searchPaths.push_back(assetPath);
-        string resDir = this->_fullLocalAssetPath(AM_ASSET_RESOURCE_DIRECTORY);
-        string srcDir = this->_fullLocalAssetPath(AM_ASSET_SCRIPT_DIRECTORY);
-        searchPaths.push_back(resDir);
-        searchPaths.push_back(srcDir);
+        // the asset path must occupy the highest priority.
+        searchPaths.insert(searchPaths.cbegin(), assetPath);
+        FileUtils::getInstance()->setSearchPaths(searchPaths);
         // set search order, the asset resource path should be the prepreerence.
-        FileUtils::getInstance()->addSearchResolutionsOrder(resDir, true);
-        FileUtils::getInstance()->addSearchResolutionsOrder(srcDir, true);
         FileUtils::getInstance()->addSearchResolutionsOrder(assetPath, true);
         
         // add lua script package path.
-//#if MW_ENABLE_SCRIPT_BINDING
-//        vector<string> packages;
-//        packages.push_back(srcDir);
-//        MWLuaUtils::getInstance()->addPackagePaths(packages);
-//#endif
+#if MW_ENABLE_SCRIPT_BINDING
+        vector<string> packages;
+        packages.push_back(assetPath);
+        MWLuaUtils::getInstance()->addPackagePaths(packages);
+//        CCLOG("%s", MWLuaUtils::getInstance()->getPackagePath().c_str());
+#endif
     }
 }
 
@@ -310,10 +310,10 @@ void MWAssetManager::onDownloadStarted(mwframework::MWHttpDownloader *downloader
     
     if (_downloadFileType == VERSION_FILE) {
         CCLOG("开始下载版本文件...");
-    } else if (_downloadFileType == BUNDLE_MD5_FILE) {
-        CCLOG("开始下载Bundle Md5文件...");
     } else if (_downloadFileType == ASSET_CONFIG_FILE) {
         CCLOG("开始下载Asset配置文件...");
+    } else if (_downloadFileType == BUNDLE_MD5_FILE) {
+        CCLOG("开始下载Bundle Md5文件...");
     } else if (_downloadFileType == ASSET_FILE) {
         CCLOG("开始下载%s", static_cast<__String *>(userdata)->getCString());
     }
@@ -340,18 +340,19 @@ void MWAssetManager::onDownloadCompleted(mwframework::MWHttpDownloader *download
     if (_downloadFileType == VERSION_FILE) {
         CCLOG("版本文件下载完成。");
         this->_processAfterDownloadVersionFile();
-    } else if (_downloadFileType == BUNDLE_MD5_FILE) {
-        CCLOG("Bundle Md5文件下载完成。");
-        this->_processAfterDownloadBundleMd5File();
     } else if (_downloadFileType == ASSET_CONFIG_FILE) {
         CCLOG("Asset配置文件下载完成。");
         this->_processAfterDownloadAssetConfigFile();
+    } else if (_downloadFileType == BUNDLE_MD5_FILE) {
+        CCLOG("Bundle Md5文件下载完成。");
+        this->_processAfterDownloadBundleMd5File();
     } else if (_downloadFileType == ASSET_FILE) {
         string rpath = static_cast<__String *>(userdata)->getCString();
         CCLOG("%s下载完成。", rpath.c_str());
         if (_delegate) {
             _delegate->onAssetFileDownloaded(rpath);
         }
+        _downloadFileList.pop();
         this->_downloadNextAssetFile();
     }
 }
@@ -361,6 +362,11 @@ void MWAssetManager::onDownloadFailed(mwframework::MWHttpDownloader *downloader,
     MW_UNUSED_PARAM(downloader);
     
     CCLOG("下载错误: %s", errorMsg.c_str());
+    
+    if (_downloader->retry(userdata)) {
+        CCLOG("重试下载...");
+        return;
+    }
     
     if (_downloadFileType == VERSION_FILE) {
         CCLOG("版本文件下载失败...");

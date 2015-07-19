@@ -5,18 +5,23 @@ require "mwframework"
 
 -- for CCLuaEngine traceback
 local function __G__TRACKBACK__(msg)
-    cclog("----------------------------------------")
-    cclog("LUA ERROR: " .. tostring(msg) .. "\n")
-    cclog(debug.traceback())
-    cclog("----------------------------------------")
+    mw.log("----------------------------------------")
+    mw.log("LUA ERROR: " .. tostring(msg) .. "\n")
+    mw.log(debug.traceback())
+    mw.log("----------------------------------------")
     return msg
 end
 
 local Game = {}
 
-local winSize = cc.Director:getInstance():getWinSize()
+function Game:start()
+    local status, msg = xpcall(function() Game:_start() end, __G__TRACKBACK__)
+    if not status then
+        error(msg)
+    end
+end
 
-function Game:init()
+function Game:_init()
     collectgarbage("collect")
     -- avoid memory leak
     collectgarbage("setpause", 100)
@@ -39,21 +44,15 @@ function Game:init()
     director:setAnimationInterval(1.0 / 60)
 end
 
-function Game:run()
+function Game:_run()
     require "scenes/TestScene"
+
     ReplaceScene(TestScene, { STRING = "abc", NUMBER = 123, BOOLEAN = true, REF = mw.ArrayList:create() })
 end
 
-function Game:start()
-	local status, msg = xpcall(function() Game:__start() end, __G__TRACKBACK__)
-	if not status then
-	    error(msg)
-	end
-end
-
-function Game:__start()
-    Game:init()
-    Game:run()
+function Game:_start()
+    Game:_init()
+    Game:_run()
 end
 
 return Game

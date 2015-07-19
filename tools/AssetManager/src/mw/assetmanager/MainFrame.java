@@ -8,12 +8,7 @@ package mw.assetmanager;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.nio.ByteBuffer;
-import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -324,6 +319,7 @@ public class MainFrame extends javax.swing.JFrame {
         
         String oldAssetConfigPath = uploadDirPath + ASSET_CONFIG_FILE_NAME;
         File oldAssetConfig = new File(oldAssetConfigPath);
+        List<String> mainModuleFiles = new ArrayList<String>();
         if (oldAssetConfig.exists()) {
             String content = null;
             byte[] buffer = FileUtils.getInstance().readDataFromFile(oldAssetConfigPath);
@@ -331,10 +327,14 @@ public class MainFrame extends javax.swing.JFrame {
             JSONObject json = JSONObject.parseObject(content);
             JSONObject files = json.getJSONObject("files");
             Set<String> keys = files.keySet();
-            String md5 = null;
             for (String key : keys) {
                 JSONArray info = files.getJSONArray(key);
                 _oldMd5Map.put(key, info.getString(0));
+            }
+            
+            JSONArray mainModuleFileList = json.getJSONObject(MODULES_KEY).getJSONArray(MAIN_MODULE_NAME);
+            for (int i = 0; i < mainModuleFileList.size(); i++) {
+                mainModuleFiles.add(mainModuleFileList.getString(i));
             }
         }
         
@@ -355,6 +355,10 @@ public class MainFrame extends javax.swing.JFrame {
         JSONObject md5Vals = new JSONObject();
         Set<String> keys = this._newMd5Map.keySet();
         JSONArray ary = new JSONArray();
+        JSONArray mainModuleFileList = new JSONArray();
+        for (String file : mainModuleFiles) {
+            mainModuleFileList.add(file);
+        }
         long totalSize = 0;
         for (String key : keys) {
             JSONArray info = new JSONArray();
@@ -364,11 +368,18 @@ public class MainFrame extends javax.swing.JFrame {
             totalSize += size;
             md5Vals.put(key, info);
             ary.add(key);
+            
+            if (!_oldMd5Map.containsKey(key) || !_oldMd5Map.get(key).equals(_newMd5Map.get(key))) {
+                if (!mainModuleFileList.contains(key)) {
+                    mainModuleFileList.add(key);
+                }
+            }
         }
         json.put("totalSize", totalSize);
         json.put("files", md5Vals);
+        
         JSONObject modules = new JSONObject();
-        modules.put(MAIN_MODULE_NAME, ary);
+        modules.put(MAIN_MODULE_NAME, mainModuleFileList);
         json.put("modules", modules);
         
         String newAssetConfigPath = versionPath;
@@ -560,6 +571,9 @@ public class MainFrame extends javax.swing.JFrame {
     }
     
     private int generateMd5ForEachFile(File file, String parentPath, int fileCount) {
+        if (".DS_Store".equals(file.getName())) {
+            return fileCount;
+        }
         try {
             if (file.isDirectory()) {
                 File[] files = file.listFiles();
@@ -578,6 +592,9 @@ public class MainFrame extends javax.swing.JFrame {
     }
     
     private void generateFileSizeForEachFile(File file, String parentPath) {
+        if (".DS_Store".equals(file.getName())) {
+            return;
+        }
         if (file.isDirectory()) {
             File[] files = file.listFiles();
             for (File f : files) {
@@ -620,6 +637,7 @@ public class MainFrame extends javax.swing.JFrame {
     private final String ASSET_CONFIG_FILE_NAME = "asset.config.bin";
     private final String BUNDLE_MD5_FILE_NAME = "bundle.md5.bin";
     private final String VERSION_KEY = "version";
+    private final String MODULES_KEY = "modules";
     private final String MAIN_MODULE_NAME = "am.main";
     private final String VERSION_DIR = "Version";
     private final String BUNDLE_MD5_DIR = "BundleMd5";
