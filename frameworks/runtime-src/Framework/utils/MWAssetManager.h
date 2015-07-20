@@ -121,4 +121,4 @@ private:
 
 MW_FRAMEWORK_END
 
-#endif /* defined(__GameFramework__MWAssetManager__) */
+#endif

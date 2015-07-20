@@ -89,6 +89,7 @@
 		F293B3D915EB7BE500256477 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F293B3D815EB7BE500256477 /* Foundation.framework */; };
 		F293B3DB15EB7BE500256477 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F293B3DA15EB7BE500256477 /* CoreGraphics.framework */; };
 		F293BB9C15EB831F00256477 /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F293BB7E15EB831F00256477 /* AppDelegate.cpp */; };
+		F51F9BDB1B5CE8F400CDE1CC /* UpdateScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F51F9BD91B5CE8F400CDE1CC /* UpdateScene.cpp */; };
 		F535359D1AB448FD00EF7298 /* MWNetRequest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F535359B1AB448FD00EF7298 /* MWNetRequest.cpp */; };
 		F53535A21AB44F1600EF7298 /* MWNetResponse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F53535A01AB44F1600EF7298 /* MWNetResponse.cpp */; };
 		F53535A51AB4512D00EF7298 /* MWNetProtocol.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F53535A31AB4512D00EF7298 /* MWNetProtocol.cpp */; };
@@ -129,11 +130,6 @@
 		F5D2DE471B57CA0A00D717A7 /* res in Resources */ = {isa = PBXBuildFile; fileRef = F5D2DE451B57CA0A00D717A7 /* res */; };
 		F5D2DE481B57CA0A00D717A7 /* src in Resources */ = {isa = PBXBuildFile; fileRef = F5D2DE461B57CA0A00D717A7 /* src */; };
 		F5DDB31E1AFA2C0B00642E89 /* MWSvgSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5DDB31C1AFA2C0B00642E89 /* MWSvgSprite.cpp */; };
-		F5DDB3271AFB33A600642E89 /* TestScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5DDB3251AFB33A600642E89 /* TestScene.cpp */; };
-		F5DDB32A1AFB344900642E89 /* TestGifViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5DDB3281AFB344900642E89 /* TestGifViewController.cpp */; };
-		F5DDB32D1AFB373C00642E89 /* TestZipViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5DDB32B1AFB373C00642E89 /* TestZipViewController.cpp */; };
-		F5DDB3301AFB393400642E89 /* TestSvgViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5DDB32E1AFB393400642E89 /* TestSvgViewController.cpp */; };
-		F5DDB3331AFB39EB00642E89 /* TestHttpViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5DDB3311AFB39EB00642E89 /* TestHttpViewController.cpp */; };
 		F5ECA03C1B16CBE000C6023A /* lua_mwframework_auto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5ECA01E1B16CBE000C6023A /* lua_mwframework_auto.cpp */; };
 		F5ECA0421B180D4500C6023A /* lua_mwframework_manual.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5ECA0401B180D4500C6023A /* lua_mwframework_manual.cpp */; };
 /* End PBXBuildFile section */
@@ -337,6 +333,8 @@
 		F293B3DA15EB7BE500256477 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		F293BB7E15EB831F00256477 /* AppDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AppDelegate.cpp; path = ../Classes/AppDelegate.cpp; sourceTree = "<group>"; };
 		F293BB7F15EB831F00256477 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ../Classes/AppDelegate.h; sourceTree = "<group>"; };
+		F51F9BD91B5CE8F400CDE1CC /* UpdateScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UpdateScene.cpp; path = ../Classes/UpdateScene.cpp; sourceTree = "<group>"; };
+		F51F9BDA1B5CE8F400CDE1CC /* UpdateScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UpdateScene.h; path = ../Classes/UpdateScene.h; sourceTree = "<group>"; };
 		F535359B1AB448FD00EF7298 /* MWNetRequest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MWNetRequest.cpp; path = net/MWNetRequest.cpp; sourceTree = "<group>"; };
 		F535359C1AB448FD00EF7298 /* MWNetRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MWNetRequest.h; path = net/MWNetRequest.h; sourceTree = "<group>"; };
 		F53535A01AB44F1600EF7298 /* MWNetResponse.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MWNetResponse.cpp; path = net/MWNetResponse.cpp; sourceTree = "<group>"; };
@@ -430,16 +428,6 @@
 		F5DDB31B1AFA2B4600642E89 /* nanosvgrast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nanosvgrast.h; sourceTree = "<group>"; };
 		F5DDB31C1AFA2C0B00642E89 /* MWSvgSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWSvgSprite.cpp; sourceTree = "<group>"; };
 		F5DDB31D1AFA2C0B00642E89 /* MWSvgSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWSvgSprite.h; sourceTree = "<group>"; };
-		F5DDB3251AFB33A600642E89 /* TestScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestScene.cpp; sourceTree = "<group>"; };
-		F5DDB3261AFB33A600642E89 /* TestScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestScene.h; sourceTree = "<group>"; };
-		F5DDB3281AFB344900642E89 /* TestGifViewController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestGifViewController.cpp; sourceTree = "<group>"; };
-		F5DDB3291AFB344900642E89 /* TestGifViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestGifViewController.h; sourceTree = "<group>"; };
-		F5DDB32B1AFB373C00642E89 /* TestZipViewController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestZipViewController.cpp; sourceTree = "<group>"; };
-		F5DDB32C1AFB373C00642E89 /* TestZipViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestZipViewController.h; sourceTree = "<group>"; };
-		F5DDB32E1AFB393400642E89 /* TestSvgViewController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestSvgViewController.cpp; sourceTree = "<group>"; };
-		F5DDB32F1AFB393400642E89 /* TestSvgViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestSvgViewController.h; sourceTree = "<group>"; };
-		F5DDB3311AFB39EB00642E89 /* TestHttpViewController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestHttpViewController.cpp; sourceTree = "<group>"; };
-		F5DDB3321AFB39EB00642E89 /* TestHttpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestHttpViewController.h; sourceTree = "<group>"; };
 		F5ECA01E1B16CBE000C6023A /* lua_mwframework_auto.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lua_mwframework_auto.cpp; sourceTree = "<group>"; };
 		F5ECA01F1B16CBE000C6023A /* lua_mwframework_auto.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lua_mwframework_auto.hpp; sourceTree = "<group>"; };
 		F5ECA0401B180D4500C6023A /* lua_mwframework_manual.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lua_mwframework_manual.cpp; sourceTree = "<group>"; };
@@ -850,10 +838,11 @@
 		F293BB7C15EB830F00256477 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				F5DDB3241AFB338500642E89 /* test */,
 				15427C7E198F201A00DC375D /* lua_module_register.h */,
 				F293BB7E15EB831F00256477 /* AppDelegate.cpp */,
 				F293BB7F15EB831F00256477 /* AppDelegate.h */,
+				F51F9BD91B5CE8F400CDE1CC /* UpdateScene.cpp */,
+				F51F9BDA1B5CE8F400CDE1CC /* UpdateScene.h */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -1097,24 +1086,6 @@
 			path = nanosvg;
 			sourceTree = "<group>";
 		};
-		F5DDB3241AFB338500642E89 /* test */ = {
-			isa = PBXGroup;
-			children = (
-				F5DDB3251AFB33A600642E89 /* TestScene.cpp */,
-				F5DDB3261AFB33A600642E89 /* TestScene.h */,
-				F5DDB3281AFB344900642E89 /* TestGifViewController.cpp */,
-				F5DDB3291AFB344900642E89 /* TestGifViewController.h */,
-				F5DDB32B1AFB373C00642E89 /* TestZipViewController.cpp */,
-				F5DDB32C1AFB373C00642E89 /* TestZipViewController.h */,
-				F5DDB32E1AFB393400642E89 /* TestSvgViewController.cpp */,
-				F5DDB32F1AFB393400642E89 /* TestSvgViewController.h */,
-				F5DDB3311AFB39EB00642E89 /* TestHttpViewController.cpp */,
-				F5DDB3321AFB39EB00642E89 /* TestHttpViewController.h */,
-			);
-			name = test;
-			path = ../Classes/test;
-			sourceTree = "<group>";
-		};
 		F5ECA0001B16CBE000C6023A /* auto */ = {
 			isa = PBXGroup;
 			children = (
@@ -1339,7 +1310,6 @@
 				33250DC71A91E39A00D1668B /* MWJsonElement.cpp in Sources */,
 				33250DD41A91E39A00D1668B /* JSONStream.cpp in Sources */,
 				33250DD11A91E39A00D1668B /* JSONNode.cpp in Sources */,
-				F5DDB3271AFB33A600642E89 /* TestScene.cpp in Sources */,
 				F5CF4A6D1ADCF1EC00D0AF87 /* MWGifSprite.cpp in Sources */,
 				33250DCD1A91E39A00D1668B /* JSONChildren.cpp in Sources */,
 				F5ECA03C1B16CBE000C6023A /* lua_mwframework_auto.cpp in Sources */,
@@ -1354,15 +1324,12 @@
 				33A37BF71A91D3D30042CA97 /* MWSqliteDb.cpp in Sources */,
 				5023812517EBBCAC00990C9B /* RootViewController.mm in Sources */,
 				F5C9F9271AD7B5B6008FAF9A /* MWSystemHelper.cpp in Sources */,
-				F5DDB32D1AFB373C00642E89 /* TestZipViewController.cpp in Sources */,
 				F5A79BB71AEF7B9E0040F7BE /* MWGifFramesCache.cpp in Sources */,
 				33250DD01A91E39A00D1668B /* JSONMemory.cpp in Sources */,
-				F5DDB3301AFB393400642E89 /* TestSvgViewController.cpp in Sources */,
 				F5CF4A681ADCE9EA00D0AF87 /* MWGifFrame.cpp in Sources */,
 				F5629EC71AEC20F000CC4F1F /* zip.c in Sources */,
 				33250DD61A91E39A00D1668B /* JSONWorker.cpp in Sources */,
 				F5A5F00F1B4428B70060AE8E /* MWCipherMachine.cpp in Sources */,
-				F5DDB3331AFB39EB00642E89 /* TestHttpViewController.cpp in Sources */,
 				33250DC81A91E39A00D1668B /* MWJsonFormatter.cpp in Sources */,
 				33250DD71A91E39A00D1668B /* JSONWriter.cpp in Sources */,
 				F53535A21AB44F1600EF7298 /* MWNetResponse.cpp in Sources */,
@@ -1398,6 +1365,7 @@
 				33250DD31A91E39A00D1668B /* JSONPreparse.cpp in Sources */,
 				33BC563A1A7B99D400EBCA2A /* MWStack.cpp in Sources */,
 				5023811817EBBCAC00990C9B /* AppController.mm in Sources */,
+				F51F9BDB1B5CE8F400CDE1CC /* UpdateScene.cpp in Sources */,
 				F5629EB81AEC202A00CC4F1F /* MWZipData.cpp in Sources */,
 				F53535A51AB4512D00EF7298 /* MWNetProtocol.cpp in Sources */,
 				3382D9F71A80F64C00A3702F /* FrameworkErrors.cpp in Sources */,
@@ -1407,7 +1375,6 @@
 				F53535B51AB45A4100EF7298 /* MWNetFilter.cpp in Sources */,
 				F5714FE11AB9D77B00AF3A51 /* MWHttpForm.cpp in Sources */,
 				F5950CC01AFA8F8B00A73190 /* MWIOUtils.cpp in Sources */,
-				F5DDB32A1AFB344900642E89 /* TestGifViewController.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -6,84 +6,17 @@
 
 #include "mwframework.h"
 
+#include "UpdateScene.h"
+
 #define BUNDLE_RESOURCE_VERSION 1.00
 #define CPP_PROGRAM_VERSION 0.00
-#define DEVELOP_MODE true
+#define DEVELOP_MODE false
 #define SERVER_ASSET_ROOT_URL "http://120.25.123.138/mobile/asset"
 
 using namespace cocos2d;
 using namespace std;
 using namespace CocosDenshion;
 using namespace mwframework;
-
-class UpdateScene : public MWGameScene, public IAssetUpdateDelegate
-{
-public:
-    static UpdateScene *create()
-    {
-        auto ret = new (nothrow) UpdateScene();
-        if (ret && ret->init()) {
-            ret->autorelease();
-            return ret;
-        }
-        CC_SAFE_RELEASE(ret);
-        return nullptr;
-    }
-    
-    /**
-     * Delegate when the version checking is over.
-     */
-    void onVersionCheckCompleted(bool latest, int fileCount, bool needUpdateProgram, const std::string &programUpdateUrl)
-    {
-        if (latest) {
-            CCLOG("已经是最新版本...");
-        } else {
-            if (needUpdateProgram) {
-                CCLOG("需要更新cpp程序，更新地址: %s", programUpdateUrl.c_str());
-            } else {
-                CCLOG("需要更新Asset，文件个数: %d", fileCount);
-            }
-        }
-    }
-    /**
-     * Delegate when the single file is downloading.
-     */
-    void onAssetFileDownloading(const std::string &filePath, float progress, long totalToDownload)
-    {
-        
-    }
-    /**
-     * Delegate when the single file is updated.
-     */
-    void onAssetFileDownloaded(const std::string &filePath)
-    {
-        CCLOG("%s下载完成", filePath.c_str());
-    }
-    /**
-     * Delegate when the version is updated.
-     */
-    void onVersionUpdated()
-    {
-        CCLOG("版本更新完毕.");
-        
-        MWLuaUtils::getInstance()->executeScriptFile("src/main.lua");
-    }
-    /**
-     * Delegate when download failed.
-     */
-    void onUpdateError(EAssetUpdateErrorType errorType, const std::string &errorMsg)
-    {
-        CCLOG("更新出错: %s", errorMsg.c_str());
-    }
-    
-    void onEnter() override
-    {
-        CCLOG("%s", FileUtils::getInstance()->getWritablePath().c_str());
-        
-        MWAssetManager::getInstance()->setAssetUpdateDelegate(this);
-        MWAssetManager::getInstance()->checkVersion();
-    }
-};
 
 AppDelegate::AppDelegate()
 {
@@ -129,9 +62,7 @@ bool AppDelegate::applicationDidFinishLaunching()
     
     if (MWAssetManager::getInstance()->isDevelopMode()) {
 #ifdef MW_ENABLE_SCRIPT_BINDING
-        if (engine->executeScriptFile("src/main.lua")) {
-            return false;
-        }
+        MWLuaUtils::getInstance()->executeScriptFile("src/main.lua");
 #endif
     } else {
         Director::getInstance()->runWithScene(UpdateScene::create());

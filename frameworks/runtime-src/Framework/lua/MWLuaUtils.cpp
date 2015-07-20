@@ -59,7 +59,7 @@ void MWLuaUtils::executeScriptFile(const std::string &filePath)
     if (!FileUtils::getInstance()->isFileExist(path)) {
         return;
     }
-    pEngine->executeScriptFile(path.c_str());
+    pEngine->executeScriptFile(filePath.c_str());
 }
 
 void MWLuaUtils::setTableField(const std::string &tableName, const std::string &key, cocos2d::Ref *value, const std::string &valueType)
