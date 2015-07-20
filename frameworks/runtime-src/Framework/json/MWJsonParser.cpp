@@ -24,7 +24,7 @@ Ref *MWJsonParser::parseString(const std::string &jsonStr)
 Ref *MWJsonParser::parseFile(const std::string &jsonPath)
 {
     std::string buffer;
-    MWBinaryData *pData = MWIOUtils::getInstance()->getDataFromFile(jsonPath);
+    MWBinaryData *pData = MWIOUtils::getInstance()->getDataFromFile(FileUtils::getInstance()->fullPathForFilename(jsonPath));
     unsigned char * pFileData = reinterpret_cast<unsigned char *>(pData->getData());
     MW_ULONG fileSize = pData->getSize();
     if (pFileData) {

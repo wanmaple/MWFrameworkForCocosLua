@@ -40,7 +40,7 @@ MWSvgSprite *MWSvgSprite::createWithFile(const std::string &svgPath, float dpi)
 
 bool MWSvgSprite::initWithFile(const std::string &svgPath, float dpi)
 {
-    auto pData = MWIOUtils::getInstance()->getDataFromFile(svgPath);
+    auto pData = MWIOUtils::getInstance()->getDataFromFile(FileUtils::getInstance()->fullPathForFilename(svgPath));
     
     return this->initWithRawData(pData, dpi);
 }

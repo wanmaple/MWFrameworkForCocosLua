@@ -239,7 +239,7 @@ MWGifSprite *MWGifSprite::createWithFile(const std::string &gifPath)
 
 bool MWGifSprite::initWithFile(const std::string &gifPath)
 {
-    auto pData = MWIOUtils::getInstance()->getDataFromFile(gifPath);
+    auto pData = MWIOUtils::getInstance()->getDataFromFile(FileUtils::getInstance()->fullPathForFilename(gifPath));
     
     return this->initWithRawData(pData);
 }
