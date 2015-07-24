@@ -10,7 +10,7 @@
 
 #define BUNDLE_RESOURCE_VERSION 1.00
 #define CPP_PROGRAM_VERSION 0.00
-#define DEVELOP_MODE false
+#define DEVELOP_MODE true
 #define SERVER_ASSET_ROOT_URL "http://120.25.123.138/mobile/asset"
 
 using namespace cocos2d;
