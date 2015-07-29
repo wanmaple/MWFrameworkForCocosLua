@@ -13,10 +13,10 @@ MW_FRAMEWORK_BEGIN
 
 class MWViewController;
 
-class MW_INTERFACE MWViewSegueDelegate
+class MW_INTERFACE IMWViewSegueDelegate
 {
 public:
-    virtual ~MWViewSegueDelegate() {}
+    virtual ~IMWViewSegueDelegate() {}
     
     /**
      * Define how to initialize the view before loading a view controller.
@@ -35,7 +35,7 @@ public:
 /**
  * Basic view segue.
  */
-class MW_DLL MWViewSegue : public MWObject, public MWViewSegueDelegate
+class MW_DLL MWViewSegue : public MWObject, public IMWViewSegueDelegate
 {
 public:
     /**
