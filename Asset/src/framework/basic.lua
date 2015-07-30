@@ -12,10 +12,10 @@ end
 -- return type string of the instance
 function GetType(instance)
 	if type(instance) == "table" then
-		if instance.__className == nil then
+		if instance.__cname == nil then
 			return tolua.type(instance)
 		end
-		return instance.__className
+		return instance.__cname
 	elseif type(instance) == "userdata" then
 		return tolua.type(instance)
 	end
@@ -44,6 +44,7 @@ function CallFunctionAsync(target, selector, delay, ...)
 		cc.Director:getInstance():getScheduler():unscheduleScriptEntry(handlerId)
 	end
 	handlerId = cc.Director:getInstance():getScheduler():scheduleScriptFunc(handlerFunction, delay, false)
+	return handlerId
 end
 
 -- switch scene

@@ -31,7 +31,7 @@ function Game:_init()
     local director = cc.Director:getInstance()
     local glview = director:getOpenGLView()
     if glview == nil then
-        glview = cc.GLViewImpl:createWithRect("TestFramework", cc.rect(0, 0, 900, 640))
+        glview = cc.GLViewImpl:createWithRect("GameFramework", cc.rect(0, 0, 900, 640))
         director:setOpenGLView(glview)
     end
 
@@ -45,9 +45,10 @@ function Game:_init()
 end
 
 function Game:_run()
-    require "scenes/TestScene"
-
-    ReplaceScene(TestScene, { STRING = "abc", NUMBER = 123, BOOLEAN = true, REF = mw.ArrayList:create() })
+    local NewScene = require "scenes.NewScene"
+    local scene = NewScene.new({ A = 1 })
+    cc.Director:getInstance():runWithScene(scene)
+    -- ReplaceScene(TestScene, { STRING = "abc", NUMBER = 123, BOOLEAN = true, REF = mw.ArrayList:create() })
 end
 
 function Game:_start()

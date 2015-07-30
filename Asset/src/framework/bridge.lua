@@ -28,7 +28,7 @@ local function checkArguments(args, sig)
     return args, table.concat(sig)
 end
 
-function LanguageBridge:callJavaStaticMethod(className, methodName, args, sig)
+function LanguageBridge.callJavaStaticMethod(className, methodName, args, sig)
     local args, sig = checkArguments(args, sig)
     return LuaJavaBridge.callStaticMethod(className, methodName, args, sig)
 end
