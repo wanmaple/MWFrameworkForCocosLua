@@ -11,4 +11,9 @@
 -- require "framework/bridge"
 
 require "framework.constants"
+require "framework.bit"
 require "framework.classdef"
+require "framework.basic"
+require "framework.system"
+require "framework.device"
+require "framework.bridge"

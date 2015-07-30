@@ -45,10 +45,8 @@ function Game:_init()
 end
 
 function Game:_run()
-    local NewScene = require "scenes.NewScene"
-    local scene = NewScene.new({ A = 1 })
-    cc.Director:getInstance():runWithScene(scene)
-    -- ReplaceScene(TestScene, { STRING = "abc", NUMBER = 123, BOOLEAN = true, REF = mw.ArrayList:create() })
+    local TestScene = require "scenes.TestScene"
+    ReplaceScene(TestScene, { STRING = "abc", NUMBER = 123, BOOLEAN = true, REF = mw.ArrayList:create() })
 end
 
 function Game:_start()

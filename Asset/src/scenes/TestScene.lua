@@ -1,12 +1,17 @@
-class("TestScene", clsGameScene)
 
-require "scenes.TestViewController"
+local TestScene = class("TestScene", function(params)
+	return mw.GameScene:createWithParams(params)
+end)
+
+local TestViewController = require "scenes.TestViewController"
 
 function TestScene:onEnter()
-	local testVc = TestViewController:create()
+	local testVc = TestViewController.new()
 	self:loadViewController(testVc, "TEST_VIEW_CONTROLLER")
 end
 
 function TestScene:onExit()
 
 end
+
+return TestScene

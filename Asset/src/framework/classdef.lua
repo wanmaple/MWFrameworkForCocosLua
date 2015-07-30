@@ -35,17 +35,12 @@ function class(className, super)
 		end
 
 		function cls.new(...)
-			print(1111)
 			local instance = cls.__create(...)
 			local peer = {}
 			setmetatable(peer, cls)
-			print(1111)
 			tolua.setpeer(instance, peer)
-			print(1111)
 			instance.class = cls
-			print(1111)
 			instance:ctor(...)
-			print(1111)
 			return instance
 		end
 	elseif stype == "nil" then

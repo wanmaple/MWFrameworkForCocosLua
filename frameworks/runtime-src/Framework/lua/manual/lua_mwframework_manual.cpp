@@ -90,15 +90,6 @@ MW_LOCAL int tolua_mwframework_MWGameScene_createWithParams(lua_State *tolua_S)
         }
 #endif
         
-        // 1 - table
-        lua_pushnumber(tolua_S, 1);
-        lua_gettable(tolua_S, 2);
-#if COCOS2D_DEBUG >= 1
-        if (!lua_istable(tolua_S, -1)) {
-            goto tolua_lerror;
-        }
-#endif
-        
         tolua_Error err;
         auto params = mwframework::MWDictionary::create();
         
@@ -111,13 +102,13 @@ MW_LOCAL int tolua_mwframework_MWGameScene_createWithParams(lua_State *tolua_S)
 //                   lua_typename(tolua_S, lua_type(tolua_S, -2)),
 //                   lua_typename(tolua_S, lua_type(tolua_S, -1)));
             cocos2d::Ref *value = nullptr;
-            if (tolua_isnumber(tolua_S, 5, 0, &err)) {
+            if (tolua_isnumber(tolua_S, 4, 0, &err)) {
                 value = __Double::create(tolua_tonumber(tolua_S, -1, 0));
-            } else if (tolua_isboolean(tolua_S, 5, 0, &err)) {
+            } else if (tolua_isboolean(tolua_S, 4, 0, &err)) {
                 value = __Bool::create(tolua_toboolean(tolua_S, -1, 0));
-            } else if (tolua_isstring(tolua_S, 5, 0, &err)) {
+            } else if (tolua_isstring(tolua_S, 4, 0, &err)) {
                 value = __String::create(tolua_tostring(tolua_S, -1, nullptr));
-            } else if (tolua_isusertype(tolua_S, 5, "cc.Ref", 0, &err)) {
+            } else if (tolua_isusertype(tolua_S, 4, "cc.Ref", 0, &err)) {
                 value = static_cast<cocos2d::Ref *>(tolua_tousertype(tolua_S, -1, nullptr));
             }
             
@@ -137,7 +128,7 @@ MW_LOCAL int tolua_mwframework_MWGameScene_createWithParams(lua_State *tolua_S)
             lua_pop(tolua_S, 1);
         }
         
-        lua_pop(tolua_S, 2);
+        lua_pop(tolua_S, 1);
         
         auto ret = mwframework::MWGameScene::createWithParams(params);
         object_to_luaval<mwframework::MWGameScene>(tolua_S, "mw.GameScene", (mwframework::MWGameScene *) ret);

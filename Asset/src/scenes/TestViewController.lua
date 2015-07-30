@@ -1,4 +1,7 @@
-class("TestViewController", clsViewController)
+
+local TestViewController = class("TestViewController", function()
+	return mw.ViewController:create()
+end)
 
 local winSize = cc.Director:getInstance():getWinSize()
 
@@ -48,3 +51,5 @@ end
 function TestViewController:viewDidUnload()
 
 end
+
+return TestViewController
