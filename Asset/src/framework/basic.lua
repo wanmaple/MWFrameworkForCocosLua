@@ -4,11 +4,6 @@
 	Date: 04/26/2014
 ]]
 
--- mark as deprecated
-function Deprecate(className)
-	assert(false, "Deprecated class: " .. className)
-end
-
 -- return type string of the instance
 function GetType(instance)
 	if type(instance) == "table" then

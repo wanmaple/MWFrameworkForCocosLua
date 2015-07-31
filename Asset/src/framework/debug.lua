@@ -12,6 +12,16 @@ end
 
 function logWithTag(tag, fmt, ...)
 	if DEBUG then
-		print(string.upper(tag), string.format(fmt, ...))
+		print("[" .. string.upper(tag) .. "]", string.format(fmt, ...))
 	end
+end
+
+function logError(fmt, ...)
+	logWithTag("error", fmt, ...)
+	print(debug.traceback("", 2))
+end
+
+-- mark as deprecated
+function deprecate(oldClass, newClass)
+	assert(false, oldClass .. " is deprecated, use " .. newClass .. " instead.")
 end
