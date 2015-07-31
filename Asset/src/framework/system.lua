@@ -4,12 +4,6 @@
 	Date: 04/26/2014
 ]]
 
-function mw.log(...)
-	if DEBUG then
-		print(os.date("%X"), string.format(...))
-	end
-end
-
 -- Copy k-v from source table to the target table.
 function table.shallowCopy(targetTable, sourceTable)
 	if type(targetTable) == "table" and type(sourceTable) == "table" then
@@ -36,14 +30,14 @@ function table.deepCopy(targetTable, sourceTable)
 end
 
 -- get k-v count
-function table.getTotalCount(table, selector, ...)
-	if type(table) ~= "table" then
+function table.count(t, selector, ...)
+	if type(t) ~= "table" then
 		return -1
 	end
 	
 	local count = 0
-	for k, v in pairs(table) do
-		if selector == nil or selector(v, ...) then
+	for k, v in pairs(t) do
+		if selector == nil or selector(v, k, ...) then
 			count = count + 1
 		end
 	end
@@ -52,129 +46,101 @@ function table.getTotalCount(table, selector, ...)
 end
 
 -- concat strings with the specified character
-function table.join(table, joinChar)
-	if type(table) ~= "table" or type(joinChar) ~= "string" then
+function table.join(t, c)
+	if type(t) ~= "table" or type(c) ~= "string" then
 		return
 	end
 
 	local str = ""
-	local count = 0
-	for k, v in pairs(table) do
+	for i, v in ipairs(t) do
 		str = str .. tostring(v)
-		count = count + 1
-		if count ~= #table then		
-			str = str .. joinChar	
+		if i ~= #t then		
+			str = str .. c	
 		end
 	end
 	return str
 end
 
--- do action for each array element in table
-function table.forEachAsArray(table, action)
-	if type(table) ~= "table" or type(action) ~= "function" then
-		return
-	end
-
-	for _, v in ipairs(table) do
-		action(v)
-	end
-end
-
 -- do action for each element in table
-function table.forEachAsHash(table, action)
-	if type(table) ~= "table" or type(action) ~= "function" then
+function table.forEach(t, action, ...)
+	if type(t) ~= "table" or type(action) ~= "function" then
 		return
 	end
 
-	for k, v in pairs(table) do
-		action(k, v)
+	for k, v in pairs(t) do
+		action(k, v, ...)
 	end
 end
 
 -- select new table for the specified behaviors
-function table.select(table, selector, ...)
-	if type(table) ~= "table" or type(selector) ~= "function" then
-		return
+function table.select(t, selector, ...)
+	if type(t) ~= "table" or type(selector) ~= "function" then
+		return nil
 	end
 
-	local newTable = {}
-	for _, v in ipairs(table) do
-		if selector(v, ...) then
-			_G["table"].insert(newTable, v)
+	local ret = {}
+	for i, v in ipairs(t) do
+		if selector(v, i, ...) then
+			table.insert(ret, v)
 		end
 	end
-	return newTable
+	return ret
 end
 
 -- cast every item of table to the specified item
-function table.cast(table, caster, ...)
-	if type(table) ~= "table" or type(caster) ~= "function" then
-		return
+function table.cast(t, caster, ...)
+	if type(t) ~= "table" or type(caster) ~= "function" then
+		return nil
 	end
 
-	local newTable = {}
-	for _, v in ipairs(table) do
-		local item = caster(v, ...)
-		_G["table"].insert(newTable, item)
+	local ret = {}
+	for i, v in ipairs(table) do
+		local item = caster(v, i, ...)
+		table.insert(ret, item)
 	end
-	return newTable
+	return ret
 end
 
 -- whether the table contains the object which satisfies the condition
-function table.contains(table, selector, ...)
-	if type(table) ~= "table" then
+function table.contains(t, selector, ...)
+	if type(t) ~= "table" then
 		return false
 	end
 
-	for _, v in ipairs(table) do
-		if selector(v, ...) then
+	for i, v in ipairs(t) do
+		if selector(v, i, ...) then
 			return true
 		end
 	end
 	return false
 end
 
--- find the object which satisfies the condition
-function table.find(table, selector, ...)
-	if type(table) ~= "table" then
+-- remove the first object which satisfied the condition
+function table.erase(t, selector, ...)
+	if type(t) ~= "table" then
 		return false
 	end
 
-	for _, v in ipairs(table) do
-		if selector(v, ...) then
-			return v
-		end
-	end
-	return nil
-end
-
--- remove the object which satisfied the condition
-function table.erase(table, selector, ...)
-	if type(table) ~= "table" then
-		return false
-	end
-
-	for i, v in ipairs(table) do
-		if selector(v, ...) then
-			_G["table"].remove(table, i)
+	for i, v in ipairs(t) do
+		if selector(v, i, ...) then
+			table.remove(table, i)
 			return true
 		end
 	end
 	return false
 end
 
--- random object which satisfied the condition
-function table.random(table, selector, ...)
-	if type(table) ~= "table" then
-		return false
+-- shuffle the array
+function table.shuffle(t)
+	if type(t) ~= "table" then
+		return
 	end
 
-	local targetTable = _G["table"].select(table, selector, ...)
-	if #targetTable <= 0 then
-		return nil
+	local rd = nil
+	for i = 1, #t - 1 do
+		rd = math.random(1, #t - i - 1)
+		t[i], t[rd] = t[rd], t[i]
 	end
-	local rd = math.random(1, #targetTable)
-	return targetTable[rd]
 end
 
 -- log table
@@ -202,42 +168,47 @@ function table.dump(table)
 end
 
 -- serialze table
-function table.serialize(table)
-	if type(table) ~= "table" then
+function table.serialize(t, filter, ...)
+	if type(t) ~= "table" then
 		return false
+	end
+	if filter == nil or type(filter) ~= "function" then
+		filter = function()
+			return true
+		end
 	end
 	local mark = {}
 	local assign = {}
-	local function serialize_table(t, parent)
+	local function serialize_table(t, parent, filter, ...)
 		mark[t] = parent
 		local tmp = {}
 		for k, v in pairs(t) do
-			if (type(v) == "number" or type(v) == "string" or type(v) == "table" or type(v) == "boolean") and not string.find(k, "__") then
+			if (type(v) == "number" or type(v) == "string" or type(v) == "table" or type(v) == "boolean") and filter(v, k, ...) then
 				local key = type(k) == "number" and "[" .. k .. "]" or k
 				if type(v) == "table" then
 					local dotKey = parent .. (type(k) == "number" and key or "." .. key)
 					if mark[v] then
-						_G["table"].insert(assign, dotKey .. "=" .. mark[v])
+						table.insert(assign, dotKey .. "=" .. mark[v])
 					else
-						_G["table"].insert(tmp, key .. "=" .. serialize_table(v, dotKey))
+						table.insert(tmp, key .. "=" .. serialize_table(v, dotKey))
 					end
 				else
-					_G["table"].insert(tmp, key .. "=" .. (type(v) == "string" and ("\"" .. v .. "\"") or tostring(v)))
+					table.insert(tmp, key .. "=" .. (type(v) == "string" and ("\"" .. v .. "\"") or tostring(v)))
 				end
 			end
 		end
-		return "{" .. _G["table"].concat(tmp, ",") .. "}"
+		return "{" .. table.concat(tmp, ",") .. "}"
 	end
 
-	return "do local ret = " .. serialize_table(table, "ret") .. _G["table"].concat(assign, " ") .. " return ret end"
+	return "do local ret = " .. serialize_table(t, "ret", filter, ...) .. table.concat(assign, " ") .. " return ret end"
 end
 
 -- split string from the specified character
-function string.split(str, splitChar)
+function string.split(str, c)
 	local resultTable = {}
 
 	while true do
-		local pos = string.find(str, splitChar)
+		local pos = string.find(str, c)
 		if not pos then
 			table.insert(resultTable, str)
 			break

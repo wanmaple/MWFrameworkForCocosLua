@@ -6,13 +6,13 @@ end)
 local winSize = cc.Director:getInstance():getWinSize()
 
 function TestViewController:viewDidLoad()
-	mw.log("Test GameScene parameters...")
-	mw.log("NUMBER: %d", self:scene():getNumberParameter("NUMBER"))
-	mw.log("STRING: %s", self:scene():getStringParameter("STRING"))
-	mw.log("BOOLEAN: %s", tostring(self:scene():getBooleanParameter("BOOLEAN")))
-	mw.log("REF: %s", GetType(self:scene():getRefParameter("REF")))
+	log("Test GameScene parameters...")
+	log("NUMBER: %d", self:scene():getNumberParameter("NUMBER"))
+	log("STRING: %s", self:scene():getStringParameter("STRING"))
+	log("BOOLEAN: %s", tostring(self:scene():getBooleanParameter("BOOLEAN")))
+	log("REF: %s", GetType(self:scene():getRefParameter("REF")))
 
-	mw.log("Test ZipData and GifSprite...")
+	log("Test ZipData and GifSprite...")
 	local zipData = mw.ZipData:createWithExistingFile("res/GIF/pokemon_gif5.rc")
 	zipData:beginUnzip()
 	local data1 = zipData:getCompressedFileData("487_o.gif", "7ujm,lp-")
@@ -33,19 +33,19 @@ function TestViewController:viewDidLoad()
 		self:view():addChild(sp)
 	end
 
-	mw.log("Test Sqlite DB...")
+	log("Test Sqlite DB...")
 	local db = mw.SqliteDb:openDb("res/icon.jpg")
 	local t = db:executeQuery("select * from [pet_info] where [id] = '493'");
 	table.dump(t)
 
-	mw.log("Test some utils...")
+	log("Test some utils...")
 	local reachabilityStrMap = {
 		[0] = "No network.",
 		[1] = "Wifi",
 		[2] = "WWAN",
 	}
-	mw.log("NetStatus: %s", reachabilityStrMap[mw.SystemHelper:getInstance():checkNetStatus()])
-	mw.log("UUID: %s", mw.UUIDGenerator:getInstance():generateUUID())
+	log("NetStatus: %s", reachabilityStrMap[mw.SystemHelper:getInstance():checkNetStatus()])
+	log("UUID: %s", mw.UUIDGenerator:getInstance():generateUUID())
 end
 
 function TestViewController:viewDidUnload()

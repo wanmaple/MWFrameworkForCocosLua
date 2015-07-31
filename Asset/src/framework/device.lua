@@ -7,6 +7,13 @@
 Device = {}
 
 local app = cc.Application:getInstance()
+local director = cc.Director:getInstance()
+
+Device.size = director:getWinSize()
+Device.width = Device.size.width
+Device.height = Device.size.height
+Device.cx = Device.width * 0.5
+Device.cy = Device.height * 0.5
 
 --[[
 cc.PLATFORM_OS_WINDOWS = 0
@@ -42,8 +49,4 @@ cc.LANGUAGE_ARABIC     = 11
 ]]
 function Device:getLanguage()
 	return app:getCurrentLanguage()
-end
-
-function Device:getWinSize()
-	return cc.Director:getInstance():getWinSize()
 end

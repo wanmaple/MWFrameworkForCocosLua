@@ -4,7 +4,7 @@
     Date: 06/18/2015
 ]]
 
-LanguageBridge = {}
+local LanguageBridge = {}
 
 local function checkArguments(args, sig)
     if type(args) ~= "table" then args = {} end
@@ -54,3 +54,5 @@ function LanguageBridge.callOCStaticMethod(className, methodName, args)
     end
     return ok, ret
 end
+
+return LanguageBridge

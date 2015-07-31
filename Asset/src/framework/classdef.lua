@@ -62,6 +62,14 @@ function class(className, super)
 		-- lua super class
 		setmetatable(cls, super)
 		cls.super = super
+
+		function cls.new(...)
+			local instance = {}
+			setmetatable(instance, cls)
+			instance.class = cls
+			instance:ctor(...)
+			return instance
+		end
 	end
 
 	return cls
