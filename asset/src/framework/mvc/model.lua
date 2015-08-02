@@ -76,12 +76,11 @@ function ModelBase:_setProperties(props)
 	end
 	for propName, propValue in pairs(props) do
 		local propType = self._scheme[propName]
-		if propType ~= nil and
-			((type(propType) == "string" and GetType(propValue) == propType)
-			or (type(propType) == "function" and propType(propValue))) then
-			self["_" .. propName] = propValue
-		elseif propType == nil then
+		if propType == nil then
 			log("The property %s doesn't exist in your model scheme.", propName)
+		elseif (type(propType) == "string" and GetType(propValue) == propType)
+			or (type(propType) == "function" and propType(propValue)) then
+			self["_" .. propName] = propValue
 		else
 			log("Invalid property value of %s.", propName)
 		end
