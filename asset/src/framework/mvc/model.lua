@@ -15,12 +15,16 @@ local ModelBase = class("ModelBase")
 	e.g.
 	local MyModel = class("MyModel", ModelBase)
 
-	function MyModel:ctor(id)
+	function MyModel:ctor(id, name, age)
 		self.super.ctor(self, id)
 
 		self:_defineScheme({
 			age = "number",
 			name = "string",
+		})
+		self:_setProperties({
+			name = name,
+			age = age,
 		})
 	end
 
