@@ -56,6 +56,7 @@ function ModelBase:_defineScheme(scheme)
 	if type(scheme) ~= "table" then
 		scheme = {}
 	end
+	self._scheme = { id = "string" }
 	for propName, propType in pairs(scheme) do
 		if type(propType) == "string" then
 			self._scheme[propName] = propType
