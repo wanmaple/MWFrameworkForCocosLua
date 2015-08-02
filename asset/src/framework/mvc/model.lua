@@ -19,7 +19,9 @@ local ModelBase = class("ModelBase")
 		self.super.ctor(self, id)
 
 		self:_defineScheme({
-			age = "number",
+			age = function(val) {
+				return type(val) == "number" and val >= 0
+			},
 			name = "string",
 		})
 		self:_setProperties({
@@ -62,7 +64,7 @@ function ModelBase:_defineScheme(scheme)
 	end
 	self._scheme = { id = "string" }
 	for propName, propType in pairs(scheme) do
-		if type(propType) == "string" then
+		if type(propType) == "string" or type(propType) == "function" then
 			self._scheme[propName] = propType
 		end
 	end
@@ -74,12 +76,14 @@ function ModelBase:_setProperties(props)
 	end
 	for propName, propValue in pairs(props) do
 		local propType = self._scheme[propName]
-		if propType and GetType(propValue) == propType then
+		if propType ~= nil and
+			((type(propType) == "string" and GetType(propValue) == propType)
+			or (type(propType) == "function" and propType(propValue))) then
 			self["_" .. propName] = propValue
 		elseif propType == nil then
 			log("The property %s doesn't exist in your model scheme.", propName)
 		else
-			log("Wrong type of the property %s. The value type is %s, but it should be %s.", propName, GetType(propValue), propType)
+			log("Invalid property value of %s.", propName)
 		end
 	end
 end
