@@ -204,19 +204,18 @@ function table.serialize(t, filter, ...)
 end
 
 -- split string from the specified character
-function string.split(str, c)
-	local resultTable = {}
+function string.split(input, delimiter)
+    input = tostring(input)
+    delimiter = tostring(delimiter)
+    if (delimiter == "") then return nil end
 
-	while true do
-		local pos = string.find(str, c)
-		if not pos then
-			table.insert(resultTable, str)
-			break
-		end
-		local subStr = string.sub(str, 1, pos - 1)
-		table.insert(resultTable, subStr)
-		str = string.sub(str, pos + 1, #str)
-	end
+    local pos, arr = 0, {}
+    -- for each divider found
+    for st, sp in function() return string.find(input, delimiter, pos, true) end do
+        table.insert(arr, string.sub(input, pos, st - 1))
+        pos = sp + 1
+    end
+    table.insert(arr, string.sub(input, pos))
 
-	return resultTable
+    return arr
 end
