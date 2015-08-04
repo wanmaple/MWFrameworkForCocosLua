@@ -19,10 +19,10 @@ local ModelBase = class("ModelBase")
 		self.super.ctor(self, id)
 
 		self:_defineScheme({
-			age = function(val) {
+			age = { function(val) {
 				return type(val) == "number" and val >= 0
-			},
-			name = "string",
+			}, 0 },
+			name = { "string", nil },
 		})
 		self:_setProperties({
 			name = name,
@@ -48,10 +48,10 @@ local ModelBase = class("ModelBase")
 ]]
 function ModelBase:ctor(id)
 	assert(type(id) ~= "string", "Invalid model id, id must be string type.")
-	self._id = id
 	self._scheme = {
-		id = "string",
+		id = { "string", nil },
 	}
+	self._id = id
 end
 
 function ModelBase:getId()
@@ -59,15 +59,22 @@ function ModelBase:getId()
 end
 
 function ModelBase:_defineScheme(scheme)
+	if self._inited then
+		return
+	end
 	if type(scheme) ~= "table" then
 		scheme = {}
 	end
 	self._scheme = { id = "string" }
-	for propName, propType in pairs(scheme) do
+	for propName, propAttr in pairs(scheme) do
+		local propType = propAttr[1]
+		local propDef = propAttr[2]
 		if type(propType) == "string" or type(propType) == "function" then
 			self._scheme[propName] = propType
+			self["_" .. propName] = propDef
 		end
 	end
+	self._inited = true
 end
 
 function ModelBase:_setProperties(props)
@@ -75,7 +82,8 @@ function ModelBase:_setProperties(props)
 		return
 	end
 	for propName, propValue in pairs(props) do
-		local propType = self._scheme[propName]
+		local propAttr = self._scheme[propName]
+		local propType = propAttr[1]
 		if propType == nil then
 			log("The property %s doesn't exist in your model scheme.", propName)
 		elseif (type(propType) == "string" and GetType(propValue) == propType)
