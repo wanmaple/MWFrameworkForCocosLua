@@ -84,3 +84,17 @@ function ReplaceScene(scene, params)
 		cc.Director:getInstance():runWithScene(newScene)
 	end
 end
+
+-- convert json to lua table
+function JsonToLua(json)
+	local jsonType = GetType(json)
+    assert(jsonType == "mw.JsonObject" or jsonType == "mw.JsonArray", "Invalid param json.")
+    
+    local luaStr = json:toLuaString()
+    local func, err = loadstring("return " .. luaStr)
+    if err then
+    	print("Error occues when trying to parse a json.")
+    	return nil
+    end
+    return func()
+end

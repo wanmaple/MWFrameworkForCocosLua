@@ -1526,7 +1526,7 @@
 					CC_TARGET_OS_IPHONE,
 					"$(inherited)",
 				);
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/../Framework/protobuf/protobuf_lib/include";
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = ios/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../../runtime-src/Framework/net/http/curl/prebuilt/ios";
@@ -1553,7 +1553,7 @@
 					CC_TARGET_OS_IPHONE,
 					"$(inherited)",
 				);
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/../Framework/protobuf/protobuf_lib/include";
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = ios/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../../runtime-src/Framework/net/http/curl/prebuilt/ios";

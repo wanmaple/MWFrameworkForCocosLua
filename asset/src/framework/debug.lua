@@ -17,8 +17,10 @@ function logWithTag(tag, fmt, ...)
 end
 
 function logError(fmt, ...)
-	logWithTag("error", fmt, ...)
-	print(debug.traceback("", 2))
+	if DEBUG then
+		logWithTag("error", fmt, ...)
+		print(debug.traceback("", 2))
+	end
 end
 
 -- mark as deprecated

@@ -3,8 +3,6 @@ local TestViewController = class("TestViewController", function()
 	return mw.ViewController:create()
 end)
 
-local winSize = cc.Director:getInstance():getWinSize()
-
 function TestViewController:viewDidLoad()
 	log("Test GameScene parameters...")
 	log("NUMBER: %d", self:scene():getNumberParameter("NUMBER"))
@@ -29,7 +27,7 @@ function TestViewController:viewDidLoad()
 	for i, key in ipairs(keys) do
 		local sp = pDict:objectForKey(key)
 		tolua.cast(sp, "mw.GifSprite")
-		sp:setPosition(winSize.width * (0.25 + (i - 1) * 0.5), winSize.height * 0.5)
+		sp:setPosition(Device.size.width * (0.25 + (i - 1) * 0.5), Device.size.height * 0.5)
 		self:view():addChild(sp)
 	end
 
