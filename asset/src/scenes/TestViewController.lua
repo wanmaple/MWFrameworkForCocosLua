@@ -27,9 +27,14 @@ function TestViewController:viewDidLoad()
 	for i, key in ipairs(keys) do
 		local sp = pDict:objectForKey(key)
 		tolua.cast(sp, "mw.GifSprite")
-		sp:setPosition(Device.size.width * (0.25 + (i - 1) * 0.5), Device.size.height * 0.5)
+		sp:setPosition(Device:width() * (0.25 + (i - 1) * 0.5), Device:height() * 0.5)
 		self:view():addChild(sp)
 	end
+
+    local svg = mw.SvgSprite:createWithFile("tiger.svg")
+    svg:setPosition(Device:cx(), Device:cy())
+    svg:setVectorScale(0.5)
+    self:view():addChild(svg)
 
 	log("Test Sqlite DB...")
 	local db = mw.SqliteDb:openDb("res/icon.jpg")

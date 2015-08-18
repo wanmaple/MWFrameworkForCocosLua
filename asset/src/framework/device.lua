@@ -9,11 +9,25 @@ Device = {}
 local app = cc.Application:getInstance()
 local director = cc.Director:getInstance()
 
-Device.size = director:getWinSize()
-Device.width = Device.size.width
-Device.height = Device.size.height
-Device.cx = Device.width * 0.5
-Device.cy = Device.height * 0.5
+function Device:getWinSize()
+	return director:getWinSize()
+end
+
+function Device:width()
+	return self:getWinSize().width
+end
+
+function Device:height()
+	return self:getWinSize().height
+end
+
+function Device:cx()
+	return self:width() * 0.5
+end
+
+function Device:cy()
+	return self:height() * 0.5
+end
 
 --[[
 cc.PLATFORM_OS_WINDOWS = 0
