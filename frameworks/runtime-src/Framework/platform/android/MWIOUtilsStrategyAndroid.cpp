@@ -1,6 +1,6 @@
 #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
 
-#include "MWIOUtils.h"
+#include "MWIOUtilsStrategyAndroid.h"
 
 #include <sys/uio.h>
 #include <sys/types.h>
@@ -13,16 +13,12 @@ using namespace std;
 
 MW_FRAMEWORK_BEGIN
 
-MWIOUtils::MWIOUtils()
-{
-}
-
-string MWIOUtils::resourcePath(const std::string &path)
+string MWIOUtilsStrategyAndroid::resourcePath(const std::string &path)
 {
     return path;
 }
 
-bool MWIOUtils::fileExists(const std::string &path)
+bool MWIOUtilsStrategyAndroid::fileExists(const std::string &path)
 {
     fstream file;
     file.open(path, ios::in);
@@ -36,12 +32,12 @@ bool MWIOUtils::fileExists(const std::string &path)
     return exist;
 }
 
-bool MWIOUtils::moveFile(const std::string &oldPath, const std::string &newPath)
+bool MWIOUtilsStrategyAndroid::moveFile(const std::string &oldPath, const std::string &newPath)
 {
     return rename(oldPath.c_str(), newPath.c_str()) == 0;
 }
 
-bool MWIOUtils::copyFile(const std::string &oldPath, const std::string &newPath)
+bool MWIOUtilsStrategyAndroid::copyFile(const std::string &oldPath, const std::string &newPath)
 {
     ifstream in;
     ofstream out;
@@ -67,7 +63,7 @@ bool MWIOUtils::copyFile(const std::string &oldPath, const std::string &newPath)
     return true;
 }
 
-MWBinaryData *MWIOUtils::getDataFromFile(const std::string &filePath)
+MWBinaryData *MWIOUtilsStrategyAndroid::getDataFromFile(const std::string &filePath)
 {
     FILE *hFile = fopen(filePath.c_str(), "rb");
     fseek(hFile, 0, SEEK_END);
@@ -82,7 +78,7 @@ MWBinaryData *MWIOUtils::getDataFromFile(const std::string &filePath)
     return MWBinaryData::create(pBuffer, size);
 }
 
-bool MWIOUtils::writeDataToFile(const MW_RAW_DATA content, MW_ULONG length, const std::string &filePath, bool isAppend)
+bool MWIOUtilsStrategyAndroid::writeDataToFile(const MW_RAW_DATA content, MW_ULONG length, const std::string &filePath, bool isAppend)
 {
     ofstream ofs;
     auto mode = std::ios::out | std::ios::binary;
@@ -100,12 +96,12 @@ bool MWIOUtils::writeDataToFile(const MW_RAW_DATA content, MW_ULONG length, cons
     return true;
 }
 
-bool MWIOUtils::removeFile(const std::string &filePath)
+bool MWIOUtilsStrategyAndroid::removeFile(const std::string &filePath)
 {
     return remove(filePath.c_str()) == 0;
 }
 
-bool MWIOUtils::createFile(const std::string &filePath)
+bool MWIOUtilsStrategyAndroid::createFile(const std::string &filePath)
 {
     ofstream ofs;
     ofs.open(filePath);
@@ -116,7 +112,7 @@ bool MWIOUtils::createFile(const std::string &filePath)
     return false;
 }
 
-bool MWIOUtils::createDirectory(const std::string &directoryPath)
+bool MWIOUtilsStrategyAndroid::createDirectory(const std::string &directoryPath)
 {
     // split the directory path
     vector<string> dirPathArray;

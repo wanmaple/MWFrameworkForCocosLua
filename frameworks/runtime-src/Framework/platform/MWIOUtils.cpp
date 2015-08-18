@@ -2,6 +2,8 @@
 
 #if CC_TARGET_PLATFORM == CC_PLATFORM_IOS
 #include "ios/MWIOUtilsStrategyIOS.h"
+#elif CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
+#include "android/MWIOUtilsStrategyAndroid.h"
 #endif
 
 using namespace std;
@@ -11,6 +13,8 @@ MW_FRAMEWORK_BEGIN
 MWIOUtils::MWIOUtils()
 #if CC_TARGET_PLATFORM == CC_PLATFORM_IOS
 : _strategy(new MWIOUtilsStrategyIos())
+#elif CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
+: _strategy(new MWIOUtilsStrategyAndroid())
 #endif
 {
 }

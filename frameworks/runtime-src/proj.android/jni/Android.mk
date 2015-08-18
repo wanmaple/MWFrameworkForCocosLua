@@ -55,10 +55,9 @@ LOCAL_SRC_FILES := entrance/main.cpp \
 				   ../../Framework/net/http/MWHttpForm.cpp \
 				   ../../Framework/net/http/MWHttpGetService.cpp \
 				   ../../Framework/net/http/MWHttpPostService.cpp \
+				   ../../Framework/platform/android/MWIOUtilsStrategyAndroid.cpp \
 				   ../../Framework/platform/MWIOUtils.cpp \
-				   ../../Framework/platform/MWIOUtilsImpAndroid.cpp \
 				   ../../Framework/platform/MWSystemHelper.cpp \
-				   ../../Framework/platform/MWIOUtilsImpAndroid.cpp \
 				   ../../Framework/scheme/MWGameScene.cpp \
 				   ../../Framework/scheme/MWGameView.cpp \
 				   ../../Framework/scheme/MWViewController.cpp \

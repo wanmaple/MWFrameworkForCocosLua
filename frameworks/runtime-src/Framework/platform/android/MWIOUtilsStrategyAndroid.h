@@ -1,11 +1,11 @@
 /******************************
- Description: IO utils ios strategy.
+ Description: IO utils android strategy.
  Author: M.Wan
- Date: 3/18/2015
+ Date: 8/18/2015
  ******************************/
 
-#ifndef __PLATFORM_IOUTILS_STRATEGY_IOS__
-#define __PLATFORM_IOUTILS_STRATEGY_IOS__
+#ifndef __PLATFORM_IOUTILS_STRATEGY_ANDROID__
+#define __PLATFORM_IOUTILS_STRATEGY_ANDROID__
 
 #include "../../base/mwbase.h"
 #include "../MWIOUtilsStrategy.h"
@@ -13,7 +13,7 @@
 
 MW_FRAMEWORK_BEGIN
 
-class MW_DLL MWIOUtilsStrategyIos : public MWIOUtilsStrategy
+class MW_DLL MWIOUtilsStrategyAndroid : public MWIOUtilsStrategy
 {
 public:
     std::string resourcePath(const std::string &path) override;

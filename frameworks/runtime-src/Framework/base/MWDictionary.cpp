@@ -30,9 +30,9 @@ MWDictionary::~MWDictionary()
     this->clear();
 }
 
-std::vector<const std::string> MWDictionary::allKeys()
+std::vector<std::string> MWDictionary::allKeys()
 {
-    vector<const std::string> vec;
+    vector<std::string> vec;
     
     for (auto iter = _innerMap.cbegin(); iter != _innerMap.cend(); ++iter) {
         vec.push_back(iter->first);

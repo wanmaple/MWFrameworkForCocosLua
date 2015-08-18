@@ -45,7 +45,7 @@ public:
      *
      * @return Array of all keys(unordered).
      */
-    std::vector<const std::string> allKeys();
+    std::vector<std::string> allKeys();
     
     /**
      * Overload methods to set new value to the specified key.
