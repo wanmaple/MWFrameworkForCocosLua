@@ -24,10 +24,8 @@ string MWIOUtils::resourcePath(const std::string &path)
 
 bool MWIOUtils::fileExists(const std::string &path)
 {
-    string absolutePath = this->resourcePath(path);
-    
     fstream file;
-    file.open(absolutePath, ios::in);
+    file.open(path, ios::in);
     bool exist = false;
     if (file)
     {
@@ -38,36 +36,16 @@ bool MWIOUtils::fileExists(const std::string &path)
     return exist;
 }
 
-bool MWIOUtils::directoryExists(const std::string &path)
-{
-    string absolutePath = this->resourcePath(path);
-    
-    struct stat info;
-    
-    if (::stat(absolutePath.c_str(), &info) != 0) {
-        return false;
-    } else if (info.st_mode & S_IFDIR) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
 bool MWIOUtils::moveFile(const std::string &oldPath, const std::string &newPath)
 {
-    string oldAbsolutePath = this->resourcePath(oldPath);
-    string newAbsolutePath = this->resourcePath(newPath);
-    return rename(oldAbsolutePath.c_str(), newAbsolutePath.c_str()) == 0;
+    return rename(oldPath.c_str(), newPath.c_str()) == 0;
 }
 
 bool MWIOUtils::copyFile(const std::string &oldPath, const std::string &newPath)
 {
-    string oldAbsolutePath = this->resourcePath(oldPath);
-    string newAbsolutePath = this->resourcePath(newPath);
-    
     ifstream in;
     ofstream out;
-    in.open(oldAbsolutePath, ios::in | ios::binary);		// open source file
+    in.open(oldPath, ios::in | ios::binary);		// open source file
     if (in.fail())
     {
         printf("Failed to open the source file.");
@@ -75,7 +53,7 @@ bool MWIOUtils::copyFile(const std::string &oldPath, const std::string &newPath)
         out.close();
         return false;
     }
-    out.open(newAbsolutePath, ios::out | ios::binary);
+    out.open(newPath, ios::out | ios::binary);
     if (out.fail())
     {
         printf("Failed to create the target file.");
@@ -91,9 +69,7 @@ bool MWIOUtils::copyFile(const std::string &oldPath, const std::string &newPath)
 
 MWBinaryData *MWIOUtils::getDataFromFile(const std::string &filePath)
 {
-    string absolutePath = this->resourcePath(filePath);
-    
-    FILE *hFile = fopen(absolutePath.c_str(), "rb");
+    FILE *hFile = fopen(filePath.c_str(), "rb");
     fseek(hFile, 0, SEEK_END);
     MW_ULONG size = ftell(hFile);
     fseek(hFile, 0, SEEK_SET);
@@ -108,14 +84,12 @@ MWBinaryData *MWIOUtils::getDataFromFile(const std::string &filePath)
 
 bool MWIOUtils::writeDataToFile(const MW_RAW_DATA content, MW_ULONG length, const std::string &filePath, bool isAppend)
 {
-    string absolutePath = this->resourcePath(filePath);
-    
     ofstream ofs;
     auto mode = std::ios::out | std::ios::binary;
     if (isAppend) {
         mode |= std::ios::app;
     }
-    ofs.open(absolutePath, mode);
+    ofs.open(filePath, mode);
     if (!ofs.is_open()) {
         return false;
     }
@@ -128,17 +102,13 @@ bool MWIOUtils::writeDataToFile(const MW_RAW_DATA content, MW_ULONG length, cons
 
 bool MWIOUtils::removeFile(const std::string &filePath)
 {
-    string absolutePath = this->resourcePath(filePath);
-    
     return remove(filePath.c_str()) == 0;
 }
 
 bool MWIOUtils::createFile(const std::string &filePath)
 {
-    string absolutePath = this->resourcePath(filePath);
-    
     ofstream ofs;
-    ofs.open(absolutePath);
+    ofs.open(filePath);
     if (ofs.is_open()) {
         return true;
     }

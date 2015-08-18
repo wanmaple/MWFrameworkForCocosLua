@@ -24,3 +24,10 @@ xcuserdatad/
 *.xcclassmodel/
 DerivedData/
 /tools/AssetManager/dist/
+
+#Eclipse
+.settings/
+bin/
+gen/
+obj/
+local.properties
