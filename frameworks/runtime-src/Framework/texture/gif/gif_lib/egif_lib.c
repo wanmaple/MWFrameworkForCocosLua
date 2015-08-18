@@ -58,11 +58,19 @@ EGifOpenFileName(const char *FileName, const bool TestExistence, int *Error)
     GifFileType *GifFile;
 
     if (TestExistence)
-        FileHandle = open(FileName, O_WRONLY | O_CREAT | O_EXCL, 
+        FileHandle = open(FileName, O_WRONLY | O_CREAT | O_EXCL,
+#if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
+              S_IRUSR | S_IWUSR);
+#else
 			  S_IREAD | S_IWRITE);
+#endif
     else
         FileHandle = open(FileName, O_WRONLY | O_CREAT | O_TRUNC, 
+#if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
+              S_IRUSR | S_IWUSR);
+#else
 			  S_IREAD | S_IWRITE);
+#endif
 
     if (FileHandle == -1) {
         if (Error != NULL)

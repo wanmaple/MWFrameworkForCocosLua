@@ -40,8 +40,7 @@ void AppDelegate::initGLContextAttrs()
 
 bool AppDelegate::applicationDidFinishLaunching()
 {
-    FileUtils::getInstance()->addSearchPath("res");
-    FileUtils::getInstance()->addSearchPath("src");
+    FileUtils::getInstance()->addSearchPath("asset");
     
     auto engine = LuaEngine::getInstance();
     ScriptEngineManager::getInstance()->setScriptEngine(engine);

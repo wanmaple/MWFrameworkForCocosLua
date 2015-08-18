@@ -171,7 +171,7 @@ public:
      *
      * @return All key collection of json.
      */
-    std::vector<const std::string> allKeys();
+    std::vector<std::string> allKeys();
     
     /**
      * Convert to json string.

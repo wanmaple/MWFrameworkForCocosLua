@@ -120,7 +120,7 @@ void MWJsonObject::clear()
     _dataHolder->clear();
 }
 
-std::vector<const std::string> MWJsonObject::allKeys()
+std::vector<std::string> MWJsonObject::allKeys()
 {
     return _dataHolder->allKeys();
 }

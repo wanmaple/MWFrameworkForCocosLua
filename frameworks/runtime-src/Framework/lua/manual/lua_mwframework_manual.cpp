@@ -38,7 +38,7 @@ MW_LOCAL int tolua_mwframework_MWDictionary_allKeys(lua_State *tolua_S)
         if(!ok)
             return 0;
         
-        std::vector<const std::string> ret = cobj->allKeys();
+        auto ret = cobj->allKeys();
         
         lua_newtable(tolua_S);
         
@@ -176,7 +176,7 @@ MW_LOCAL int tolua_mwframework_MWJsonObject_allKeys(lua_State *tolua_S)
         if(!ok)
             return 0;
         
-        std::vector<const std::string> ret = cobj->allKeys();
+        auto ret = cobj->allKeys();
         
         lua_newtable(tolua_S);
         

@@ -3,6 +3,8 @@
 #include "cocos2d.h"
 #if CC_TARGET_PLATFORM == CC_PLATFORM_IOS
 #include "ios/MWSystemHelperStrategyIOS.h"
+#elif CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
+#include "android/MWSystemHelperStrategyAndroid.h"
 #endif
 
 MW_FRAMEWORK_BEGIN
@@ -10,6 +12,8 @@ MW_FRAMEWORK_BEGIN
 MWSystemHelper::MWSystemHelper()
 #if CC_TARGET_PLATFORM == CC_PLATFORM_IOS
 : _strategy(new MWSystemHelperStrategyIos())
+#elif CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
+: _strategy(new MWSystemHelperStrategyAndroid())
 #endif
 {
 }

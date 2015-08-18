@@ -30,5 +30,6 @@ DerivedData/
 bin/
 gen/
 obj/
+simulator/
 local.properties
 libs/

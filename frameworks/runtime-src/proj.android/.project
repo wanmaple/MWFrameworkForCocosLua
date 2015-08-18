@@ -34,7 +34,7 @@
 		<link>
 			<name>libcocos2d</name>
 			<type>2</type>
-			<locationURI>$%7BPARENT-2-PROJECT_LOC%7D/cocos2d-x/cocos/platform/android/java/src</locationURI>
+			<locationURI>PROJECT_LOC/libs/libcocos2d</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>
