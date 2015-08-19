@@ -50,11 +50,6 @@ bool AppDelegate::applicationDidFinishLaunching()
     register_all_mwframework(L);
     register_all_mwframework_manual(L);
     
-#ifdef DEBUG
-    lua_pushboolean(L, true);
-    lua_setglobal(L, "DEBUG");
-#endif
-    
     MWAssetManager::getInstance()->setBundleResourceVersion(BUNDLE_RESOURCE_VERSION);
     MWAssetManager::getInstance()->setProgramVersion(CPP_PROGRAM_VERSION);
     MWAssetManager::getInstance()->setDevelopMode(DEVELOP_MODE);

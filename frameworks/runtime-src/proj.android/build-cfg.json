@@ -7,11 +7,11 @@
     ],
     "copy_resources": [
         {
-            "from": "../../../src",
+            "from": "../../../asset/src",
             "to": "src"
         },
         {
-            "from": "../../../res",
+            "from": "../../../asset/res",
             "to": "res"
         }
     ]

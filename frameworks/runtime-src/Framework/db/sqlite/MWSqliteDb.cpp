@@ -1,4 +1,5 @@
 #include "MWSqliteDb.h"
+#include "../../platform/MWIOUtils.h"
 #include "cocos2d.h"
 #include <new>
 
@@ -26,7 +27,16 @@ MWSqliteDb::~MWSqliteDb()
 
 MWSqliteDb *MWSqliteDb::openDb(const std::string &dbPath)
 {
+#if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
+    // assets is a zip file, so you can't locate to such file path.
+    Data fileData = FileUtils::getInstance()->getDataFromFile(dbPath);
+    string tmpPath = MWIOUtils::getInstance()->splicePath(FileUtils::getInstance()->getWritablePath(), "tmp");
+    MWIOUtils::getInstance()->createDirectory(tmpPath);
+    auto filePath = MWIOUtils::getInstance()->splicePath(tmpPath, "tmp.sqlite3");
+    MWIOUtils::getInstance()->writeDataToFile(fileData.getBytes(), fileData.getSize(), filePath);
+#else
     std::string filePath = FileUtils::getInstance()->fullPathForFilename(dbPath.c_str());
+#endif
     // check from cache.
     MWSqliteDb *pSqlite = nullptr;
     if (g_dbCache.hasKey(filePath)) {

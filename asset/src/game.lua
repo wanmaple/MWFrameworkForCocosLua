@@ -35,7 +35,7 @@ function Game:_init()
         director:setOpenGLView(glview)
     end
 
-    glview:setDesignResolutionSize(900, 640, cc.ResolutionPolicy.NO_BORDER)
+    glview:setDesignResolutionSize(1136, 640, cc.ResolutionPolicy.NO_BORDER)
 
     --turn on display FPS
     director:setDisplayStats(true)
