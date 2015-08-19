@@ -36,7 +36,9 @@ bool MWZipData::initWithExistingFile(const std::string &filePath)
     string tmpPath = MWIOUtils::getInstance()->splicePath(FileUtils::getInstance()->getWritablePath(), "tmp");
     MWIOUtils::getInstance()->createDirectory(tmpPath);
     auto absolutePath = MWIOUtils::getInstance()->splicePath(tmpPath, "tmp.zip");
-    MWIOUtils::getInstance()->writeDataToFile(fileData.getBytes(), fileData.getSize(), absolutePath);
+    if (!MWIOUtils::getInstance()->writeDataToFile(fileData.getBytes(), fileData.getSize(), absolutePath)) {
+        return false;
+    }
 #else
     auto absolutePath = FileUtils::getInstance()->fullPathForFilename(filePath);
 #endif
