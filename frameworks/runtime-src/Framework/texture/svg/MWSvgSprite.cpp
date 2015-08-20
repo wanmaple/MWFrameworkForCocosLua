@@ -40,7 +40,12 @@ MWSvgSprite *MWSvgSprite::createWithFile(const std::string &svgPath, float dpi)
 
 bool MWSvgSprite::initWithFile(const std::string &svgPath, float dpi)
 {
+#if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
+    Data data = FileUtils::getInstance()->getDataFromFile(svgPath);
+    auto pData = MWBinaryData::create(data.getBytes(), data.getSize());
+#else
     auto pData = MWIOUtils::getInstance()->getDataFromFile(FileUtils::getInstance()->fullPathForFilename(svgPath));
+#endif
     
     return this->initWithRawData(pData, dpi);
 }

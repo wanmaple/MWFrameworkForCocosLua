@@ -31,9 +31,13 @@ MWSqliteDb *MWSqliteDb::openDb(const std::string &dbPath)
     // assets is a zip file, so you can't locate to such file path.
     Data fileData = FileUtils::getInstance()->getDataFromFile(dbPath);
     string tmpPath = MWIOUtils::getInstance()->splicePath(FileUtils::getInstance()->getWritablePath(), "tmp");
-    MWIOUtils::getInstance()->createDirectory(tmpPath);
-    auto filePath = MWIOUtils::getInstance()->splicePath(tmpPath, "tmp.sqlite3");
-    MWIOUtils::getInstance()->writeDataToFile(fileData.getBytes(), fileData.getSize(), filePath);
+    auto filePath = MWIOUtils::getInstance()->splicePath(tmpPath, dbPath);
+    size_t found = filePath.find_last_of("/\\");
+    string tmpFilename = filePath.substr(found + 1);
+    MWIOUtils::getInstance()->createDirectory(filePath.substr(0, found + 1));
+    if (!MWIOUtils::getInstance()->writeDataToFile(fileData.getBytes(), fileData.getSize(), filePath)) {
+        return nullptr;
+    }
 #else
     std::string filePath = FileUtils::getInstance()->fullPathForFilename(dbPath.c_str());
 #endif

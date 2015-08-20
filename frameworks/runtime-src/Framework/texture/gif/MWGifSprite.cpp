@@ -239,7 +239,12 @@ MWGifSprite *MWGifSprite::createWithFile(const std::string &gifPath)
 
 bool MWGifSprite::initWithFile(const std::string &gifPath)
 {
+#if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
+    Data data = FileUtils::getInstance()->getDataFromFile(gifPath);
+    auto pData = MWBinaryData::create(data.getBytes(), data.getSize());
+#else
     auto pData = MWIOUtils::getInstance()->getDataFromFile(FileUtils::getInstance()->fullPathForFilename(gifPath));
+#endif
     
     return this->initWithRawData(pData);
 }
