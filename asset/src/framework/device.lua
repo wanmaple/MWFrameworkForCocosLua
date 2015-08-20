@@ -9,16 +9,16 @@ Device = {}
 local app = cc.Application:getInstance()
 local director = cc.Director:getInstance()
 
-function Device:getWinSize()
+function Device:size()
 	return director:getWinSize()
 end
 
 function Device:width()
-	return self:getWinSize().width
+	return self:size().width
 end
 
 function Device:height()
-	return self:getWinSize().height
+	return self:size().height
 end
 
 function Device:cx()
