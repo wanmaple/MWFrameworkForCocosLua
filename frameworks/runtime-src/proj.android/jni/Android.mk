@@ -75,7 +75,7 @@ LOCAL_SRC_FILES := entrance/main.cpp \
 				   ../../Framework/texture/gif/MWGifFramesCache.cpp \
 				   ../../Framework/texture/svg/MWSvgSprite.cpp \
 				   ../../Framework/utils/MWAssetManager.cpp \
-				   ../../Framework/utils/MWUUIDGenerator.cpp \
+				   ../../Framework/utils/MWUUIDGenerator-android.cpp \
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes \
 					$(LOCAL_PATH)/../../Framework \

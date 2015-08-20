@@ -2,9 +2,7 @@
 
 using namespace std;
 
-#if CC_TARGET_PLATFORM == CC_PLATFORM_IOS
 #include <uuid/uuid.h>
-#endif
 
 typedef struct {
     unsigned long Data1;
@@ -18,9 +16,7 @@ MW_FRAMEWORK_BEGIN
 MW_LOCAL GUID CreateGUID()
 {
     GUID guid;
-#if CC_TARGET_PLATFORM == CC_PLATFORM_IOS
     ::uuid_generate(reinterpret_cast<unsigned char*>(&guid));
-#endif
     return guid;
 }
 

@@ -28,5 +28,19 @@ package org.cocos2dx.lua;
 
 import org.cocos2dx.lib.Cocos2dxActivity;
 
+import android.app.Activity;
+import android.os.Bundle;
+
 public class AppActivity extends Cocos2dxActivity {
+	public static Activity getInstance() {
+		return _instance;
+	}
+	
+	private static Activity _instance = null;
+	
+	protected void onCreate(final Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		
+		_instance = this;
+	}
 }

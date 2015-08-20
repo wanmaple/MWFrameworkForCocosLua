@@ -15,7 +15,7 @@ MW_FRAMEWORK_BEGIN
 /**
  * A UUID Generators
  */
-class MW_DLL MWUUIDGenerator : public cocos2d::Ref
+class MW_DLL MWUUIDGenerator
 {
     /**
      * UUIDGenerator is a singleton.
