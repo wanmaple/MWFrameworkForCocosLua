@@ -24,20 +24,16 @@
 -- @return bool#bool ret (return value: bool)
         
 --------------------------------
--- Write content to the specified file.<br>
--- param content File content to write.<br>
--- param length Content size.<br>
--- param filePath Destination file path.<br>
--- param isAppend Whether to append the content at the end of the file.<br>
--- return Operation result.
--- @function [parent=#MWIOUtils] writeDataToFile 
+-- @overload self, mw.MWBinaryData, string, bool         
+-- @overload self, void, unsigned long, string, bool         
+-- @function [parent=#MWIOUtils] writeDataToFile
 -- @param self
 -- @param #void content
 -- @param #unsigned long length
 -- @param #string filePath
 -- @param #bool isAppend
 -- @return bool#bool ret (return value: bool)
-        
+
 --------------------------------
 -- Get the raw data from the specified file.<br>
 -- param filePath Source file path.<br>

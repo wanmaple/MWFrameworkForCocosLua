@@ -1,7 +1,6 @@
 
 --------------------------------
 -- @module MWUUIDGenerator
--- @extend Ref
 -- @parent_module mw
 
 --------------------------------

@@ -32,7 +32,7 @@
 #include "json/MWJsonStructure.h"
 
 // encryption.
-#include "encryption/MWCipherMachine.h"
+#include "encryption/MWCrypto.h"
 
 // utils
 #include "utils/MWUUIDGenerator.h"

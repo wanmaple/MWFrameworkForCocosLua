@@ -1,7 +1,7 @@
 
 --------------------------------
 -- @module MWViewSegue
--- @extend MWObject,MWViewSegueDelegate
+-- @extend MWObject,IMWViewSegueDelegate
 -- @parent_module mw
 
 --------------------------------

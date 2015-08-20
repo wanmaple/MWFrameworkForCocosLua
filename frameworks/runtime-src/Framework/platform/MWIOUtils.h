@@ -84,6 +84,7 @@ public:
      * @return Operation result.
      */
     bool writeDataToFile(const MW_RAW_DATA content, MW_ULONG length, const std::string &filePath, bool isAppend = false);
+    bool writeDataToFile(MWBinaryData *data, const std::string &filePath, bool isAppend = false);
     
     /**
      * Remove the specified file.

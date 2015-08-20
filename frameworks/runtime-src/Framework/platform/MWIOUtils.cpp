@@ -72,6 +72,11 @@ bool MWIOUtils::writeDataToFile(const MW_RAW_DATA content, MW_ULONG length, cons
     MW_THROW_EXCEPTION(1012);
 }
 
+bool MWIOUtils::writeDataToFile(mwframework::MWBinaryData *data, const std::string &filePath, bool isAppend)
+{
+    return this->writeDataToFile(data->getData(), data->getSize(), filePath, isAppend);
+}
+
 bool MWIOUtils::removeFile(const std::string &filePath)
 {
     if (_strategy) {
