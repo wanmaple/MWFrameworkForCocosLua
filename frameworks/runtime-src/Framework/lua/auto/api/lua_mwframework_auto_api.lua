@@ -107,6 +107,11 @@
 
 
 --------------------------------------------------------
+-- the mw MWCrypto
+-- @field [parent=#mw] MWCrypto#MWCrypto MWCrypto preloaded module
+
+
+--------------------------------------------------------
 -- the mw MWUUIDGenerator
 -- @field [parent=#mw] MWUUIDGenerator#MWUUIDGenerator MWUUIDGenerator preloaded module
 

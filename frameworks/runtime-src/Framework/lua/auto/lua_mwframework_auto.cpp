@@ -8940,6 +8940,601 @@ int lua_register_mwframework_MWJsonArray(lua_State* tolua_S)
     return 1;
 }
 
+int lua_mwframework_MWCrypto_encipherAes256(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWCrypto* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.Crypto",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWCrypto*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWCrypto_encipherAes256'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 2) 
+    {
+        mwframework::MWBinaryData* arg0;
+        std::string arg1;
+
+        ok &= luaval_to_object<mwframework::MWBinaryData>(tolua_S, 2, "mw.BinaryData",&arg0);
+
+        ok &= luaval_to_std_string(tolua_S, 3,&arg1, "mw.Crypto:encipherAes256");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWCrypto_encipherAes256'", nullptr);
+            return 0;
+        }
+        mwframework::MWBinaryData* ret = cobj->encipherAes256(arg0, arg1);
+        object_to_luaval<mwframework::MWBinaryData>(tolua_S, "mw.BinaryData",(mwframework::MWBinaryData*)ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.Crypto:encipherAes256",argc, 2);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWCrypto_encipherAes256'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWCrypto_decodeBase64(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWCrypto* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.Crypto",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWCrypto*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWCrypto_decodeBase64'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 1) 
+    {
+        std::string arg0;
+
+        ok &= luaval_to_std_string(tolua_S, 2,&arg0, "mw.Crypto:decodeBase64");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWCrypto_decodeBase64'", nullptr);
+            return 0;
+        }
+        std::string ret = cobj->decodeBase64(arg0);
+        tolua_pushcppstring(tolua_S,ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.Crypto:decodeBase64",argc, 1);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWCrypto_decodeBase64'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWCrypto_decipherXxtea(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWCrypto* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.Crypto",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWCrypto*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWCrypto_decipherXxtea'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 2) 
+    {
+        mwframework::MWBinaryData* arg0;
+        std::string arg1;
+
+        ok &= luaval_to_object<mwframework::MWBinaryData>(tolua_S, 2, "mw.BinaryData",&arg0);
+
+        ok &= luaval_to_std_string(tolua_S, 3,&arg1, "mw.Crypto:decipherXxtea");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWCrypto_decipherXxtea'", nullptr);
+            return 0;
+        }
+        mwframework::MWBinaryData* ret = cobj->decipherXxtea(arg0, arg1);
+        object_to_luaval<mwframework::MWBinaryData>(tolua_S, "mw.BinaryData",(mwframework::MWBinaryData*)ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.Crypto:decipherXxtea",argc, 2);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWCrypto_decipherXxtea'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWCrypto_md5String(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWCrypto* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.Crypto",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWCrypto*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWCrypto_md5String'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 1) 
+    {
+        std::string arg0;
+
+        ok &= luaval_to_std_string(tolua_S, 2,&arg0, "mw.Crypto:md5String");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWCrypto_md5String'", nullptr);
+            return 0;
+        }
+        std::string ret = cobj->md5String(arg0);
+        tolua_pushcppstring(tolua_S,ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.Crypto:md5String",argc, 1);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWCrypto_md5String'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWCrypto_md5File(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWCrypto* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.Crypto",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWCrypto*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWCrypto_md5File'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 1) 
+    {
+        std::string arg0;
+
+        ok &= luaval_to_std_string(tolua_S, 2,&arg0, "mw.Crypto:md5File");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWCrypto_md5File'", nullptr);
+            return 0;
+        }
+        std::string ret = cobj->md5File(arg0);
+        tolua_pushcppstring(tolua_S,ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.Crypto:md5File",argc, 1);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWCrypto_md5File'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWCrypto_encipherXxtea(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWCrypto* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.Crypto",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWCrypto*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWCrypto_encipherXxtea'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 2) 
+    {
+        mwframework::MWBinaryData* arg0;
+        std::string arg1;
+
+        ok &= luaval_to_object<mwframework::MWBinaryData>(tolua_S, 2, "mw.BinaryData",&arg0);
+
+        ok &= luaval_to_std_string(tolua_S, 3,&arg1, "mw.Crypto:encipherXxtea");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWCrypto_encipherXxtea'", nullptr);
+            return 0;
+        }
+        mwframework::MWBinaryData* ret = cobj->encipherXxtea(arg0, arg1);
+        object_to_luaval<mwframework::MWBinaryData>(tolua_S, "mw.BinaryData",(mwframework::MWBinaryData*)ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.Crypto:encipherXxtea",argc, 2);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWCrypto_encipherXxtea'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWCrypto_getAes256KeyLength(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWCrypto* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.Crypto",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWCrypto*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWCrypto_getAes256KeyLength'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 0) 
+    {
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWCrypto_getAes256KeyLength'", nullptr);
+            return 0;
+        }
+        int ret = cobj->getAes256KeyLength();
+        tolua_pushnumber(tolua_S,(lua_Number)ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.Crypto:getAes256KeyLength",argc, 0);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWCrypto_getAes256KeyLength'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWCrypto_decipherAes256(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWCrypto* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.Crypto",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWCrypto*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWCrypto_decipherAes256'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 2) 
+    {
+        mwframework::MWBinaryData* arg0;
+        std::string arg1;
+
+        ok &= luaval_to_object<mwframework::MWBinaryData>(tolua_S, 2, "mw.BinaryData",&arg0);
+
+        ok &= luaval_to_std_string(tolua_S, 3,&arg1, "mw.Crypto:decipherAes256");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWCrypto_decipherAes256'", nullptr);
+            return 0;
+        }
+        mwframework::MWBinaryData* ret = cobj->decipherAes256(arg0, arg1);
+        object_to_luaval<mwframework::MWBinaryData>(tolua_S, "mw.BinaryData",(mwframework::MWBinaryData*)ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.Crypto:decipherAes256",argc, 2);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWCrypto_decipherAes256'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWCrypto_encodeBase64(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWCrypto* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.Crypto",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWCrypto*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWCrypto_encodeBase64'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 1) 
+    {
+        std::string arg0;
+
+        ok &= luaval_to_std_string(tolua_S, 2,&arg0, "mw.Crypto:encodeBase64");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWCrypto_encodeBase64'", nullptr);
+            return 0;
+        }
+        std::string ret = cobj->encodeBase64(arg0);
+        tolua_pushcppstring(tolua_S,ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.Crypto:encodeBase64",argc, 1);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWCrypto_encodeBase64'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWCrypto_md5(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWCrypto* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.Crypto",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWCrypto*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWCrypto_md5'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 1) 
+    {
+        mwframework::MWBinaryData* arg0;
+
+        ok &= luaval_to_object<mwframework::MWBinaryData>(tolua_S, 2, "mw.BinaryData",&arg0);
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWCrypto_md5'", nullptr);
+            return 0;
+        }
+        std::string ret = cobj->md5(arg0);
+        tolua_pushcppstring(tolua_S,ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.Crypto:md5",argc, 1);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWCrypto_md5'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWCrypto_getInstance(lua_State* tolua_S)
+{
+    int argc = 0;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertable(tolua_S,1,"mw.Crypto",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    argc = lua_gettop(tolua_S) - 1;
+
+    if (argc == 0)
+    {
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWCrypto_getInstance'", nullptr);
+            return 0;
+        }
+        mwframework::MWCrypto* ret = mwframework::MWCrypto::getInstance();
+        object_to_luaval<mwframework::MWCrypto>(tolua_S, "mw.Crypto",(mwframework::MWCrypto*)ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d\n ", "mw.Crypto:getInstance",argc, 0);
+    return 0;
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWCrypto_getInstance'.",&tolua_err);
+#endif
+    return 0;
+}
+static int lua_mwframework_MWCrypto_finalize(lua_State* tolua_S)
+{
+    printf("luabindings: finalizing LUA object (MWCrypto)");
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+    if (
+    !tolua_isusertype(tolua_S,1,"mw.Crypto",0,&tolua_err) ||
+    !tolua_isnoobj(tolua_S,2,&tolua_err)
+    )
+        goto tolua_lerror;
+    else
+#endif
+    {
+        mwframework::MWCrypto* self = (mwframework::MWCrypto*)  tolua_tousertype(tolua_S,1,0);
+#if COCOS2D_DEBUG >= 1
+        if (!self) tolua_error(tolua_S,"invalid 'self' in function 'delete'", nullptr);
+#endif
+        delete self;
+    }
+    return 0;
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'delete'.",&tolua_err);
+    return 0;
+#endif
+    return 0;
+}
+
+int lua_register_mwframework_MWCrypto(lua_State* tolua_S)
+{
+    tolua_usertype(tolua_S,"mw.Crypto");
+    tolua_cclass(tolua_S,"Crypto","mw.Crypto","",nullptr);
+
+    tolua_beginmodule(tolua_S,"Crypto");
+        tolua_function(tolua_S,"encipherAes256",lua_mwframework_MWCrypto_encipherAes256);
+        tolua_function(tolua_S,"decodeBase64",lua_mwframework_MWCrypto_decodeBase64);
+        tolua_function(tolua_S,"decipherXxtea",lua_mwframework_MWCrypto_decipherXxtea);
+        tolua_function(tolua_S,"md5String",lua_mwframework_MWCrypto_md5String);
+        tolua_function(tolua_S,"md5File",lua_mwframework_MWCrypto_md5File);
+        tolua_function(tolua_S,"encipherXxtea",lua_mwframework_MWCrypto_encipherXxtea);
+        tolua_function(tolua_S,"getAes256KeyLength",lua_mwframework_MWCrypto_getAes256KeyLength);
+        tolua_function(tolua_S,"decipherAes256",lua_mwframework_MWCrypto_decipherAes256);
+        tolua_function(tolua_S,"encodeBase64",lua_mwframework_MWCrypto_encodeBase64);
+        tolua_function(tolua_S,"md5",lua_mwframework_MWCrypto_md5);
+        tolua_function(tolua_S,"getInstance", lua_mwframework_MWCrypto_getInstance);
+    tolua_endmodule(tolua_S);
+    std::string typeName = typeid(mwframework::MWCrypto).name();
+    g_luaType[typeName] = "mw.Crypto";
+    g_typeCast["Crypto"] = "mw.Crypto";
+    return 1;
+}
+
 int lua_mwframework_MWUUIDGenerator_generateUUID(lua_State* tolua_S)
 {
     int argc = 0;
@@ -10742,6 +11337,7 @@ TOLUA_API int register_all_mwframework(lua_State* tolua_S)
 	lua_register_mwframework_MWGameScene(tolua_S);
 	lua_register_mwframework_MWSvgSprite(tolua_S);
 	lua_register_mwframework_MWDictionary(tolua_S);
+	lua_register_mwframework_MWNetHandler(tolua_S);
 	lua_register_mwframework_MWSystemHelper(tolua_S);
 	lua_register_mwframework_MWGifSprite(tolua_S);
 	lua_register_mwframework_MWBinaryData(tolua_S);
@@ -10755,7 +11351,7 @@ TOLUA_API int register_all_mwframework(lua_State* tolua_S)
 	lua_register_mwframework_MWArrayList(tolua_S);
 	lua_register_mwframework_MWJsonArray(tolua_S);
 	lua_register_mwframework_MWZipData(tolua_S);
-	lua_register_mwframework_MWNetHandler(tolua_S);
+	lua_register_mwframework_MWCrypto(tolua_S);
 	lua_register_mwframework_MWNetResponse(tolua_S);
 	lua_register_mwframework_MWJsonObject(tolua_S);
 
