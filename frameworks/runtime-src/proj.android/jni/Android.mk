@@ -76,6 +76,10 @@ LOCAL_SRC_FILES := entrance/main.cpp \
 				   ../../Framework/texture/svg/MWSvgSprite.cpp \
 				   ../../Framework/utils/MWAssetManager.cpp \
 				   ../../Framework/utils/MWUUIDGenerator-android.cpp \
+				   ../../Framework/encryption/base64/libbase64.c \
+				   ../../Framework/encryption/md5/md5.cpp \
+				   ../../Framework/encryption/MWCrypto.cpp \
+				   ../../Framework/encryption/MWCrypto-android.cpp \
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes \
 					$(LOCAL_PATH)/../../Framework \
