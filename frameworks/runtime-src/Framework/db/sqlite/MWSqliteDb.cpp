@@ -111,19 +111,15 @@ MWArrayList *MWSqliteDb::executeQuery(const std::string &sql)
                 {
                     // unknown type?
                     CCLOG("Unknown sqlite3 type");
-                    CC_SAFE_RELEASE(result);
-                    return nullptr;
+                    return MWArrayList::create();
                 }
                 columnDict->setObjectForKey(szName, pValue);
             }
             result->appendObject(columnDict);
         }
         sqlite3_finalize(pStmt);
-        
-        return result;
     }
-    CC_SAFE_RELEASE(result);
-    return nullptr;
+    return result;
 }
 
 bool MWSqliteDb::executeNonQuery(const std::string &sql)
