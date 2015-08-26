@@ -31,12 +31,12 @@ void UpdateScene::onVersionCheckCompleted(bool latest, int fileCount, bool needU
     }
 }
 
-void UpdateScene::onAssetFileDownloading(const std::string &filePath, float progress, long totalToDownload)
+void UpdateScene::onAssetFileDownloading(const std::string &relativePath, double downloaded, double totalToDownload)
 {
     
 }
 
-void UpdateScene::onAssetFileDownloaded(const std::string &filePath)
+void UpdateScene::onAssetFileDownloaded(const std::string &relativePath)
 {
     
 }

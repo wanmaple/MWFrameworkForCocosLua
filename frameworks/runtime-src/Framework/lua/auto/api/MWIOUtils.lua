@@ -70,6 +70,15 @@
 -- @return string#string ret (return value: string)
         
 --------------------------------
+-- Check whether the specified directory does exist.<br>
+-- param path Directory path to check.<br>
+-- return A boolean value.
+-- @function [parent=#MWIOUtils] directoryExists 
+-- @param self
+-- @param #string path
+-- @return bool#bool ret (return value: bool)
+        
+--------------------------------
 -- Remove the specified file.<br>
 -- param filePath Destination file path.<br>
 -- return Operation result.
@@ -87,6 +96,15 @@
 -- @param self
 -- @param #string oldPath
 -- @param #string newPath
+-- @return bool#bool ret (return value: bool)
+        
+--------------------------------
+-- Remove the specified directory.<br>
+-- param filePath Destination file path.<br>
+-- return Operation result.
+-- @function [parent=#MWIOUtils] removeDirectory 
+-- @param self
+-- @param #string directoryPath
 -- @return bool#bool ret (return value: bool)
         
 --------------------------------

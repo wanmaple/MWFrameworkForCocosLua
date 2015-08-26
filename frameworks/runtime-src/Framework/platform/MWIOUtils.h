@@ -46,6 +46,15 @@ public:
     bool fileExists(const std::string &path);
     
     /**
+     * Check whether the specified directory does exist.
+     *
+     * @param path Directory path to check.
+     *
+     * @return A boolean value.
+     */
+    bool directoryExists(const std::string &path);
+    
+    /**
      * Move file from old path to new path.
      *
      * @param oldPath Source file path.
@@ -94,6 +103,15 @@ public:
      * @return Operation result.
      */
     bool removeFile(const std::string &filePath);
+    
+    /**
+     * Remove the specified directory.
+     *
+     * @param filePath Destination file path.
+     *
+     * @return Operation result.
+     */
+    bool removeDirectory(const std::string &directoryPath);
     
     /**
      * Create a new file.

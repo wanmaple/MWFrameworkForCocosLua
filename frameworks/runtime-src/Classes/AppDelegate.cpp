@@ -8,8 +8,8 @@
 
 #include "UpdateScene.h"
 
-#define BUNDLE_RESOURCE_VERSION 1.00
-#define CPP_PROGRAM_VERSION 0.00
+#define BUNDLE_VERSION "0.0.0-D0.A1B2C3"
+#define CPP_PROGRAM_VERSION 0
 #define DEVELOP_MODE true
 #define SERVER_ASSET_ROOT_URL "http://120.25.123.138/mobile/asset"
 
@@ -50,10 +50,11 @@ bool AppDelegate::applicationDidFinishLaunching()
     register_all_mwframework(L);
     register_all_mwframework_manual(L);
     
-    MWAssetManager::getInstance()->setBundleResourceVersion(BUNDLE_RESOURCE_VERSION);
+    MWAssetManager::getInstance()->setBundleVersion(BUNDLE_VERSION);
     MWAssetManager::getInstance()->setProgramVersion(CPP_PROGRAM_VERSION);
     MWAssetManager::getInstance()->setDevelopMode(DEVELOP_MODE);
-    MWAssetManager::getInstance()->setAssetRootUrl(SERVER_ASSET_ROOT_URL);
+    MWAssetManager::getInstance()->setServerUrl(SERVER_ASSET_ROOT_URL);
+    MWAssetManager::getInstance()->setAssetRootPath(MWIOUtils::getInstance()->splicePath(FileUtils::getInstance()->getWritablePath(), "Update"));
     
     if (MWAssetManager::getInstance()->isDevelopMode()) {
 #ifdef MW_ENABLE_SCRIPT_BINDING

@@ -14,11 +14,11 @@ public:
     /**
      * Delegate when the single file is downloading.
      */
-    void onAssetFileDownloading(const std::string &filePath, float progress, long totalToDownload);
+    void onAssetFileDownloading(const std::string &relativePath, double downloaded, double totalToDownload);
     /**
      * Delegate when the single file is updated.
      */
-    void onAssetFileDownloaded(const std::string &filePath);
+    void onAssetFileDownloaded(const std::string &relativePath);
     /**
      * Delegate when the version is updated.
      */

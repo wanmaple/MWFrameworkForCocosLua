@@ -5,8 +5,10 @@
 #elif CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
 #include "android/MWIOUtilsStrategyAndroid.h"
 #endif
+#include "cocos2d.h"
 
 using namespace std;
+using namespace cocos2d;
 
 MW_FRAMEWORK_BEGIN
 
@@ -34,10 +36,12 @@ string MWIOUtils::resourcePath(const std::string &path)
 
 bool MWIOUtils::fileExists(const std::string &path)
 {
-    if (_strategy) {
-        return _strategy->fileExists(path);
-    }
-    MW_THROW_EXCEPTION(1012);
+    return FileUtils::getInstance()->isFileExist(path);
+}
+
+bool MWIOUtils::directoryExists(const std::string &path)
+{
+    return FileUtils::getInstance()->isDirectoryExist(path);
 }
 
 bool MWIOUtils::moveFile(const std::string &oldPath, const std::string &newPath)
@@ -83,6 +87,11 @@ bool MWIOUtils::removeFile(const std::string &filePath)
         return _strategy->removeFile(filePath);
     }
     MW_THROW_EXCEPTION(1012);
+}
+
+bool MWIOUtils::removeDirectory(const std::string &directoryPath)
+{
+    return cocos2d::FileUtils::getInstance()->removeDirectory(directoryPath);
 }
 
 bool MWIOUtils::createFile(const std::string &filePath)
