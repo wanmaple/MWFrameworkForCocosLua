@@ -82,7 +82,7 @@ void MWAssetManager::setAssetUpdateDelegate(mwframework::IAssetUpdateDelegate *d
 
 void MWAssetManager::_loadLocalVersion()
 {
-    if (!MWIOUtils::getInstance()->fileExists(this->_fullLocalAssetPath())) {
+    if (!MWIOUtils::getInstance()->directoryExists(this->_fullLocalAssetPath())) {
         MWIOUtils::getInstance()->createDirectory(this->_fullLocalAssetPath());
     }
     string assetDir = this->_fullLocalAssetPath();
