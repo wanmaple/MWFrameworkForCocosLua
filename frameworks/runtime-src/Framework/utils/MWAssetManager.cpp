@@ -284,7 +284,7 @@ string MWAssetManager::_fullServerAssetPath(const std::string &path)
 void MWAssetManager::_configSearchPath()
 {
     vector<string> searchPaths = FileUtils::getInstance()->getSearchPaths();
-    string assetPath = this->_fullLocalAssetPath();
+    string assetPath = this->_fullLocalAssetPath(AM_ASSET_DIR);
     // check whether the asset resource path is already set.
     bool didSet = false;
     for (const auto &path : searchPaths) {
