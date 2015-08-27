@@ -260,9 +260,10 @@ bool MWAssetManager::_saveVersion()
 {
     if (!MWIOUtils::getInstance()->copyFile(this->_fullLocalAssetPath(AM_VERSION_FILE), this->_fullLocalAssetPath(AM_LOCAL_VERSION_FILE))) {
         this->_delegateUpdateError(EAssetUpdateErrorType::IO_ERROR, "Failed to save local version.");
-        return;
+        return false;
     }
     _localVersion = _newVersion;
+    return true;
 }
 
 string MWAssetManager::_fullLocalAssetPath(const std::string &path)
