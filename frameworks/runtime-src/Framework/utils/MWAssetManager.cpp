@@ -215,6 +215,8 @@ void MWAssetManager::_mergeBundleMd5File()
         if (!localMd5Json) {
             // invalid local md5 file, delete it.
             MWIOUtils::getInstance()->removeFile(localMd5Path);
+            this->_delegateUpdateError(EAssetUpdateErrorType::VERSION_CHECK_ERROR, "Failed to parse local md5 file.");
+            return;
         } else {
             localMd5Map = localMd5Json;
         }
