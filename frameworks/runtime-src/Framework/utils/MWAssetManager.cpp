@@ -135,11 +135,15 @@ void MWAssetManager::_processAfterDownloadVersionFile()
     _programUpdateUrl = versionJson->getString(AM_UPDATE_URL_KEY);
     
     if (_localVersion == _newVersion) {
-        // download related md5 file
-        string url = this->_fullServerAssetPath(string(AM_BUNDLE_MD5_DIR) + "/" + _newVersion + "/" + AM_BUNDLE_MD5_FILE);
-        string savePath = this->_fullLocalAssetPath(AM_LOCAL_MD5_FILE);
-        
-        _downloader->beginDownloading(url, savePath, __String::create(AM_BUNDLE_MD5_FILE_ID));
+        string localMd5Path = this->_fullLocalAssetPath(AM_LOCAL_MD5_FILE);
+        if (MWIOUtils::getInstance()->fileExists(localMd5Path)) {
+            this->_saveVersion();
+            this->_delegateVersionCheckCompleted(true, 0, false, "");
+        } else {
+            // download related md5 file
+            string url = this->_fullServerAssetPath(string(AM_BUNDLE_MD5_DIR) + "/" + _newVersion + "/" + AM_BUNDLE_MD5_FILE);
+            _downloader->beginDownloading(url, localMd5Path, __String::create(AM_BUNDLE_MD5_FILE_ID));
+        }
     } else {
         this->_downloadAssetConfigFile();
     }
