@@ -190,10 +190,8 @@ void MWAssetManager::_downloadBundleMd5File()
 void MWAssetManager::_processAfterDownloadBundleMd5File()
 {
     this->_mergeBundleMd5File();
-    
-    this->_delegateVersionCheckCompleted(false, (int) _downloadFileList.size(), !_programUpdateUrl.empty(), _programUpdateUrl);
-    
     _readyToUpdate = true;
+    this->_delegateVersionCheckCompleted(false, (int) _downloadFileList.size(), !_programUpdateUrl.empty(), _programUpdateUrl);
 }
 
 void MWAssetManager::_mergeBundleMd5File()
