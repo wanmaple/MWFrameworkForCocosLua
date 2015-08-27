@@ -44,6 +44,7 @@ MWAssetManager::MWAssetManager()
 , _delegate(nullptr)
 , _downloader(nullptr)
 , _downloadFileList()
+, _fileSizeMap()
 , _readyToUpdate(false)
 , _localVersion()
 , _newVersion()
@@ -169,6 +170,11 @@ void MWAssetManager::_processAfterDownloadAssetConfigFile()
         this->_delegateUpdateError(EAssetUpdateErrorType::VERSION_CHECK_ERROR, "Invalid config file.");
         return;
     }
+    _fileSizeMap.clear();
+    auto allKeys = fileInfoJson->allKeys();
+    for (const auto &key : allKeys) {
+        _fileSizeMap[key] = (long) fileInfoJson->getNumber(key);
+    }
     
     this->_downloadBundleMd5File();
 }
@@ -246,7 +252,6 @@ void MWAssetManager::_downloadNextAssetFile()
 
 void MWAssetManager::_saveVersion()
 {
-    // save version to local version and save bundle md5 to local md5.
     if (!MWIOUtils::getInstance()->copyFile(this->_fullLocalAssetPath(AM_VERSION_FILE), this->_fullLocalAssetPath(AM_LOCAL_VERSION_FILE))) {
         this->_delegateUpdateError(EAssetUpdateErrorType::IO_ERROR, "Failed to save local version.");
         return;
@@ -356,6 +361,12 @@ void MWAssetManager::onDownloadStarted(mwframework::MWHttpDownloader *downloader
 void MWAssetManager::onDownloading(mwframework::MWHttpDownloader *downloader, float progress, cocos2d::Ref *userdata)
 {
     MW_UNUSED_PARAM(downloader);
+
+    string fileId = static_cast<__String *>(userdata)->getCString();
+    if (fileId != string(AM_VERSION_FILE_ID) && fileId != string(AM_CONFIG_FILE_ID) && fileId != string(AM_BUNDLE_MD5_FILE_ID)) {
+        long totalSize = _fileSizeMap[fileId];
+        this->_delegateAssetFileDownloading(fileId, (double) progress * totalSize, (double) totalSize);
+    }
 }
 
 void MWAssetManager::onDownloadCompleted(mwframework::MWHttpDownloader *downloader, cocos2d::Ref *userdata)

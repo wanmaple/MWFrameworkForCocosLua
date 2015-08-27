@@ -12,6 +12,7 @@
 #include <string>
 #include <vector>
 #include <queue>
+#include <unordered_map>
 
 MW_FRAMEWORK_BEGIN
 
@@ -108,6 +109,7 @@ private:
     std::string _newVersion;
     std::string _programUpdateUrl;
     std::queue<std::string> _downloadFileList;
+    std::unordered_map<std::string, long> _fileSizeMap;
     
     MWHttpDownloader *_downloader;
     
