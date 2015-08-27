@@ -95,7 +95,7 @@ private:
     void _downloadBundleMd5File();
     void _processAfterDownloadBundleMd5File();
     void _downloadNextAssetFile();
-    void _saveVersion();
+    bool _saveVersion();
     
     void _delegateVersionCheckCompleted(bool latest, int fileCount, bool needUpdateProgram, const std::string &programUpdateUrl);
     void _delegateAssetFileDownloading(const std::string &relativePath, double downloaded, double totalToDownload);

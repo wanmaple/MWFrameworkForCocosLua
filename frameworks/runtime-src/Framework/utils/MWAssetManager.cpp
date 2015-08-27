@@ -250,25 +250,19 @@ void MWAssetManager::_downloadNextAssetFile()
         
         _downloader->beginDownloading(downloadPath, savePath, __String::create(rpath), true);
     } else {
-        this->_saveVersion();
+        if (this->_saveVersion()) {
+            this->_delegateVersionUpdated();
+        }
     }
 }
 
-void MWAssetManager::_saveVersion()
+bool MWAssetManager::_saveVersion()
 {
     if (!MWIOUtils::getInstance()->copyFile(this->_fullLocalAssetPath(AM_VERSION_FILE), this->_fullLocalAssetPath(AM_LOCAL_VERSION_FILE))) {
         this->_delegateUpdateError(EAssetUpdateErrorType::IO_ERROR, "Failed to save local version.");
         return;
     }
-    if (!MWIOUtils::getInstance()->copyFile(this->_fullLocalAssetPath(AM_BUNDLE_MD5_FILE), this->_fullLocalAssetPath(AM_LOCAL_MD5_FILE))) {
-        this->_delegateUpdateError(EAssetUpdateErrorType::IO_ERROR, "Failed to save local md5 file.");
-        return;
-    }
-    
-    if (_localVersion != _newVersion) {
-        _localVersion = _newVersion;
-        this->_delegateVersionUpdated();
-    }
+    _localVersion = _newVersion;
 }
 
 string MWAssetManager::_fullLocalAssetPath(const std::string &path)
