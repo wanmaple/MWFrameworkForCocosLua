@@ -20,6 +20,7 @@
 
 // version description file keys
 #define AM_VERSION_STR_KEY "version_str"
+#define AM_CPP_VERSION_KEY "cpp_version"
 #define AM_UPDATE_URL_KEY "cpp_update_url"
 #define AM_FILE_COUNT_KEY "file_count"
 #define AM_FILE_INFO_KEY "file_info"
@@ -91,12 +92,20 @@ void MWAssetManager::_loadLocalVersion()
         _localVersion = _bundleVersion;
     } else {
         MWJsonObject *localVersionJson = MWJsonObject::createWithFile(localVersionPath);
-        if (!localVersionJson->hasKey(AM_VERSION_STR_KEY)) {
+        if (!localVersionJson || !localVersionJson->hasKey(AM_VERSION_STR_KEY) || !localVersionJson->hasKey(AM_CPP_VERSION_KEY)) {
             // local version file is damaged. delete it.
             MWIOUtils::getInstance()->removeFile(localVersionPath);
             _localVersion = _bundleVersion;
         } else {
-            _localVersion = localVersionJson->getString(AM_VERSION_STR_KEY);
+            // check whether cpp version is the latest
+            int cppVersion = (int) localVersionJson->getNumber(AM_CPP_VERSION_KEY);
+            if (cppVersion < _programVersion) {
+                // remove all updated data.
+                MWIOUtils::getInstance->removeDirectory(this->_fullLocalAssetPath());
+                _localVersion = _bundleVersion;
+            } else {
+                _localVersion = localVersionJson->getString(AM_VERSION_STR_KEY);
+            }
         }
     }
 }
@@ -176,10 +185,6 @@ void MWAssetManager::_processAfterDownloadBundleMd5File()
 {
     this->_mergeBundleMd5File();
     
-    if (!_programUpdateUrl.empty()) {
-        // you have to update from app store, delete all updated asset files.
-        MWIOUtils::getInstance()->removeDirectory(this->_fullLocalAssetPath());
-    }
     this->_delegateVersionCheckCompleted(false, (int) _downloadFileList.size(), !_programUpdateUrl.empty(), _programUpdateUrl);
     
     _readyToUpdate = true;

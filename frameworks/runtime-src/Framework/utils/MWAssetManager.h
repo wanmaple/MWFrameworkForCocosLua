@@ -109,7 +109,7 @@ private:
     std::string _programUpdateUrl;
     std::queue<std::string> _downloadFileList;
     
-    MWHttpDownloader * _downloader;
+    MWHttpDownloader *_downloader;
     
     IAssetUpdateDelegate *_delegate;
 };
