@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mw.assetmanager;
+package mw.am;
 
 import java.io.File;
 import java.io.FileInputStream;

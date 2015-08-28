@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mw.assetmanager;
+package mw.am;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -34,8 +34,22 @@ public class FileUtils {
     {
     }
     
-    public boolean createDirectory(String dirPath)
-    {
+    public String splicePath(String path1, String... pathList) {
+        String newPath = path1;
+        if (!path1.endsWith(File.separator)) {
+            newPath += File.separator;
+        }
+        for (int i = 0; i < pathList.length; i++) {
+            String path = pathList[i];
+            newPath += path;
+            if (i < pathList.length - 1 && !newPath.endsWith(File.separator)) {
+                newPath += File.separator;
+            }
+        }
+        return newPath;
+    }
+    
+    public boolean createDirectory(String dirPath) {
         boolean ret = false;
         File dir = new File(dirPath);
         if (!dir.exists()) {
