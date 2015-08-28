@@ -12,6 +12,10 @@ public:
      */
     void onVersionCheckCompleted(bool latest, int fileCount, bool needUpdateProgram, const std::string &programUpdateUrl);
     /**
+     * Delegate when the single file is ready to download.
+     */
+    void onAssetFileToDownload(const std::string &relativePath, double totalToDownload);
+    /**
      * Delegate when the single file is downloading.
      */
     void onAssetFileDownloading(const std::string &relativePath, double downloaded, double totalToDownload);
@@ -29,5 +33,6 @@ public:
     void onUpdateError(mwframework::EAssetUpdateErrorType errorType, const std::string &errorMsg);
     
     void onEnter() override;
+    void onExit() override;
 };
 

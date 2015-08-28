@@ -8,10 +8,10 @@
 
 #include "UpdateScene.h"
 
-#define BUNDLE_VERSION "0.0.0-D0.A1B2C3"
-#define CPP_PROGRAM_VERSION 0
+#define BUNDLE_VERSION "1.0.0-D2.987612"
+#define CPP_PROGRAM_VERSION 1
 #define DEVELOP_MODE true
-#define SERVER_ASSET_ROOT_URL "http://120.25.123.138/mobile/asset"
+#define SERVER_ASSET_ROOT_URL "http://localhost:8080/mobile"
 
 using namespace cocos2d;
 using namespace std;

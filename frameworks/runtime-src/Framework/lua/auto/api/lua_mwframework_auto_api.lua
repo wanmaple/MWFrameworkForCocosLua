@@ -117,6 +117,11 @@
 
 
 --------------------------------------------------------
+-- the mw MWAssetManager
+-- @field [parent=#mw] MWAssetManager#MWAssetManager MWAssetManager preloaded module
+
+
+--------------------------------------------------------
 -- the mw MWNetHandler
 -- @field [parent=#mw] MWNetHandler#MWNetHandler MWNetHandler preloaded module
 

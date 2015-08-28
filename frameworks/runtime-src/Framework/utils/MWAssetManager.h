@@ -56,7 +56,7 @@ public:
     virtual void onUpdateError(EAssetUpdateErrorType errorType, const std::string &errorMsg) = 0;
 };
 
-class MW_DLL MWAssetManager : public IHttpDownloaderDelegate
+class MW_DLL MWAssetManager : private IHttpDownloaderDelegate
 {
     MW_SINGLETON(MWAssetManager);
 public:
@@ -64,12 +64,6 @@ public:
     
     void checkVersion();
     void beginUpdate();
-    
-    // overrides
-    virtual void onDownloadStarted(MWHttpDownloader *downloader, cocos2d::Ref *userdata);
-    virtual void onDownloading(MWHttpDownloader *downloader, float progress, cocos2d::Ref *userdata);
-    virtual void onDownloadCompleted(MWHttpDownloader *downloader, cocos2d::Ref *userdata);
-    virtual void onDownloadFailed(MWHttpDownloader *downloader, const std::string &errorMsg, cocos2d::Ref *userdata);
     
     inline bool isDevelopMode()
     {
@@ -80,12 +74,21 @@ public:
         _isDevelopMode = isDevelopMode;
     }
     void setAssetUpdateDelegate(IAssetUpdateDelegate *delegate);
+#if MW_ENABLE_SCRIPT_BINDING
+    MW_SYNTHESIZE_RETAIN(cocos2d::Ref *, _scriptDelegate, ScriptDelegate);
+#endif
     MW_SYNTHESIZE(int, _programVersion, ProgramVersion);
     MW_SYNTHESIZE_PASS_BY_CONST_REF(std::string, _bundleVersion, BundleVersion);
     MW_SYNTHESIZE_PASS_BY_CONST_REF(std::string, _assetRoot, AssetRootPath);
     MW_SYNTHESIZE_PASS_BY_CONST_REF(std::string, _serverUrl, ServerUrl);
     
 private:
+    // overrides
+    virtual void onDownloadStarted(MWHttpDownloader *downloader, cocos2d::Ref *userdata);
+    virtual void onDownloading(MWHttpDownloader *downloader, float progress, cocos2d::Ref *userdata);
+    virtual void onDownloadCompleted(MWHttpDownloader *downloader, cocos2d::Ref *userdata);
+    virtual void onDownloadFailed(MWHttpDownloader *downloader, const std::string &errorMsg, cocos2d::Ref *userdata);
+    
     void _loadLocalVersion();
     void _configSearchPath();
     std::string _fullLocalAssetPath(const std::string &path = "");

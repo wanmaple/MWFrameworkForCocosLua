@@ -478,7 +478,7 @@ public class MainFrame extends javax.swing.JFrame {
         for (String key: newMd5Keys) {
             if (!_oldMd5Map.containsKey(key)) {
                 _addList.add(key);
-            } else {
+            } else if (!_oldMd5Map.get(key).equals(_newMd5Map.get(key))) {
                 _modifyList.add(key);
             }
         }

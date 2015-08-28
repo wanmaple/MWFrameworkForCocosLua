@@ -9761,6 +9761,666 @@ int lua_register_mwframework_MWUUIDGenerator(lua_State* tolua_S)
     return 1;
 }
 
+int lua_mwframework_MWAssetManager_checkVersion(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWAssetManager* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.AssetManager",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWAssetManager*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWAssetManager_checkVersion'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 0) 
+    {
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWAssetManager_checkVersion'", nullptr);
+            return 0;
+        }
+        cobj->checkVersion();
+        return 0;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.AssetManager:checkVersion",argc, 0);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWAssetManager_checkVersion'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWAssetManager_setBundleVersion(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWAssetManager* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.AssetManager",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWAssetManager*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWAssetManager_setBundleVersion'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 1) 
+    {
+        std::string arg0;
+
+        ok &= luaval_to_std_string(tolua_S, 2,&arg0, "mw.AssetManager:setBundleVersion");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWAssetManager_setBundleVersion'", nullptr);
+            return 0;
+        }
+        cobj->setBundleVersion(arg0);
+        return 0;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.AssetManager:setBundleVersion",argc, 1);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWAssetManager_setBundleVersion'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWAssetManager_getAssetRootPath(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWAssetManager* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.AssetManager",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWAssetManager*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWAssetManager_getAssetRootPath'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 0) 
+    {
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWAssetManager_getAssetRootPath'", nullptr);
+            return 0;
+        }
+        std::string ret = cobj->getAssetRootPath();
+        tolua_pushcppstring(tolua_S,ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.AssetManager:getAssetRootPath",argc, 0);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWAssetManager_getAssetRootPath'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWAssetManager_getServerUrl(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWAssetManager* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.AssetManager",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWAssetManager*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWAssetManager_getServerUrl'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 0) 
+    {
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWAssetManager_getServerUrl'", nullptr);
+            return 0;
+        }
+        std::string ret = cobj->getServerUrl();
+        tolua_pushcppstring(tolua_S,ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.AssetManager:getServerUrl",argc, 0);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWAssetManager_getServerUrl'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWAssetManager_setAssetRootPath(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWAssetManager* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.AssetManager",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWAssetManager*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWAssetManager_setAssetRootPath'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 1) 
+    {
+        std::string arg0;
+
+        ok &= luaval_to_std_string(tolua_S, 2,&arg0, "mw.AssetManager:setAssetRootPath");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWAssetManager_setAssetRootPath'", nullptr);
+            return 0;
+        }
+        cobj->setAssetRootPath(arg0);
+        return 0;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.AssetManager:setAssetRootPath",argc, 1);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWAssetManager_setAssetRootPath'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWAssetManager_beginUpdate(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWAssetManager* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.AssetManager",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWAssetManager*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWAssetManager_beginUpdate'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 0) 
+    {
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWAssetManager_beginUpdate'", nullptr);
+            return 0;
+        }
+        cobj->beginUpdate();
+        return 0;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.AssetManager:beginUpdate",argc, 0);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWAssetManager_beginUpdate'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWAssetManager_setServerUrl(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWAssetManager* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.AssetManager",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWAssetManager*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWAssetManager_setServerUrl'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 1) 
+    {
+        std::string arg0;
+
+        ok &= luaval_to_std_string(tolua_S, 2,&arg0, "mw.AssetManager:setServerUrl");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWAssetManager_setServerUrl'", nullptr);
+            return 0;
+        }
+        cobj->setServerUrl(arg0);
+        return 0;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.AssetManager:setServerUrl",argc, 1);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWAssetManager_setServerUrl'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWAssetManager_setDevelopMode(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWAssetManager* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.AssetManager",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWAssetManager*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWAssetManager_setDevelopMode'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 1) 
+    {
+        bool arg0;
+
+        ok &= luaval_to_boolean(tolua_S, 2,&arg0, "mw.AssetManager:setDevelopMode");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWAssetManager_setDevelopMode'", nullptr);
+            return 0;
+        }
+        cobj->setDevelopMode(arg0);
+        return 0;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.AssetManager:setDevelopMode",argc, 1);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWAssetManager_setDevelopMode'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWAssetManager_getBundleVersion(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWAssetManager* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.AssetManager",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWAssetManager*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWAssetManager_getBundleVersion'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 0) 
+    {
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWAssetManager_getBundleVersion'", nullptr);
+            return 0;
+        }
+        std::string ret = cobj->getBundleVersion();
+        tolua_pushcppstring(tolua_S,ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.AssetManager:getBundleVersion",argc, 0);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWAssetManager_getBundleVersion'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWAssetManager_setProgramVersion(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWAssetManager* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.AssetManager",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWAssetManager*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWAssetManager_setProgramVersion'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 1) 
+    {
+        int arg0;
+
+        ok &= luaval_to_int32(tolua_S, 2,(int *)&arg0, "mw.AssetManager:setProgramVersion");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWAssetManager_setProgramVersion'", nullptr);
+            return 0;
+        }
+        cobj->setProgramVersion(arg0);
+        return 0;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.AssetManager:setProgramVersion",argc, 1);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWAssetManager_setProgramVersion'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWAssetManager_isDevelopMode(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWAssetManager* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.AssetManager",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWAssetManager*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWAssetManager_isDevelopMode'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 0) 
+    {
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWAssetManager_isDevelopMode'", nullptr);
+            return 0;
+        }
+        bool ret = cobj->isDevelopMode();
+        tolua_pushboolean(tolua_S,(bool)ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.AssetManager:isDevelopMode",argc, 0);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWAssetManager_isDevelopMode'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWAssetManager_getProgramVersion(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWAssetManager* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.AssetManager",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWAssetManager*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWAssetManager_getProgramVersion'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 0) 
+    {
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWAssetManager_getProgramVersion'", nullptr);
+            return 0;
+        }
+        int ret = cobj->getProgramVersion();
+        tolua_pushnumber(tolua_S,(lua_Number)ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.AssetManager:getProgramVersion",argc, 0);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWAssetManager_getProgramVersion'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWAssetManager_getInstance(lua_State* tolua_S)
+{
+    int argc = 0;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertable(tolua_S,1,"mw.AssetManager",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    argc = lua_gettop(tolua_S) - 1;
+
+    if (argc == 0)
+    {
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWAssetManager_getInstance'", nullptr);
+            return 0;
+        }
+        mwframework::MWAssetManager* ret = mwframework::MWAssetManager::getInstance();
+        object_to_luaval<mwframework::MWAssetManager>(tolua_S, "mw.AssetManager",(mwframework::MWAssetManager*)ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d\n ", "mw.AssetManager:getInstance",argc, 0);
+    return 0;
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWAssetManager_getInstance'.",&tolua_err);
+#endif
+    return 0;
+}
+static int lua_mwframework_MWAssetManager_finalize(lua_State* tolua_S)
+{
+    printf("luabindings: finalizing LUA object (MWAssetManager)");
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+    if (
+    !tolua_isusertype(tolua_S,1,"mw.AssetManager",0,&tolua_err) ||
+    !tolua_isnoobj(tolua_S,2,&tolua_err)
+    )
+        goto tolua_lerror;
+    else
+#endif
+    {
+        mwframework::MWAssetManager* self = (mwframework::MWAssetManager*)  tolua_tousertype(tolua_S,1,0);
+#if COCOS2D_DEBUG >= 1
+        if (!self) tolua_error(tolua_S,"invalid 'self' in function 'delete'", nullptr);
+#endif
+        delete self;
+    }
+    return 0;
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'delete'.",&tolua_err);
+    return 0;
+#endif
+    return 0;
+}
+
+int lua_register_mwframework_MWAssetManager(lua_State* tolua_S)
+{
+    tolua_usertype(tolua_S,"mw.AssetManager");
+    tolua_cclass(tolua_S,"AssetManager","mw.AssetManager","",nullptr);
+
+    tolua_beginmodule(tolua_S,"AssetManager");
+        tolua_function(tolua_S,"checkVersion",lua_mwframework_MWAssetManager_checkVersion);
+        tolua_function(tolua_S,"setBundleVersion",lua_mwframework_MWAssetManager_setBundleVersion);
+        tolua_function(tolua_S,"getAssetRootPath",lua_mwframework_MWAssetManager_getAssetRootPath);
+        tolua_function(tolua_S,"getServerUrl",lua_mwframework_MWAssetManager_getServerUrl);
+        tolua_function(tolua_S,"setAssetRootPath",lua_mwframework_MWAssetManager_setAssetRootPath);
+        tolua_function(tolua_S,"beginUpdate",lua_mwframework_MWAssetManager_beginUpdate);
+        tolua_function(tolua_S,"setServerUrl",lua_mwframework_MWAssetManager_setServerUrl);
+        tolua_function(tolua_S,"setDevelopMode",lua_mwframework_MWAssetManager_setDevelopMode);
+        tolua_function(tolua_S,"getBundleVersion",lua_mwframework_MWAssetManager_getBundleVersion);
+        tolua_function(tolua_S,"setProgramVersion",lua_mwframework_MWAssetManager_setProgramVersion);
+        tolua_function(tolua_S,"isDevelopMode",lua_mwframework_MWAssetManager_isDevelopMode);
+        tolua_function(tolua_S,"getProgramVersion",lua_mwframework_MWAssetManager_getProgramVersion);
+        tolua_function(tolua_S,"getInstance", lua_mwframework_MWAssetManager_getInstance);
+    tolua_endmodule(tolua_S);
+    std::string typeName = typeid(mwframework::MWAssetManager).name();
+    g_luaType[typeName] = "mw.AssetManager";
+    g_typeCast["AssetManager"] = "mw.AssetManager";
+    return 1;
+}
+
 int lua_mwframework_MWNetHandler_create(lua_State* tolua_S)
 {
     int argc = 0;
@@ -11452,6 +12112,7 @@ TOLUA_API int register_all_mwframework(lua_State* tolua_S)
 	lua_register_mwframework_MWStack(tolua_S);
 	lua_register_mwframework_MWArrayList(tolua_S);
 	lua_register_mwframework_MWJsonArray(tolua_S);
+	lua_register_mwframework_MWAssetManager(tolua_S);
 	lua_register_mwframework_MWZipData(tolua_S);
 	lua_register_mwframework_MWCrypto(tolua_S);
 	lua_register_mwframework_MWNetResponse(tolua_S);

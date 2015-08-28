@@ -45,7 +45,7 @@ function Game:_init()
 end
 
 function Game:_run()
-    local TestScene = require "scenes.TestScene"
+    local TestScene = require "src.scenes.TestScene"
     ReplaceScene(TestScene, { STRING = "abc", NUMBER = 123, BOOLEAN = true, REF = mw.ArrayList:create() })
 end
 

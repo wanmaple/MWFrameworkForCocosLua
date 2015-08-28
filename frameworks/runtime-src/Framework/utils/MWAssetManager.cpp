@@ -55,6 +55,9 @@ MWAssetManager::MWAssetManager()
 , _localVersion()
 , _newVersion()
 , _programUpdateUrl()
+#if MW_ENABLE_SCRIPT_BINDING
+, _scriptDelegate(nullptr)
+#endif
 {
     _downloader = new MWHttpDownloader();
     _downloader->setDelegate(this);
@@ -108,7 +111,7 @@ void MWAssetManager::_loadLocalVersion()
             int cppVersion = (int) localVersionJson->getNumber(AM_CPP_VERSION_KEY);
             if (cppVersion < _programVersion) {
                 // remove all updated data.
-                MWIOUtils::getInstance->removeDirectory(this->_fullLocalAssetPath());
+                MWIOUtils::getInstance()->removeDirectory(this->_fullLocalAssetPath());
                 _localVersion = _bundleVersion;
             } else {
                 _localVersion = localVersionJson->getString(AM_VERSION_STR_KEY);
@@ -143,7 +146,9 @@ void MWAssetManager::_processAfterDownloadVersionFile()
     if (_localVersion == _newVersion) {
         string localMd5Path = this->_fullLocalAssetPath(AM_LOCAL_MD5_FILE);
         if (MWIOUtils::getInstance()->fileExists(localMd5Path)) {
-            this->_saveVersion();
+            if (!this->_saveVersion()) {
+                return;
+            }
             this->_delegateVersionCheckCompleted(true, 0, false, "");
         } else {
             // download related md5 file
@@ -234,6 +239,7 @@ void MWAssetManager::_mergeBundleMd5File()
             MWIOUtils::getInstance()->removeFile(this->_fullLocalAssetPath(key));
         }
     }
+    MWIOUtils::getInstance()->removeFile(localMd5Path);
     MWIOUtils::getInstance()->copyFile(bundleMd5Path, localMd5Path);
     
     // save download file list
@@ -266,9 +272,20 @@ void MWAssetManager::_downloadNextAssetFile()
 
 bool MWAssetManager::_saveVersion()
 {
-    if (!MWIOUtils::getInstance()->copyFile(this->_fullLocalAssetPath(AM_VERSION_FILE), this->_fullLocalAssetPath(AM_LOCAL_VERSION_FILE))) {
+    string versionPath = this->_fullLocalAssetPath(AM_VERSION_FILE);
+    string localVersionPath = this->_fullLocalAssetPath(AM_LOCAL_VERSION_FILE);
+    MWIOUtils::getInstance()->removeFile(localVersionPath);
+    MWIOUtils::getInstance()->copyFile(versionPath, localVersionPath);
+    // check whether version is correct.
+    if (!MWIOUtils::getInstance()->fileExists(localVersionPath)) {
         this->_delegateUpdateError(EAssetUpdateErrorType::IO_ERROR, "Failed to save local version.");
         return false;
+    } else {
+        MWJsonObject *localVersionJson = MWJsonObject::createWithFile(localVersionPath);
+        if (!localVersionJson || string(localVersionJson->getString(AM_VERSION_STR_KEY)) != _newVersion) {
+            this->_delegateUpdateError(EAssetUpdateErrorType::IO_ERROR, "Failed to save local version.");
+            return false;
+        }
     }
     _localVersion = _newVersion;
     return true;
@@ -307,7 +324,8 @@ void MWAssetManager::_configSearchPath()
         // add lua script package path.
 #if MW_ENABLE_SCRIPT_BINDING
         vector<string> packages;
-        packages.push_back(MWIOUtils::getInstance()->splicePath(this->_fullLocalAssetPath(AM_ASSET_DIR), AM_SCRIPT_DIR));
+        string scriptDir = MWIOUtils::getInstance()->splicePath(this->_fullLocalAssetPath(AM_ASSET_DIR), AM_SCRIPT_DIR);
+        packages.push_back(scriptDir);
         MWLuaUtils::getInstance()->addPackagePaths(packages);
 //        CCLOG("%s", MWLuaUtils::getInstance()->getPackagePath().c_str());
 #endif
@@ -319,6 +337,21 @@ void MWAssetManager::_delegateVersionCheckCompleted(bool latest, int fileCount, 
     if (_delegate) {
         _delegate->onVersionCheckCompleted(latest, fileCount, needUpdateProgram, programUpdateUrl);
     }
+#if MW_ENABLE_SCRIPT_BINDING
+    if (_scriptDelegate) {
+        auto params = MWArrayList::create();
+        params->appendObject(__Bool::create(latest));
+        params->appendObject(__Integer::create(fileCount));
+        params->appendObject(__Bool::create(needUpdateProgram));
+        params->appendObject(__String::create(programUpdateUrl));
+        auto paramTypes = MWArrayList::create();
+        paramTypes->appendObject(__String::create("__Bool"));
+        paramTypes->appendObject(__String::create("__Integer"));
+        paramTypes->appendObject(__String::create("__Bool"));
+        paramTypes->appendObject(__String::create("__String"));
+        MWLuaUtils::getInstance()->executePeertableFunction(_scriptDelegate, "onVersionCheckCompleted", params, paramTypes, false);
+    }
+#endif
 }
 
 void MWAssetManager::_delegateVersionUpdated()
@@ -326,6 +359,11 @@ void MWAssetManager::_delegateVersionUpdated()
     if (_delegate) {
         _delegate->onVersionUpdated();
     }
+#if MW_ENABLE_SCRIPT_BINDING
+    if (_scriptDelegate) {
+        MWLuaUtils::getInstance()->executePeertableFunction(_scriptDelegate, "onVersionUpdated", nullptr, nullptr, false);
+    }
+#endif
 }
 
 void MWAssetManager::_delegateAssetFileToDownload(const std::string &relativePath, double totalToDownload)
@@ -333,6 +371,17 @@ void MWAssetManager::_delegateAssetFileToDownload(const std::string &relativePat
     if (_delegate) {
         _delegate->onAssetFileToDownload(relativePath, totalToDownload);
     }
+#if MW_ENABLE_SCRIPT_BINDING
+    if (_scriptDelegate) {
+        auto params = MWArrayList::create();
+        params->appendObject(__String::create(relativePath));
+        params->appendObject(__Double::create(totalToDownload));
+        auto paramTypes = MWArrayList::create();
+        paramTypes->appendObject(__String::create("__String"));
+        paramTypes->appendObject(__String::create("__Double"));
+        MWLuaUtils::getInstance()->executePeertableFunction(_scriptDelegate, "onAssetFileToDownload", params, paramTypes, false);
+    }
+#endif
 }
 
 void MWAssetManager::_delegateAssetFileDownloaded(const std::string &relativePath)
@@ -340,6 +389,15 @@ void MWAssetManager::_delegateAssetFileDownloaded(const std::string &relativePat
     if (_delegate) {
         _delegate->onAssetFileDownloaded(relativePath);
     }
+#if MW_ENABLE_SCRIPT_BINDING
+    if (_scriptDelegate) {
+        auto params = MWArrayList::create();
+        params->appendObject(__String::create(relativePath));
+        auto paramTypes = MWArrayList::create();
+        paramTypes->appendObject(__String::create("__String"));
+        MWLuaUtils::getInstance()->executePeertableFunction(_scriptDelegate, "onAssetFileDownloaded", params, paramTypes, false);
+    }
+#endif
 }
 
 void MWAssetManager::_delegateAssetFileDownloading(const std::string &relativePath, double downloaded, double totalToDownload)
@@ -347,6 +405,19 @@ void MWAssetManager::_delegateAssetFileDownloading(const std::string &relativePa
     if (_delegate) {
         _delegate->onAssetFileDownloading(relativePath, downloaded, totalToDownload);
     }
+#if MW_ENABLE_SCRIPT_BINDING
+    if (_scriptDelegate) {
+        auto params = MWArrayList::create();
+        params->appendObject(__String::create(relativePath));
+        params->appendObject(__Double::create(downloaded));
+        params->appendObject(__Double::create(totalToDownload));
+        auto paramTypes = MWArrayList::create();
+        paramTypes->appendObject(__String::create("__String"));
+        paramTypes->appendObject(__String::create("__Double"));
+        paramTypes->appendObject(__String::create("__Double"));
+        MWLuaUtils::getInstance()->executePeertableFunction(_scriptDelegate, "onAssetFileDownloading", params, paramTypes, false);
+    }
+#endif
 }
 
 void MWAssetManager::_delegateUpdateError(mwframework::EAssetUpdateErrorType errorType, const std::string &errorMsg)
@@ -354,6 +425,17 @@ void MWAssetManager::_delegateUpdateError(mwframework::EAssetUpdateErrorType err
     if (_delegate) {
         _delegate->onUpdateError(errorType, errorMsg);
     }
+#if MW_ENABLE_SCRIPT_BINDING
+    if (_scriptDelegate) {
+        auto params = MWArrayList::create();
+        params->appendObject(__Integer::create((int) errorType));
+        params->appendObject(__String::create(errorMsg));
+        auto paramTypes = MWArrayList::create();
+        paramTypes->appendObject(__String::create("__Integer"));
+        paramTypes->appendObject(__String::create("__String"));
+        MWLuaUtils::getInstance()->executePeertableFunction(_scriptDelegate, "onUpdateError", params, paramTypes, false);
+    }
+#endif
 }
 
 void MWAssetManager::onDownloadStarted(mwframework::MWHttpDownloader *downloader, cocos2d::Ref *userdata)
@@ -394,7 +476,9 @@ void MWAssetManager::onDownloadCompleted(mwframework::MWHttpDownloader *download
         this->_processAfterDownloadAssetConfigFile();
     } else if (fileId == string(AM_BUNDLE_MD5_FILE_ID)) {
         if (_localVersion == _newVersion) {
-            this->_saveVersion();
+            if (!this->_saveVersion()) {
+                return;
+            }
             this->_delegateVersionCheckCompleted(true, 0, false, "");
         } else {
             this->_processAfterDownloadBundleMd5File();

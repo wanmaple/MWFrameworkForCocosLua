@@ -41,10 +41,11 @@ void MWLuaUtils::addPackagePaths(const std::vector<std::string> &paths)
     std::string path = g_defaultPackagePath;
     for (auto val : paths) {
         if (val.length() > 0) {
+            // add ?.lua
             path.append(";");
             path.append(val);
             if (val.at(val.length() - 1) != '/') {
-                val.append("/");
+                path.append("/");
             }
             path.append("?.lua");
         }
