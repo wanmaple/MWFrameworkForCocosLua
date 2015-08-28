@@ -8,6 +8,12 @@
 
 #include <vector>
 
+#if CC_TARGET_PLATFORM == CC_PLATFORM_WIN32
+#define FILE_SEPARATOR '\\'
+#else
+#define FILE_SEPARATOR '/'
+#endif
+
 // files and directorys
 #define AM_VERSION_FILE "version.json"
 #define AM_CONFIG_FILE "config.json"
@@ -141,7 +147,7 @@ void MWAssetManager::_processAfterDownloadVersionFile()
             this->_delegateVersionCheckCompleted(true, 0, false, "");
         } else {
             // download related md5 file
-            string url = this->_fullServerAssetPath(string(AM_BUNDLE_MD5_DIR) + "/" + _newVersion + "/" + AM_BUNDLE_MD5_FILE);
+            string url = this->_fullServerAssetPath(string(AM_BUNDLE_MD5_DIR) + FILE_SEPARATOR + _newVersion + FILE_SEPARATOR + AM_BUNDLE_MD5_FILE);
             _downloader->beginDownloading(url, localMd5Path, __String::create(AM_BUNDLE_MD5_FILE_ID));
         }
     } else {
@@ -185,7 +191,7 @@ void MWAssetManager::_processAfterDownloadAssetConfigFile()
 
 void MWAssetManager::_downloadBundleMd5File()
 {
-    string url = this->_fullServerAssetPath(string(AM_BUNDLE_MD5_DIR) + "/" + _newVersion + "/" + AM_BUNDLE_MD5_FILE);
+    string url = this->_fullServerAssetPath(string(AM_BUNDLE_MD5_DIR) + FILE_SEPARATOR + _newVersion + FILE_SEPARATOR + AM_BUNDLE_MD5_FILE);
     string savePath = this->_fullLocalAssetPath(AM_BUNDLE_MD5_FILE);
     
     _downloader->beginDownloading(url, savePath, __String::create(AM_BUNDLE_MD5_FILE_ID));
@@ -245,8 +251,8 @@ void MWAssetManager::_downloadNextAssetFile()
     // todo. continue with the progress of last accident which cause the failure of the update.
     if (!_downloadFileList.empty()) {
         string rpath = _downloadFileList.front();
-        string downloadPath = this->_fullServerAssetPath(string(AM_ASSET_DIR) + "/" + rpath);
-        string savePath = this->_fullLocalAssetPath(string(AM_ASSET_DIR) + "/" + rpath);
+        string downloadPath = this->_fullServerAssetPath(string(AM_ASSET_DIR) + FILE_SEPARATOR + rpath);
+        string savePath = this->_fullLocalAssetPath(string(AM_ASSET_DIR) + FILE_SEPARATOR + rpath);
         double totalToDownload = _fileSizeMap[rpath];
         this->_delegateAssetFileToDownload(rpath, totalToDownload);
         
