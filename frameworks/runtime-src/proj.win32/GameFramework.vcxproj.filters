@@ -10,6 +10,81 @@
     <Filter Include="resource">
       <UniqueIdentifier>{2d1d0979-58cd-4ab6-b91c-13650158f1fa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Framework">
+      <UniqueIdentifier>{ac351c2d-37ca-43d6-bd06-6abc8fd6644c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\base">
+      <UniqueIdentifier>{2b017263-f19d-45d5-898c-de1c0f5e8ec2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\compression">
+      <UniqueIdentifier>{445e00ad-67e7-4054-9e3d-a7d07d0033f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\db">
+      <UniqueIdentifier>{7378b2a6-649d-49cc-9052-ef856ef38762}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\db\sqlite">
+      <UniqueIdentifier>{24ebc9b3-6b8a-42f6-bef1-198ee355ffc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\db\sqlite\libsqlite">
+      <UniqueIdentifier>{a721dc2b-69c3-4b29-be91-57c438d172fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\encryption">
+      <UniqueIdentifier>{ed2f0087-e900-482b-b3f8-bb120ee1b339}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\encryption\base64">
+      <UniqueIdentifier>{c847f69c-aaa8-46b3-802a-e4490c0cecc4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\encryption\md5">
+      <UniqueIdentifier>{7be862c5-65a0-46cd-8d9f-2d4df227dffd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\json">
+      <UniqueIdentifier>{ad5429bd-a380-4f6e-8136-3c7cdfbf95d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\json\libjson">
+      <UniqueIdentifier>{2237bce5-6751-4c89-bfe3-ed0dd6e94ce3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\lua">
+      <UniqueIdentifier>{8851df6c-b82a-4ffc-860b-aaeca2edbfbf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\lua\auto">
+      <UniqueIdentifier>{ead27646-f1de-47f5-bbd4-382d340673aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\lua\manual">
+      <UniqueIdentifier>{18f50536-4ddf-4044-b612-257b2795443d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\net">
+      <UniqueIdentifier>{ecbbd7a6-61c6-40a6-b705-0a6e96b2cc6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\net\http">
+      <UniqueIdentifier>{0c03046b-8b20-4be8-8157-7924fe19afa0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\platform">
+      <UniqueIdentifier>{53e1e356-a0b6-4a71-a3f7-e7cd17d0b1dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\scheme">
+      <UniqueIdentifier>{2ad1b532-39d0-45c9-8130-df68ac38605c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\texture">
+      <UniqueIdentifier>{5f3cf89a-1f75-4b59-bf56-9b4c4ee6f573}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\utils">
+      <UniqueIdentifier>{bee8c6ef-9cb0-4277-b393-3d0a197d9e6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\texture\gif">
+      <UniqueIdentifier>{9e567575-6fce-496d-a791-dd23eef70585}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\texture\svg">
+      <UniqueIdentifier>{0de09ea3-ebe9-41c2-adf1-f8cfbfa15ff2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\texture\gif\gif_lib">
+      <UniqueIdentifier>{b46dc383-5a68-4957-85a4-dd635d569945}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\texture\svg\nanosvg">
+      <UniqueIdentifier>{5e534134-208f-44ff-99e2-7de93528a5dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\compression\zip-win32">
+      <UniqueIdentifier>{5361284a-8b65-4c8c-a13e-f069c335d8e6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h">
@@ -19,6 +94,273 @@
       <Filter>win32</Filter>
     </ClInclude>
     <ClInclude Include="resource.h" />
+    <ClInclude Include="..\Framework\base\FrameworkErrors.h">
+      <Filter>Framework\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\base\FrameworkMacros.h">
+      <Filter>Framework\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\base\ICloneable.h">
+      <Filter>Framework\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\base\ISerializable.h">
+      <Filter>Framework\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\base\IUncopyable.h">
+      <Filter>Framework\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\base\IUninheritable.h">
+      <Filter>Framework\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\base\MWArrayList.h">
+      <Filter>Framework\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\base\mwbase.h">
+      <Filter>Framework\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\base\MWBinaryData.h">
+      <Filter>Framework\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\base\MWDictionary.h">
+      <Filter>Framework\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\base\MWException.h">
+      <Filter>Framework\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\base\MWObject.h">
+      <Filter>Framework\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\base\MWQueue.h">
+      <Filter>Framework\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\base\MWStack.h">
+      <Filter>Framework\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\compression\MWZipData.h">
+      <Filter>Framework\compression</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\db\IDbBase.h">
+      <Filter>Framework\db</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\db\sqlite\libsqlite\sqlite3.h">
+      <Filter>Framework\db\sqlite\libsqlite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\db\sqlite\libsqlite\sqlite3ext.h">
+      <Filter>Framework\db\sqlite\libsqlite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\db\sqlite\MWSqliteDb.h">
+      <Filter>Framework\db\sqlite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\encryption\base64\libbase64.h">
+      <Filter>Framework\encryption\base64</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\encryption\md5\md5.h">
+      <Filter>Framework\encryption\md5</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\encryption\MWCrypto.h">
+      <Filter>Framework\encryption</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\json\libjson\Dependencies\libbase64++\libbase64++.h">
+      <Filter>Framework\json\libjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\json\libjson\Dependencies\mempool++\mempool.h">
+      <Filter>Framework\json\libjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\json\libjson\JSONOptions.h">
+      <Filter>Framework\json\libjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\json\libjson\libjson.h">
+      <Filter>Framework\json\libjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\json\libjson\Source\internalJSONNode.h">
+      <Filter>Framework\json\libjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\json\libjson\Source\JSONAllocator.h">
+      <Filter>Framework\json\libjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\json\libjson\Source\JSONChildren.h">
+      <Filter>Framework\json\libjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\json\libjson\Source\JSONDebug.h">
+      <Filter>Framework\json\libjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\json\libjson\Source\JSONDefs\GNU_C.h">
+      <Filter>Framework\json\libjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\json\libjson\Source\JSONDefs\Strings_Defs.h">
+      <Filter>Framework\json\libjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\json\libjson\Source\JSONDefs\Unknown_C.h">
+      <Filter>Framework\json\libjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\json\libjson\Source\JSONDefs\Visual_C.h">
+      <Filter>Framework\json\libjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\json\libjson\Source\JSONDefs.h">
+      <Filter>Framework\json\libjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\json\libjson\Source\JSONGlobals.h">
+      <Filter>Framework\json\libjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\json\libjson\Source\JSONMemory.h">
+      <Filter>Framework\json\libjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\json\libjson\Source\JSONMemoryPool.h">
+      <Filter>Framework\json\libjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\json\libjson\Source\JSONNode.h">
+      <Filter>Framework\json\libjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\json\libjson\Source\JSONPreparse.h">
+      <Filter>Framework\json\libjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\json\libjson\Source\JSONSharedString.h">
+      <Filter>Framework\json\libjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\json\libjson\Source\JSONSingleton.h">
+      <Filter>Framework\json\libjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\json\libjson\Source\JSONStats.h">
+      <Filter>Framework\json\libjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\json\libjson\Source\JSONStream.h">
+      <Filter>Framework\json\libjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\json\libjson\Source\JSONValidator.h">
+      <Filter>Framework\json\libjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\json\libjson\Source\JSONWorker.h">
+      <Filter>Framework\json\libjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\json\libjson\Source\JSON_Base64.h">
+      <Filter>Framework\json\libjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\json\libjson\Source\NumberToString.h">
+      <Filter>Framework\json\libjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\json\MWJsonElement.h">
+      <Filter>Framework\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\json\MWJsonFormatter.h">
+      <Filter>Framework\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\json\MWJsonParser.h">
+      <Filter>Framework\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\json\MWJsonStructure.h">
+      <Filter>Framework\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\lua\MWLuaUtils.h">
+      <Filter>Framework\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\lua\auto\lua_mwframework_auto.hpp">
+      <Filter>Framework\lua\auto</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\lua\manual\lua_mwframework_manual.hpp">
+      <Filter>Framework\lua\manual</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\net\http\MWHttpGetService.h">
+      <Filter>Framework\net\http</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\net\http\MWHttpPostService.h">
+      <Filter>Framework\net\http</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\net\http\IHttpTransferStrategy.h">
+      <Filter>Framework\net\http</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\net\http\MWHttpDownloader.h">
+      <Filter>Framework\net\http</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\net\http\MWHttpForm.h">
+      <Filter>Framework\net\http</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\net\MWNetRequest.h">
+      <Filter>Framework\net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\net\MWNetResponse.h">
+      <Filter>Framework\net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\net\MWNetService.h">
+      <Filter>Framework\net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\net\MWNetCenter.h">
+      <Filter>Framework\net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\net\MWNetFilter.h">
+      <Filter>Framework\net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\net\MWNetHandler.h">
+      <Filter>Framework\net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\net\MWNetProtocol.h">
+      <Filter>Framework\net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\platform\MWSystemHelper.h">
+      <Filter>Framework\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\platform\MWSystemHelperStrategy.h">
+      <Filter>Framework\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\platform\MWIOUtils.h">
+      <Filter>Framework\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\platform\MWIOUtilsStrategy.h">
+      <Filter>Framework\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\scheme\MWGameView.h">
+      <Filter>Framework\scheme</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\scheme\MWViewController.h">
+      <Filter>Framework\scheme</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\scheme\MWViewSegue.h">
+      <Filter>Framework\scheme</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\scheme\MWGameScene.h">
+      <Filter>Framework\scheme</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\mwframework.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\texture\gif\gif_lib\gif_hash.h">
+      <Filter>Framework\texture\gif\gif_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\texture\gif\gif_lib\gif_lib.h">
+      <Filter>Framework\texture\gif\gif_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\texture\gif\gif_lib\gif_lib_private.h">
+      <Filter>Framework\texture\gif\gif_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\texture\gif\MWGifFrame.h">
+      <Filter>Framework\texture\gif</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\texture\gif\MWGifFramesCache.h">
+      <Filter>Framework\texture\gif</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\texture\gif\MWGifSprite.h">
+      <Filter>Framework\texture\gif</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\texture\svg\nanosvg\nanosvg.h">
+      <Filter>Framework\texture\svg\nanosvg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\texture\svg\nanosvg\nanosvgrast.h">
+      <Filter>Framework\texture\svg\nanosvg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\texture\svg\MWSvgSprite.h">
+      <Filter>Framework\texture\svg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\utils\MWAssetManager.h">
+      <Filter>Framework\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\utils\MWUUIDGenerator.h">
+      <Filter>Framework\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\compression\zip-win32\unzip.h">
+      <Filter>Framework\compression\zip-win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\compression\zip-win32\zip.h">
+      <Filter>Framework\compression\zip-win32</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -26,6 +368,207 @@
     </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\base\FrameworkErrors.cpp">
+      <Filter>Framework\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\base\MWArrayList.cpp">
+      <Filter>Framework\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\base\MWBinaryData.cpp">
+      <Filter>Framework\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\base\MWDictionary.cpp">
+      <Filter>Framework\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\base\MWException.cpp">
+      <Filter>Framework\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\base\MWObject.cpp">
+      <Filter>Framework\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\base\MWQueue.cpp">
+      <Filter>Framework\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\base\MWStack.cpp">
+      <Filter>Framework\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\db\sqlite\libsqlite\sqlite3.c">
+      <Filter>Framework\db\sqlite\libsqlite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\db\sqlite\MWSqliteDb.cpp">
+      <Filter>Framework\db\sqlite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\encryption\base64\libbase64.c">
+      <Filter>Framework\encryption\base64</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\encryption\md5\md5.cpp">
+      <Filter>Framework\encryption\md5</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\encryption\MWCrypto.cpp">
+      <Filter>Framework\encryption</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\json\libjson\Source\internalJSONNode.cpp">
+      <Filter>Framework\json\libjson</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\json\libjson\Source\JSONAllocator.cpp">
+      <Filter>Framework\json\libjson</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\json\libjson\Source\JSONChildren.cpp">
+      <Filter>Framework\json\libjson</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\json\libjson\Source\JSONDebug.cpp">
+      <Filter>Framework\json\libjson</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\json\libjson\Source\JSONIterators.cpp">
+      <Filter>Framework\json\libjson</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\json\libjson\Source\JSONMemory.cpp">
+      <Filter>Framework\json\libjson</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\json\libjson\Source\JSONNode.cpp">
+      <Filter>Framework\json\libjson</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\json\libjson\Source\JSONNode_Mutex.cpp">
+      <Filter>Framework\json\libjson</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\json\libjson\Source\JSONPreparse.cpp">
+      <Filter>Framework\json\libjson</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\json\libjson\Source\JSONStream.cpp">
+      <Filter>Framework\json\libjson</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\json\libjson\Source\JSONValidator.cpp">
+      <Filter>Framework\json\libjson</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\json\libjson\Source\JSONWorker.cpp">
+      <Filter>Framework\json\libjson</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\json\libjson\Source\JSONWriter.cpp">
+      <Filter>Framework\json\libjson</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\json\libjson\Source\libjson.cpp">
+      <Filter>Framework\json\libjson</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\json\MWJsonFormatter.cpp">
+      <Filter>Framework\json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\json\MWJsonParser.cpp">
+      <Filter>Framework\json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\json\MWJsonStructure.cpp">
+      <Filter>Framework\json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\json\MWJsonElement.cpp">
+      <Filter>Framework\json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\lua\MWLuaUtils.cpp">
+      <Filter>Framework\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\lua\auto\lua_mwframework_auto.cpp">
+      <Filter>Framework\lua\auto</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\lua\manual\lua_mwframework_manual.cpp">
+      <Filter>Framework\lua\manual</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\net\http\MWHttpPostService.cpp">
+      <Filter>Framework\net\http</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\net\http\MWHttpDownloader.cpp">
+      <Filter>Framework\net\http</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\net\http\MWHttpForm.cpp">
+      <Filter>Framework\net\http</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\net\http\MWHttpGetService.cpp">
+      <Filter>Framework\net\http</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\net\MWNetRequest.cpp">
+      <Filter>Framework\net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\net\MWNetResponse.cpp">
+      <Filter>Framework\net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\net\MWNetCenter.cpp">
+      <Filter>Framework\net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\net\MWNetFilter.cpp">
+      <Filter>Framework\net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\net\MWNetHandler.cpp">
+      <Filter>Framework\net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\net\MWNetProtocol.cpp">
+      <Filter>Framework\net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\platform\MWIOUtils.cpp">
+      <Filter>Framework\platform</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\platform\MWSystemHelper.cpp">
+      <Filter>Framework\platform</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\scheme\MWGameView.cpp">
+      <Filter>Framework\scheme</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\scheme\MWViewController.cpp">
+      <Filter>Framework\scheme</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\scheme\MWViewSegue.cpp">
+      <Filter>Framework\scheme</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\scheme\MWGameScene.cpp">
+      <Filter>Framework\scheme</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\texture\gif\gif_lib\dgif_lib.c">
+      <Filter>Framework\texture\gif\gif_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\texture\gif\gif_lib\egif_lib.c">
+      <Filter>Framework\texture\gif\gif_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\texture\gif\gif_lib\gifalloc.c">
+      <Filter>Framework\texture\gif\gif_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\texture\gif\gif_lib\gif_err.c">
+      <Filter>Framework\texture\gif\gif_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\texture\gif\gif_lib\gif_font.c">
+      <Filter>Framework\texture\gif\gif_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\texture\gif\gif_lib\gif_hash.c">
+      <Filter>Framework\texture\gif\gif_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\texture\gif\gif_lib\quantize.c">
+      <Filter>Framework\texture\gif\gif_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\texture\gif\MWGifFrame.cpp">
+      <Filter>Framework\texture\gif</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\texture\gif\MWGifFramesCache.cpp">
+      <Filter>Framework\texture\gif</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\texture\gif\MWGifSprite.cpp">
+      <Filter>Framework\texture\gif</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\texture\svg\MWSvgSprite.cpp">
+      <Filter>Framework\texture\svg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\utils\MWUUIDGenerator.cpp">
+      <Filter>Framework\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\utils\MWAssetManager.cpp">
+      <Filter>Framework\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\compression\MWZipData-win32.cpp">
+      <Filter>Framework\compression</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\compression\zip-win32\zip.cpp">
+      <Filter>Framework\compression\zip-win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\compression\zip-win32\unzip.cpp">
+      <Filter>Framework\compression\zip-win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\encryption\MWCrypto-win32.cpp">
+      <Filter>Framework\encryption</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

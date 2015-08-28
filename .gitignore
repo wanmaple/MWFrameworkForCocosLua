@@ -7,9 +7,7 @@ runtime
 *.sdf
 *.suo
 *.opensdf
-Pokemon.v11.suo
 ~*
-save.data
 .DS_Store
 *.mode1
 *.mode1v3

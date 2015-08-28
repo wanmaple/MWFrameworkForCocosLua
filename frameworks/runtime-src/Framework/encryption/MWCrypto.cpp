@@ -37,22 +37,20 @@ string MWCrypto::md5File(const std::string &filePath)
 
 string MWCrypto::encodeBase64(const std::string &content)
 {
-    int outputLen = Base64encode_len((int) content.size());
+    const int outputLen = Base64encode_len((int) content.size());
     char buffer[outputLen + 1];
     int len = Base64encode(buffer, content.c_str(), (int) content.size());
     buffer[len] = 0;
-    CCLOG("%d %d", outputLen, len);
     string ret(buffer);
     return ret;
 }
 
 string MWCrypto::decodeBase64(const std::string &content)
 {
-    int outputLen = Base64decode_len(content.c_str());
+	const int outputLen = Base64decode_len(content.c_str());
     char buffer[outputLen + 1];
     int len = Base64decode(buffer, content.c_str());
     buffer[len] = 0;
-    CCLOG("%d %d", outputLen, len);
     string ret(buffer);
     return ret;
 }

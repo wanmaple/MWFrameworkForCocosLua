@@ -51,7 +51,7 @@
     <OutDir>$(SolutionDir)$(Configuration).win32\</OutDir>
     <IntDir>$(Configuration).win32\</IntDir>
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)..\Framework;$(IncludePath)</IncludePath>
     <SourcePath>$(SourcePath);</SourcePath>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
@@ -77,7 +77,7 @@
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;STRICT;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS_DEBUG;COCOS2D_DEBUG=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;STRICT;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS_DEBUG;COCOS2D_DEBUG=1;MW_ENABLE_SCRIPT_BINDING;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <DisableSpecificWarnings>4267;4251;4244;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
@@ -167,11 +167,167 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
+    <ClInclude Include="..\Framework\base\FrameworkErrors.h" />
+    <ClInclude Include="..\Framework\base\FrameworkMacros.h" />
+    <ClInclude Include="..\Framework\base\ICloneable.h" />
+    <ClInclude Include="..\Framework\base\ISerializable.h" />
+    <ClInclude Include="..\Framework\base\IUncopyable.h" />
+    <ClInclude Include="..\Framework\base\IUninheritable.h" />
+    <ClInclude Include="..\Framework\base\MWArrayList.h" />
+    <ClInclude Include="..\Framework\base\mwbase.h" />
+    <ClInclude Include="..\Framework\base\MWBinaryData.h" />
+    <ClInclude Include="..\Framework\base\MWDictionary.h" />
+    <ClInclude Include="..\Framework\base\MWException.h" />
+    <ClInclude Include="..\Framework\base\MWObject.h" />
+    <ClInclude Include="..\Framework\base\MWQueue.h" />
+    <ClInclude Include="..\Framework\base\MWStack.h" />
+    <ClInclude Include="..\Framework\compression\MWZipData.h" />
+    <ClInclude Include="..\Framework\compression\zip-win32\unzip.h" />
+    <ClInclude Include="..\Framework\compression\zip-win32\zip.h" />
+    <ClInclude Include="..\Framework\db\IDbBase.h" />
+    <ClInclude Include="..\Framework\db\sqlite\libsqlite\sqlite3.h" />
+    <ClInclude Include="..\Framework\db\sqlite\libsqlite\sqlite3ext.h" />
+    <ClInclude Include="..\Framework\db\sqlite\MWSqliteDb.h" />
+    <ClInclude Include="..\Framework\encryption\base64\libbase64.h" />
+    <ClInclude Include="..\Framework\encryption\md5\md5.h" />
+    <ClInclude Include="..\Framework\encryption\MWCrypto.h" />
+    <ClInclude Include="..\Framework\json\libjson\Dependencies\libbase64++\libbase64++.h" />
+    <ClInclude Include="..\Framework\json\libjson\Dependencies\mempool++\mempool.h" />
+    <ClInclude Include="..\Framework\json\libjson\JSONOptions.h" />
+    <ClInclude Include="..\Framework\json\libjson\libjson.h" />
+    <ClInclude Include="..\Framework\json\libjson\Source\internalJSONNode.h" />
+    <ClInclude Include="..\Framework\json\libjson\Source\JSONAllocator.h" />
+    <ClInclude Include="..\Framework\json\libjson\Source\JSONChildren.h" />
+    <ClInclude Include="..\Framework\json\libjson\Source\JSONDebug.h" />
+    <ClInclude Include="..\Framework\json\libjson\Source\JSONDefs.h" />
+    <ClInclude Include="..\Framework\json\libjson\Source\JSONDefs\GNU_C.h" />
+    <ClInclude Include="..\Framework\json\libjson\Source\JSONDefs\Strings_Defs.h" />
+    <ClInclude Include="..\Framework\json\libjson\Source\JSONDefs\Unknown_C.h" />
+    <ClInclude Include="..\Framework\json\libjson\Source\JSONDefs\Visual_C.h" />
+    <ClInclude Include="..\Framework\json\libjson\Source\JSONGlobals.h" />
+    <ClInclude Include="..\Framework\json\libjson\Source\JSONMemory.h" />
+    <ClInclude Include="..\Framework\json\libjson\Source\JSONMemoryPool.h" />
+    <ClInclude Include="..\Framework\json\libjson\Source\JSONNode.h" />
+    <ClInclude Include="..\Framework\json\libjson\Source\JSONPreparse.h" />
+    <ClInclude Include="..\Framework\json\libjson\Source\JSONSharedString.h" />
+    <ClInclude Include="..\Framework\json\libjson\Source\JSONSingleton.h" />
+    <ClInclude Include="..\Framework\json\libjson\Source\JSONStats.h" />
+    <ClInclude Include="..\Framework\json\libjson\Source\JSONStream.h" />
+    <ClInclude Include="..\Framework\json\libjson\Source\JSONValidator.h" />
+    <ClInclude Include="..\Framework\json\libjson\Source\JSONWorker.h" />
+    <ClInclude Include="..\Framework\json\libjson\Source\JSON_Base64.h" />
+    <ClInclude Include="..\Framework\json\libjson\Source\NumberToString.h" />
+    <ClInclude Include="..\Framework\json\MWJsonElement.h" />
+    <ClInclude Include="..\Framework\json\MWJsonFormatter.h" />
+    <ClInclude Include="..\Framework\json\MWJsonParser.h" />
+    <ClInclude Include="..\Framework\json\MWJsonStructure.h" />
+    <ClInclude Include="..\Framework\lua\auto\lua_mwframework_auto.hpp" />
+    <ClInclude Include="..\Framework\lua\manual\lua_mwframework_manual.hpp" />
+    <ClInclude Include="..\Framework\lua\MWLuaUtils.h" />
+    <ClInclude Include="..\Framework\mwframework.h" />
+    <ClInclude Include="..\Framework\net\http\IHttpTransferStrategy.h" />
+    <ClInclude Include="..\Framework\net\http\MWHttpDownloader.h" />
+    <ClInclude Include="..\Framework\net\http\MWHttpForm.h" />
+    <ClInclude Include="..\Framework\net\http\MWHttpGetService.h" />
+    <ClInclude Include="..\Framework\net\http\MWHttpPostService.h" />
+    <ClInclude Include="..\Framework\net\MWNetCenter.h" />
+    <ClInclude Include="..\Framework\net\MWNetFilter.h" />
+    <ClInclude Include="..\Framework\net\MWNetHandler.h" />
+    <ClInclude Include="..\Framework\net\MWNetProtocol.h" />
+    <ClInclude Include="..\Framework\net\MWNetRequest.h" />
+    <ClInclude Include="..\Framework\net\MWNetResponse.h" />
+    <ClInclude Include="..\Framework\net\MWNetService.h" />
+    <ClInclude Include="..\Framework\platform\MWIOUtils.h" />
+    <ClInclude Include="..\Framework\platform\MWIOUtilsStrategy.h" />
+    <ClInclude Include="..\Framework\platform\MWSystemHelper.h" />
+    <ClInclude Include="..\Framework\platform\MWSystemHelperStrategy.h" />
+    <ClInclude Include="..\Framework\scheme\MWGameScene.h" />
+    <ClInclude Include="..\Framework\scheme\MWGameView.h" />
+    <ClInclude Include="..\Framework\scheme\MWViewController.h" />
+    <ClInclude Include="..\Framework\scheme\MWViewSegue.h" />
+    <ClInclude Include="..\Framework\texture\gif\gif_lib\gif_hash.h" />
+    <ClInclude Include="..\Framework\texture\gif\gif_lib\gif_lib.h" />
+    <ClInclude Include="..\Framework\texture\gif\gif_lib\gif_lib_private.h" />
+    <ClInclude Include="..\Framework\texture\gif\MWGifFrame.h" />
+    <ClInclude Include="..\Framework\texture\gif\MWGifFramesCache.h" />
+    <ClInclude Include="..\Framework\texture\gif\MWGifSprite.h" />
+    <ClInclude Include="..\Framework\texture\svg\MWSvgSprite.h" />
+    <ClInclude Include="..\Framework\texture\svg\nanosvg\nanosvg.h" />
+    <ClInclude Include="..\Framework\texture\svg\nanosvg\nanosvgrast.h" />
+    <ClInclude Include="..\Framework\utils\MWAssetManager.h" />
+    <ClInclude Include="..\Framework\utils\MWUUIDGenerator.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
+    <ClCompile Include="..\Framework\base\FrameworkErrors.cpp" />
+    <ClCompile Include="..\Framework\base\MWArrayList.cpp" />
+    <ClCompile Include="..\Framework\base\MWBinaryData.cpp" />
+    <ClCompile Include="..\Framework\base\MWDictionary.cpp" />
+    <ClCompile Include="..\Framework\base\MWException.cpp" />
+    <ClCompile Include="..\Framework\base\MWObject.cpp" />
+    <ClCompile Include="..\Framework\base\MWQueue.cpp" />
+    <ClCompile Include="..\Framework\base\MWStack.cpp" />
+    <ClCompile Include="..\Framework\compression\MWZipData-win32.cpp" />
+    <ClCompile Include="..\Framework\compression\zip-win32\unzip.cpp" />
+    <ClCompile Include="..\Framework\compression\zip-win32\zip.cpp" />
+    <ClCompile Include="..\Framework\db\sqlite\libsqlite\sqlite3.c" />
+    <ClCompile Include="..\Framework\db\sqlite\MWSqliteDb.cpp" />
+    <ClCompile Include="..\Framework\encryption\base64\libbase64.c" />
+    <ClCompile Include="..\Framework\encryption\md5\md5.cpp" />
+    <ClCompile Include="..\Framework\encryption\MWCrypto-win32.cpp" />
+    <ClCompile Include="..\Framework\encryption\MWCrypto.cpp" />
+    <ClCompile Include="..\Framework\json\libjson\Source\internalJSONNode.cpp" />
+    <ClCompile Include="..\Framework\json\libjson\Source\JSONAllocator.cpp" />
+    <ClCompile Include="..\Framework\json\libjson\Source\JSONChildren.cpp" />
+    <ClCompile Include="..\Framework\json\libjson\Source\JSONDebug.cpp" />
+    <ClCompile Include="..\Framework\json\libjson\Source\JSONIterators.cpp" />
+    <ClCompile Include="..\Framework\json\libjson\Source\JSONMemory.cpp" />
+    <ClCompile Include="..\Framework\json\libjson\Source\JSONNode.cpp" />
+    <ClCompile Include="..\Framework\json\libjson\Source\JSONNode_Mutex.cpp" />
+    <ClCompile Include="..\Framework\json\libjson\Source\JSONPreparse.cpp" />
+    <ClCompile Include="..\Framework\json\libjson\Source\JSONStream.cpp" />
+    <ClCompile Include="..\Framework\json\libjson\Source\JSONValidator.cpp" />
+    <ClCompile Include="..\Framework\json\libjson\Source\JSONWorker.cpp" />
+    <ClCompile Include="..\Framework\json\libjson\Source\JSONWriter.cpp" />
+    <ClCompile Include="..\Framework\json\libjson\Source\libjson.cpp" />
+    <ClCompile Include="..\Framework\json\MWJsonElement.cpp" />
+    <ClCompile Include="..\Framework\json\MWJsonFormatter.cpp" />
+    <ClCompile Include="..\Framework\json\MWJsonParser.cpp" />
+    <ClCompile Include="..\Framework\json\MWJsonStructure.cpp" />
+    <ClCompile Include="..\Framework\lua\auto\lua_mwframework_auto.cpp" />
+    <ClCompile Include="..\Framework\lua\manual\lua_mwframework_manual.cpp" />
+    <ClCompile Include="..\Framework\lua\MWLuaUtils.cpp" />
+    <ClCompile Include="..\Framework\net\http\MWHttpDownloader.cpp" />
+    <ClCompile Include="..\Framework\net\http\MWHttpForm.cpp" />
+    <ClCompile Include="..\Framework\net\http\MWHttpGetService.cpp" />
+    <ClCompile Include="..\Framework\net\http\MWHttpPostService.cpp" />
+    <ClCompile Include="..\Framework\net\MWNetCenter.cpp" />
+    <ClCompile Include="..\Framework\net\MWNetFilter.cpp" />
+    <ClCompile Include="..\Framework\net\MWNetHandler.cpp" />
+    <ClCompile Include="..\Framework\net\MWNetProtocol.cpp" />
+    <ClCompile Include="..\Framework\net\MWNetRequest.cpp" />
+    <ClCompile Include="..\Framework\net\MWNetResponse.cpp" />
+    <ClCompile Include="..\Framework\platform\MWIOUtils.cpp" />
+    <ClCompile Include="..\Framework\platform\MWSystemHelper.cpp" />
+    <ClCompile Include="..\Framework\scheme\MWGameScene.cpp" />
+    <ClCompile Include="..\Framework\scheme\MWGameView.cpp" />
+    <ClCompile Include="..\Framework\scheme\MWViewController.cpp" />
+    <ClCompile Include="..\Framework\scheme\MWViewSegue.cpp" />
+    <ClCompile Include="..\Framework\texture\gif\gif_lib\dgif_lib.c" />
+    <ClCompile Include="..\Framework\texture\gif\gif_lib\egif_lib.c" />
+    <ClCompile Include="..\Framework\texture\gif\gif_lib\gifalloc.c" />
+    <ClCompile Include="..\Framework\texture\gif\gif_lib\gif_err.c" />
+    <ClCompile Include="..\Framework\texture\gif\gif_lib\gif_font.c" />
+    <ClCompile Include="..\Framework\texture\gif\gif_lib\gif_hash.c" />
+    <ClCompile Include="..\Framework\texture\gif\gif_lib\quantize.c" />
+    <ClCompile Include="..\Framework\texture\gif\MWGifFrame.cpp" />
+    <ClCompile Include="..\Framework\texture\gif\MWGifFramesCache.cpp" />
+    <ClCompile Include="..\Framework\texture\gif\MWGifSprite.cpp" />
+    <ClCompile Include="..\Framework\texture\svg\MWSvgSprite.cpp" />
+    <ClCompile Include="..\Framework\utils\MWAssetManager.cpp" />
+    <ClCompile Include="..\Framework\utils\MWUUIDGenerator.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
