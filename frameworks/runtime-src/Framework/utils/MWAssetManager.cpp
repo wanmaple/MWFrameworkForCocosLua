@@ -247,6 +247,8 @@ void MWAssetManager::_downloadNextAssetFile()
         string rpath = _downloadFileList.front();
         string downloadPath = this->_fullServerAssetPath(string(AM_ASSET_DIR) + "/" + rpath);
         string savePath = this->_fullLocalAssetPath(string(AM_ASSET_DIR) + "/" + rpath);
+        double totalToDownload = _fileSizeMap[rpath];
+        this->_delegateAssetFileToDownload(rpath, totalToDownload);
         
         _downloader->beginDownloading(downloadPath, savePath, __String::create(rpath), true);
     } else {
@@ -317,6 +319,13 @@ void MWAssetManager::_delegateVersionUpdated()
 {
     if (_delegate) {
         _delegate->onVersionUpdated();
+    }
+}
+
+void MWAssetManager::_delegateAssetFileToDownload(const std::string &relativePath, double totalToDownload)
+{
+    if (_delegate) {
+        _delegate->onAssetFileToDownload(relativePath, totalToDownload);
     }
 }
 

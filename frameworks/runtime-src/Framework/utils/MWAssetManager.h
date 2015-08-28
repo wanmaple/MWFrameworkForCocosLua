@@ -35,6 +35,10 @@ public:
      */
     virtual void onVersionCheckCompleted(bool latest, int fileCount, bool needUpdateProgram, const std::string &programUpdateUrl) = 0;
     /**
+     * Delegate when the single file is ready to download.
+     */
+    virtual void onAssetFileToDownload(const std::string &relativePath, double totalToDownload) = 0;
+    /**
      * Delegate when the single file is downloading.
      */
     virtual void onAssetFileDownloading(const std::string &relativePath, double downloaded, double totalToDownload) = 0;
@@ -98,6 +102,7 @@ private:
     bool _saveVersion();
     
     void _delegateVersionCheckCompleted(bool latest, int fileCount, bool needUpdateProgram, const std::string &programUpdateUrl);
+    void _delegateAssetFileToDownload(const std::string &relativePath, double totalToDownload);
     void _delegateAssetFileDownloading(const std::string &relativePath, double downloaded, double totalToDownload);
     void _delegateAssetFileDownloaded(const std::string &relativePath);
     void _delegateVersionUpdated();
