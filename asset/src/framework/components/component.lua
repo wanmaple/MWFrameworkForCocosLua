@@ -4,6 +4,10 @@
     Date: 08/12/2015
 ]]
 
+--[[
+* Base class of the component.
+* component is used to bind on any targets who satisfy the condition constrained by the component.
+]]
 local Component = class("Component")
 
 function Component:ctor(name, depends)

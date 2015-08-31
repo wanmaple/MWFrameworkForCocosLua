@@ -4,6 +4,9 @@
     Date: 06/18/2015
 ]]
 
+--[[
+    Bridge provides the way to call java static methods or obj-c static methods.
+]]
 local LanguageBridge = {}
 
 local function checkArguments(args, sig)

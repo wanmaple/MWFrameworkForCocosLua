@@ -11,6 +11,8 @@ require "framework.device"
 -- mvc module
 require "framework.mvc.notifier"
 require "framework.mvc.model"
+-- texture module
+require "framework.texture.manager"
 -- components module
 require "framework.components.component"
 require "framework.components.behavior.fsm"

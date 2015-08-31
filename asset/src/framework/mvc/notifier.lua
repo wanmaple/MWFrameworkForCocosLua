@@ -25,6 +25,12 @@ end
 
 
 
+--[[
+* Notifier is a machine which can send events but sender and observers don't need to know each other in the same context.
+* @func addObserver add an observer who will care the event sent from the sender.
+* @func removeObserver remove the observer who cares the event sent from the sender.
+* @func notify send event with the event arguments.
+]]
 Notifier = {}
 
 Notifier._observerMap = {}		-- observer map
