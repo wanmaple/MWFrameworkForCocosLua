@@ -11,7 +11,6 @@
 -- @function [parent=#MWZipData] getCompressedFileData 
 -- @param self
 -- @param #string compressedFile
--- @param #string password
 -- @return MWBinaryData#MWBinaryData ret (return value: mw.MWBinaryData)
         
 --------------------------------
@@ -24,7 +23,6 @@
 -- @param self
 -- @param #string name
 -- @param #mw.MWBinaryData fileData
--- @param #string password
 -- @param #int level
 -- @return bool#bool ret (return value: bool)
         
@@ -58,6 +56,7 @@
 -- @function [parent=#MWZipData] createWithExistingFile 
 -- @param self
 -- @param #string filePath
+-- @param #string password
 -- @return MWZipData#MWZipData ret (return value: mw.MWZipData)
         
 --------------------------------
@@ -66,6 +65,7 @@
 -- @function [parent=#MWZipData] createWithNewFile 
 -- @param self
 -- @param #string filePath
+-- @param #string password
 -- @return MWZipData#MWZipData ret (return value: mw.MWZipData)
         
 return nil

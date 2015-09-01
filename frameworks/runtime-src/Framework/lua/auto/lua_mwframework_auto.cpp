@@ -5104,23 +5104,6 @@ int lua_mwframework_MWZipData_getCompressedFileData(lua_State* tolua_S)
         object_to_luaval<mwframework::MWBinaryData>(tolua_S, "mw.BinaryData",(mwframework::MWBinaryData*)ret);
         return 1;
     }
-    if (argc == 2) 
-    {
-        std::string arg0;
-        std::string arg1;
-
-        ok &= luaval_to_std_string(tolua_S, 2,&arg0, "mw.ZipData:getCompressedFileData");
-
-        ok &= luaval_to_std_string(tolua_S, 3,&arg1, "mw.ZipData:getCompressedFileData");
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWZipData_getCompressedFileData'", nullptr);
-            return 0;
-        }
-        mwframework::MWBinaryData* ret = cobj->getCompressedFileData(arg0, arg1);
-        object_to_luaval<mwframework::MWBinaryData>(tolua_S, "mw.BinaryData",(mwframework::MWBinaryData*)ret);
-        return 1;
-    }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.ZipData:getCompressedFileData",argc, 1);
     return 0;
 
@@ -5178,42 +5161,19 @@ int lua_mwframework_MWZipData_zipNewFile(lua_State* tolua_S)
     {
         std::string arg0;
         mwframework::MWBinaryData* arg1;
-        std::string arg2;
+        int arg2;
 
         ok &= luaval_to_std_string(tolua_S, 2,&arg0, "mw.ZipData:zipNewFile");
 
         ok &= luaval_to_object<mwframework::MWBinaryData>(tolua_S, 3, "mw.BinaryData",&arg1);
 
-        ok &= luaval_to_std_string(tolua_S, 4,&arg2, "mw.ZipData:zipNewFile");
+        ok &= luaval_to_int32(tolua_S, 4,(int *)&arg2, "mw.ZipData:zipNewFile");
         if(!ok)
         {
             tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWZipData_zipNewFile'", nullptr);
             return 0;
         }
         bool ret = cobj->zipNewFile(arg0, arg1, arg2);
-        tolua_pushboolean(tolua_S,(bool)ret);
-        return 1;
-    }
-    if (argc == 4) 
-    {
-        std::string arg0;
-        mwframework::MWBinaryData* arg1;
-        std::string arg2;
-        int arg3;
-
-        ok &= luaval_to_std_string(tolua_S, 2,&arg0, "mw.ZipData:zipNewFile");
-
-        ok &= luaval_to_object<mwframework::MWBinaryData>(tolua_S, 3, "mw.BinaryData",&arg1);
-
-        ok &= luaval_to_std_string(tolua_S, 4,&arg2, "mw.ZipData:zipNewFile");
-
-        ok &= luaval_to_int32(tolua_S, 5,(int *)&arg3, "mw.ZipData:zipNewFile");
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWZipData_zipNewFile'", nullptr);
-            return 0;
-        }
-        bool ret = cobj->zipNewFile(arg0, arg1, arg2, arg3);
         tolua_pushboolean(tolua_S,(bool)ret);
         return 1;
     }
@@ -5439,6 +5399,21 @@ int lua_mwframework_MWZipData_createWithExistingFile(lua_State* tolua_S)
         object_to_luaval<mwframework::MWZipData>(tolua_S, "mw.ZipData",(mwframework::MWZipData*)ret);
         return 1;
     }
+    if (argc == 2)
+    {
+        std::string arg0;
+        std::string arg1;
+        ok &= luaval_to_std_string(tolua_S, 2,&arg0, "mw.ZipData:createWithExistingFile");
+        ok &= luaval_to_std_string(tolua_S, 3,&arg1, "mw.ZipData:createWithExistingFile");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWZipData_createWithExistingFile'", nullptr);
+            return 0;
+        }
+        mwframework::MWZipData* ret = mwframework::MWZipData::createWithExistingFile(arg0, arg1);
+        object_to_luaval<mwframework::MWZipData>(tolua_S, "mw.ZipData",(mwframework::MWZipData*)ret);
+        return 1;
+    }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d\n ", "mw.ZipData:createWithExistingFile",argc, 1);
     return 0;
 #if COCOS2D_DEBUG >= 1
@@ -5472,6 +5447,21 @@ int lua_mwframework_MWZipData_createWithNewFile(lua_State* tolua_S)
             return 0;
         }
         mwframework::MWZipData* ret = mwframework::MWZipData::createWithNewFile(arg0);
+        object_to_luaval<mwframework::MWZipData>(tolua_S, "mw.ZipData",(mwframework::MWZipData*)ret);
+        return 1;
+    }
+    if (argc == 2)
+    {
+        std::string arg0;
+        std::string arg1;
+        ok &= luaval_to_std_string(tolua_S, 2,&arg0, "mw.ZipData:createWithNewFile");
+        ok &= luaval_to_std_string(tolua_S, 3,&arg1, "mw.ZipData:createWithNewFile");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWZipData_createWithNewFile'", nullptr);
+            return 0;
+        }
+        mwframework::MWZipData* ret = mwframework::MWZipData::createWithNewFile(arg0, arg1);
         object_to_luaval<mwframework::MWZipData>(tolua_S, "mw.ZipData",(mwframework::MWZipData*)ret);
         return 1;
     }
