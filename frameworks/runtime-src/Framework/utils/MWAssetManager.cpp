@@ -239,8 +239,6 @@ void MWAssetManager::_mergeBundleMd5File()
             MWIOUtils::getInstance()->removeFile(this->_fullLocalAssetPath(key));
         }
     }
-    MWIOUtils::getInstance()->removeFile(localMd5Path);
-    MWIOUtils::getInstance()->copyFile(bundleMd5Path, localMd5Path);
     
     // save download file list
     _downloadFileList = queue<string>();
@@ -272,10 +270,10 @@ void MWAssetManager::_downloadNextAssetFile()
 
 bool MWAssetManager::_saveVersion()
 {
+    // save version
     string versionPath = this->_fullLocalAssetPath(AM_VERSION_FILE);
     string localVersionPath = this->_fullLocalAssetPath(AM_LOCAL_VERSION_FILE);
     MWIOUtils::getInstance()->removeFile(localVersionPath);
-    MWIOUtils::getInstance()->copyFile(versionPath, localVersionPath);
     // check whether version is correct.
     if (!MWIOUtils::getInstance()->fileExists(localVersionPath)) {
         this->_delegateUpdateError(EAssetUpdateErrorType::IO_ERROR, "Failed to save local version.");
@@ -287,6 +285,13 @@ bool MWAssetManager::_saveVersion()
             return false;
         }
     }
+    MWIOUtils::getInstance()->copyFile(versionPath, localVersionPath);
+    // save md5
+    string bundleMd5Path = this->_fullLocalAssetPath(AM_BUNDLE_MD5_FILE);
+    string localMd5Path = this->_fullLocalAssetPath(AM_LOCAL_MD5_FILE);
+    MWIOUtils::getInstance()->removeFile(localMd5Path);
+    MWIOUtils::getInstance()->copyFile(bundleMd5Path, localMd5Path);
+    
     _localVersion = _newVersion;
     return true;
 }

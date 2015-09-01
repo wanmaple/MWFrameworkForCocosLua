@@ -54,4 +54,19 @@ bool MWBinaryData::isValid()
     return _data && _size > 0;
 }
 
+string MWBinaryData::toString()
+{
+    if (!isValid()) {
+        return "";
+    }
+    
+    char *buffer = new char[_size + 1];
+    buffer[_size] = '\0';
+    memcpy(buffer, _data, _size);
+    string ret(buffer);
+    delete [] buffer;
+    
+    return ret;
+}
+
 MW_FRAMEWORK_END

@@ -55,6 +55,8 @@ public:
      */
     bool isValid();
     
+    std::string toString();
+    
 private:
     bool init(MW_RAW_DATA data, MW_ULONG size);
     
