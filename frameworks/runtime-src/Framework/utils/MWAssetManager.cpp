@@ -295,8 +295,10 @@ bool MWAssetManager::_saveVersion()
     // save md5
     string bundleMd5Path = this->_fullLocalAssetPath(AM_BUNDLE_MD5_FILE);
     string localMd5Path = this->_fullLocalAssetPath(AM_LOCAL_MD5_FILE);
-    MWIOUtils::getInstance()->removeFile(localMd5Path);
-    MWIOUtils::getInstance()->copyFile(bundleMd5Path, localMd5Path);
+    if (MWIOUtils::getInstance()->fileExists(bundleMd5Path)) {
+        MWIOUtils::getInstance()->removeFile(localMd5Path);
+        MWIOUtils::getInstance()->copyFile(bundleMd5Path, localMd5Path);
+    }
     
     _localVersion = _newVersion;
     return true;
