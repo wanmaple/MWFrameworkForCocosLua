@@ -22,6 +22,7 @@
 #define AM_LOCAL_MD5_FILE "local_md5.json"
 #define AM_ASSET_DIR "Asset"
 #define AM_BUNDLE_MD5_DIR "BundleMd5"
+#define AM_RESOURCE_DIR "res"
 #define AM_SCRIPT_DIR "src"
 
 // version description file keys
@@ -136,12 +137,17 @@ void MWAssetManager::_processAfterDownloadVersionFile()
         this->_delegateUpdateError(EAssetUpdateErrorType::VERSION_CHECK_ERROR, "Failed to parse version file.");
         return;
     }
-    if (!versionJson->hasKey(AM_VERSION_STR_KEY) || !versionJson->hasKey(AM_UPDATE_URL_KEY)) {
+    if (!versionJson->hasKey(AM_VERSION_STR_KEY) || !versionJson->hasKey(AM_CPP_VERSION_KEY) || !versionJson->hasKey(AM_UPDATE_URL_KEY)) {
         this->_delegateUpdateError(EAssetUpdateErrorType::VERSION_CHECK_ERROR, "Invalid version file.");
         return;
     }
     _newVersion = versionJson->getString(AM_VERSION_STR_KEY);
     _programUpdateUrl = versionJson->getString(AM_UPDATE_URL_KEY);
+    int cppVersion = (int) versionJson->getNumber(AM_CPP_VERSION_KEY);
+    if (cppVersion > _programVersion) {
+        this->_delegateVersionCheckCompleted(false, 0, true, _programUpdateUrl);
+        return;
+    }
     
     if (_localVersion == _newVersion) {
         string localMd5Path = this->_fullLocalAssetPath(AM_LOCAL_MD5_FILE);
