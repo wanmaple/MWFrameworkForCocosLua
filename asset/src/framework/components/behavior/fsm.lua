@@ -210,13 +210,13 @@ function FiniteStateMachine:exportMethods()
         "doEventForce",
         "doEvent",
     })
-    return self._target
+    return self
 end
 
-function FiniteStateMachine:onBind_()
+function FiniteStateMachine:_onBind()
 end
 
-function FiniteStateMachine:onUnbind_()
+function FiniteStateMachine:_onUnbind()
 end
 
 function FiniteStateMachine:_addEvent(event)

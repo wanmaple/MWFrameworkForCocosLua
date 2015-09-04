@@ -16,5 +16,6 @@ require "framework.texture.manager"
 -- components module
 require "framework.components.component"
 require "framework.components.behavior.fsm"
+require "framework.components.ui.longtouch"
 -- platform
 require "framework.platform.bridge"

@@ -7,6 +7,9 @@
 --[[
 * Base class of the component.
 * component is used to bind on any targets who satisfy the condition constrained by the component.
+* e.g.
+* bindable(target):addComponent(COMPONENT_MODULE_PATH, ...):exportMethods()
+* target:COMPONENT_METHOD();
 ]]
 local Component = class("Component")
 

@@ -36,6 +36,9 @@ function TestViewController:viewDidLoad()
     svg:setVectorScale(0.5)
     self:view():addChild(svg)
 
+	bindable(svg):addComponent("framework.components.ui.longtouch"):exportMethods()
+	svg:setDelegate(self)
+
 	log("Test Sqlite DB...")
 	local db = mw.SqliteDb:openDb("res/icon.jpg")
 	local t = db:executeQuery("select * from [pet_info] where [id] = '493'");
@@ -53,6 +56,26 @@ end
 
 function TestViewController:viewDidUnload()
 
+end
+
+function TestViewController:onLongTouchBegan(target, loc, ts)
+	print("TestViewController:onLongTouchBegan", target, loc, ts)
+	self._beginPos = target:convertToNodeSpace(loc)
+end
+
+function TestViewController:onLongTouchPressed(target, loc, ts)
+	print("TestViewController:onLongTouchPressed", target, loc, ts)
+	local vec = cc.pSub(target:convertToNodeSpace(loc), self._beginPos)
+	target:setPosition(cc.pAdd(cc.p(target:getPosition()), vec))
+end
+
+function TestViewController:onLongTouchEnded(target, loc, ts)
+	print("TestViewController:onLongTouchEnded", target, loc, ts)
+	self._beginPos = nil
+end
+
+function TestViewController:onClick(target)
+	print("TestViewController:onClick", target)
 end
 
 return TestViewController
