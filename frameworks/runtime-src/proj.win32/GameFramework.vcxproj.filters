@@ -552,9 +552,6 @@
     <ClCompile Include="..\Framework\texture\svg\MWSvgSprite.cpp">
       <Filter>Framework\texture\svg</Filter>
     </ClCompile>
-    <ClCompile Include="..\Framework\utils\MWUUIDGenerator.cpp">
-      <Filter>Framework\utils</Filter>
-    </ClCompile>
     <ClCompile Include="..\Framework\utils\MWAssetManager.cpp">
       <Filter>Framework\utils</Filter>
     </ClCompile>

@@ -1,6 +1,5 @@
 #include "MWHttpGetService.h"
 
-#include "HttpRequest.h"
 #include "MWHttpForm.h"
 #include "../MWNetRequest.h"
 #include "../MWNetResponse.h"

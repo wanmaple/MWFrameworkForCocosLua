@@ -10,9 +10,9 @@
 #include "../../base/mwbase.h"
 
 #include "cocos2d.h"
-#include "HttpClient.h"
-#include "HttpRequest.h"
-#include "HttpResponse.h"
+#include "network/HttpClient.h"
+#include "network/HttpRequest.h"
+#include "network/HttpResponse.h"
 #include "../MWNetService.h"
 #include "IHttpTransferStrategy.h"
 #include <string>
