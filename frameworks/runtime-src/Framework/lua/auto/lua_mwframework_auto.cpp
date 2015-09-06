@@ -10548,6 +10548,95 @@ int lua_register_mwframework_MWNetHandler(lua_State* tolua_S)
     return 1;
 }
 
+int lua_mwframework_MWNetFilter_create(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWNetFilter* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.NetFilter",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWNetFilter*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWNetFilter_create'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 0) 
+    {
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWNetFilter_create'", nullptr);
+            return 0;
+        }
+        mwframework::MWNetFilter* ret = cobj->create();
+        object_to_luaval<mwframework::MWNetFilter>(tolua_S, "mw.NetFilter",(mwframework::MWNetFilter*)ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.NetFilter:create",argc, 0);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWNetFilter_create'.",&tolua_err);
+#endif
+
+    return 0;
+}
+static int lua_mwframework_MWNetFilter_finalize(lua_State* tolua_S)
+{
+    printf("luabindings: finalizing LUA object (MWNetFilter)");
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+    if (
+    !tolua_isusertype(tolua_S,1,"mw.NetFilter",0,&tolua_err) ||
+    !tolua_isnoobj(tolua_S,2,&tolua_err)
+    )
+        goto tolua_lerror;
+    else
+#endif
+    {
+        mwframework::MWNetFilter* self = (mwframework::MWNetFilter*)  tolua_tousertype(tolua_S,1,0);
+#if COCOS2D_DEBUG >= 1
+        if (!self) tolua_error(tolua_S,"invalid 'self' in function 'delete'", nullptr);
+#endif
+        delete self;
+    }
+    return 0;
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'delete'.",&tolua_err);
+    return 0;
+#endif
+    return 0;
+}
+
+int lua_register_mwframework_MWNetFilter(lua_State* tolua_S)
+{
+    tolua_usertype(tolua_S,"mw.NetFilter");
+    tolua_cclass(tolua_S,"NetFilter","mw.NetFilter","mw.Object",nullptr);
+
+    tolua_beginmodule(tolua_S,"NetFilter");
+        tolua_function(tolua_S,"create",lua_mwframework_MWNetFilter_create);
+    tolua_endmodule(tolua_S);
+    std::string typeName = typeid(mwframework::MWNetFilter).name();
+    g_luaType[typeName] = "mw.NetFilter";
+    g_typeCast["NetFilter"] = "mw.NetFilter";
+    return 1;
+}
+
 int lua_mwframework_MWNetRequest_getProtocolId(lua_State* tolua_S)
 {
     int argc = 0;
@@ -12152,6 +12241,7 @@ TOLUA_API int register_all_mwframework(lua_State* tolua_S)
 	lua_register_mwframework_MWJsonArray(tolua_S);
 	lua_register_mwframework_MWAssetManager(tolua_S);
 	lua_register_mwframework_MWZipData(tolua_S);
+	lua_register_mwframework_MWNetFilter(tolua_S);
 	lua_register_mwframework_MWCrypto(tolua_S);
 	lua_register_mwframework_MWNetResponse(tolua_S);
 	lua_register_mwframework_MWJsonObject(tolua_S);

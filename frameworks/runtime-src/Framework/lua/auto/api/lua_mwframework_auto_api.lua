@@ -127,6 +127,11 @@
 
 
 --------------------------------------------------------
+-- the mw MWNetFilter
+-- @field [parent=#mw] MWNetFilter#MWNetFilter MWNetFilter preloaded module
+
+
+--------------------------------------------------------
 -- the mw MWNetRequest
 -- @field [parent=#mw] MWNetRequest#MWNetRequest MWNetRequest preloaded module
 
