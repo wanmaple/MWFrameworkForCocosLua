@@ -25,7 +25,9 @@ MWViewController *MWViewController::create(MWViewSegue *segue)
 
 bool MWViewController::init(MWViewSegue *segue)
 {
+    CC_SAFE_RELEASE(_segue);
     _segue = segue;
+    CC_SAFE_RETAIN(_segue);
     
     return true;
 }
@@ -41,6 +43,7 @@ MWViewController::MWViewController()
 MWViewController::~MWViewController()
 {
     CC_SAFE_RELEASE(_view);
+    CC_SAFE_RELEASE(_segue);
 }
 
 void MWViewController::viewDidLoad()
