@@ -11,6 +11,7 @@
  * @func unloadTexture: unload a texture.
  * @func didLoadTexture: whether did load the texture.
  * @func loadTextureAsync: load a texture. (async)
+ * @func unloadTextureWithDelay: it won't unload the texture immediately when the reference count is 0, it will clean the texture with a delay(So you can load the texture during the delay time).
  * @func forceUnloadTexture: force unload a texture, which will ignore the reference count.
  * @func setPvrTexturesSupportPremultipliedAlpha: set if .pvr texture supports premultiplied alpha.
  ]]
@@ -48,6 +49,7 @@ function TextureManager:unloadTexture(plist)
 		logError("The texture %s hasn't been loaded.", plist)
 		return
 	end
+	self._textureMap[plist]["ref"] = self._textureMap[plist]["ref"] - 1
 	log("Texture %s unloaded, reference count: %d", plist, self._textureMap[plist]["ref"])
 	if self._textureMap[plist]["ref"] <= 0 then
 		cc.SpriteFrameCache:getInstance():removeSpriteFramesFromFile(plist)
@@ -87,6 +89,33 @@ function TextureManager:loadTextureAsync(plist, texture, callback)
 			callback()
 		end
 		cc.Director:getTextureCache():addImageAsync(texture, realCallback)
+	end
+end
+
+function TextureManager:unloadTextureWithDelay(plist, delay)
+	if type(plist) ~= "string" then
+		logError("Invalid param 'plist', should be a string value.")
+		return
+	end
+	if not self:didLoadTexture(plist) then
+		logError("The texture %s hasn't been loaded.", plist)
+		return
+	end
+	if self._textureMap[plist]["ref"] <= 0 then
+		logError("Delay removed.")
+		return
+	end
+	self._textureMap[plist]["ref"] = self._textureMap[plist]["ref"] - 1
+	log("Texture %s unloaded with delay, reference count: %d", plist, self._textureMap[plist]["ref"])
+	if self._textureMap[plist]["ref"] <= 0 then
+		local callback = function ()
+			if self._textureMap[plist]["ref"] <= 0 then
+				cc.SpriteFrameCache:getInstance():removeSpriteFramesFromFile(plist)
+				cc.Director:getTextureCache():removeTextureForKey(self._textureMap[plist]["tex"])
+				self._textureMap[plist] = nil
+			end
+		end
+		cc.Director:getInstance():getScheduler():scheduleScriptFunc(callback, 0)
 	end
 end
 
