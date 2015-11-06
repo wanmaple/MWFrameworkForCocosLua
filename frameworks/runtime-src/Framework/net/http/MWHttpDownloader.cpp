@@ -11,6 +11,9 @@
 #elif CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
 #include "curl/include/android/curl/curl.h"
 #include "curl/include/android/curl/easy.h"
+#elif CC_TARGET_PLATFORM == CC_PLATFORM_WIN32
+#include "curl/include/win32/curl/curl.h"
+#include "curl/include/win32/curl/easy.h"
 #endif
 
 using namespace cocos2d;

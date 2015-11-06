@@ -5,6 +5,8 @@
 #include "ios/MWSystemHelperStrategyIOS.h"
 #elif CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
 #include "android/MWSystemHelperStrategyAndroid.h"
+#elif CC_TARGET_PLATFORM == CC_PLATFORM_WIN32
+#include "win32/MWSystemHelperStrategyWin32.h"
 #endif
 
 MW_FRAMEWORK_BEGIN
@@ -14,6 +16,8 @@ MWSystemHelper::MWSystemHelper()
 : _strategy(new MWSystemHelperStrategyIos())
 #elif CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
 : _strategy(new MWSystemHelperStrategyAndroid())
+#elif CC_TARGET_PLATFORM == CC_PLATFORM_WIN32
+: _strategy(new MWSystemHelperStrategyWin32())
 #endif
 {
 }
@@ -25,9 +29,13 @@ MWSystemHelper::~MWSystemHelper()
 
 MW_ULONG MWSystemHelper::millisecondsNow()
 {
+#if CC_TARGET_PLATFORM == CC_PLATFORM_WIN32
+	return 0;
+#else
     timeval now;
     gettimeofday(&now, nullptr);
     return now.tv_sec * 1000 + now.tv_usec / 1000;
+#endif
 }
 
 ENetStatus MWSystemHelper::checkNetStatus()

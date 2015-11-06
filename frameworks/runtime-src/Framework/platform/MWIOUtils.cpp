@@ -4,6 +4,8 @@
 #include "ios/MWIOUtilsStrategyIOS.h"
 #elif CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
 #include "android/MWIOUtilsStrategyAndroid.h"
+#elif CC_TARGET_PLATFORM == CC_PLATFORM_WIN32
+#include "win32/MWIOUtilsStrategyWin32.h"
 #endif
 #include "cocos2d.h"
 
@@ -17,6 +19,8 @@ MWIOUtils::MWIOUtils()
 : _strategy(new MWIOUtilsStrategyIos())
 #elif CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
 : _strategy(new MWIOUtilsStrategyAndroid())
+#elif CC_TARGET_PLATFORM == CC_PLATFORM_WIN32
+: _strategy(new MWIOUtilsStrategyWin32())
 #endif
 {
 }

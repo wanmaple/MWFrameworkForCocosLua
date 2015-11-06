@@ -51,7 +51,7 @@
     <OutDir>$(SolutionDir)$(Configuration).win32\</OutDir>
     <IntDir>$(Configuration).win32\</IntDir>
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)..\Framework;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)..\Framework;$(ProjectDir)..\Framework\net\http\pthreads-win32\include;$(ProjectDir)..\Framework\platform\win32;$(IncludePath)</IncludePath>
     <SourcePath>$(SourcePath);</SourcePath>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
@@ -61,7 +61,7 @@
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LibraryPath>$(MSBuildProgramFiles32)\Microsoft SDKs\Windows\v7.1A\lib;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(MSBuildProgramFiles32)\Microsoft SDKs\Windows\v7.1A\lib;$(ProjectDir)..\Framework\net\http\pthreads-win32\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LibraryPath>$(MSBuildProgramFiles32)\Microsoft SDKs\Windows\v7.1A\lib;$(LibraryPath)</LibraryPath>
@@ -85,8 +85,8 @@
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libcurl_imp.lib;lua51.lib;websockets.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OutDir)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libcurl_imp.lib;lua51.lib;websockets.lib;pthreadVC2.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ResourceCompile>
       <Culture>0x0409</Culture>
@@ -167,6 +167,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
+    <ClInclude Include="..\Classes\UpdateScene.h" />
     <ClInclude Include="..\Framework\base\FrameworkErrors.h" />
     <ClInclude Include="..\Framework\base\FrameworkMacros.h" />
     <ClInclude Include="..\Framework\base\ICloneable.h" />
@@ -241,6 +242,8 @@
     <ClInclude Include="..\Framework\platform\MWIOUtilsStrategy.h" />
     <ClInclude Include="..\Framework\platform\MWSystemHelper.h" />
     <ClInclude Include="..\Framework\platform\MWSystemHelperStrategy.h" />
+    <ClInclude Include="..\Framework\platform\win32\MWIOUtilsStrategyWin32.h" />
+    <ClInclude Include="..\Framework\platform\win32\MWSystemHelperStrategyWin32.h" />
     <ClInclude Include="..\Framework\scheme\MWGameScene.h" />
     <ClInclude Include="..\Framework\scheme\MWGameView.h" />
     <ClInclude Include="..\Framework\scheme\MWViewController.h" />
@@ -261,6 +264,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
+    <ClCompile Include="..\Classes\UpdateScene.cpp" />
     <ClCompile Include="..\Framework\base\FrameworkErrors.cpp" />
     <ClCompile Include="..\Framework\base\MWArrayList.cpp" />
     <ClCompile Include="..\Framework\base\MWBinaryData.cpp" />
@@ -311,6 +315,8 @@
     <ClCompile Include="..\Framework\net\MWNetResponse.cpp" />
     <ClCompile Include="..\Framework\platform\MWIOUtils.cpp" />
     <ClCompile Include="..\Framework\platform\MWSystemHelper.cpp" />
+    <ClCompile Include="..\Framework\platform\win32\MWIOUtilsStrategyWin32.cpp" />
+    <ClCompile Include="..\Framework\platform\win32\MWSystemHelperStrategyWin32.cpp" />
     <ClCompile Include="..\Framework\scheme\MWGameScene.cpp" />
     <ClCompile Include="..\Framework\scheme\MWGameView.cpp" />
     <ClCompile Include="..\Framework\scheme\MWViewController.cpp" />
@@ -327,6 +333,7 @@
     <ClCompile Include="..\Framework\texture\gif\MWGifSprite.cpp" />
     <ClCompile Include="..\Framework\texture\svg\MWSvgSprite.cpp" />
     <ClCompile Include="..\Framework\utils\MWAssetManager.cpp" />
+    <ClCompile Include="..\Framework\utils\MWUUIDGenerator-win32.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
