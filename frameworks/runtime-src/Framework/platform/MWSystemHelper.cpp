@@ -9,6 +9,8 @@
 #include "win32/MWSystemHelperStrategyWin32.h"
 #endif
 
+using namespace cocos2d;
+
 MW_FRAMEWORK_BEGIN
 
 MWSystemHelper::MWSystemHelper()
@@ -29,13 +31,9 @@ MWSystemHelper::~MWSystemHelper()
 
 MW_ULONG MWSystemHelper::millisecondsNow()
 {
-#if CC_TARGET_PLATFORM == CC_PLATFORM_WIN32
-	return 0;
-#else
     timeval now;
     gettimeofday(&now, nullptr);
     return now.tv_sec * 1000 + now.tv_usec / 1000;
-#endif
 }
 
 ENetStatus MWSystemHelper::checkNetStatus()
