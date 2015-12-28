@@ -10712,9 +10712,9 @@ int lua_mwframework_MWNetRequest_setBody(lua_State* tolua_S)
     argc = lua_gettop(tolua_S)-1;
     if (argc == 1) 
     {
-        std::string arg0;
+        mwframework::MWBinaryData *arg0;
 
-        ok &= luaval_to_std_string(tolua_S, 2,&arg0, "mw.NetRequest:setBody");
+		ok &= luaval_to_object<mwframework::MWBinaryData>(tolua_S, 2, "mw.BinaryData", &arg0);
         if(!ok)
         {
             tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWNetRequest_setBody'", nullptr);
@@ -10815,8 +10815,8 @@ int lua_mwframework_MWNetRequest_getBody(lua_State* tolua_S)
             tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWNetRequest_getBody'", nullptr);
             return 0;
         }
-        std::string ret = cobj->getBody();
-        tolua_pushcppstring(tolua_S,ret);
+		mwframework::MWBinaryData *ret = cobj->getBody();
+		object_to_luaval<mwframework::MWBinaryData>(tolua_S, "mw.BinaryData", (mwframework::MWBinaryData*)ret);
         return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.NetRequest:getBody",argc, 0);
@@ -10847,9 +10847,10 @@ int lua_mwframework_MWNetRequest_create(lua_State* tolua_S)
     if (argc == 2)
     {
         std::string arg0;
-        std::string arg1;
-        ok &= luaval_to_std_string(tolua_S, 2,&arg0, "mw.NetRequest:create");
-        ok &= luaval_to_std_string(tolua_S, 3,&arg1, "mw.NetRequest:create");
+		mwframework::MWBinaryData *arg1;
+
+		ok &= luaval_to_std_string(tolua_S, 2, &arg0, "mw.NetRequest:create");
+		ok &= luaval_to_object<mwframework::MWBinaryData>(tolua_S, 3, "mw.BinaryData", &arg1);
         if(!ok)
         {
             tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWNetRequest_create'", nullptr);
@@ -11034,10 +11035,10 @@ int lua_mwframework_MWNetResponse_setBody(lua_State* tolua_S)
 
     argc = lua_gettop(tolua_S)-1;
     if (argc == 1) 
-    {
-        std::string arg0;
+	{
+		mwframework::MWBinaryData *arg0;
 
-        ok &= luaval_to_std_string(tolua_S, 2,&arg0, "mw.NetResponse:setBody");
+		ok &= luaval_to_object<mwframework::MWBinaryData>(tolua_S, 2, "mw.BinaryData", &arg0);
         if(!ok)
         {
             tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWNetResponse_setBody'", nullptr);
@@ -11137,9 +11138,9 @@ int lua_mwframework_MWNetResponse_getBody(lua_State* tolua_S)
         {
             tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWNetResponse_getBody'", nullptr);
             return 0;
-        }
-        std::string ret = cobj->getBody();
-        tolua_pushcppstring(tolua_S,ret);
+		}
+		mwframework::MWBinaryData *ret = cobj->getBody();
+		object_to_luaval<mwframework::MWBinaryData>(tolua_S, "mw.BinaryData", (mwframework::MWBinaryData*)ret);
         return 1;
     }
     luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.NetResponse:getBody",argc, 0);
@@ -11170,10 +11171,10 @@ int lua_mwframework_MWNetResponse_create(lua_State* tolua_S)
     if (argc == 3)
     {
         std::string arg0;
-        std::string arg1;
+        mwframework::MWBinaryData *arg1;
         mwframework::MWNetRequest* arg2;
-        ok &= luaval_to_std_string(tolua_S, 2,&arg0, "mw.NetResponse:create");
-        ok &= luaval_to_std_string(tolua_S, 3,&arg1, "mw.NetResponse:create");
+		ok &= luaval_to_std_string(tolua_S, 2, &arg0, "mw.NetResponse:create");
+		ok &= luaval_to_object<mwframework::MWBinaryData>(tolua_S, 3, "mw.BinaryData", &arg1);
         ok &= luaval_to_object<mwframework::MWNetRequest>(tolua_S, 4, "mw.NetRequest",&arg2);
         if(!ok)
         {

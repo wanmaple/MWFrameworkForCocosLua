@@ -409,6 +409,9 @@
     <ClInclude Include="..\Framework\protobuf\pbc\varint.h">
       <Filter>Framework\protobuf\pbc</Filter>
     </ClInclude>
+    <ClInclude Include="..\Framework\protobuf\pbc\pbc-lua.h">
+      <Filter>Framework\protobuf\pbc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -664,6 +667,9 @@
       <Filter>Framework\protobuf\pbc</Filter>
     </ClCompile>
     <ClCompile Include="..\Framework\protobuf\pbc\wmessage.c">
+      <Filter>Framework\protobuf\pbc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\protobuf\pbc\pbc-lua.c">
       <Filter>Framework\protobuf\pbc</Filter>
     </ClCompile>
   </ItemGroup>

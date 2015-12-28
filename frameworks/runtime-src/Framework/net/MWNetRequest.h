@@ -27,7 +27,7 @@ public:
      *
      * @return Return a new NetRequest object.
      */
-    static MWNetRequest *create(const std::string &protocolId, const std::string &body);
+    static MWNetRequest *create(const std::string &protocolId, MWBinaryData *body);
     
     /**
      * NetRequest destructor.
@@ -42,7 +42,7 @@ public:
     MW_SYNTHESIZE_PASS_BY_CONST_REF(std::string, _protocolId, ProtocolId);
     
 protected:
-    bool init(const std::string &protocolId, const std::string &body);
+	bool init(const std::string &protocolId, MWBinaryData *body);
 };
 
 MW_FRAMEWORK_END

@@ -251,6 +251,7 @@
     <ClInclude Include="..\Framework\protobuf\pbc\descriptor.pbc.h" />
     <ClInclude Include="..\Framework\protobuf\pbc\map.h" />
     <ClInclude Include="..\Framework\protobuf\pbc\pattern.h" />
+    <ClInclude Include="..\Framework\protobuf\pbc\pbc-lua.h" />
     <ClInclude Include="..\Framework\protobuf\pbc\proto.h" />
     <ClInclude Include="..\Framework\protobuf\pbc\stringpool.h" />
     <ClInclude Include="..\Framework\protobuf\pbc\varint.h" />
@@ -334,6 +335,7 @@
     <ClCompile Include="..\Framework\protobuf\pbc\decode.c" />
     <ClCompile Include="..\Framework\protobuf\pbc\map.c" />
     <ClCompile Include="..\Framework\protobuf\pbc\pattern.c" />
+    <ClCompile Include="..\Framework\protobuf\pbc\pbc-lua.c" />
     <ClCompile Include="..\Framework\protobuf\pbc\proto.c" />
     <ClCompile Include="..\Framework\protobuf\pbc\register.c" />
     <ClCompile Include="..\Framework\protobuf\pbc\rmessage.c" />

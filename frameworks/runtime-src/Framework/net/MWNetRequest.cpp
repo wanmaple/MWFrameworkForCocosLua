@@ -6,7 +6,7 @@ using namespace std;
 
 MW_FRAMEWORK_BEGIN
 
-MWNetRequest *MWNetRequest::create(const std::string &protocolId, const std::string &body)
+MWNetRequest *MWNetRequest::create(const std::string &protocolId, MWBinaryData *body)
 {
     auto pRequest = new (nothrow) MWNetRequest();
     if (pRequest && pRequest->init(protocolId, body)) {
@@ -17,7 +17,7 @@ MWNetRequest *MWNetRequest::create(const std::string &protocolId, const std::str
     return nullptr;
 }
 
-bool MWNetRequest::init(const std::string &protocolId, const std::string &body)
+bool MWNetRequest::init(const std::string &protocolId, MWBinaryData *body)
 {
     if (protocolId.size() <= 0) {
         return false;

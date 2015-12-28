@@ -11,3 +11,5 @@ extern "C" {
 #endif
 
 int register_all_mwframework(lua_State* tolua_S);
+
+#endif
