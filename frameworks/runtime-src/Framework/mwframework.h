@@ -31,6 +31,9 @@
 // json.
 #include "json/MWJsonStructure.h"
 
+// protobuf
+#include "protobuf/pbc/pbc.h"
+
 // encryption.
 #include "encryption/MWCrypto.h"
 
@@ -59,6 +62,7 @@
 #include "lua/MWLuaUtils.h"
 #include "lua/auto/lua_mwframework_auto.hpp"
 #include "lua/manual/lua_mwframework_manual.hpp"
+#include "protobuf/pbc/pbc-lua.h"
 #endif
 
 #endif

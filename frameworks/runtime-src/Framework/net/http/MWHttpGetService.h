@@ -80,7 +80,7 @@ public:
 protected:
     bool _init(const std::string &serviceAddress);
     
-    MWHttpForm *_createForm(const std::string &body);
+    MWHttpForm *_createForm(MWBinaryData *body);
     
     void onHttpRequestCompleted(cocos2d::network::HttpClient *client, cocos2d::network::HttpResponse *response);
     

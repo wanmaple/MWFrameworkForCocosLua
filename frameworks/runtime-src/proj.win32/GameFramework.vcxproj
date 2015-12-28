@@ -51,7 +51,7 @@
     <OutDir>$(SolutionDir)$(Configuration).win32\</OutDir>
     <IntDir>$(Configuration).win32\</IntDir>
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)..\Framework;$(ProjectDir)..\Framework\net\http\pthreads-win32\include;$(ProjectDir)..\Framework\platform\win32;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)..\Framework;$(ProjectDir)..\Framework\net\http\pthreads-win32\include;$(ProjectDir)..\Framework\platform\win32;$(ProjectDir)..\Framework\protobuf\include;$(IncludePath)</IncludePath>
     <SourcePath>$(SourcePath);</SourcePath>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
@@ -61,7 +61,7 @@
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LibraryPath>$(MSBuildProgramFiles32)\Microsoft SDKs\Windows\v7.1A\lib;$(ProjectDir)..\Framework\net\http\pthreads-win32\lib\x86;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(MSBuildProgramFiles32)\Microsoft SDKs\Windows\v7.1A\lib;$(ProjectDir)..\Framework\net\http\pthreads-win32\lib\x86;$(ProjectDir)..\Framework\protobuf\precompile\win32;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LibraryPath>$(MSBuildProgramFiles32)\Microsoft SDKs\Windows\v7.1A\lib;$(LibraryPath)</LibraryPath>
@@ -86,7 +86,7 @@
       <TargetMachine>MachineX86</TargetMachine>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(OutDir)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libcurl_imp.lib;lua51.lib;websockets.lib;pthreadVC2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libcurl_imp.lib;lua51.lib;websockets.lib;pthreadVC2.lib;libprotobuf-lite.lib;pbc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ResourceCompile>
       <Culture>0x0409</Culture>
@@ -244,6 +244,16 @@
     <ClInclude Include="..\Framework\platform\MWSystemHelperStrategy.h" />
     <ClInclude Include="..\Framework\platform\win32\MWIOUtilsStrategyWin32.h" />
     <ClInclude Include="..\Framework\platform\win32\MWSystemHelperStrategyWin32.h" />
+    <ClInclude Include="..\Framework\protobuf\pbc\alloc.h" />
+    <ClInclude Include="..\Framework\protobuf\pbc\array.h" />
+    <ClInclude Include="..\Framework\protobuf\pbc\bootstrap.h" />
+    <ClInclude Include="..\Framework\protobuf\pbc\context.h" />
+    <ClInclude Include="..\Framework\protobuf\pbc\descriptor.pbc.h" />
+    <ClInclude Include="..\Framework\protobuf\pbc\map.h" />
+    <ClInclude Include="..\Framework\protobuf\pbc\pattern.h" />
+    <ClInclude Include="..\Framework\protobuf\pbc\proto.h" />
+    <ClInclude Include="..\Framework\protobuf\pbc\stringpool.h" />
+    <ClInclude Include="..\Framework\protobuf\pbc\varint.h" />
     <ClInclude Include="..\Framework\scheme\MWGameScene.h" />
     <ClInclude Include="..\Framework\scheme\MWGameView.h" />
     <ClInclude Include="..\Framework\scheme\MWViewController.h" />
@@ -317,6 +327,19 @@
     <ClCompile Include="..\Framework\platform\MWSystemHelper.cpp" />
     <ClCompile Include="..\Framework\platform\win32\MWIOUtilsStrategyWin32.cpp" />
     <ClCompile Include="..\Framework\platform\win32\MWSystemHelperStrategyWin32.cpp" />
+    <ClCompile Include="..\Framework\protobuf\pbc\alloc.c" />
+    <ClCompile Include="..\Framework\protobuf\pbc\array.c" />
+    <ClCompile Include="..\Framework\protobuf\pbc\bootstrap.c" />
+    <ClCompile Include="..\Framework\protobuf\pbc\context.c" />
+    <ClCompile Include="..\Framework\protobuf\pbc\decode.c" />
+    <ClCompile Include="..\Framework\protobuf\pbc\map.c" />
+    <ClCompile Include="..\Framework\protobuf\pbc\pattern.c" />
+    <ClCompile Include="..\Framework\protobuf\pbc\proto.c" />
+    <ClCompile Include="..\Framework\protobuf\pbc\register.c" />
+    <ClCompile Include="..\Framework\protobuf\pbc\rmessage.c" />
+    <ClCompile Include="..\Framework\protobuf\pbc\stringpool.c" />
+    <ClCompile Include="..\Framework\protobuf\pbc\varint.c" />
+    <ClCompile Include="..\Framework\protobuf\pbc\wmessage.c" />
     <ClCompile Include="..\Framework\scheme\MWGameScene.cpp" />
     <ClCompile Include="..\Framework\scheme\MWGameView.cpp" />
     <ClCompile Include="..\Framework\scheme\MWViewController.cpp" />

@@ -46,7 +46,7 @@ MWHttpPostService::~MWHttpPostService()
 
 void MWHttpPostService::sendMessage(MWNetRequest *request)
 {
-    std::string body = request->getBody();
+    MWBinaryData *body = request->getBody();
     auto pHttpRequest = new HttpRequest();
     // save user data
     pHttpRequest->setUserData(request);
@@ -108,7 +108,7 @@ void MWHttpPostService::onHttpRequestCompleted(HttpClient *client, HttpResponse 
     pUserRequest->release();
 }
 
-MWHttpForm *MWHttpPostService::_createForm(const std::string &body)
+MWHttpForm *MWHttpPostService::_createForm(MWBinaryData *body)
 {
     CCASSERT(_strategy, "A transfer rule is required!");
     std::map<std::string, std::string> params = _strategy->transferParameters(body);
