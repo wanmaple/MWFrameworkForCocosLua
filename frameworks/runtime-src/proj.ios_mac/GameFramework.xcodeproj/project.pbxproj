@@ -81,6 +81,21 @@
 		78C738861A77F4100028FC3A /* MWViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 78C738841A77F4100028FC3A /* MWViewController.cpp */; };
 		78C738941A77F7440028FC3A /* MWBinaryData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 78C738871A77F7440028FC3A /* MWBinaryData.cpp */; };
 		C06E23C418CEF9740093C81A /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C06E23C318CEF9740093C81A /* main.cpp */; };
+		C0B09C401C31A65300CD761B /* alloc.c in Sources */ = {isa = PBXBuildFile; fileRef = C0B09C261C31A65300CD761B /* alloc.c */; settings = {ASSET_TAGS = (); }; };
+		C0B09C411C31A65300CD761B /* array.c in Sources */ = {isa = PBXBuildFile; fileRef = C0B09C281C31A65300CD761B /* array.c */; settings = {ASSET_TAGS = (); }; };
+		C0B09C421C31A65300CD761B /* bootstrap.c in Sources */ = {isa = PBXBuildFile; fileRef = C0B09C2A1C31A65300CD761B /* bootstrap.c */; settings = {ASSET_TAGS = (); }; };
+		C0B09C431C31A65300CD761B /* context.c in Sources */ = {isa = PBXBuildFile; fileRef = C0B09C2C1C31A65300CD761B /* context.c */; settings = {ASSET_TAGS = (); }; };
+		C0B09C441C31A65300CD761B /* decode.c in Sources */ = {isa = PBXBuildFile; fileRef = C0B09C2E1C31A65300CD761B /* decode.c */; settings = {ASSET_TAGS = (); }; };
+		C0B09C451C31A65300CD761B /* map.c in Sources */ = {isa = PBXBuildFile; fileRef = C0B09C301C31A65300CD761B /* map.c */; settings = {ASSET_TAGS = (); }; };
+		C0B09C461C31A65300CD761B /* pattern.c in Sources */ = {isa = PBXBuildFile; fileRef = C0B09C321C31A65300CD761B /* pattern.c */; settings = {ASSET_TAGS = (); }; };
+		C0B09C471C31A65300CD761B /* pbc-lua.c in Sources */ = {isa = PBXBuildFile; fileRef = C0B09C341C31A65300CD761B /* pbc-lua.c */; settings = {ASSET_TAGS = (); }; };
+		C0B09C481C31A65300CD761B /* proto.c in Sources */ = {isa = PBXBuildFile; fileRef = C0B09C371C31A65300CD761B /* proto.c */; settings = {ASSET_TAGS = (); }; };
+		C0B09C491C31A65300CD761B /* register.c in Sources */ = {isa = PBXBuildFile; fileRef = C0B09C391C31A65300CD761B /* register.c */; settings = {ASSET_TAGS = (); }; };
+		C0B09C4A1C31A65300CD761B /* rmessage.c in Sources */ = {isa = PBXBuildFile; fileRef = C0B09C3A1C31A65300CD761B /* rmessage.c */; settings = {ASSET_TAGS = (); }; };
+		C0B09C4B1C31A65300CD761B /* stringpool.c in Sources */ = {isa = PBXBuildFile; fileRef = C0B09C3B1C31A65300CD761B /* stringpool.c */; settings = {ASSET_TAGS = (); }; };
+		C0B09C4C1C31A65300CD761B /* varint.c in Sources */ = {isa = PBXBuildFile; fileRef = C0B09C3D1C31A65300CD761B /* varint.c */; settings = {ASSET_TAGS = (); }; };
+		C0B09C4D1C31A65300CD761B /* wmessage.c in Sources */ = {isa = PBXBuildFile; fileRef = C0B09C3F1C31A65300CD761B /* wmessage.c */; settings = {ASSET_TAGS = (); }; };
+		C0B09C4F1C31ABA800CD761B /* libprotobuf-lite.la in Frameworks */ = {isa = PBXBuildFile; fileRef = C0B09C4E1C31ABA800CD761B /* libprotobuf-lite.la */; };
 		D6B061351803AC000077942B /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6B061341803AC000077942B /* CoreMotion.framework */; };
 		F293B3CD15EB7BE500256477 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F293B3CC15EB7BE500256477 /* QuartzCore.framework */; };
 		F293B3D115EB7BE500256477 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F293B3D015EB7BE500256477 /* OpenAL.framework */; };
@@ -323,6 +338,33 @@
 		78C738931A77F7440028FC3A /* IUninheritable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUninheritable.h; sourceTree = "<group>"; };
 		C03781AE18BF654500FE4F13 /* cocos2d_lua_bindings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_lua_bindings.xcodeproj; path = "../../cocos2d-x/cocos/scripting/lua-bindings/proj.ios_mac/cocos2d_lua_bindings.xcodeproj"; sourceTree = "<group>"; };
 		C06E23C318CEF9740093C81A /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		C0B09C261C31A65300CD761B /* alloc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = alloc.c; path = protobuf/pbc/alloc.c; sourceTree = "<group>"; };
+		C0B09C271C31A65300CD761B /* alloc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = alloc.h; path = protobuf/pbc/alloc.h; sourceTree = "<group>"; };
+		C0B09C281C31A65300CD761B /* array.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = array.c; path = protobuf/pbc/array.c; sourceTree = "<group>"; };
+		C0B09C291C31A65300CD761B /* array.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = array.h; path = protobuf/pbc/array.h; sourceTree = "<group>"; };
+		C0B09C2A1C31A65300CD761B /* bootstrap.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = bootstrap.c; path = protobuf/pbc/bootstrap.c; sourceTree = "<group>"; };
+		C0B09C2B1C31A65300CD761B /* bootstrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bootstrap.h; path = protobuf/pbc/bootstrap.h; sourceTree = "<group>"; };
+		C0B09C2C1C31A65300CD761B /* context.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = context.c; path = protobuf/pbc/context.c; sourceTree = "<group>"; };
+		C0B09C2D1C31A65300CD761B /* context.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = context.h; path = protobuf/pbc/context.h; sourceTree = "<group>"; };
+		C0B09C2E1C31A65300CD761B /* decode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = decode.c; path = protobuf/pbc/decode.c; sourceTree = "<group>"; };
+		C0B09C2F1C31A65300CD761B /* descriptor.pbc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = descriptor.pbc.h; path = protobuf/pbc/descriptor.pbc.h; sourceTree = "<group>"; };
+		C0B09C301C31A65300CD761B /* map.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = map.c; path = protobuf/pbc/map.c; sourceTree = "<group>"; };
+		C0B09C311C31A65300CD761B /* map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = map.h; path = protobuf/pbc/map.h; sourceTree = "<group>"; };
+		C0B09C321C31A65300CD761B /* pattern.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pattern.c; path = protobuf/pbc/pattern.c; sourceTree = "<group>"; };
+		C0B09C331C31A65300CD761B /* pattern.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = pattern.h; path = protobuf/pbc/pattern.h; sourceTree = "<group>"; };
+		C0B09C341C31A65300CD761B /* pbc-lua.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "pbc-lua.c"; path = "protobuf/pbc/pbc-lua.c"; sourceTree = "<group>"; };
+		C0B09C351C31A65300CD761B /* pbc-lua.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "pbc-lua.h"; path = "protobuf/pbc/pbc-lua.h"; sourceTree = "<group>"; };
+		C0B09C361C31A65300CD761B /* pbc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = pbc.h; path = protobuf/pbc/pbc.h; sourceTree = "<group>"; };
+		C0B09C371C31A65300CD761B /* proto.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = proto.c; path = protobuf/pbc/proto.c; sourceTree = "<group>"; };
+		C0B09C381C31A65300CD761B /* proto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = proto.h; path = protobuf/pbc/proto.h; sourceTree = "<group>"; };
+		C0B09C391C31A65300CD761B /* register.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = register.c; path = protobuf/pbc/register.c; sourceTree = "<group>"; };
+		C0B09C3A1C31A65300CD761B /* rmessage.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = rmessage.c; path = protobuf/pbc/rmessage.c; sourceTree = "<group>"; };
+		C0B09C3B1C31A65300CD761B /* stringpool.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = stringpool.c; path = protobuf/pbc/stringpool.c; sourceTree = "<group>"; };
+		C0B09C3C1C31A65300CD761B /* stringpool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stringpool.h; path = protobuf/pbc/stringpool.h; sourceTree = "<group>"; };
+		C0B09C3D1C31A65300CD761B /* varint.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = varint.c; path = protobuf/pbc/varint.c; sourceTree = "<group>"; };
+		C0B09C3E1C31A65300CD761B /* varint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = varint.h; path = protobuf/pbc/varint.h; sourceTree = "<group>"; };
+		C0B09C3F1C31A65300CD761B /* wmessage.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = wmessage.c; path = protobuf/pbc/wmessage.c; sourceTree = "<group>"; };
+		C0B09C4E1C31ABA800CD761B /* libprotobuf-lite.la */ = {isa = PBXFileReference; lastKnownFileType = text; name = "libprotobuf-lite.la"; path = "../Framework/protobuf/precompile/unix/libprotobuf-lite.la"; sourceTree = "<group>"; };
 		D6B061341803AC000077942B /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreMotion.framework; sourceTree = DEVELOPER_DIR; };
 		F293B3C815EB7BE500256477 /* GameFramework iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GameFramework iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F293B3CC15EB7BE500256477 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -463,6 +505,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0B09C4F1C31ABA800CD761B /* libprotobuf-lite.la in Frameworks */,
 				F55B48F01B591842004D8759 /* SystemConfiguration.framework in Frameworks */,
 				F57150931AB9E4B900AF3A51 /* libcurl.a in Frameworks */,
 				15427C5B198F1E0100DC375D /* libluacocos2d iOS.a in Frameworks */,
@@ -725,6 +768,7 @@
 		78C7387C1A77EF8F0028FC3A /* Framework */ = {
 			isa = PBXGroup;
 			children = (
+				C0B09C241C31A63100CD761B /* protobuf */,
 				78C738821A77F17A0028FC3A /* base */,
 				F59B05F21AB36718001204D1 /* net */,
 				33250D901A91E39A00D1668B /* json */,
@@ -784,6 +828,47 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		C0B09C241C31A63100CD761B /* protobuf */ = {
+			isa = PBXGroup;
+			children = (
+				C0B09C251C31A64400CD761B /* pbc */,
+			);
+			name = protobuf;
+			sourceTree = "<group>";
+		};
+		C0B09C251C31A64400CD761B /* pbc */ = {
+			isa = PBXGroup;
+			children = (
+				C0B09C261C31A65300CD761B /* alloc.c */,
+				C0B09C271C31A65300CD761B /* alloc.h */,
+				C0B09C281C31A65300CD761B /* array.c */,
+				C0B09C291C31A65300CD761B /* array.h */,
+				C0B09C2A1C31A65300CD761B /* bootstrap.c */,
+				C0B09C2B1C31A65300CD761B /* bootstrap.h */,
+				C0B09C2C1C31A65300CD761B /* context.c */,
+				C0B09C2D1C31A65300CD761B /* context.h */,
+				C0B09C2E1C31A65300CD761B /* decode.c */,
+				C0B09C2F1C31A65300CD761B /* descriptor.pbc.h */,
+				C0B09C301C31A65300CD761B /* map.c */,
+				C0B09C311C31A65300CD761B /* map.h */,
+				C0B09C321C31A65300CD761B /* pattern.c */,
+				C0B09C331C31A65300CD761B /* pattern.h */,
+				C0B09C341C31A65300CD761B /* pbc-lua.c */,
+				C0B09C351C31A65300CD761B /* pbc-lua.h */,
+				C0B09C361C31A65300CD761B /* pbc.h */,
+				C0B09C371C31A65300CD761B /* proto.c */,
+				C0B09C381C31A65300CD761B /* proto.h */,
+				C0B09C391C31A65300CD761B /* register.c */,
+				C0B09C3A1C31A65300CD761B /* rmessage.c */,
+				C0B09C3B1C31A65300CD761B /* stringpool.c */,
+				C0B09C3C1C31A65300CD761B /* stringpool.h */,
+				C0B09C3D1C31A65300CD761B /* varint.c */,
+				C0B09C3E1C31A65300CD761B /* varint.h */,
+				C0B09C3F1C31A65300CD761B /* wmessage.c */,
+			);
+			name = pbc;
+			sourceTree = "<group>";
+		};
 		F293B3BD15EB7BE500256477 = {
 			isa = PBXGroup;
 			children = (
@@ -811,6 +896,7 @@
 		F293B3CB15EB7BE500256477 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C0B09C4E1C31ABA800CD761B /* libprotobuf-lite.la */,
 				F55B48EF1B591842004D8759 /* SystemConfiguration.framework */,
 				F55B48ED1B591813004D8759 /* CFNetwork.framework */,
 				F58964F31AFB8EF9005BEA54 /* libprotobuf.dylib */,
@@ -1316,6 +1402,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0B09C481C31A65300CD761B /* proto.c in Sources */,
 				F5CF4A641ADCE8CD00D0AF87 /* gifalloc.c in Sources */,
 				78C738861A77F4100028FC3A /* MWViewController.cpp in Sources */,
 				F55B48EC1B59143E004D8759 /* Reachability.m in Sources */,
@@ -1325,12 +1412,16 @@
 				F55B48E61B591393004D8759 /* MWIOUtilsStrategyIOS.mm in Sources */,
 				33250DC71A91E39A00D1668B /* MWJsonElement.cpp in Sources */,
 				33250DD41A91E39A00D1668B /* JSONStream.cpp in Sources */,
+				C0B09C4A1C31A65300CD761B /* rmessage.c in Sources */,
 				33250DD11A91E39A00D1668B /* JSONNode.cpp in Sources */,
 				F5CF4A6D1ADCF1EC00D0AF87 /* MWGifSprite.cpp in Sources */,
 				33250DCD1A91E39A00D1668B /* JSONChildren.cpp in Sources */,
 				F5ECA03C1B16CBE000C6023A /* lua_mwframework_auto.cpp in Sources */,
 				F5629EC51AEC20F000CC4F1F /* mztools.c in Sources */,
+				C0B09C4B1C31A65300CD761B /* stringpool.c in Sources */,
 				33250DCC1A91E39A00D1668B /* JSONAllocator.cpp in Sources */,
+				C0B09C401C31A65300CD761B /* alloc.c in Sources */,
+				C0B09C471C31A65300CD761B /* pbc-lua.c in Sources */,
 				F57BF7C51B536F0700F2A2EC /* MWHttpDownloader.cpp in Sources */,
 				F5CF4A611ADCE8CD00D0AF87 /* gif_err.c in Sources */,
 				F57BF7C81B53B9F900F2A2EC /* MWAssetManager.cpp in Sources */,
@@ -1338,12 +1429,16 @@
 				F5CF4A601ADCE8CD00D0AF87 /* egif_lib.c in Sources */,
 				78C738801A77EF9B0028FC3A /* MWGameScene.cpp in Sources */,
 				33A37BF71A91D3D30042CA97 /* MWSqliteDb.cpp in Sources */,
+				C0B09C441C31A65300CD761B /* decode.c in Sources */,
 				5023812517EBBCAC00990C9B /* RootViewController.mm in Sources */,
 				F5C9F9271AD7B5B6008FAF9A /* MWSystemHelper.cpp in Sources */,
 				F5A79BB71AEF7B9E0040F7BE /* MWGifFramesCache.cpp in Sources */,
+				C0B09C421C31A65300CD761B /* bootstrap.c in Sources */,
+				C0B09C431C31A65300CD761B /* context.c in Sources */,
 				33250DD01A91E39A00D1668B /* JSONMemory.cpp in Sources */,
 				F5CF4A681ADCE9EA00D0AF87 /* MWGifFrame.cpp in Sources */,
 				F5629EC71AEC20F000CC4F1F /* zip.c in Sources */,
+				C0B09C461C31A65300CD761B /* pattern.c in Sources */,
 				33250DD61A91E39A00D1668B /* JSONWorker.cpp in Sources */,
 				F5A5F00F1B4428B70060AE8E /* MWCrypto.cpp in Sources */,
 				33250DC81A91E39A00D1668B /* MWJsonFormatter.cpp in Sources */,
@@ -1364,6 +1459,7 @@
 				F55B48E71B591393004D8759 /* MWSystemHelperStrategyIOS.mm in Sources */,
 				F5CF4A621ADCE8CD00D0AF87 /* gif_font.c in Sources */,
 				F5CF4A651ADCE8CD00D0AF87 /* quantize.c in Sources */,
+				C0B09C4D1C31A65300CD761B /* wmessage.c in Sources */,
 				F5CF4A4C1ADBF3BC00D0AF87 /* MWUUIDGenerator.cpp in Sources */,
 				F5CF4A421ADB6DA900D0AF87 /* MWViewSegue.cpp in Sources */,
 				F293BB9C15EB831F00256477 /* AppDelegate.cpp in Sources */,
@@ -1377,6 +1473,7 @@
 				F5629EC41AEC20F000CC4F1F /* ioapi.c in Sources */,
 				F5CF4A631ADCE8CD00D0AF87 /* gif_hash.c in Sources */,
 				5023812417EBBCAC00990C9B /* main.m in Sources */,
+				C0B09C491C31A65300CD761B /* register.c in Sources */,
 				78C738941A77F7440028FC3A /* MWBinaryData.cpp in Sources */,
 				F53535B01AB4569A00EF7298 /* MWNetHandler.cpp in Sources */,
 				33250DD31A91E39A00D1668B /* JSONPreparse.cpp in Sources */,
@@ -1389,6 +1486,9 @@
 				F58A04AB1B86366700BB5229 /* md5.cpp in Sources */,
 				F58A04AD1B86400200BB5229 /* MWCrypto-ios.mm in Sources */,
 				F5DDB31E1AFA2C0B00642E89 /* MWSvgSprite.cpp in Sources */,
+				C0B09C4C1C31A65300CD761B /* varint.c in Sources */,
+				C0B09C411C31A65300CD761B /* array.c in Sources */,
+				C0B09C451C31A65300CD761B /* map.c in Sources */,
 				33250DC91A91E39A00D1668B /* MWJsonParser.cpp in Sources */,
 				F53535B51AB45A4100EF7298 /* MWNetFilter.cpp in Sources */,
 				F5714FE11AB9D77B00AF3A51 /* MWHttpForm.cpp in Sources */,
@@ -1544,7 +1644,7 @@
 					CC_TARGET_OS_IPHONE,
 					"$(inherited)",
 				);
-				HEADER_SEARCH_PATHS = "";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../Framework/protobuf/include";
 				INFOPLIST_FILE = ios/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../../runtime-src/Framework/net/http/curl/prebuilt/ios";
@@ -1571,7 +1671,7 @@
 					CC_TARGET_OS_IPHONE,
 					"$(inherited)",
 				);
-				HEADER_SEARCH_PATHS = "";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../Framework/protobuf/include";
 				INFOPLIST_FILE = ios/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../../runtime-src/Framework/net/http/curl/prebuilt/ios";

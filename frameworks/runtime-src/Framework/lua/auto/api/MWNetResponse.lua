@@ -20,7 +20,7 @@
 -- 
 -- @function [parent=#MWNetResponse] setBody 
 -- @param self
--- @param #string var
+-- @param #mw.MWBinaryData var
         
 --------------------------------
 -- 
@@ -32,7 +32,7 @@
 -- 
 -- @function [parent=#MWNetResponse] getBody 
 -- @param self
--- @return string#string ret (return value: string)
+-- @return MWBinaryData#MWBinaryData ret (return value: mw.MWBinaryData)
         
 --------------------------------
 -- Create a new MWNetResponse.<br>
@@ -43,7 +43,7 @@
 -- @function [parent=#MWNetResponse] create 
 -- @param self
 -- @param #string protocolId
--- @param #string body
+-- @param #mw.MWBinaryData body
 -- @param #mw.MWNetRequest request
 -- @return MWNetResponse#MWNetResponse ret (return value: mw.MWNetResponse)
         

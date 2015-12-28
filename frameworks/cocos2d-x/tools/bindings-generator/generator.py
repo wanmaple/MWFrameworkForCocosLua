@@ -902,6 +902,9 @@ class NativeClass(object):
 
 class Generator(object):
     def __init__(self, opts):
+    	libchangePath = os.path.abspath(os.path.join(os.path.dirname(__file__), 'libclang'))
+        cindex.Config.set_library_path(libchangePath)
+
         self.index = cindex.Index.create()
         self.outdir = opts['outdir']
         self.prefix = opts['prefix']

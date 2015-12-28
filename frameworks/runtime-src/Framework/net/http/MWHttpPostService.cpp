@@ -84,12 +84,12 @@ void MWHttpPostService::onHttpRequestCompleted(HttpClient *client, HttpResponse 
     MWNetRequest *pUserRequest = static_cast<MWNetRequest*>(pRelatedRequest->getUserData());
     if (!response->isSucceed())
     {
-//        CCLOG("Response failed. Error: %s", response->getErrorBuffer());
+        //        CCLOG("Response failed. Error: %s", response->getErrorBuffer());
         string error = "unknown error occured.";
         if (response->getErrorBuffer() && strlen(response->getErrorBuffer()) > 0) {
             error = response->getErrorBuffer();
         }
-        auto pResponse = MWNetResponse::create(pUserRequest->getProtocolId(), error, pUserRequest);
+        auto pResponse = MWNetResponse::create(pUserRequest->getProtocolId(), MWBinaryData::create((MW_RAW_DATA)error.c_str(), error.size()), pUserRequest);
         MWNetCenter::getInstance()->dispatchFailedMessage(pResponse);
         // retained once when sending request, so release it here.
         pUserRequest->release();
@@ -97,12 +97,12 @@ void MWHttpPostService::onHttpRequestCompleted(HttpClient *client, HttpResponse 
     }
     // retrieve response data.
     vector<char> *buffer = response->getResponseData();
-    string responseBody;
-    responseBody.assign(buffer->begin(), buffer->end());
+    //    string responseBody;
+    //    responseBody.assign(buffer->begin(), buffer->end());
     // please use UTF-8 encoding on server. some decoding may be required. todo
-    CCLOG("Response successful. Data: %s", responseBody.c_str());
+    //    CCLOG("Response successful. Data: %s", responseBody.c_str());
     // create net response
-    auto pResponse = MWNetResponse::create(pUserRequest->getProtocolId(), responseBody, pUserRequest);
+    auto pResponse = MWNetResponse::create(pUserRequest->getProtocolId(), MWBinaryData::create((MW_RAW_DATA)buffer, buffer->size()), pUserRequest);
     MWNetCenter::getInstance()->dispatchSuccessfulMessage(pResponse);
     // retained once when sending request, so release it here.
     pUserRequest->release();
