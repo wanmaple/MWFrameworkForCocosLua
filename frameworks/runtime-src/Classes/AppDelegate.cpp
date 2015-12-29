@@ -47,9 +47,10 @@ bool AppDelegate::applicationDidFinishLaunching()
     ScriptEngineManager::getInstance()->setScriptEngine(engine);
     lua_State* L = engine->getLuaStack()->getLuaState();
     lua_module_register(L);
-	luaopen_protobuf_c(L);
     register_all_mwframework(L);
-    register_all_mwframework_manual(L);
+	register_all_mwframework_manual(L);
+	// can't register lua protobuf before mwframework, why?
+	luaopen_protobuf_c(L);
     
     MWAssetManager::getInstance()->setBundleVersion(BUNDLE_VERSION);
     MWAssetManager::getInstance()->setProgramVersion(CPP_PROGRAM_VERSION);

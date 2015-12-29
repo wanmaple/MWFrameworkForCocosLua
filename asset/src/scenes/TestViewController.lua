@@ -52,6 +52,26 @@ function TestViewController:viewDidLoad()
 	}
 	log("NetStatus: %s", reachabilityStrMap[mw.SystemHelper:getInstance():checkNetStatus()])
 	log("UUID: %s", mw.UUIDGenerator:getInstance():generateUUID())
+
+	log("Test protobuf...")
+	local pb = protobuf
+	pb.register_file("res/addressbook.pb")
+	local code = pb.encode("tutorial.Person", {
+			name = "Winder",
+			id = 18,
+			phone = {
+				{ number = "021-55555555" },
+				{ number = "13311122244", type = "WORK" }
+			}
+		})
+	log("DECODING...")
+	local data = pb.decode("tutorial.Person", code)
+	log("ID: %d", data.id)
+	log("NAME: %s", data.name)
+	log("PHONE: ")
+	for _, v in ipairs(data.phone) do
+		log("\t%s\t%s", v.number, v.type)
+	end
 end
 
 function TestViewController:viewDidUnload()

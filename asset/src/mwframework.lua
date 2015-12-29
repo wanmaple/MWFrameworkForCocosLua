@@ -19,3 +19,5 @@ require "framework.components.behavior.fsm"
 require "framework.components.ui.longtouch"
 -- platform
 require "framework.platform.bridge"
+-- protobuf
+require "framework.protobuf.protobuf"

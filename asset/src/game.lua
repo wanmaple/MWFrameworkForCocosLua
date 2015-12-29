@@ -5,10 +5,10 @@ require "mwframework"
 
 -- for CCLuaEngine traceback
 local function __G__TRACKBACK__(msg)
-    mw.log("----------------------------------------")
-    mw.log("LUA ERROR: " .. tostring(msg) .. "\n")
-    mw.log(debug.traceback())
-    mw.log("----------------------------------------")
+    log("----------------------------------------")
+    log("LUA ERROR: " .. tostring(msg) .. "\n")
+    log(debug.traceback())
+    log("----------------------------------------")
     return msg
 end
 
