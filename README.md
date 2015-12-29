@@ -13,7 +13,8 @@ This is a cross-platform game framework for cocos2d-x 3.x lua.
 - JSON format.
 - Protobuf (use cloudwu/pbc).
 - GIF texture.
-- Network scheme (HTTP).
+- Network scheme.
+- Http service.
 
 ## TODO
 
