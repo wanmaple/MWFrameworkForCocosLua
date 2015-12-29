@@ -55,7 +55,7 @@ function TestViewController:viewDidLoad()
 
 	log("Test protobuf...")
 	local pb = protobuf
-	pb.register_file("res/addressbook.pb")
+	pb.register_file(cc.FileUtils:getInstance():fullPathForFilename("res/addressbook.pb"))
 	local code = pb.encode("tutorial.Person", {
 			name = "Winder",
 			id = 18,
