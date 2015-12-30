@@ -116,7 +116,7 @@ Texture2D *MWSvgSprite::getScaledTexture(float scale)
 {
     int width = g_nsvgImg->width * scale;
     int height = g_nsvgImg->height * scale;
-    int len = width * height * sizeof(RGBA);
+    ssize_t len = width * height * sizeof(RGBA);
     PRGBA pBuffer = (PRGBA) malloc(len);
     
     if (!g_nsvgRasterizer) {
@@ -129,7 +129,7 @@ Texture2D *MWSvgSprite::getScaledTexture(float scale)
     nsvgRasterize(g_nsvgRasterizer, g_nsvgImg, 0, 0, scale, (MW_BYTE *) pBuffer, width, height, width * sizeof(RGBA));
     
     auto pTexture = new Texture2D();
-    pTexture->initWithData(pBuffer, len, Texture2D::PixelFormat::RGBA8888, width, height, Size(width, height));
+    pTexture->initWithData((const MW_RAW_DATA)pBuffer, len, Texture2D::PixelFormat::RGBA8888, width, height, Size(width, height));
     pTexture->autorelease();
     
     return pTexture;

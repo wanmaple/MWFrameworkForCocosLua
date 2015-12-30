@@ -568,9 +568,9 @@ Texture2D *MWGifSprite::createTextureByRawData(void *imgData)
 {
     int bgWidth = g_hGif->SWidth;
     int bgHeight = g_hGif->SHeight;
-    int len = bgWidth * bgHeight * sizeof(RGBA);
+    ssize_t len = bgWidth * bgHeight * sizeof(RGBA);
     auto pTexture = new Texture2D();
-    pTexture->initWithData(imgData, len, Texture2D::PixelFormat::RGBA8888, bgWidth, bgHeight, Size(bgWidth, bgHeight));
+    pTexture->initWithData((const MW_RAW_DATA)imgData, len, Texture2D::PixelFormat::RGBA8888, bgWidth, bgHeight, Size(bgWidth, bgHeight));
     pTexture->autorelease();
     
     return pTexture;

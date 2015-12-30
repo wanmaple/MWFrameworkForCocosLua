@@ -59,18 +59,14 @@ EGifOpenFileName(const char *FileName, const bool TestExistence, int *Error)
 
     if (TestExistence)
         FileHandle = open(FileName, O_WRONLY | O_CREAT | O_EXCL,
-#if CC_TARGET_PLATFORM == CC_PLATFORM_WIN32
-			  S_IREAD | S_IWRITE);
-#elif CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
+#if defined(ANDROID)
               S_IRUSR | S_IWUSR);
 #else
 			  S_IREAD | S_IWRITE);
 #endif
     else
 		FileHandle = open(FileName, O_WRONLY | O_CREAT | O_TRUNC,
-#if CC_TARGET_PLATFORM == CC_PLATFORM_WIN32
-		      S_IREAD | S_IWRITE);
-#elif CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
+#if defined(ANDROID)
               S_IRUSR | S_IWUSR);
 #else
 			  S_IREAD | S_IWRITE);

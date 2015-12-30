@@ -79,7 +79,21 @@ LOCAL_SRC_FILES := entrance/main.cpp \
 				   ../../Framework/encryption/base64/libbase64.c \
 				   ../../Framework/encryption/md5/md5.cpp \
 				   ../../Framework/encryption/MWCrypto.cpp \
-				   ../../Framework/encryption/MWCrypto-android.cpp
+				   ../../Framework/encryption/MWCrypto-android.cpp \
+				   ../../Framework/protobuf/pbc/alloc.c \
+				   ../../Framework/protobuf/pbc/array.c \
+				   ../../Framework/protobuf/pbc/bootstrap.c \
+				   ../../Framework/protobuf/pbc/context.c \
+				   ../../Framework/protobuf/pbc/decode.c \
+				   ../../Framework/protobuf/pbc/map.c \
+				   ../../Framework/protobuf/pbc/pattern.c \
+				   ../../Framework/protobuf/pbc/pbc-lua.c \
+				   ../../Framework/protobuf/pbc/proto.c \
+				   ../../Framework/protobuf/pbc/register.c \
+				   ../../Framework/protobuf/pbc/rmessage.c \
+				   ../../Framework/protobuf/pbc/stringpool.c \
+				   ../../Framework/protobuf/pbc/varint.c \
+				   ../../Framework/protobuf/pbc/wmessage.c
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes \
 					$(LOCAL_PATH)/../../Framework \
@@ -110,6 +124,8 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes \
 					$(LOCAL_PATH)/../../Framework/texture/svg \
 					$(LOCAL_PATH)/../../Framework/texture/svg/nanosvg \
 					$(LOCAL_PATH)/../../Framework/utils \
+					$(LOCAL_PATH)/../../Framework/protobuf \
+					$(LOCAL_PATH)/../../Framework/protobuf/include \
 					$(LOCAL_PATH)/../../../cocos2d-x/cocos/network \
 					$(LOCAL_PATH)/../../../cocos2d-x/external
 					
