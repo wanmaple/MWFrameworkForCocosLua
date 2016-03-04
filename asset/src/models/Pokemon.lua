@@ -9,7 +9,6 @@ function Pokemon:ctor(id)
 	self:_defineScheme({
 		name = { "string", "" }
 		})
-	table.dump(self._scheme)
 	self:_setProperties({
 		name = mw.SqliteDb:openDb("icon.jpg"):executeQuery("select [name] from [pet_info] where id = '" .. self._id .. "'")[1].name
 		})
