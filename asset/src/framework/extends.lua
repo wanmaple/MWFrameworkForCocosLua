@@ -57,10 +57,10 @@ function cc.rectApplyAffineTransform(rect, t)
     local bottomLeft = cc.pApplyAffineTransform(cc.p(left, bottom), t)
     local bottomRight = cc.pApplyAffineTransform(cc.p(right, bottom), t)
 
-    local minX = math.min(math.min(topLeft.x, topRight.x), math.min(bottomLeft.x, bottomRight.x))
-    local maxX = math.max(math.max(topLeft.x, topRight.x), math.max(bottomLeft.x, bottomRight.x))
-    local minY = math.min(math.min(topLeft.y, topRight.y), math.min(bottomLeft.y, bottomRight.y))
-    local maxY = math.max(math.max(topLeft.y, topRight.y), math.max(bottomLeft.y, bottomRight.y))
+    local minX = math.min(topLeft.x, topRight.x, bottomLeft.x, bottomRight.x)
+    local maxX = math.max(topLeft.x, topRight.x, bottomLeft.x, bottomRight.x)
+    local minY = math.min(topLeft.y, topRight.y, bottomLeft.y, bottomRight.y)
+    local maxY = math.max(topLeft.y, topRight.y, bottomLeft.y, bottomRight.y)
 
     return cc.rect(minX, minY, (maxX - minX), (maxY - minY))
 end
@@ -71,8 +71,9 @@ end
 local Node = cc.Node
 
 function Node:getBoundingBoxToWorld()
-    local boundingBox = self:getBoundingBox()
+    local contentSize = self:getContentSize()
+    local rect = cc.rect(0, 0, contentSize.width, contentSize.height)
     local tran = self:getNodeToWorldAffineTransform()
-    local bound = cc.rectApplyAffineTransform(boundingBox, tran)
+    local bound = cc.rectApplyAffineTransform(rect, tran)
     return bound
 end
