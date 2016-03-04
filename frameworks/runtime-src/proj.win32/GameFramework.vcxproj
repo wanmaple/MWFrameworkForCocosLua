@@ -115,6 +115,12 @@
       <Command>
       </Command>
     </PreLinkEvent>
+    <PostBuildEvent>
+      <Command>rm -rf $(SolutionDir)$(Configuration).win32\res
+rm -rf $(SolutionDir)$(Configuration).win32\src
+cp -r $(ProjectDir)..\..\..\asset\res $(SolutionDir)$(Configuration).win32\res
+cp -r $(ProjectDir)..\..\..\asset\src $(SolutionDir)$(Configuration).win32\src</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>

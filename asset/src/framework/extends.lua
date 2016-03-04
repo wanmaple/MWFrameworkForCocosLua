@@ -71,9 +71,8 @@ end
 local Node = cc.Node
 
 function Node:getBoundingBoxToWorld()
-    local contentSize = self:getContentSize()
-    local rect = cc.rect(0, 0, contentSize.width, contentSize.height)
+    local boundingBox = self:getBoundingBox()
     local tran = self:getNodeToWorldAffineTransform()
-    local bound = cc.rectApplyAffineTransform(rect, tran)
+    local bound = cc.rectApplyAffineTransform(boundingBox, tran)
     return bound
 end

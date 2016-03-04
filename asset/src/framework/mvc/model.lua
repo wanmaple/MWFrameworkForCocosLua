@@ -47,9 +47,9 @@ local ModelBase = class("ModelBase")
 	end
 ]]
 function ModelBase:ctor(id)
-	assert(type(id) ~= "string", "Invalid model id, id must be string type.")
+	assert(type(id) == "string", "Invalid model id, id must be string type.")
 	self._scheme = {
-		id = { "string", nil },
+		id = "string",
 	}
 	self._id = id
 end
@@ -83,7 +83,7 @@ function ModelBase:_setProperties(props)
 	end
 	for propName, propValue in pairs(props) do
 		local propAttr = self._scheme[propName]
-		local propType = propAttr[1]
+		local propType = propAttr
 		if propType == nil then
 			log("The property %s doesn't exist in your model scheme.", propName)
 		elseif (type(propType) == "string" and GetType(propValue) == propType)

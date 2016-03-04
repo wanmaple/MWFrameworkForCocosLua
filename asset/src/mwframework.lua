@@ -21,3 +21,4 @@ require "framework.components.ui.longtouch"
 require "framework.platform.bridge"
 -- protobuf
 require "framework.protobuf.protobuf"
+require "framework.protobuf.helper"

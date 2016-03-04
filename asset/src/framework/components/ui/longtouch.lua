@@ -17,18 +17,26 @@ function LongTouchComponent:ctor()
 	self._longTouching = false
 end
 
-function LongTouchComponent:setLongTouchTime(ts)
-	assert(type(ts) == "number" and ts > 0, "Invalid params of LongTouchComponent:setLongTouchTime")
+function LongTouchComponent:getPressTime()
+	return self._touchTs
+end
+
+function LongTouchComponent:setPressTime(ts)
+	assert(type(ts) == "number" and ts > 0, "Invalid params of LongTouchComponent:setPressTime")
 	self._touchTs = ts
 end
 
+--[[
+	onClick, onLongTouchBegan, onLongTouchMoved, onLongTouchEnded, onLongTouchCancelled
+]]
 function LongTouchComponent:setDelegate(delegate)
 	self._delegate = delegate
 end
 
 function LongTouchComponent:exportMethods()
 	self:_exportMethods({
-		"setLongTouchTime",
+		"getPressTime",
+		"setPressTime",
 		"setDelegate",
 	})
 	return self
@@ -42,19 +50,21 @@ function LongTouchComponent:_onBind(target)
 	listener:registerScriptHandler(MakeScriptHandler(self, self._onTouchEnded), cc.Handler.EVENT_TOUCH_ENDED)
 	listener:registerScriptHandler(MakeScriptHandler(self, self._onTouchCancelled), cc.Handler.EVENT_TOUCH_CANCELLED)
 	cc.Director:getInstance():getEventDispatcher():addEventListenerWithSceneGraphPriority(listener, target)
-	self.listener = listener
+	self._listener = listener
 end
 
 function LongTouchComponent:_onUnbind()
-	if self.listener then
-		cc.Director:getInstance():getEventDispatcher():removeEventListener(self.listener)
-		self.listener = nil
+	if self._listener then
+		cc.Director:getInstance():getEventDispatcher():removeEventListener(self._listener)
+		self._listener = nil
 	end
 end
 
 function LongTouchComponent:_onTouchBegan(touch, event)
 	self._currentLoc = touch:getLocation()
 	local bound = self._target:getBoundingBoxToWorld()
+	table.dump(bound)
+	table.dump(self._currentLoc)
 	if cc.rectContainsPoint(bound, self._currentLoc) then
 		self._beginTs = os.clock()
 		self:_scheduleUpdate()
@@ -69,8 +79,11 @@ function LongTouchComponent:_onTouchMoved(touch, event)
 		return
 	end
 	local bound = self._target:getBoundingBoxToWorld()
-	if not cc.rectContainsPoint(bound, self._currentLoc) then
-		self:_unscheduleUpdate()
+	if cc.rectContainsPoint(bound, self._currentLoc) then
+		if self._delegate and type(self._delegate.onLongTouchMoved) == "function" then
+			self._delegate:onLongTouchMoved(self._target, self._currentLoc, os.clock() - self._beginTs)
+		end
+	else
 		self._longTouching = false
 		if self._delegate and type(self._delegate.onLongTouchEnded) == "function" then
 			self._delegate:onLongTouchEnded(self._target, self._currentLoc, os.clock() - self._beginTs)
@@ -82,19 +95,15 @@ function LongTouchComponent:_onTouchEnded(touch, event)
 	self._currentLoc = touch:getLocation()
 	self:_unscheduleUpdate()
 	if self._longTouching then
-		if self._delegate and type(self._delegate.onLongTouchEnded) == "function" then
-			self._delegate:onLongTouchEnded(self._target, self._currentLoc, os.clock() - self._beginTs)
-		end
-	else
 		local bound = self._target:getBoundingBoxToWorld()
-		if cc.rectContainsPoint(bound, self._currentLoc)
-			and os.clock() - self._beginTs < self._touchTs
-			and self._delegate and type(self._delegate.onClick) == "function" then
-			self._delegate:onClick(self._target)
+		if cc.rectContainsPoint(bound, self._currentLoc) then
+			if self._delegate and type(self._delegate.onClick) == "function" then
+				self._delegate:onClick(self._target)
+			end
 		end
 	end
 	self._longTouching = false
-	self._beginTs = 0
+	self._beginTs = nil
 	self._currentLoc = nil
 end
 
@@ -107,22 +116,17 @@ function LongTouchComponent:_onTouchCancelled(touch, event)
 		end
 	end
 	self._longTouching = false
-	self._beginTs = 0
+	self._beginTs = nil
 	self._currentLoc = nil
 end
 
 function LongTouchComponent:_update(dt)
 	local delta = os.clock() - self._beginTs
 	if delta >= self._touchTs then
-		if self._longTouching then
-			if self._delegate and type(self._delegate.onLongTouchPressed) == "function" then
-				self._delegate:onLongTouchPressed(self._target, self._currentLoc, delta)
-			end
-		else
-			self._longTouching = true
-			if self._delegate and type(self._delegate.onLongTouchBegan) == "function" then
-				self._delegate:onLongTouchBegan(self._target, self._currentLoc, delta)
-			end
+		self._longTouching = true
+		self:_unscheduleUpdate()
+		if self._delegate and type(self._delegate.onLongTouchBegan) == "function" then
+			self._delegate:onLongTouchBegan(self._target, self._currentLoc, delta)
 		end
 	end
 end

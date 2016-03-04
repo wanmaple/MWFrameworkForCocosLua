@@ -9,6 +9,28 @@ local CLASS_TYPE = {
 	INHERIT_FROM_LUA = 2,
 }
 
+local function setmetatableindex(t, index)
+	if type(t) == "userdata" then
+		local peer = tolua.getpeer(t)
+		if not peer then
+			peer = {}
+			tolua.setpeer(t, peer)
+		end
+		setmetatableindex(peer, index)
+	else
+		local mt = getmetatable(t)
+		if not mt then
+			mt = {}
+		end
+		if not mt.__index then
+			mt.__index = index
+			setmetatable(t, mt)
+		elseif mt.__index ~= index then
+			setmetatableindex(mt, index)
+		end
+	end
+end
+
 function class(className, super)
 	assert(type(className) == "string" and #className > 0, "Invalid class name.")
 	local stype = type(super)
@@ -20,7 +42,7 @@ function class(className, super)
 
 	if stype == "table" and super.__ctype == CLASS_TYPE.INHERIT_FROM_CPP then
 		-- cpp super class
-		setmetatable(cls, super)
+		setmetatable(cls, { __index = super })
 		cls.super = super
 	elseif stype == "function" then
 		-- the first time to define class inherits cpp class
@@ -29,47 +51,31 @@ function class(className, super)
 		end
 
 		cls.__ctype = CLASS_TYPE.INHERIT_FROM_CPP
-
-		function cls:ctor() 
-			-- constructor
-		end
-
-		function cls.new(...)
-			local instance = cls.__create(...)
-			local peer = {}
-			setmetatable(peer, cls)
-			tolua.setpeer(instance, peer)
-			instance.class = cls
-			instance:ctor(...)
-			return instance
-		end
 	elseif stype == "nil" then
 		-- the first time to define lua class
 		cls.__ctype = CLASS_TYPE.INHERIT_FROM_LUA
-
-		function cls:ctor()
-			-- constructor
-		end
-
-		function cls.new(...)
-			local instance = {}
-			setmetatable(instance, cls)
-			instance.class = cls
-			instance:ctor(...)
-			return instance
-		end
 	elseif stype == "table" and super.__ctype == CLASS_TYPE.INHERIT_FROM_LUA then
 		-- lua super class
-		setmetatable(cls, super)
+		setmetatable(cls, { __index = super })
 		cls.super = super
+	end
 
-		function cls.new(...)
-			local instance = {}
-			setmetatable(instance, cls)
-			instance.class = cls
-			instance:ctor(...)
-			return instance
+	if not cls.ctor then
+		function cls:ctor(...)
 		end
+	end
+
+	function cls.new(...)
+		local instance
+		if cls.__create then
+			instance = cls.__create(...)
+		else
+			instance = {}
+		end
+		setmetatableindex(instance, cls)
+		instance.class = cls
+		instance:ctor(...)
+		return instance
 	end
 
 	return cls

@@ -67,8 +67,8 @@ function table.forEach(t, action, ...)
 		return
 	end
 
-	for k, v in pairs(t) do
-		action(k, v, ...)
+	for i, v in ipairs(t) do
+		action(v, i, ...)
 	end
 end
 
@@ -128,6 +128,13 @@ function table.erase(t, selector, ...)
 		end
 	end
 	return false
+end
+
+-- reverse the table
+function table.reverse(t)
+	for i = 1, math.floor(#t / 2) do
+		t[i], t[#t - i + 1] = t[#t - i + 1], t[i]
+	end
 end
 
 -- shuffle the array
