@@ -274,11 +274,23 @@ MW_LOCAL int tolua_mwframework_MWSqliteDb_executeQuery(lua_State *tolua_S)
                     lua_rawset(tolua_S, -3);        // L: userdata, array, index, dict
                 } else if ((pStr = dynamic_cast<__String *>(pDict->objectForKey(key)))) {
                     std::string val = pStr->getCString();
-                    
-                    lua_pushstring(tolua_S, val.c_str());   // L: userdata, array, index, dict, key, val
+					// L: userdata, array, index, dict, key, val
+					if (val == std::string("TRUE"))
+					{
+						lua_pushboolean(tolua_S, true);
+					}
+					else if (val == std::string("FALSE"))
+					{
+						lua_pushboolean(tolua_S, false);
+					}
+					else
+					{
+						lua_pushstring(tolua_S, val.c_str());
+					}
                     lua_rawset(tolua_S, -3);    // L: userdata, array, index, dict
                 } else {
-                    CCASSERT(false, "Invalid query.");
+					CCLOG("Invalid column value of %s", key.c_str());
+					lua_pop(tolua_S, 1);
                 }
             }
             lua_rawset(tolua_S, -3);        // L: userdata, array

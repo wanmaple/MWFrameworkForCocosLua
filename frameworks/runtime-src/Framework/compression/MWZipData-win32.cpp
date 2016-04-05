@@ -131,9 +131,17 @@ MWBinaryData *MWZipData::getCompressedFileData(const std::string &compressedFile
 	res = UnzipItem(g_hZip, index, data, dataSize);
 	if (res != ZR_OK)
 	{
+		if (data)
+		{
+			free(data);
+		}
 		return nullptr;
 	}
 	auto binaryData = MWBinaryData::create(data, dataSize);
+	if (data)
+	{
+		free(data);
+	}
 
 	return binaryData;
 }
