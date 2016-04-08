@@ -91,6 +91,30 @@ bool MWZipData::initWithNewFile(const std::string &filePath, const std::string &
     return true;
 }
 
+MWZipData *MWZipData::createWithBinaryData(MWBinaryData *rawData, const std::string &password)
+{
+	auto pRet = new (nothrow)MWZipData();
+	if (pRet && pRet->initWithBinaryData(rawData, password)) {
+		pRet->autorelease();
+		return pRet;
+	}
+	CC_SAFE_RELEASE(pRet);
+	return nullptr;
+}
+
+bool MWZipData::initWithBinaryData(MWBinaryData *rawData, const std::string &password)
+{
+	_filePath = "";
+	_password = password;
+	g_hZip = OpenZip(rawData->getData(), rawData->getSize(), password.c_str());
+	if (g_hZip == INVALID_ZIP_HANDLE)
+	{
+		return false;
+	}
+	CloseZip(g_hZip);
+	return true;
+}
+
 MWZipData::MWZipData()
 {
 }

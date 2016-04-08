@@ -14,6 +14,112 @@ using namespace std;
 
 MW_FRAMEWORK_BEGIN
 
+typedef struct
+{
+	MW_RAW_DATA data;
+	ZPOS64_T size;
+	ZPOS64_T current;
+} ZIPINFO, *PZIPINFO;
+
+static voidpf ZCALLBACK OpenZipFile(voidpf opaque, const void *filename, int mode)
+{
+	const char *filePath = reinterpret_cast<const char *>(filename);
+	PZIPINFO zipInfo = (PZIPINFO)opaque;
+	if (!filePath || strlen(filePath) > 0)
+	{
+		// maybe is android file path?
+		Data zipData = FileUtils::getInstance()->getDataFromFile(filename);
+		CCASSERT(!zipData.isNull(), "Invalid zip data.")
+		voidpf buffer = malloc(zipData.getSize());
+		memcpy(buffer, zipData.getBytes(), zipData.getSize());
+		// save zip info
+		zipInfo->data = buffer;
+		zipInfo->size = zipData.getSize();
+	}
+	else
+	{
+		// filename no use and the zip info should be inited.
+	}
+	zipInfo->current = 0;
+
+	return zipInfo->data;
+}
+
+static uLong ZCALLBACK ReadZipFile(voidpf opaque, voidpf stream, void *buf, uLong size)
+{
+	PZIPINFO zipInfo = (PZIPINFO)opaque;
+	stream = (MW_RAW_DATA)((MW_BYTE *)stream + zipInfo->current);
+	memcpy(buf, stream, size);
+	zipInfo->current += size;
+
+	return size;
+}
+
+static uLong ZCALLBACK WriteZipFile(voidpf opaque, voidpf stream, const void *buf, uLong size)
+{
+	PZIPINFO zipInfo = (PZIPINFO)opaque;
+	stream = (MW_RAW_DATA)((MW_BYTE *)stream + zipInfo->current);
+	memcpy(stream, buf, size);
+	zipInfo->current += size;
+
+	return size;
+}
+
+static ZPOS64_T ZCALLBACK TellZipFile(voidpf opaque, voidpf stream)
+{
+	PZIPINFO zipInfo = (PZIPINFO)opaque;
+
+	return zipInfo->size;
+}
+
+static int ZCALLBACK CloseZipFile(voidpf opaque, voidpf stream)
+{
+	PZIPINFO zipInfo = (PZIPINFO)opaque;
+	MW_SAFE_DELETE(zipInfo);
+	if (stream)
+	{
+		free(stream);
+	}
+
+	return 0;
+}
+
+static int ZCALLBACK ErrorZipFile(voidpf opaque, voidpf stream)
+{
+	// no error
+	return 0;
+}
+
+static long ZCALLBACK SeekZipFile(voidpf opaque, voidpf stream, ZPOS64_T offset, int origin)
+{
+	PZIPINFO zipInfo = (PZIPINFO)opaque;
+	switch (origin)
+	{
+	case ZLIB_FILEFUNC_SEEK_CUR:
+		if (zipInfo->current + offset > zipInfo->size)
+		{
+			return -1;
+		}
+		zipInfo->current += offset;
+		break;
+	case ZLIB_FILEFUNC_SEEK_END:
+		// no use
+		zipInfo->current = zipInfo->size - 1;
+		break;
+	case ZLIB_FILEFUNC_SEEK_SET:
+		if (offset > zipInfo->size)
+		{
+			return -1;
+		}
+		zipInfo->current = offset;
+		break;
+	default:
+		return -1;
+	}
+	
+	return 0;
+}
+
 MW_LOCAL zipFile g_hZip = nullptr;
 MW_LOCAL unzFile g_hUnz = nullptr;
 
@@ -30,22 +136,23 @@ MWZipData *MWZipData::createWithExistingFile(const std::string &filePath, const 
 
 bool MWZipData::initWithExistingFile(const std::string &filePath, const std::string &password)
 {
+	auto absolutePath = FileUtils::getInstance()->fullPathForFilename(filePath);
+	_filePath = absolutePath;
+	_password = password;
+
 #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
     // assets is a zip file, so you can't locate to such file path.
-    Data fileData = FileUtils::getInstance()->getDataFromFile(filePath);
-    string tmpPath = MWIOUtils::getInstance()->splicePath(FileUtils::getInstance()->getWritablePath(), "tmp");
-    auto absolutePath = MWIOUtils::getInstance()->splicePath(tmpPath, filePath);
-    size_t found = absolutePath.find_last_of("/\\");
-    string tmpFilename = absolutePath.substr(found + 1);
-    MWIOUtils::getInstance()->createDirectory(absolutePath.substr(0, found + 1));
-    if (!MWIOUtils::getInstance()->writeDataToFile(fileData.getBytes(), fileData.getSize(), absolutePath)) {
-        return false;
-    }
+	zlib_filefunc64_def ffunc;
+	ffunc.zopen64_file = &OpenZipFile;
+	ffunc.zread_file = &ReadZipFile;
+	ffunc.zwrite_file = &WriteZipFile;
+	ffunc.ztell64_file = &TellZipFile;
+	ffunc.zseek64_file = &SeekZipFile;
+	ffunc.zclose_file = &CloseZipFile;
+	ffunc.zerror_file = &ErrorZipFile;
+	ffunc.opaque = new ZIPINFO();
+	g_hUnz = unzOpen2_64(filePath.c_str(), &ffunc);
 #else
-    auto absolutePath = FileUtils::getInstance()->fullPathForFilename(filePath);
-#endif
-    _filePath = absolutePath;
-    _password = password;
     g_hUnz = unzOpen64(absolutePath.c_str());
     if (!g_hUnz) {
         return false;
@@ -54,6 +161,7 @@ bool MWZipData::initWithExistingFile(const std::string &filePath, const std::str
     g_hUnz = nullptr;
     
     return true;
+#endif
 }
 
 MWZipData *MWZipData::createWithNewFile(const std::string &filePath, const std::string &password)
@@ -79,6 +187,44 @@ bool MWZipData::initWithNewFile(const std::string &filePath, const std::string &
     g_hZip = nullptr;
     
     return true;
+}
+
+MWZipData *MWZipData::createWithBinaryData(MWBinaryData *rawData, const std::string &password)
+{
+	auto pRet = new (nothrow)MWZipData();
+	if (pRet && pRet->initWithBinaryData(rawData, password)) {
+		pRet->autorelease();
+		return pRet;
+	}
+	CC_SAFE_RELEASE(pRet);
+	return nullptr;
+}
+
+bool MWZipData::initWithBinaryData(MWBinaryData *rawData, const std::string &password)
+{
+	_filePath = "";
+	_password = password;
+
+	zlib_filefunc64_def ffunc;
+	ffunc.zopen64_file = &OpenZipFile;
+	ffunc.zread_file = &ReadZipFile;
+	ffunc.zwrite_file = &WriteZipFile;
+	ffunc.ztell64_file = &TellZipFile;
+	ffunc.zseek64_file = &SeekZipFile;
+	ffunc.zclose_file = &CloseZipFile;
+	ffunc.zerror_file = &ErrorZipFile;
+	ffunc.opaque = new ZIPINFO();
+	ffunc.opaque->data = malloc(rawData->getSize());
+	memcpy(ffunc.opaque->data, rawData->getData(), rawData->getSize());
+	ffunc.opaque->size = rawData->getSize();
+
+	g_hUnz = unzOpen2_64(nullptr, &ffunc);
+	if (g_hUnz == INVALID_ZIP_HANDLE)
+	{
+		return false;
+	}
+	CloseZip(g_hUnz);
+	return true;
 }
 
 MWZipData::MWZipData()
