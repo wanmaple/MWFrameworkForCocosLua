@@ -62,11 +62,11 @@ function MakeScriptHandler(target, selector, ...)
 end
 
 -- call a function after delay
-function CallFunctionAsync(target, selector, delay, ...)
+function CallFunctionAsync(func, delay, ...)
 	local args = {...}
 	local handlerId = nil
 	local handlerFunction = function()
-		selector(target, unpack(args))
+		func(unpack(args))
 		cc.Director:getInstance():getScheduler():unscheduleScriptEntry(handlerId)
 	end
 	handlerId = cc.Director:getInstance():getScheduler():scheduleScriptFunc(handlerFunction, delay, false)
@@ -93,7 +93,7 @@ function JsonToLua(json)
     local luaStr = json:toLuaString()
     local func, err = loadstring("return " .. luaStr)
     if err then
-    	print("Error occues when trying to parse a json.")
+    	print("Error occurs when trying to parse a json.")
     	return nil
     end
     return func()

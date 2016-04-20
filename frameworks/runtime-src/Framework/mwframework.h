@@ -10,6 +10,9 @@
 #include "platform/MWIOUtilsStrategy.h"
 #include "platform/MWIOUtils.h"
 
+// custom controls
+#include "controls/SmoothRope.h"
+
 // core scheme.
 #include "scheme/MWGameScene.h"
 #include "scheme/MWViewController.h"
