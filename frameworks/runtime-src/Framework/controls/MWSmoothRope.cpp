@@ -1,4 +1,4 @@
-#include "SmoothRope.h"
+#include "MWSmoothRope.h"
 
 #include <new>
 
@@ -7,9 +7,9 @@ using namespace std;
 
 MW_FRAMEWORK_BEGIN
 
-SmoothRope *SmoothRope::create(float length, float thickness, int segments)
+MWSmoothRope *MWSmoothRope::create(float length, float thickness, int segments)
 {
-	auto ret = new (nothrow)SmoothRope();
+	auto ret = new (nothrow)MWSmoothRope();
 	if (ret && ret->init(length, thickness, segments))
 	{
 		ret->autorelease();
@@ -19,7 +19,7 @@ SmoothRope *SmoothRope::create(float length, float thickness, int segments)
 	return nullptr;
 }
 
-bool SmoothRope::init(float length, float thickness, int segments)
+bool MWSmoothRope::init(float length, float thickness, int segments)
 {
 	if (!Node::init())
 	{
@@ -40,7 +40,7 @@ bool SmoothRope::init(float length, float thickness, int segments)
 	return true;
 }
 
-SmoothRope::SmoothRope()
+MWSmoothRope::MWSmoothRope()
 	: Node()
 	, _segTex(nullptr)
 	, _program(nullptr)
@@ -50,7 +50,7 @@ SmoothRope::SmoothRope()
 {
 }
 
-SmoothRope::~SmoothRope()
+MWSmoothRope::~MWSmoothRope()
 {
 	CC_SAFE_RELEASE(_segTex);
 	CC_SAFE_RELEASE(_program);
@@ -59,7 +59,7 @@ SmoothRope::~SmoothRope()
 	glDeleteVertexArrays(1, &_vao);
 }
 
-void SmoothRope::setBending(float val)
+void MWSmoothRope::setBending(float val)
 {
 	if (_bending != val)
 	{
@@ -68,7 +68,7 @@ void SmoothRope::setBending(float val)
 	}
 }
 
-void SmoothRope::setLength(float val)
+void MWSmoothRope::setLength(float val)
 {
 	if (_length != val)
 	{
@@ -77,7 +77,7 @@ void SmoothRope::setLength(float val)
 	}
 }
 
-void SmoothRope::setThickness(float val)
+void MWSmoothRope::setThickness(float val)
 {
 	if (_thickness != val)
 	{
@@ -86,7 +86,7 @@ void SmoothRope::setThickness(float val)
 	}
 }
 
-void SmoothRope::setSegments(int val)
+void MWSmoothRope::setSegments(int val)
 {
 	if (_segments != val)
 	{
@@ -95,7 +95,7 @@ void SmoothRope::setSegments(int val)
 	}
 }
 
-void SmoothRope::setEndPoints(const cocos2d::Point &end1, const cocos2d::Point &end2)
+void MWSmoothRope::setEndPoints(const cocos2d::Point &end1, const cocos2d::Point &end2)
 {
 	if (!_end1.equals(end1) || !_end2.equals(end2))
 	{
@@ -105,7 +105,7 @@ void SmoothRope::setEndPoints(const cocos2d::Point &end1, const cocos2d::Point &
 	}
 }
 
-void SmoothRope::setColor(const Color3B &color)
+void MWSmoothRope::setColor(const Color3B &color)
 {
 	if (!_displayedColor.equals(color))
 	{
@@ -114,7 +114,7 @@ void SmoothRope::setColor(const Color3B &color)
 	}
 }
 
-void SmoothRope::setOpacity(GLubyte opacity)
+void MWSmoothRope::setOpacity(GLubyte opacity)
 {
 	if (_displayedOpacity != opacity)
 	{
@@ -123,11 +123,11 @@ void SmoothRope::setOpacity(GLubyte opacity)
 	}
 }
 
-void SmoothRope::setSegmentTexture(const std::string &path)
+void MWSmoothRope::setSegmentTexture(const std::string &path)
 {
 	if (path.length() <= 0)
 	{
-		CCLOG("SmoothRope ERROR: Empty texture path.");
+		CCLOG("MWSmoothRope ERROR: Empty texture path.");
 		return;
 	}
 
@@ -139,7 +139,7 @@ void SmoothRope::setSegmentTexture(const std::string &path)
 		auto sf = SpriteFrameCache::getInstance()->getSpriteFrameByName(sfpath);
 		if (!sf)
 		{
-			CCLOG("SmoothRope ERROR: SpriteFrame %s doesn't exist.", sfpath.c_str());
+			CCLOG("MWSmoothRope ERROR: SpriteFrame %s doesn't exist.", sfpath.c_str());
 			return;
 		}
 		if (sf->getTexture() != _segTex)
@@ -154,7 +154,7 @@ void SmoothRope::setSegmentTexture(const std::string &path)
 		auto tex = Director::getInstance()->getTextureCache()->addImage(path);
 		if (!tex)
 		{
-			CCLOG("SmoothRope ERROR: Texture %s load failed.", path.c_str());
+			CCLOG("MWSmoothRope ERROR: Texture %s load failed.", path.c_str());
 		}
 		if (tex != _segTex)
 		{
@@ -165,7 +165,7 @@ void SmoothRope::setSegmentTexture(const std::string &path)
 	}
 }
 
-void SmoothRope::draw(cocos2d::Renderer *renderer, const cocos2d::Mat4 &transform, uint32_t flags)
+void MWSmoothRope::draw(cocos2d::Renderer *renderer, const cocos2d::Mat4 &transform, uint32_t flags)
 {
 	if (!_segTex)
 	{
@@ -178,11 +178,11 @@ void SmoothRope::draw(cocos2d::Renderer *renderer, const cocos2d::Mat4 &transfor
 	}
 
 	_cmd.init(_globalZOrder);
-	_cmd.func = MW_CALLBACK_0(SmoothRope::onDraw, this, transform, flags);
+	_cmd.func = MW_CALLBACK_0(MWSmoothRope::onDraw, this, transform, flags);
 	renderer->addCommand(&_cmd);
 }
 
-void SmoothRope::onDraw(const cocos2d::Mat4 &transform, uint32_t flags)
+void MWSmoothRope::onDraw(const cocos2d::Mat4 &transform, uint32_t flags)
 {
 	if (_vertDirty)
 	{
@@ -225,7 +225,7 @@ void SmoothRope::onDraw(const cocos2d::Mat4 &transform, uint32_t flags)
 	director->popMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW);
 }
 
-void SmoothRope::_updateVerts()
+void MWSmoothRope::_updateVerts()
 {
 	_verts.clear();
 

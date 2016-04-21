@@ -19,12 +19,12 @@ typedef struct
 	cocos2d::Vec4 color;
 } ROPE_VERT;
 
-class SmoothRope : public cocos2d::Node
+class MWSmoothRope : public cocos2d::Node
 {
 public:
-	static SmoothRope *create(float length, float thickness, int segments = 4);
+	static MWSmoothRope *create(float length, float thickness, int segments = 4);
 
-	~SmoothRope();
+	~MWSmoothRope();
 
 	void setEndPoints(const cocos2d::Point &end1, const cocos2d::Point &end2);
 	/**
@@ -46,7 +46,7 @@ public:
 	MW_SYNTHESIZE_PASS_BY_CONST_REF(cocos2d::Rect, _texRect, TextureRect);
 
 protected:
-	SmoothRope();
+	MWSmoothRope();
 
 	bool init(float length, float thickness, int segments);
 

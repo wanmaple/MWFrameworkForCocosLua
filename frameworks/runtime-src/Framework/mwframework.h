@@ -11,7 +11,7 @@
 #include "platform/MWIOUtils.h"
 
 // custom controls
-#include "controls/SmoothRope.h"
+#include "controls/MWSmoothRope.h"
 
 // core scheme.
 #include "scheme/MWGameScene.h"
