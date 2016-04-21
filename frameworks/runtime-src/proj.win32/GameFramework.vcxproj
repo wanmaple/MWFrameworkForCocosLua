@@ -189,6 +189,7 @@ xcopy "$(ProjectDir)..\..\..\asset\src" "$(SolutionDir)$(Configuration).win32\sr
     <ClInclude Include="..\Framework\compression\MWZipData.h" />
     <ClInclude Include="..\Framework\compression\zip-win32\unzip.h" />
     <ClInclude Include="..\Framework\compression\zip-win32\zip.h" />
+    <ClInclude Include="..\Framework\controls\MWSmoothRope.h" />
     <ClInclude Include="..\Framework\db\IDbBase.h" />
     <ClInclude Include="..\Framework\db\sqlite\libsqlite\sqlite3.h" />
     <ClInclude Include="..\Framework\db\sqlite\libsqlite\sqlite3ext.h" />
@@ -291,6 +292,7 @@ xcopy "$(ProjectDir)..\..\..\asset\src" "$(SolutionDir)$(Configuration).win32\sr
     <ClCompile Include="..\Framework\compression\MWZipData-win32.cpp" />
     <ClCompile Include="..\Framework\compression\zip-win32\unzip.cpp" />
     <ClCompile Include="..\Framework\compression\zip-win32\zip.cpp" />
+    <ClCompile Include="..\Framework\controls\MWSmoothRope.cpp" />
     <ClCompile Include="..\Framework\db\sqlite\libsqlite\sqlite3.c" />
     <ClCompile Include="..\Framework\db\sqlite\MWSqliteDb.cpp" />
     <ClCompile Include="..\Framework\encryption\base64\libbase64.c" />

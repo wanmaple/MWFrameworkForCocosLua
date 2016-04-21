@@ -3,7 +3,7 @@ local TestViewController = class("TestViewController", function()
 	return mw.ViewController:create()
 end)
 
-local Pokemon = Import("..models.Pokemon")
+local SpecialPokemon = Import("..models.SpecialPokemon")
 local PokemonView = Import("..views.PokemonView")
 
 function TestViewController:viewDidLoad()
@@ -14,12 +14,22 @@ function TestViewController:viewDidLoad()
 	log("REF: %s", GetType(self:scene():getRefParameter("REF")))
 
 	log("Test ZipData and GifSprite...")
-	local pokemon1 = Pokemon.new("492")
-	print("POKEMON1 NAME: " .. pokemon1:getName())
-	local pokemon2 = Pokemon.new("493")
-	print("POKEMON2 NAME: " .. pokemon2:getName())
+	local pokemon1 = SpecialPokemon.new("492")
+	log("POKEMON1 NAME: %s\nPOKEMON1 WEIGHT: %.2fkg\nPOKEMON1 HEIGHT: %.2fm", pokemon1:getName(), pokemon1:getWeight(), pokemon1:getHeight())
+	local pokemon2 = SpecialPokemon.new("493")
+	log("POKEMON2 NAME: %s\nPOKEMON2 WEIGHT: %.2fkg\nPOKEMON2 HEIGHT: %.2fm", pokemon2:getName(), pokemon2:getWeight(), pokemon2:getHeight())
 	local view1 = PokemonView.new(pokemon1)
+	view1:setAnchorPoint(cc.p(0.5, 0.5))
 	local view2 = PokemonView.new(pokemon2)
+	view2:setAnchorPoint(cc.p(0.5, 0.5))
+	self._pokemon1 = view1
+	self._pokemon2 = view2
+
+	local rope = mw.SmoothRope:create(850, 18, 20)
+	rope:setSegmentTexture("chain.png")
+	rope:setBending(0.5)
+	self:view():addChild(rope)
+	self._rope = rope
 
 	local pDict = mw.Dictionary:create()
 	pDict:setObjectForKey("GIF1", view1)
@@ -31,6 +41,8 @@ function TestViewController:viewDidLoad()
 		view:setPosition(Device:width() * (0.25 + (i - 1) * 0.5), Device:height() * 0.5)
 		self:view():addChild(view)
 	end
+
+	self._rope:setEndPoints(cc.p(self._pokemon1:getPosition()), cc.p(self._pokemon2:getPosition()))
 
     local svg = mw.SvgSprite:createWithFile("tiger.svg")
     svg:setPosition(Device:cx(), Device:cy())
@@ -94,6 +106,7 @@ function TestViewController:onLongTouchMoved(target, loc, ts)
 	print("TestViewController:onLongTouchMoved", target, loc, ts)
 	local vec = cc.pSub(target:convertToNodeSpace(loc), self._beginPos)
 	target:setPosition(cc.pAdd(cc.p(target:getPosition()), vec))
+	self._rope:setEndPoints(cc.p(self._pokemon1:getPosition()), cc.p(self._pokemon2:getPosition()))
 end
 
 function TestViewController:onLongTouchEnded(target, loc, ts)

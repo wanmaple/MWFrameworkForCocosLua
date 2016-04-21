@@ -47,6 +47,11 @@
 
 
 --------------------------------------------------------
+-- the mw MWSmoothRope
+-- @field [parent=#mw] MWSmoothRope#MWSmoothRope MWSmoothRope preloaded module
+
+
+--------------------------------------------------------
 -- the mw MWGameScene
 -- @field [parent=#mw] MWGameScene#MWGameScene MWGameScene preloaded module
 

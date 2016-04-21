@@ -247,7 +247,7 @@ void MWSmoothRope::_updateVerts()
 		else
 		{
 			float k2 = -1.f / k;
-			dx = sqrtf(_thickness*_thickness*0.25 / (1 + k2 * k2));
+			dx = sqrtf(_thickness * _thickness * 0.25 / (1 + k2 * k2));
 			dy = dx * k2;
 		}
 		float segX = (_end2.x - _end1.x) / _segments;
@@ -353,10 +353,11 @@ void MWSmoothRope::_updateVerts()
 			dx0 = sqrtf(_thickness * _thickness * 0.25 / (1 + k02 * k02));
 			dy0 = dx0 * k02;
 		}
-		float prevXu = _end1.x + (-k0 / abs(k0)) * dx0;
-		float prevYu = _end1.y + (-k0 / abs(k0)) * dy0;
-		float prevXd = _end1.x - (-k0 / abs(k0)) * dx0;
-		float prevYd = _end1.y - (-k0 / abs(k0)) * dy0;
+		float coefficient0 = k0 == 0.f ? 1.f : (-k0 / abs(k0));
+		float prevXu = _end1.x + coefficient0 * dx0;
+		float prevYu = _end1.y + coefficient0 * dy0;
+		float prevXd = _end1.x - coefficient0 * dx0;
+		float prevYd = _end1.y - coefficient0 * dy0;
 		for (size_t i = 1; i <= _segments; i++)
 		{
 			ROPE_VERT tl, bl, tr, br;
@@ -379,10 +380,11 @@ void MWSmoothRope::_updateVerts()
 				dy = dx * k2;
 			}
 
-			float xu = (1 - t) * (1 - t) * _end1.x + 2 * (1 - t) * t * center.x + t * t * _end2.x + (-k / abs(k)) * dx;
-			float yu = (1 - t) * (1 - t) * _end1.y + 2 * (1 - t) * t * center.y + t * t * _end2.y + (-k / abs(k)) * dy;
-			float xd = (1 - t) * (1 - t) * _end1.x + 2 * (1 - t) * t * center.x + t * t * _end2.x - (-k / abs(k)) * dx;
-			float yd = (1 - t) * (1 - t) * _end1.y + 2 * (1 - t) * t * center.y + t * t * _end2.y - (-k / abs(k)) * dy;
+			float coefficient = k == 0.f ? 1.f : (-k / abs(k));
+			float xu = (1 - t) * (1 - t) * _end1.x + 2 * (1 - t) * t * center.x + t * t * _end2.x + coefficient * dx;
+			float yu = (1 - t) * (1 - t) * _end1.y + 2 * (1 - t) * t * center.y + t * t * _end2.y + coefficient * dy;
+			float xd = (1 - t) * (1 - t) * _end1.x + 2 * (1 - t) * t * center.x + t * t * _end2.x - coefficient * dx;
+			float yd = (1 - t) * (1 - t) * _end1.y + 2 * (1 - t) * t * center.y + t * t * _end2.y - coefficient * dy;
 			tl.vertice.set(prevXu, prevYu);
 			bl.vertice.set(prevXd, prevYd);
 			tr.vertice.set(xu, yu);
@@ -464,7 +466,7 @@ void MWSmoothRope::_updateVerts()
 	glBindVertexArray(_vao);
 	glBindBuffer(GL_ARRAY_BUFFER, _vbos[0]);
 
-	glBindBuffer(GL_ARRAY_BUFFER, _verts.size() * sizeof(_verts[0]), &_verts[0], GL_DYNAMIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, _verts.size() * sizeof(_verts[0]), &_verts[0], GL_DYNAMIC_DRAW);
 
 	GLint posLoc = _program->getAttribLocation("a_position");
 	GLint colorLoc = _program->getAttribLocation("a_color");

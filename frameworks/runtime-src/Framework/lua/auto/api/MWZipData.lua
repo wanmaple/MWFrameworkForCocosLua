@@ -52,7 +52,8 @@
         
 --------------------------------
 -- Wrapper the zip data from the file and password if required.<br>
--- param filePath The zip file path.
+-- param filePath The zip file path.<br>
+-- param password Zip password.
 -- @function [parent=#MWZipData] createWithExistingFile 
 -- @param self
 -- @param #string filePath
@@ -61,10 +62,21 @@
         
 --------------------------------
 -- Create an empty zip.<br>
--- param filePath The zip file path to create.
+-- param filePath The zip file path to create.<br>
+-- param password Zip password.
 -- @function [parent=#MWZipData] createWithNewFile 
 -- @param self
 -- @param #string filePath
+-- @param #string password
+-- @return MWZipData#MWZipData ret (return value: mw.MWZipData)
+        
+--------------------------------
+-- Wrapper the zip data from raw data.<br>
+-- param rawData The zip file data.<br>
+-- param password Zip password.
+-- @function [parent=#MWZipData] createWithBinaryData 
+-- @param self
+-- @param #mw.MWBinaryData rawData
 -- @param #string password
 -- @return MWZipData#MWZipData ret (return value: mw.MWZipData)
         

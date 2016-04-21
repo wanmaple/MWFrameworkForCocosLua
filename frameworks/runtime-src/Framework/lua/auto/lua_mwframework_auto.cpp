@@ -3600,6 +3600,848 @@ int lua_register_mwframework_MWIOUtils(lua_State* tolua_S)
     return 1;
 }
 
+int lua_mwframework_MWSmoothRope_setSegmentTexture(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWSmoothRope* cobj = nullptr;
+    bool ok  = true;
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.SmoothRope",0,&tolua_err)) goto tolua_lerror;
+#endif
+    cobj = (mwframework::MWSmoothRope*)tolua_tousertype(tolua_S,1,0);
+#if COCOS2D_DEBUG >= 1
+    if (!cobj)
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWSmoothRope_setSegmentTexture'", nullptr);
+        return 0;
+    }
+#endif
+    argc = lua_gettop(tolua_S)-1;
+    do{
+        if (argc == 1) {
+            cocos2d::Texture2D* arg0;
+            ok &= luaval_to_object<cocos2d::Texture2D>(tolua_S, 2, "cc.Texture2D",&arg0);
+
+            if (!ok) { break; }
+            cobj->setSegmentTexture(arg0);
+            return 0;
+        }
+    }while(0);
+    ok  = true;
+    do{
+        if (argc == 1) {
+            std::string arg0;
+            ok &= luaval_to_std_string(tolua_S, 2,&arg0, "mw.SmoothRope:setSegmentTexture");
+
+            if (!ok) { break; }
+            cobj->setSegmentTexture(arg0);
+            return 0;
+        }
+    }while(0);
+    ok  = true;
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n",  "mw.SmoothRope:setSegmentTexture",argc, 1);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWSmoothRope_setSegmentTexture'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWSmoothRope_getSegments(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWSmoothRope* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.SmoothRope",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWSmoothRope*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWSmoothRope_getSegments'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 0) 
+    {
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWSmoothRope_getSegments'", nullptr);
+            return 0;
+        }
+        int ret = cobj->getSegments();
+        tolua_pushnumber(tolua_S,(lua_Number)ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.SmoothRope:getSegments",argc, 0);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWSmoothRope_getSegments'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWSmoothRope_setColor(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWSmoothRope* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.SmoothRope",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWSmoothRope*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWSmoothRope_setColor'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 1) 
+    {
+        cocos2d::Color3B arg0;
+
+        ok &= luaval_to_color3b(tolua_S, 2, &arg0, "mw.SmoothRope:setColor");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWSmoothRope_setColor'", nullptr);
+            return 0;
+        }
+        cobj->setColor(arg0);
+        return 0;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.SmoothRope:setColor",argc, 1);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWSmoothRope_setColor'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWSmoothRope_getBending(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWSmoothRope* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.SmoothRope",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWSmoothRope*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWSmoothRope_getBending'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 0) 
+    {
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWSmoothRope_getBending'", nullptr);
+            return 0;
+        }
+        double ret = cobj->getBending();
+        tolua_pushnumber(tolua_S,(lua_Number)ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.SmoothRope:getBending",argc, 0);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWSmoothRope_getBending'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWSmoothRope_setSegments(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWSmoothRope* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.SmoothRope",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWSmoothRope*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWSmoothRope_setSegments'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 1) 
+    {
+        int arg0;
+
+        ok &= luaval_to_int32(tolua_S, 2,(int *)&arg0, "mw.SmoothRope:setSegments");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWSmoothRope_setSegments'", nullptr);
+            return 0;
+        }
+        cobj->setSegments(arg0);
+        return 0;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.SmoothRope:setSegments",argc, 1);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWSmoothRope_setSegments'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWSmoothRope_setThickness(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWSmoothRope* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.SmoothRope",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWSmoothRope*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWSmoothRope_setThickness'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 1) 
+    {
+        double arg0;
+
+        ok &= luaval_to_number(tolua_S, 2,&arg0, "mw.SmoothRope:setThickness");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWSmoothRope_setThickness'", nullptr);
+            return 0;
+        }
+        cobj->setThickness(arg0);
+        return 0;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.SmoothRope:setThickness",argc, 1);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWSmoothRope_setThickness'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWSmoothRope_setBending(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWSmoothRope* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.SmoothRope",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWSmoothRope*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWSmoothRope_setBending'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 1) 
+    {
+        double arg0;
+
+        ok &= luaval_to_number(tolua_S, 2,&arg0, "mw.SmoothRope:setBending");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWSmoothRope_setBending'", nullptr);
+            return 0;
+        }
+        cobj->setBending(arg0);
+        return 0;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.SmoothRope:setBending",argc, 1);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWSmoothRope_setBending'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWSmoothRope_setOpacity(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWSmoothRope* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.SmoothRope",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWSmoothRope*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWSmoothRope_setOpacity'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 1) 
+    {
+        uint16_t arg0;
+
+        ok &= luaval_to_uint16(tolua_S, 2,&arg0, "mw.SmoothRope:setOpacity");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWSmoothRope_setOpacity'", nullptr);
+            return 0;
+        }
+        cobj->setOpacity(arg0);
+        return 0;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.SmoothRope:setOpacity",argc, 1);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWSmoothRope_setOpacity'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWSmoothRope_setTextureRect(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWSmoothRope* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.SmoothRope",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWSmoothRope*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWSmoothRope_setTextureRect'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 1) 
+    {
+        cocos2d::Rect arg0;
+
+        ok &= luaval_to_rect(tolua_S, 2, &arg0, "mw.SmoothRope:setTextureRect");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWSmoothRope_setTextureRect'", nullptr);
+            return 0;
+        }
+        cobj->setTextureRect(arg0);
+        return 0;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.SmoothRope:setTextureRect",argc, 1);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWSmoothRope_setTextureRect'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWSmoothRope_getSegmentTexture(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWSmoothRope* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.SmoothRope",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWSmoothRope*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWSmoothRope_getSegmentTexture'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 0) 
+    {
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWSmoothRope_getSegmentTexture'", nullptr);
+            return 0;
+        }
+        cocos2d::Texture2D* ret = cobj->getSegmentTexture();
+        object_to_luaval<cocos2d::Texture2D>(tolua_S, "cc.Texture2D",(cocos2d::Texture2D*)ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.SmoothRope:getSegmentTexture",argc, 0);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWSmoothRope_getSegmentTexture'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWSmoothRope_getThickness(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWSmoothRope* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.SmoothRope",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWSmoothRope*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWSmoothRope_getThickness'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 0) 
+    {
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWSmoothRope_getThickness'", nullptr);
+            return 0;
+        }
+        double ret = cobj->getThickness();
+        tolua_pushnumber(tolua_S,(lua_Number)ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.SmoothRope:getThickness",argc, 0);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWSmoothRope_getThickness'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWSmoothRope_getLength(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWSmoothRope* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.SmoothRope",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWSmoothRope*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWSmoothRope_getLength'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 0) 
+    {
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWSmoothRope_getLength'", nullptr);
+            return 0;
+        }
+        double ret = cobj->getLength();
+        tolua_pushnumber(tolua_S,(lua_Number)ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.SmoothRope:getLength",argc, 0);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWSmoothRope_getLength'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWSmoothRope_setLength(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWSmoothRope* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.SmoothRope",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWSmoothRope*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWSmoothRope_setLength'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 1) 
+    {
+        double arg0;
+
+        ok &= luaval_to_number(tolua_S, 2,&arg0, "mw.SmoothRope:setLength");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWSmoothRope_setLength'", nullptr);
+            return 0;
+        }
+        cobj->setLength(arg0);
+        return 0;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.SmoothRope:setLength",argc, 1);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWSmoothRope_setLength'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWSmoothRope_setEndPoints(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWSmoothRope* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.SmoothRope",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWSmoothRope*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWSmoothRope_setEndPoints'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 2) 
+    {
+        cocos2d::Point arg0;
+        cocos2d::Point arg1;
+
+        ok &= luaval_to_point(tolua_S, 2, &arg0, "mw.SmoothRope:setEndPoints");
+
+        ok &= luaval_to_point(tolua_S, 3, &arg1, "mw.SmoothRope:setEndPoints");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWSmoothRope_setEndPoints'", nullptr);
+            return 0;
+        }
+        cobj->setEndPoints(arg0, arg1);
+        return 0;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.SmoothRope:setEndPoints",argc, 2);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWSmoothRope_setEndPoints'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWSmoothRope_getTextureRect(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWSmoothRope* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.SmoothRope",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWSmoothRope*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWSmoothRope_getTextureRect'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 0) 
+    {
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWSmoothRope_getTextureRect'", nullptr);
+            return 0;
+        }
+        cocos2d::Rect ret = cobj->getTextureRect();
+        rect_to_luaval(tolua_S, ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.SmoothRope:getTextureRect",argc, 0);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWSmoothRope_getTextureRect'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWSmoothRope_create(lua_State* tolua_S)
+{
+    int argc = 0;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertable(tolua_S,1,"mw.SmoothRope",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    argc = lua_gettop(tolua_S) - 1;
+
+    if (argc == 2)
+    {
+        double arg0;
+        double arg1;
+        ok &= luaval_to_number(tolua_S, 2,&arg0, "mw.SmoothRope:create");
+        ok &= luaval_to_number(tolua_S, 3,&arg1, "mw.SmoothRope:create");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWSmoothRope_create'", nullptr);
+            return 0;
+        }
+        mwframework::MWSmoothRope* ret = mwframework::MWSmoothRope::create(arg0, arg1);
+        object_to_luaval<mwframework::MWSmoothRope>(tolua_S, "mw.SmoothRope",(mwframework::MWSmoothRope*)ret);
+        return 1;
+    }
+    if (argc == 3)
+    {
+        double arg0;
+        double arg1;
+        int arg2;
+        ok &= luaval_to_number(tolua_S, 2,&arg0, "mw.SmoothRope:create");
+        ok &= luaval_to_number(tolua_S, 3,&arg1, "mw.SmoothRope:create");
+        ok &= luaval_to_int32(tolua_S, 4,(int *)&arg2, "mw.SmoothRope:create");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWSmoothRope_create'", nullptr);
+            return 0;
+        }
+        mwframework::MWSmoothRope* ret = mwframework::MWSmoothRope::create(arg0, arg1, arg2);
+        object_to_luaval<mwframework::MWSmoothRope>(tolua_S, "mw.SmoothRope",(mwframework::MWSmoothRope*)ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d\n ", "mw.SmoothRope:create",argc, 2);
+    return 0;
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWSmoothRope_create'.",&tolua_err);
+#endif
+    return 0;
+}
+static int lua_mwframework_MWSmoothRope_finalize(lua_State* tolua_S)
+{
+    printf("luabindings: finalizing LUA object (MWSmoothRope)");
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+    if (
+    !tolua_isusertype(tolua_S,1,"mw.SmoothRope",0,&tolua_err) ||
+    !tolua_isnoobj(tolua_S,2,&tolua_err)
+    )
+        goto tolua_lerror;
+    else
+#endif
+    {
+        mwframework::MWSmoothRope* self = (mwframework::MWSmoothRope*)  tolua_tousertype(tolua_S,1,0);
+#if COCOS2D_DEBUG >= 1
+        if (!self) tolua_error(tolua_S,"invalid 'self' in function 'delete'", nullptr);
+#endif
+        delete self;
+    }
+    return 0;
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'delete'.",&tolua_err);
+    return 0;
+#endif
+    return 0;
+}
+
+int lua_register_mwframework_MWSmoothRope(lua_State* tolua_S)
+{
+    tolua_usertype(tolua_S,"mw.SmoothRope");
+    tolua_cclass(tolua_S,"SmoothRope","mw.SmoothRope","cc.Node",nullptr);
+
+    tolua_beginmodule(tolua_S,"SmoothRope");
+        tolua_function(tolua_S,"setSegmentTexture",lua_mwframework_MWSmoothRope_setSegmentTexture);
+        tolua_function(tolua_S,"getSegments",lua_mwframework_MWSmoothRope_getSegments);
+        tolua_function(tolua_S,"setColor",lua_mwframework_MWSmoothRope_setColor);
+        tolua_function(tolua_S,"getBending",lua_mwframework_MWSmoothRope_getBending);
+        tolua_function(tolua_S,"setSegments",lua_mwframework_MWSmoothRope_setSegments);
+        tolua_function(tolua_S,"setThickness",lua_mwframework_MWSmoothRope_setThickness);
+        tolua_function(tolua_S,"setBending",lua_mwframework_MWSmoothRope_setBending);
+        tolua_function(tolua_S,"setOpacity",lua_mwframework_MWSmoothRope_setOpacity);
+        tolua_function(tolua_S,"setTextureRect",lua_mwframework_MWSmoothRope_setTextureRect);
+        tolua_function(tolua_S,"getSegmentTexture",lua_mwframework_MWSmoothRope_getSegmentTexture);
+        tolua_function(tolua_S,"getThickness",lua_mwframework_MWSmoothRope_getThickness);
+        tolua_function(tolua_S,"getLength",lua_mwframework_MWSmoothRope_getLength);
+        tolua_function(tolua_S,"setLength",lua_mwframework_MWSmoothRope_setLength);
+        tolua_function(tolua_S,"setEndPoints",lua_mwframework_MWSmoothRope_setEndPoints);
+        tolua_function(tolua_S,"getTextureRect",lua_mwframework_MWSmoothRope_getTextureRect);
+        tolua_function(tolua_S,"create", lua_mwframework_MWSmoothRope_create);
+    tolua_endmodule(tolua_S);
+    std::string typeName = typeid(mwframework::MWSmoothRope).name();
+    g_luaType[typeName] = "mw.SmoothRope";
+    g_typeCast["SmoothRope"] = "mw.SmoothRope";
+    return 1;
+}
+
 int lua_mwframework_MWGameScene_getViewControllers(lua_State* tolua_S)
 {
     int argc = 0;
@@ -5473,6 +6315,57 @@ int lua_mwframework_MWZipData_createWithNewFile(lua_State* tolua_S)
 #endif
     return 0;
 }
+int lua_mwframework_MWZipData_createWithBinaryData(lua_State* tolua_S)
+{
+    int argc = 0;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertable(tolua_S,1,"mw.ZipData",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    argc = lua_gettop(tolua_S) - 1;
+
+    if (argc == 1)
+    {
+        mwframework::MWBinaryData* arg0;
+        ok &= luaval_to_object<mwframework::MWBinaryData>(tolua_S, 2, "mw.BinaryData",&arg0);
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWZipData_createWithBinaryData'", nullptr);
+            return 0;
+        }
+        mwframework::MWZipData* ret = mwframework::MWZipData::createWithBinaryData(arg0);
+        object_to_luaval<mwframework::MWZipData>(tolua_S, "mw.ZipData",(mwframework::MWZipData*)ret);
+        return 1;
+    }
+    if (argc == 2)
+    {
+        mwframework::MWBinaryData* arg0;
+        std::string arg1;
+        ok &= luaval_to_object<mwframework::MWBinaryData>(tolua_S, 2, "mw.BinaryData",&arg0);
+        ok &= luaval_to_std_string(tolua_S, 3,&arg1, "mw.ZipData:createWithBinaryData");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWZipData_createWithBinaryData'", nullptr);
+            return 0;
+        }
+        mwframework::MWZipData* ret = mwframework::MWZipData::createWithBinaryData(arg0, arg1);
+        object_to_luaval<mwframework::MWZipData>(tolua_S, "mw.ZipData",(mwframework::MWZipData*)ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d\n ", "mw.ZipData:createWithBinaryData",argc, 1);
+    return 0;
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWZipData_createWithBinaryData'.",&tolua_err);
+#endif
+    return 0;
+}
 static int lua_mwframework_MWZipData_finalize(lua_State* tolua_S)
 {
     printf("luabindings: finalizing LUA object (MWZipData)");
@@ -5515,6 +6408,7 @@ int lua_register_mwframework_MWZipData(lua_State* tolua_S)
         tolua_function(tolua_S,"endZip",lua_mwframework_MWZipData_endZip);
         tolua_function(tolua_S,"createWithExistingFile", lua_mwframework_MWZipData_createWithExistingFile);
         tolua_function(tolua_S,"createWithNewFile", lua_mwframework_MWZipData_createWithNewFile);
+        tolua_function(tolua_S,"createWithBinaryData", lua_mwframework_MWZipData_createWithBinaryData);
     tolua_endmodule(tolua_S);
     std::string typeName = typeid(mwframework::MWZipData).name();
     g_luaType[typeName] = "mw.ZipData";
@@ -7154,6 +8048,53 @@ int lua_mwframework_MWJsonObject_getNumber(lua_State* tolua_S)
 
     return 0;
 }
+int lua_mwframework_MWJsonObject_toPrettyString(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWJsonObject* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.JsonObject",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWJsonObject*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWJsonObject_toPrettyString'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 0) 
+    {
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWJsonObject_toPrettyString'", nullptr);
+            return 0;
+        }
+        std::string ret = cobj->toPrettyString();
+        tolua_pushcppstring(tolua_S,ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.JsonObject:toPrettyString",argc, 0);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWJsonObject_toPrettyString'.",&tolua_err);
+#endif
+
+    return 0;
+}
 int lua_mwframework_MWJsonObject_putJsonArray(lua_State* tolua_S)
 {
     int argc = 0;
@@ -7554,53 +8495,6 @@ int lua_mwframework_MWJsonObject_getJsonObject(lua_State* tolua_S)
 
     return 0;
 }
-int lua_mwframework_MWJsonObject_toPrettyString(lua_State* tolua_S)
-{
-    int argc = 0;
-    mwframework::MWJsonObject* cobj = nullptr;
-    bool ok  = true;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_Error tolua_err;
-#endif
-
-
-#if COCOS2D_DEBUG >= 1
-    if (!tolua_isusertype(tolua_S,1,"mw.JsonObject",0,&tolua_err)) goto tolua_lerror;
-#endif
-
-    cobj = (mwframework::MWJsonObject*)tolua_tousertype(tolua_S,1,0);
-
-#if COCOS2D_DEBUG >= 1
-    if (!cobj) 
-    {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWJsonObject_toPrettyString'", nullptr);
-        return 0;
-    }
-#endif
-
-    argc = lua_gettop(tolua_S)-1;
-    if (argc == 0) 
-    {
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWJsonObject_toPrettyString'", nullptr);
-            return 0;
-        }
-        std::string ret = cobj->toPrettyString();
-        tolua_pushcppstring(tolua_S,ret);
-        return 1;
-    }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.JsonObject:toPrettyString",argc, 0);
-    return 0;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWJsonObject_toPrettyString'.",&tolua_err);
-#endif
-
-    return 0;
-}
 int lua_mwframework_MWJsonObject_hasKey(lua_State* tolua_S)
 {
     int argc = 0;
@@ -7847,6 +8741,7 @@ int lua_register_mwframework_MWJsonObject(lua_State* tolua_S)
         tolua_function(tolua_S,"putBoolean",lua_mwframework_MWJsonObject_putBoolean);
         tolua_function(tolua_S,"getString",lua_mwframework_MWJsonObject_getString);
         tolua_function(tolua_S,"getNumber",lua_mwframework_MWJsonObject_getNumber);
+        tolua_function(tolua_S,"toPrettyString",lua_mwframework_MWJsonObject_toPrettyString);
         tolua_function(tolua_S,"putJsonArray",lua_mwframework_MWJsonObject_putJsonArray);
         tolua_function(tolua_S,"putJsonObject",lua_mwframework_MWJsonObject_putJsonObject);
         tolua_function(tolua_S,"clear",lua_mwframework_MWJsonObject_clear);
@@ -7855,7 +8750,6 @@ int lua_register_mwframework_MWJsonObject(lua_State* tolua_S)
         tolua_function(tolua_S,"remove",lua_mwframework_MWJsonObject_remove);
         tolua_function(tolua_S,"putString",lua_mwframework_MWJsonObject_putString);
         tolua_function(tolua_S,"getJsonObject",lua_mwframework_MWJsonObject_getJsonObject);
-        tolua_function(tolua_S,"toPrettyString",lua_mwframework_MWJsonObject_toPrettyString);
         tolua_function(tolua_S,"hasKey",lua_mwframework_MWJsonObject_hasKey);
         tolua_function(tolua_S,"getObject",lua_mwframework_MWJsonObject_getObject);
         tolua_function(tolua_S,"createWithFile", lua_mwframework_MWJsonObject_createWithFile);
@@ -12230,6 +13124,7 @@ TOLUA_API int register_all_mwframework(lua_State* tolua_S)
 	lua_register_mwframework_MWSystemHelper(tolua_S);
 	lua_register_mwframework_MWGifSprite(tolua_S);
 	lua_register_mwframework_MWBinaryData(tolua_S);
+	lua_register_mwframework_MWSmoothRope(tolua_S);
 	lua_register_mwframework_MWSqliteDb(tolua_S);
 	lua_register_mwframework_MWQueue(tolua_S);
 	lua_register_mwframework_MWNetCenter(tolua_S);

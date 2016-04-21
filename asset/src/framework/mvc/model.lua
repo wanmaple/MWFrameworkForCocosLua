@@ -59,13 +59,9 @@ function ModelBase:getId()
 end
 
 function ModelBase:_defineScheme(scheme)
-	if self._inited then
-		return
-	end
 	if type(scheme) ~= "table" then
 		scheme = {}
 	end
-	self._scheme = { id = "string" }
 	for propName, propAttr in pairs(scheme) do
 		local propType = propAttr[1]
 		local propDef = propAttr[2]
@@ -74,7 +70,6 @@ function ModelBase:_defineScheme(scheme)
 			self["_" .. propName] = propDef
 		end
 	end
-	self._inited = true
 end
 
 function ModelBase:_setProperties(props)
