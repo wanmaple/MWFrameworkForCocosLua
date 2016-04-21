@@ -12,12 +12,7 @@ Date: 4/20/2016
 
 MW_FRAMEWORK_BEGIN
 
-typedef struct
-{
-	cocos2d::Vec2 vertice;
-	cocos2d::Vec2 texCoord;
-	cocos2d::Vec4 color;
-} ROPE_VERT;
+typedef MWVertex2D ROPE_VERT;
 
 class MWSmoothRope : public cocos2d::Node
 {
@@ -28,7 +23,7 @@ public:
 
 	void setEndPoints(const cocos2d::Point &end1, const cocos2d::Point &end2);
 	/**
-	* Use sprite frame with a '#' prefix otherwise it will a local image.
+	* Use sprite frame with a '#' prefix otherwise it will be recognized as a local image.
 	*/
 	void setSegmentTexture(const std::string &path);
 	void setBending(float val);

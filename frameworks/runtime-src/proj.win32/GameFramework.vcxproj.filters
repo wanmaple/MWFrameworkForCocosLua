@@ -418,6 +418,9 @@
     <ClInclude Include="..\Framework\controls\MWSmoothRope.h">
       <Filter>Framework\controls</Filter>
     </ClInclude>
+    <ClInclude Include="..\Framework\base\GraphicBase.h">
+      <Filter>Framework\base</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">

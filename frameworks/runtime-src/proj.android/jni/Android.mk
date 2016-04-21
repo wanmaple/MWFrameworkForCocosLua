@@ -63,6 +63,7 @@ LOCAL_SRC_FILES := entrance/main.cpp \
 				   ../../Framework/scheme/MWGameView.cpp \
 				   ../../Framework/scheme/MWViewController.cpp \
 				   ../../Framework/scheme/MWViewSegue.cpp \
+				   ../../Framework/controls/MWSmoothRope.cpp \
 				   ../../Framework/texture/gif/gif_lib/dgif_lib.c \
 				   ../../Framework/texture/gif/gif_lib/egif_lib.c \
 				   ../../Framework/texture/gif/gif_lib/gif_err.c \

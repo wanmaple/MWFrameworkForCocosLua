@@ -14,6 +14,7 @@
 // common usages.
 #include "MWObject.h"
 #include "MWBinaryData.h"
+#include "GraphicBase.h"
 
 // error handler.
 #include "MWException.h"
