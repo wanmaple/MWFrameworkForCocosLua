@@ -76,3 +76,16 @@ function Node:getBoundingBoxToWorld()
     local bound = cc.rectApplyAffineTransform(boundingBox, tran)
     return bound
 end
+
+function Node:setColor(color)
+    local func = tolua.getcfunction(self, "setColor")
+    if type(color) == "string" then
+        local hex = tonumber("0x" .. color)
+        local r = math.floor(hex / 256 / 256) % 256
+        local g = math.floor(hex / 256) % 256
+        local b = math.mod(hex, 256)
+        func(self, cc.c3b(r, g, b))
+    else
+        func(self, color)
+    end
+end

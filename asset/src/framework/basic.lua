@@ -62,11 +62,10 @@ function MakeScriptHandler(target, selector, ...)
 end
 
 -- call a function after delay
-function CallFunctionAsync(func, delay, ...)
-	local args = {...}
+function CallFunctionWithDelay(func, delay)
 	local handlerId = nil
 	local handlerFunction = function()
-		func(unpack(args))
+		func()
 		cc.Director:getInstance():getScheduler():unscheduleScriptEntry(handlerId)
 	end
 	handlerId = cc.Director:getInstance():getScheduler():scheduleScriptFunc(handlerFunction, delay, false)

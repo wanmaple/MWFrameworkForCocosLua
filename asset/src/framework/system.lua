@@ -211,18 +211,51 @@ function table.serialize(t, filter, ...)
 end
 
 -- split string from the specified character
-function string.split(input, delimiter)
-    input = tostring(input)
+function string.split(s, delimiter)
+    s = tostring(s)
     delimiter = tostring(delimiter)
     if (delimiter == "") then return nil end
 
     local pos, arr = 0, {}
     -- for each divider found
-    for st, sp in function() return string.find(input, delimiter, pos, true) end do
-        table.insert(arr, string.sub(input, pos, st - 1))
+    for st, sp in function() return string.find(s, delimiter, pos, true) end do
+        table.insert(arr, string.sub(s, pos, st - 1))
         pos = sp + 1
     end
-    table.insert(arr, string.sub(input, pos))
+    table.insert(arr, string.sub(s, pos))
 
     return arr
+end
+
+-- get utf-8 char array
+function string.charArray(s)
+	local function getBytesOfChar(idx)
+		local byte = string.byte(s, idx)
+		if bit.rshift(byte, 7) == 0x0 then
+			return 1
+		elseif bit.rshift(byte, 5) == 0x6 then
+			return 2
+		elseif bit.rshift(byte, 4) == 0xE then
+			return 3
+		elseif bit.rshift(byte, 3) == 0x1E then
+			return 4
+		elseif bit.rshift(byte, 2) == 0x3E then
+			return 5
+		elseif bit.rshift(byte, 1) == 0x7E then
+			return 6
+		end
+		return 1
+	end
+
+	local ary = {}
+	local start = 1
+	local idx = 1
+	while idx <= #str do
+		idx = idx + getBytesOfChar(idx)
+		local substr = string.sub(str, start, idx - 1)
+		start = idx
+		table.insert(ary, substr)
+	end
+
+	return ary
 end
