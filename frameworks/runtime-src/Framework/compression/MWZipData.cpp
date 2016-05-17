@@ -9,6 +9,8 @@
 #include "minizip/zip.h"
 #include "minizip/unzip.h"
 
+#define INVALID_ZIP_HANDLE 0
+
 using namespace cocos2d;
 using namespace std;
 
@@ -28,9 +30,9 @@ static voidpf ZCALLBACK OpenZipFile(voidpf opaque, const void *filename, int mod
 	if (!filePath || strlen(filePath) > 0)
 	{
 		// maybe is android file path?
-		Data zipData = FileUtils::getInstance()->getDataFromFile(filename);
-		CCASSERT(!zipData.isNull(), "Invalid zip data.")
-		voidpf buffer = malloc(zipData.getSize());
+		Data zipData = FileUtils::getInstance()->getDataFromFile(filePath);
+		CCASSERT(!zipData.isNull(), "Invalid zip data.");
+		voidpf buffer = ::malloc(zipData.getSize());
 		memcpy(buffer, zipData.getBytes(), zipData.getSize());
 		// save zip info
 		zipInfo->data = buffer;
@@ -75,7 +77,7 @@ static ZPOS64_T ZCALLBACK TellZipFile(voidpf opaque, voidpf stream)
 static int ZCALLBACK CloseZipFile(voidpf opaque, voidpf stream)
 {
 	PZIPINFO zipInfo = (PZIPINFO)opaque;
-	MW_SAFE_DELETE(zipInfo);
+	CC_SAFE_DELETE(zipInfo);
 	if (stream)
 	{
 		free(stream);
@@ -213,17 +215,18 @@ bool MWZipData::initWithBinaryData(MWBinaryData *rawData, const std::string &pas
 	ffunc.zseek64_file = &SeekZipFile;
 	ffunc.zclose_file = &CloseZipFile;
 	ffunc.zerror_file = &ErrorZipFile;
-	ffunc.opaque = new ZIPINFO();
-	ffunc.opaque->data = malloc(rawData->getSize());
-	memcpy(ffunc.opaque->data, rawData->getData(), rawData->getSize());
-	ffunc.opaque->size = rawData->getSize();
+	auto opaque = new ZIPINFO();
+	opaque->data = ::malloc(rawData->getSize());
+	memcpy(opaque->data, rawData->getData(), rawData->getSize());
+	opaque->size = rawData->getSize();
+	ffunc.opaque = opaque;
 
 	g_hUnz = unzOpen2_64(nullptr, &ffunc);
 	if (g_hUnz == INVALID_ZIP_HANDLE)
 	{
 		return false;
 	}
-	CloseZip(g_hUnz);
+	unzClose(g_hUnz);
 	return true;
 }
 
