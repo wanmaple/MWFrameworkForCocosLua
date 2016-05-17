@@ -3,7 +3,7 @@ local TestScene = class("TestScene", function(params)
 	return mw.GameScene:createWithParams(params)
 end)
 
-local TestViewController = Import(".TestViewController")
+local TestViewController = Import("..controllers.TestViewController")
 
 function TestScene:onEnter()
 	local testVc = TestViewController.new()
