@@ -138,6 +138,8 @@ LOCAL_CFLAGS += -DMW_ENABLE_SCRIPT_BINDING \
 					
 LOCAL_STATIC_LIBRARIES := cocos2d_lua_static
 
+APP_ABI := all
+
 include $(BUILD_SHARED_LIBRARY)
 
 $(call import-module,scripting/lua-bindings/proj.android)

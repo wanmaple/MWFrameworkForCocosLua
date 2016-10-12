@@ -80,6 +80,7 @@
 		78C738801A77EF9B0028FC3A /* MWGameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 78C7387E1A77EF9B0028FC3A /* MWGameScene.cpp */; };
 		78C738861A77F4100028FC3A /* MWViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 78C738841A77F4100028FC3A /* MWViewController.cpp */; };
 		78C738941A77F7440028FC3A /* MWBinaryData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 78C738871A77F7440028FC3A /* MWBinaryData.cpp */; };
+		C0092ACD1CEF53AF004CB380 /* MWSmoothRope.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C0092ACB1CEF53AF004CB380 /* MWSmoothRope.cpp */; settings = {ASSET_TAGS = (); }; };
 		C06E23C418CEF9740093C81A /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C06E23C318CEF9740093C81A /* main.cpp */; };
 		C0B09C401C31A65300CD761B /* alloc.c in Sources */ = {isa = PBXBuildFile; fileRef = C0B09C261C31A65300CD761B /* alloc.c */; settings = {ASSET_TAGS = (); }; };
 		C0B09C411C31A65300CD761B /* array.c in Sources */ = {isa = PBXBuildFile; fileRef = C0B09C281C31A65300CD761B /* array.c */; settings = {ASSET_TAGS = (); }; };
@@ -336,6 +337,8 @@
 		78C738891A77F7440028FC3A /* FrameworkMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameworkMacros.h; sourceTree = "<group>"; };
 		78C738921A77F7440028FC3A /* IUncopyable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUncopyable.h; sourceTree = "<group>"; };
 		78C738931A77F7440028FC3A /* IUninheritable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUninheritable.h; sourceTree = "<group>"; };
+		C0092ACB1CEF53AF004CB380 /* MWSmoothRope.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWSmoothRope.cpp; sourceTree = "<group>"; };
+		C0092ACC1CEF53AF004CB380 /* MWSmoothRope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWSmoothRope.h; sourceTree = "<group>"; };
 		C03781AE18BF654500FE4F13 /* cocos2d_lua_bindings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_lua_bindings.xcodeproj; path = "../../cocos2d-x/cocos/scripting/lua-bindings/proj.ios_mac/cocos2d_lua_bindings.xcodeproj"; sourceTree = "<group>"; };
 		C06E23C318CEF9740093C81A /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		C0B09C261C31A65300CD761B /* alloc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = alloc.c; path = protobuf/pbc/alloc.c; sourceTree = "<group>"; };
@@ -768,6 +771,7 @@
 		78C7387C1A77EF8F0028FC3A /* Framework */ = {
 			isa = PBXGroup;
 			children = (
+				C0092ACA1CEF53AF004CB380 /* controls */,
 				C0B09C241C31A63100CD761B /* protobuf */,
 				78C738821A77F17A0028FC3A /* base */,
 				F59B05F21AB36718001204D1 /* net */,
@@ -817,6 +821,15 @@
 				33C73FF01A7F1A190057DA34 /* mwbase.h */,
 			);
 			path = base;
+			sourceTree = "<group>";
+		};
+		C0092ACA1CEF53AF004CB380 /* controls */ = {
+			isa = PBXGroup;
+			children = (
+				C0092ACB1CEF53AF004CB380 /* MWSmoothRope.cpp */,
+				C0092ACC1CEF53AF004CB380 /* MWSmoothRope.h */,
+			);
+			path = controls;
 			sourceTree = "<group>";
 		};
 		C03781AF18BF654500FE4F13 /* Products */ = {
@@ -1483,6 +1496,7 @@
 				F5629EB81AEC202A00CC4F1F /* MWZipData.cpp in Sources */,
 				F53535A51AB4512D00EF7298 /* MWNetProtocol.cpp in Sources */,
 				3382D9F71A80F64C00A3702F /* FrameworkErrors.cpp in Sources */,
+				C0092ACD1CEF53AF004CB380 /* MWSmoothRope.cpp in Sources */,
 				F58A04AB1B86366700BB5229 /* md5.cpp in Sources */,
 				F58A04AD1B86400200BB5229 /* MWCrypto-ios.mm in Sources */,
 				F5DDB31E1AFA2C0B00642E89 /* MWSvgSprite.cpp in Sources */,
