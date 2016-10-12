@@ -267,10 +267,11 @@ MW_LOCAL int tolua_mwframework_MWSqliteDb_executeQuery(lua_State *tolua_S)
                     double val;
                     if (pNum) {
                         val = pNum->getValue();
+						lua_pushinteger(tolua_S, val);       // L: userdata, array, index, dict, key, val
                     } else if (pNum2) {
-                        val = pNum2->getValue();
+						val = pNum2->getValue();
+						lua_pushnumber(tolua_S, val);       // L: userdata, array, index, dict, key, val
                     }
-                    lua_pushnumber(tolua_S, val);       // L: userdata, array, index, dict, key, val
                     lua_rawset(tolua_S, -3);        // L: userdata, array, index, dict
                 } else if ((pStr = dynamic_cast<__String *>(pDict->objectForKey(key)))) {
                     std::string val = pStr->getCString();
