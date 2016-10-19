@@ -75,4 +75,78 @@ void MWAStarPathFinder::updatePointFlag(int x, int y, float flag)
 	pt.setFlag(flag);
 }
 
+bool MWAStarPathFinder::findPath(const cocos2d::Point &start, const cocos2d::Point &goal)
+{
+	if (!_isPointValid(start.x, start.y) || !_isPointValid(goal.x, goal.y))
+	{
+		CCLOG("Invalid start point or goal point.");
+		return false;
+	}
+
+	MWAStarPoint &startPt = _mapPoints[start.x][start.y];
+	MWAStarPoint &goalPt = _mapPoints[goal.x][goal.y];
+	startPt.setG(0.f);		// The cost from start to start is certainly 0.
+	startPt.setH(_calculateH(startPt, goalPt));	// For the first node, h value is completely heuristic.
+
+	_openList.clear();
+	_openList.push_back(startPt);
+	_closeList.clear();
+
+	while (!_openList.empty())
+	{
+		// seek the node of minimum f value from the open list
+		float minH = _openList.begin()->getH();
+		auto minIter = _openList.begin();
+		for (auto iter = _openList.begin(); iter != _openList.end(); ++iter)
+		{
+			if (iter->getH() < minH)
+			{
+				minH = iter->getF();
+				minIter = iter;
+			}
+		}
+		MWAStarPoint &current = *minIter;
+
+		// if the seeked node is the goal, then the way is found.
+		if (current.getX() == goal.x && current.getY() == goal.y)
+		{
+			_reconstructPath(current);
+			return true;
+		}
+
+		// remove from the open list and add to the close list.
+		_openList.erase(minIter);
+		_closeList.push_back(current);
+
+		// get neighbor points of the seeked point.
+		auto neighbors = _neighborPoints(current);
+		for (auto &neighbor : neighbors)
+		{
+			// ignore the neighbor which is already evaluated.
+			if (std::find(_closeList.begin(), _closeList.end(), neighbor) != _closeList.end())
+			{
+				continue;
+			}
+			float tentativeG = current.getG() + _calculateG(current, neighbor);
+			// discover a new node.
+			if (std::find(_openList.begin(), _openList.end(), neighbor) == _openList.end())
+			{
+				_openList.push_back(neighbor);
+			}
+			else if (tentativeG >= _calculateG(startPt, neighbor))
+			{
+				// not a better path.
+				continue;
+			}
+
+			// this path is the best now and record it.
+			neighbor.setParent(&current);
+			neighbor.setG(tentativeG);
+			neighbor.setH(_calculateH(neighbor, goalPt));
+		}
+	}
+
+	return false;
+}
+
 MW_FRAMEWORK_END

@@ -172,6 +172,7 @@ xcopy "$(ProjectDir)..\..\..\asset\src" "$(SolutionDir)$(Configuration).win32\sr
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\UpdateScene.h" />
+    <ClInclude Include="..\Framework\ai\astar\MWAStarPathFinder.h" />
     <ClInclude Include="..\Framework\base\FrameworkErrors.h" />
     <ClInclude Include="..\Framework\base\FrameworkMacros.h" />
     <ClInclude Include="..\Framework\base\GraphicBase.h" />
@@ -282,6 +283,7 @@ xcopy "$(ProjectDir)..\..\..\asset\src" "$(SolutionDir)$(Configuration).win32\sr
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\UpdateScene.cpp" />
+    <ClCompile Include="..\Framework\ai\astar\MWAStarPathFinder.cpp" />
     <ClCompile Include="..\Framework\base\FrameworkErrors.cpp" />
     <ClCompile Include="..\Framework\base\MWArrayList.cpp" />
     <ClCompile Include="..\Framework\base\MWBinaryData.cpp" />

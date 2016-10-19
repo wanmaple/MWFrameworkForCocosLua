@@ -427,6 +427,9 @@
     <ClInclude Include="..\Framework\base\GraphicBase.h">
       <Filter>Framework\base</Filter>
     </ClInclude>
+    <ClInclude Include="..\Framework\ai\astar\MWAStarPathFinder.h">
+      <Filter>Framework\ai\astar</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -689,6 +692,9 @@
     </ClCompile>
     <ClCompile Include="..\Framework\controls\MWSmoothRope.cpp">
       <Filter>Framework\controls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\ai\astar\MWAStarPathFinder.cpp">
+      <Filter>Framework\ai\astar</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
