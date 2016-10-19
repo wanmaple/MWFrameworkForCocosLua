@@ -333,6 +333,13 @@ void MWSmoothRope::_updateVerts()
 	else
 	{
 		// use quadratic bezier
+
+		// avoid x1 equals x2
+		if (_end1.x == _end2.x)
+		{
+			_end2.x += 0.1f;
+		}
+
 		float dis = sqrtf(disSq);
 		Point center = Point(_end1.x + (_end2.x - _end1.x) * _bending, _end1.y - _length * (1 - dis / _length));
 		float seg = 1.f / _segments;
