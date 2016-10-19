@@ -27,7 +27,7 @@ public:
 	MW_SYNTHESIZE(float, _g, G);		// the exact cost from the start node to this node.
 	MW_SYNTHESIZE(float, _h, H);		// heuristic cost estimate from this node to the goal node.
 	MW_SYNTHESIZE(MWAStarPoint *, _parent, Parent);
-	MW_SYNTHESIZE(float, _flag, Flag);
+	MW_SYNTHESIZE(int, _flag, Flag);
 };
 
 class IAStarDelegate
@@ -44,7 +44,7 @@ class MWAStarPathFinder : public MWObject
 public:
 	static MWAStarPathFinder *create(int mapWidth, int mapHeight, bool is8Directions = true);
 
-	void updatePointFlag(int x, int y, float flag);
+	void updatePointFlag(int x, int y, int flag);
 
 	bool findPath(const cocos2d::Point &start, const cocos2d::Point &goal);
 

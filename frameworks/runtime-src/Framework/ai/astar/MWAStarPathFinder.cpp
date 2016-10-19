@@ -64,7 +64,7 @@ MWAStarPathFinder::~MWAStarPathFinder()
 	CC_SAFE_DELETE(_delegate);
 }
 
-void MWAStarPathFinder::updatePointFlag(int x, int y, float flag)
+void MWAStarPathFinder::updatePointFlag(int x, int y, int flag)
 {
 	if (!_isPointValid(x, y))
 	{
@@ -147,6 +147,46 @@ bool MWAStarPathFinder::findPath(const cocos2d::Point &start, const cocos2d::Poi
 	}
 
 	return false;
+}
+
+void MWAStarPathFinder::setDelegate(IAStarDelegate *delegate)
+{
+	CC_SAFE_DELETE(_delegate);
+	_delegate = delegate;
+}
+
+bool MWAStarPathFinder::_isPointValid(int x, int y)
+{
+	return x >= 0 && x < _mapWidth && y >= 0 && y < _mapHeight;
+}
+
+std::vector<MWAStarPoint &> MWAStarPathFinder::_neighborPoints(const MWAStarPoint &center)
+{
+	std::vector<MWAStarPoint &> ret;
+	std::vector<Point> offsets = { Point(0, 1), Point(1, 0), Point(0, -1), Point(-1, 0), };
+	for (auto &offset : offsets)
+	{
+		int x = center.getX() + offset.x;
+		int y = center.getY() + offset.y;
+		if (_isPointValid(x, y))
+		{
+			ret.push_back(_mapPoints[x][y]);
+		}
+	}
+	if (_is8Directions)
+	{
+		offsets = { Point(1, 1), Point(1, -1), Point(-1, -1), Point(-1, 1), };
+		for (auto &offset : offsets)
+		{
+			int x = center.getX() + offset.x;
+			int y = center.getY() + offset.y;
+			if (_isPointValid(x, y))
+			{
+				ret.push_back(_mapPoints[x][y]);
+			}
+		}
+	}
+	return ret;
 }
 
 MW_FRAMEWORK_END
