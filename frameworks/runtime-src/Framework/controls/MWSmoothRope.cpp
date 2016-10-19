@@ -30,12 +30,15 @@ bool MWSmoothRope::init(float length, float thickness, int segments)
 	_thickness = thickness;
 	_segments = segments;
 
-	_program = GLProgramCache::getInstance()->getGLProgram(GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR);
-	_program->retain();
+	setGLProgram(GLProgramCache::getInstance()->getGLProgram(GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR));
 
 	// generate vao and vbo
-	glGenVertexArrays(1, &_vao);
 	glGenBuffers(2, &_vbos[0]);
+
+	if (Configuration::getInstance()->supportsShareableVAO())
+	{
+		glGenVertexArrays(1, &_vao);
+	}
 
 	return true;
 }
@@ -43,7 +46,6 @@ bool MWSmoothRope::init(float length, float thickness, int segments)
 MWSmoothRope::MWSmoothRope()
 	: Node()
 	, _segTex(nullptr)
-	, _program(nullptr)
 	, _vertDirty(true)
 	, _rectRotated(false)
 	, _vao(0)
@@ -53,10 +55,12 @@ MWSmoothRope::MWSmoothRope()
 MWSmoothRope::~MWSmoothRope()
 {
 	CC_SAFE_RELEASE(_segTex);
-	CC_SAFE_RELEASE(_program);
 	
 	glDeleteBuffers(2, &_vbos[0]);
-	glDeleteVertexArrays(1, &_vao);
+	if (Configuration::getInstance()->supportsShareableVAO())
+	{
+		glDeleteVertexArrays(1, &_vao);
+	}
 }
 
 void MWSmoothRope::setBending(float val)
@@ -187,42 +191,59 @@ void MWSmoothRope::onDraw(const cocos2d::Mat4 &transform, uint32_t flags)
 	if (_vertDirty)
 	{
 		_updateVerts();
+
+		glBindBuffer(GL_ARRAY_BUFFER, _vbos[0]);
+		glBufferData(GL_ARRAY_BUFFER, _verts.size() * sizeof(_verts[0]), &_verts[0], GL_DYNAMIC_DRAW);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _vbos[1]);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, _indices.size() * sizeof(GLushort), &_indices[0], GL_DYNAMIC_DRAW);
+
 		_vertDirty = false;
 	}
 
-	Director *director = Director::getInstance();
-	director->pushMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW);
-	director->loadMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW, transform);
-
-	_program->use();
-
-	const Mat4 &mvMat = transform;
-	const Mat4 &pMat = director->getMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_PROJECTION);
-	const Mat4 &mvpMat = pMat * mvMat;
-	GLint mvpMatLoc = _program->getUniformLocation("CC_MVPMatrix");
-	_program->setUniformLocationWithMatrix4fv(mvpMatLoc, mvpMat.m, 1);
+	getGLProgram()->use();
+	getGLProgram()->setUniformsForBuiltins(transform);
 
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, _segTex->getName());
-	GLint texLoc = _program->getUniformLocation("CC_Texture0");
-	_program->setUniformLocationWith1i(texLoc, 0);
 
-	glBindVertexArray(_vao);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	glBindBuffer(GL_ARRAY_BUFFER, _vbos[0]);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _vbos[1]);
+	if (Configuration::getInstance()->supportsShareableVAO())
+	{
+		glBindVertexArray(_vao);
+	}
+	else
+	{
+		glBindBuffer(GL_ARRAY_BUFFER, _vbos[0]);
+
+		GLint posLoc = getGLProgram()->getAttribLocation("a_position");
+		GLint colorLoc = getGLProgram()->getAttribLocation("a_color");
+		GLint texCoordLoc = getGLProgram()->getAttribLocation("a_texCoord");
+
+		glEnableVertexAttribArray(posLoc);
+		glEnableVertexAttribArray(colorLoc);
+		glEnableVertexAttribArray(texCoordLoc);
+
+		glVertexAttribPointer(posLoc, 2, GL_FLOAT, GL_FALSE, sizeof(_verts[0]), nullptr);
+		glVertexAttribPointer(texCoordLoc, 2, GL_FLOAT, GL_FALSE, sizeof(_verts[0]), (const GLvoid *)(2 * sizeof(GLfloat)));
+		glVertexAttribPointer(colorLoc, 4, GL_FLOAT, GL_FALSE, sizeof(_verts[0]), (const GLvoid *)(4 * sizeof(GLfloat)));
+
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _vbos[1]);
+	}
 
 	glDrawElements(GL_TRIANGLES, _segments * 6, GL_UNSIGNED_SHORT, (GLvoid *)0);
 
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-
-	glBindVertexArray(0);
-	glBindTexture(GL_TEXTURE_2D, 0);
+	if (Configuration::getInstance()->supportsShareableVAO())
+	{
+		glBindVertexArray(0);
+	}
+	else
+	{
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	}
 
 	CHECK_GL_ERROR_DEBUG();
-
-	director->popMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW);
 }
 
 void MWSmoothRope::_updateVerts()
@@ -469,32 +490,6 @@ void MWSmoothRope::_updateVerts()
 		_indices.push_back(i * 4 + 2);
 		_indices.push_back(i * 4 + 3);
 	}
-
-	glBindVertexArray(_vao);
-	glBindBuffer(GL_ARRAY_BUFFER, _vbos[0]);
-
-	glBufferData(GL_ARRAY_BUFFER, _verts.size() * sizeof(_verts[0]), &_verts[0], GL_DYNAMIC_DRAW);
-
-	GLint posLoc = _program->getAttribLocation("a_position");
-	GLint colorLoc = _program->getAttribLocation("a_color");
-	GLint texCoordLoc = _program->getAttribLocation("a_texCoord");
-
-	glEnableVertexAttribArray(posLoc);
-	glEnableVertexAttribArray(colorLoc);
-	glEnableVertexAttribArray(texCoordLoc);
-
-	glVertexAttribPointer(posLoc, 2, GL_FLOAT, GL_FALSE, sizeof(_verts[0]), nullptr);
-	glVertexAttribPointer(texCoordLoc, 2, GL_FLOAT, GL_FALSE, sizeof(_verts[0]), (const GLvoid *)(2 * sizeof(GLfloat)));
-	glVertexAttribPointer(colorLoc, 4, GL_FLOAT, GL_FALSE, sizeof(_verts[0]), (const GLvoid *)(4 * sizeof(GLfloat)));
-
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _vbos[1]);
-
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, _indices.size() * sizeof(GLushort), &_indices[0], GL_DYNAMIC_DRAW);
-
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-
-	glBindVertexArray(0);
 }
 
 MW_FRAMEWORK_END

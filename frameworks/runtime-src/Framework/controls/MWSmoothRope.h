@@ -63,7 +63,6 @@ protected:
 	GLuint _vbos[2];		// 0: verts		1: indices
 
 	cocos2d::CustomCommand _cmd;
-	cocos2d::GLProgram *_program;
 };
 
 MW_FRAMEWORK_END

@@ -171,6 +171,8 @@ function table.dump(table)
 		str = str .. "\n" .. prefix .. "}"
 		return str
 	end
+	local traceback = string.split(debug.traceback("", 2), "\n")
+	print("dump from: " .. string.trim(traceback[3]))
 	print(dump(table))
 end
 
@@ -225,6 +227,19 @@ function string.split(s, delimiter)
     table.insert(arr, string.sub(s, pos))
 
     return arr
+end
+
+function string.ltrim(str)
+	return string.gsub(str, "^[ \t\n\r]+", "")
+end
+
+function string.rtrim(str)
+	return string.gsub(str, "[ \t\n\r]+$", "")
+end
+
+function string.trim(str)
+	str = string.gsub(str, "^[ \t\n\r]+", "")
+	return string.gsub(str, "[ \t\n\r]+$", "")
 end
 
 -- get utf-8 char array

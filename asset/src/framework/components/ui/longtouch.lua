@@ -63,8 +63,6 @@ end
 function LongTouchComponent:_onTouchBegan(touch, event)
 	self._currentLoc = touch:getLocation()
 	local bound = self._target:getBoundingBoxToWorld()
-	table.dump(bound)
-	table.dump(self._currentLoc)
 	if cc.rectContainsPoint(bound, self._currentLoc) then
 		self._beginTs = os.clock()
 		self:_scheduleUpdate()
