@@ -40,6 +40,9 @@
 // encryption.
 #include "encryption/MWCrypto.h"
 
+// ai
+#include "ai/astar/MWAStarPathFinder.h"
+
 // utils
 #include "utils/MWUUIDGenerator.h"
 #include "utils/MWAssetManager.h"

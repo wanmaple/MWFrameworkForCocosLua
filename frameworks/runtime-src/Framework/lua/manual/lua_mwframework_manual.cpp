@@ -366,6 +366,55 @@ tolua_lerror:
     return 0;
 }
 
+/******** MWAStarPathFinder extension ********/
+MW_LOCAL int tolua_mwframework_MWAStarPathFinder_getFoundPath(lua_State *tolua_S)
+{
+	if (!tolua_S)
+		return 0;
+
+	int argc = 0;
+	bool ok = true;
+	mwframework::MWAStarPathFinder *cobj = nullptr;
+
+#if COCOS2D_DEBUG >= 1
+	tolua_Error tolua_err;
+#endif
+
+#if COCOS2D_DEBUG >= 1
+	if (!tolua_isusertype(tolua_S, 1, "mw.AStarPathFinder", 0, &tolua_err)) goto tolua_lerror;
+#endif
+
+	cobj = (mwframework::MWAStarPathFinder *) tolua_tousertype(tolua_S, 1, 0);
+
+#if COCOS2D_DEBUG >= 1
+	if (!cobj)
+	{
+		tolua_error(tolua_S, "invalid 'cobj' in function 'tolua_mwframework_MWAStarPathFinder_getFoundPath'", NULL);
+		return 0;
+	}
+#endif
+
+	argc = lua_gettop(tolua_S) - 1;
+	if (argc == 0)
+	{
+		if (!ok)
+			return 0;
+
+		std::vector<cocos2d::Point> ret = cobj->getFoundPath();
+
+		points_to_luaval(tolua_S, &ret[0], ret.size());
+
+		return 1;
+	}
+	luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.AStarPathFinder:getFoundPath", argc, 0);
+	return 0;
+#if COCOS2D_DEBUG >= 1
+tolua_lerror:
+	tolua_error(tolua_S, "#ferror in function 'tolua_mwframework_MWAStarPathFinder_getFoundPath'.", &tolua_err);
+#endif
+	return 0;
+}
+
 /******** MWAssetManager extension ********/
 #if MW_ENABLE_SCRIPT_BINDING
 
@@ -526,6 +575,17 @@ MW_LOCAL void extendMWGifSprite(lua_State *tolua_S)
     }
 }
 
+MW_LOCAL void extendMWAStarPathFinder(lua_State *tolua_S)
+{
+	lua_pushstring(tolua_S, "mw.AStarPathFinder");
+	lua_rawget(tolua_S, LUA_REGISTRYINDEX);
+	if (lua_istable(tolua_S, -1)) {
+		lua_pushstring(tolua_S, "getFoundPath");
+		lua_pushcfunction(tolua_S, tolua_mwframework_MWAStarPathFinder_getFoundPath);
+		lua_rawset(tolua_S, -3);
+	}
+}
+
 #if MW_ENABLE_SCRIPT_BINDING
 
 MW_LOCAL void extendMWAssetManager(lua_State *tolua_S)
@@ -556,6 +616,7 @@ TOLUA_API int register_all_mwframework_manual(lua_State *tolua_S)
     extendMWJsonObject(tolua_S);
     extendMWSqliteDb(tolua_S);
     extendMWGifSprite(tolua_S);
+	extendMWAStarPathFinder(tolua_S);
 #if MW_ENABLE_SCRIPT_BINDING
     extendMWAssetManager(tolua_S);
 #endif

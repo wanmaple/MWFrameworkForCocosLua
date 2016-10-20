@@ -7,6 +7,7 @@
 #include "mwframework.h"
 
 #include "UpdateScene.h"
+#include "AStarScene.h"
 
 #define BUNDLE_VERSION "1.0.0-D2.987612"
 #define CPP_PROGRAM_VERSION 1
@@ -60,6 +61,8 @@ bool AppDelegate::applicationDidFinishLaunching()
         MWLuaUtils::getInstance()->executeScriptFile("src/main.lua");
 #endif
     } else {
+		auto glView = GLViewImpl::createWithRect("My Game", Rect(0, 0, 1136, 640));
+		Director::getInstance()->setOpenGLView(glView);
         Director::getInstance()->runWithScene(UpdateScene::create());
     }
 

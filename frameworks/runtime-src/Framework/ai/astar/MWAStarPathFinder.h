@@ -16,6 +16,7 @@ class MWAStarPoint
 {
 public:
 	MWAStarPoint(int x, int y);
+	MWAStarPoint() : MWAStarPoint(0, 0) {}
 
 	inline float getF()
 	{
@@ -27,16 +28,16 @@ public:
 	MW_SYNTHESIZE(float, _g, G);		// the exact cost from the start node to this node.
 	MW_SYNTHESIZE(float, _h, H);		// heuristic cost estimate from this node to the goal node.
 	MW_SYNTHESIZE(MWAStarPoint *, _parent, Parent);
-	MW_SYNTHESIZE(int, _flag, Flag);
 };
 
 class IAStarDelegate
 {
 public:
-	virtual ~IAStarDelegate();
+	virtual ~IAStarDelegate() {}
 
-	virtual float calculateG(const MWAStarPoint &current, const MWAStarPoint &neighbor) = 0;
-	virtual float calculateH(const MWAStarPoint &current, const MWAStarPoint &goal) = 0;
+	virtual bool isWalkable(int x, int y) = 0;
+	virtual float calculateG(MWAStarPoint *current, MWAStarPoint *goal) = 0;
+	virtual float calculateH(MWAStarPoint *current, MWAStarPoint *goal) = 0;
 };
 
 class MWAStarPathFinder : public MWObject
@@ -44,9 +45,8 @@ class MWAStarPathFinder : public MWObject
 public:
 	static MWAStarPathFinder *create(int mapWidth, int mapHeight, bool is8Directions = true);
 
-	void updatePointFlag(int x, int y, int flag);
-
-	bool findPath(const cocos2d::Point &start, const cocos2d::Point &goal);
+	bool findPath(const cocos2d::Point &start, const cocos2d::Point &goal, bool ignoreCornor = false);
+	std::vector<cocos2d::Point> getFoundPath();
 
 	void setDelegate(IAStarDelegate *delegate);
 #if MW_ENABLE_SCRIPT_BINDING
@@ -60,19 +60,20 @@ private:
 	bool init(int mapWidth, int mapHeight, bool is8Directions);
 
 	bool _isPointValid(int x, int y);
-	std::vector<MWAStarPoint &> _neighborPoints(const MWAStarPoint &center);
-	float _calculateG(const MWAStarPoint &current, const MWAStarPoint &neighbor);
-	float _calculateH(const MWAStarPoint &current, const MWAStarPoint &goal);
-	void _reconstructPath(const MWAStarPoint &current);
+	std::vector<MWAStarPoint *> _neighborPoints(MWAStarPoint *center, bool ignoreCornor);
+	bool _isWalkable(int x, int y);
+	float _calculateG(MWAStarPoint *current, MWAStarPoint *goal);
+	float _calculateH(MWAStarPoint *current, MWAStarPoint *goal);
+	void _reconstructPath(MWAStarPoint *current);
 
 	MWAStarPathFinder();
 	~MWAStarPathFinder();
 
 	std::vector<std::vector<MWAStarPoint>> _mapPoints;
 	bool _is8Directions;
-	std::list<MWAStarPoint> _openList;
-	std::vector<MWAStarPoint> _closeList;
-	std::vector<MWAStarPoint> _pathList;
+	std::list<MWAStarPoint *> _openList;
+	std::vector<MWAStarPoint *> _closeList;
+	std::vector<MWAStarPoint *> _pathList;
 
 	IAStarDelegate *_delegate;
 };
