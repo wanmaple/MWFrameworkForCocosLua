@@ -117,6 +117,11 @@
 
 
 --------------------------------------------------------
+-- the mw MWAStarPathFinder
+-- @field [parent=#mw] MWAStarPathFinder#MWAStarPathFinder MWAStarPathFinder preloaded module
+
+
+--------------------------------------------------------
 -- the mw MWUUIDGenerator
 -- @field [parent=#mw] MWUUIDGenerator#MWUUIDGenerator MWUUIDGenerator preloaded module
 

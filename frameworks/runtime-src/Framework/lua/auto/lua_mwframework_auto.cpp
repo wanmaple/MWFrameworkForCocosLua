@@ -8048,53 +8048,6 @@ int lua_mwframework_MWJsonObject_getNumber(lua_State* tolua_S)
 
     return 0;
 }
-int lua_mwframework_MWJsonObject_toPrettyString(lua_State* tolua_S)
-{
-    int argc = 0;
-    mwframework::MWJsonObject* cobj = nullptr;
-    bool ok  = true;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_Error tolua_err;
-#endif
-
-
-#if COCOS2D_DEBUG >= 1
-    if (!tolua_isusertype(tolua_S,1,"mw.JsonObject",0,&tolua_err)) goto tolua_lerror;
-#endif
-
-    cobj = (mwframework::MWJsonObject*)tolua_tousertype(tolua_S,1,0);
-
-#if COCOS2D_DEBUG >= 1
-    if (!cobj) 
-    {
-        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWJsonObject_toPrettyString'", nullptr);
-        return 0;
-    }
-#endif
-
-    argc = lua_gettop(tolua_S)-1;
-    if (argc == 0) 
-    {
-        if(!ok)
-        {
-            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWJsonObject_toPrettyString'", nullptr);
-            return 0;
-        }
-        std::string ret = cobj->toPrettyString();
-        tolua_pushcppstring(tolua_S,ret);
-        return 1;
-    }
-    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.JsonObject:toPrettyString",argc, 0);
-    return 0;
-
-#if COCOS2D_DEBUG >= 1
-    tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWJsonObject_toPrettyString'.",&tolua_err);
-#endif
-
-    return 0;
-}
 int lua_mwframework_MWJsonObject_putJsonArray(lua_State* tolua_S)
 {
     int argc = 0;
@@ -8495,6 +8448,53 @@ int lua_mwframework_MWJsonObject_getJsonObject(lua_State* tolua_S)
 
     return 0;
 }
+int lua_mwframework_MWJsonObject_toPrettyString(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWJsonObject* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.JsonObject",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWJsonObject*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWJsonObject_toPrettyString'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 0) 
+    {
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWJsonObject_toPrettyString'", nullptr);
+            return 0;
+        }
+        std::string ret = cobj->toPrettyString();
+        tolua_pushcppstring(tolua_S,ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.JsonObject:toPrettyString",argc, 0);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWJsonObject_toPrettyString'.",&tolua_err);
+#endif
+
+    return 0;
+}
 int lua_mwframework_MWJsonObject_hasKey(lua_State* tolua_S)
 {
     int argc = 0;
@@ -8741,7 +8741,6 @@ int lua_register_mwframework_MWJsonObject(lua_State* tolua_S)
         tolua_function(tolua_S,"putBoolean",lua_mwframework_MWJsonObject_putBoolean);
         tolua_function(tolua_S,"getString",lua_mwframework_MWJsonObject_getString);
         tolua_function(tolua_S,"getNumber",lua_mwframework_MWJsonObject_getNumber);
-        tolua_function(tolua_S,"toPrettyString",lua_mwframework_MWJsonObject_toPrettyString);
         tolua_function(tolua_S,"putJsonArray",lua_mwframework_MWJsonObject_putJsonArray);
         tolua_function(tolua_S,"putJsonObject",lua_mwframework_MWJsonObject_putJsonObject);
         tolua_function(tolua_S,"clear",lua_mwframework_MWJsonObject_clear);
@@ -8750,6 +8749,7 @@ int lua_register_mwframework_MWJsonObject(lua_State* tolua_S)
         tolua_function(tolua_S,"remove",lua_mwframework_MWJsonObject_remove);
         tolua_function(tolua_S,"putString",lua_mwframework_MWJsonObject_putString);
         tolua_function(tolua_S,"getJsonObject",lua_mwframework_MWJsonObject_getJsonObject);
+        tolua_function(tolua_S,"toPrettyString",lua_mwframework_MWJsonObject_toPrettyString);
         tolua_function(tolua_S,"hasKey",lua_mwframework_MWJsonObject_hasKey);
         tolua_function(tolua_S,"getObject",lua_mwframework_MWJsonObject_getObject);
         tolua_function(tolua_S,"createWithFile", lua_mwframework_MWJsonObject_createWithFile);
@@ -10566,6 +10566,273 @@ int lua_register_mwframework_MWCrypto(lua_State* tolua_S)
     std::string typeName = typeid(mwframework::MWCrypto).name();
     g_luaType[typeName] = "mw.Crypto";
     g_typeCast["Crypto"] = "mw.Crypto";
+    return 1;
+}
+
+int lua_mwframework_MWAStarPathFinder_getMapHeight(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWAStarPathFinder* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.AStarPathFinder",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWAStarPathFinder*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWAStarPathFinder_getMapHeight'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 0) 
+    {
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWAStarPathFinder_getMapHeight'", nullptr);
+            return 0;
+        }
+        int ret = cobj->getMapHeight();
+        tolua_pushnumber(tolua_S,(lua_Number)ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.AStarPathFinder:getMapHeight",argc, 0);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWAStarPathFinder_getMapHeight'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWAStarPathFinder_findPath(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWAStarPathFinder* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.AStarPathFinder",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWAStarPathFinder*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWAStarPathFinder_findPath'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 2) 
+    {
+        cocos2d::Point arg0;
+        cocos2d::Point arg1;
+
+        ok &= luaval_to_point(tolua_S, 2, &arg0, "mw.AStarPathFinder:findPath");
+
+        ok &= luaval_to_point(tolua_S, 3, &arg1, "mw.AStarPathFinder:findPath");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWAStarPathFinder_findPath'", nullptr);
+            return 0;
+        }
+        bool ret = cobj->findPath(arg0, arg1);
+        tolua_pushboolean(tolua_S,(bool)ret);
+        return 1;
+    }
+    if (argc == 3) 
+    {
+        cocos2d::Point arg0;
+        cocos2d::Point arg1;
+        bool arg2;
+
+        ok &= luaval_to_point(tolua_S, 2, &arg0, "mw.AStarPathFinder:findPath");
+
+        ok &= luaval_to_point(tolua_S, 3, &arg1, "mw.AStarPathFinder:findPath");
+
+        ok &= luaval_to_boolean(tolua_S, 4,&arg2, "mw.AStarPathFinder:findPath");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWAStarPathFinder_findPath'", nullptr);
+            return 0;
+        }
+        bool ret = cobj->findPath(arg0, arg1, arg2);
+        tolua_pushboolean(tolua_S,(bool)ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.AStarPathFinder:findPath",argc, 2);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWAStarPathFinder_findPath'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWAStarPathFinder_getMapWidth(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWAStarPathFinder* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.AStarPathFinder",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWAStarPathFinder*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWAStarPathFinder_getMapWidth'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 0) 
+    {
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWAStarPathFinder_getMapWidth'", nullptr);
+            return 0;
+        }
+        int ret = cobj->getMapWidth();
+        tolua_pushnumber(tolua_S,(lua_Number)ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.AStarPathFinder:getMapWidth",argc, 0);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWAStarPathFinder_getMapWidth'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWAStarPathFinder_create(lua_State* tolua_S)
+{
+    int argc = 0;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertable(tolua_S,1,"mw.AStarPathFinder",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    argc = lua_gettop(tolua_S) - 1;
+
+    if (argc == 2)
+    {
+        int arg0;
+        int arg1;
+        ok &= luaval_to_int32(tolua_S, 2,(int *)&arg0, "mw.AStarPathFinder:create");
+        ok &= luaval_to_int32(tolua_S, 3,(int *)&arg1, "mw.AStarPathFinder:create");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWAStarPathFinder_create'", nullptr);
+            return 0;
+        }
+        mwframework::MWAStarPathFinder* ret = mwframework::MWAStarPathFinder::create(arg0, arg1);
+        object_to_luaval<mwframework::MWAStarPathFinder>(tolua_S, "mw.AStarPathFinder",(mwframework::MWAStarPathFinder*)ret);
+        return 1;
+    }
+    if (argc == 3)
+    {
+        int arg0;
+        int arg1;
+        bool arg2;
+        ok &= luaval_to_int32(tolua_S, 2,(int *)&arg0, "mw.AStarPathFinder:create");
+        ok &= luaval_to_int32(tolua_S, 3,(int *)&arg1, "mw.AStarPathFinder:create");
+        ok &= luaval_to_boolean(tolua_S, 4,&arg2, "mw.AStarPathFinder:create");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWAStarPathFinder_create'", nullptr);
+            return 0;
+        }
+        mwframework::MWAStarPathFinder* ret = mwframework::MWAStarPathFinder::create(arg0, arg1, arg2);
+        object_to_luaval<mwframework::MWAStarPathFinder>(tolua_S, "mw.AStarPathFinder",(mwframework::MWAStarPathFinder*)ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d\n ", "mw.AStarPathFinder:create",argc, 2);
+    return 0;
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWAStarPathFinder_create'.",&tolua_err);
+#endif
+    return 0;
+}
+static int lua_mwframework_MWAStarPathFinder_finalize(lua_State* tolua_S)
+{
+    printf("luabindings: finalizing LUA object (MWAStarPathFinder)");
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+    if (
+    !tolua_isusertype(tolua_S,1,"mw.AStarPathFinder",0,&tolua_err) ||
+    !tolua_isnoobj(tolua_S,2,&tolua_err)
+    )
+        goto tolua_lerror;
+    else
+#endif
+    {
+        mwframework::MWAStarPathFinder* self = (mwframework::MWAStarPathFinder*)  tolua_tousertype(tolua_S,1,0);
+#if COCOS2D_DEBUG >= 1
+        if (!self) tolua_error(tolua_S,"invalid 'self' in function 'delete'", nullptr);
+#endif
+        delete self;
+    }
+    return 0;
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'delete'.",&tolua_err);
+    return 0;
+#endif
+    return 0;
+}
+
+int lua_register_mwframework_MWAStarPathFinder(lua_State* tolua_S)
+{
+    tolua_usertype(tolua_S,"mw.AStarPathFinder");
+    tolua_cclass(tolua_S,"AStarPathFinder","mw.AStarPathFinder","mw.Object",nullptr);
+
+    tolua_beginmodule(tolua_S,"AStarPathFinder");
+        tolua_function(tolua_S,"getMapHeight",lua_mwframework_MWAStarPathFinder_getMapHeight);
+        tolua_function(tolua_S,"findPath",lua_mwframework_MWAStarPathFinder_findPath);
+        tolua_function(tolua_S,"getMapWidth",lua_mwframework_MWAStarPathFinder_getMapWidth);
+        tolua_function(tolua_S,"create", lua_mwframework_MWAStarPathFinder_create);
+    tolua_endmodule(tolua_S);
+    std::string typeName = typeid(mwframework::MWAStarPathFinder).name();
+    g_luaType[typeName] = "mw.AStarPathFinder";
+    g_typeCast["AStarPathFinder"] = "mw.AStarPathFinder";
     return 1;
 }
 
@@ -13112,6 +13379,7 @@ TOLUA_API int register_all_mwframework(lua_State* tolua_S)
 	lua_register_mwframework_MWObject(tolua_S);
 	lua_register_mwframework_MWViewSegue(tolua_S);
 	lua_register_mwframework_MWNetRequest(tolua_S);
+	lua_register_mwframework_MWAStarPathFinder(tolua_S);
 	lua_register_mwframework_MWGameView(tolua_S);
 	lua_register_mwframework_MWGifFrame(tolua_S);
 	lua_register_mwframework_MWException(tolua_S);

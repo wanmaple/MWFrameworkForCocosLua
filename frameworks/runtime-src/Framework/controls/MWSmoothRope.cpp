@@ -137,7 +137,6 @@ void MWSmoothRope::setSegmentTexture(const std::string &path)
 
 	if (path[0] == '#')
 	{
-		Texture2D *tex = nullptr;
 		Rect texRect = Rect::ZERO;
 		string sfpath = path.substr(1, path.length() - 1);
 		auto sf = SpriteFrameCache::getInstance()->getSpriteFrameByName(sfpath);
@@ -155,7 +154,7 @@ void MWSmoothRope::setSegmentTexture(const std::string &path)
 	}
 	else
 	{
-		auto tex = Director::getInstance()->getTextureCache()->addImage(path);
+		Texture2D *tex = Director::getInstance()->getTextureCache()->addImage(path);
 		if (!tex)
 		{
 			CCLOG("MWSmoothRope ERROR: Texture %s load failed.", path.c_str());
@@ -195,9 +194,9 @@ void MWSmoothRope::onDraw(const cocos2d::Mat4 &transform, uint32_t flags)
 		glBindBuffer(GL_ARRAY_BUFFER, _vbos[0]);
 		glBufferData(GL_ARRAY_BUFFER, _verts.size() * sizeof(_verts[0]), &_verts[0], GL_DYNAMIC_DRAW);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _vbos[1]);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, _indices.size() * sizeof(GLushort), &_indices[0], GL_DYNAMIC_DRAW);
-
-		_vertDirty = false;
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, _indices.size() * sizeof(GLushort), &_indices[0], GL_DYNAMIC_DRAW);
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	}
 
 	getGLProgram()->use();
@@ -211,36 +210,32 @@ void MWSmoothRope::onDraw(const cocos2d::Mat4 &transform, uint32_t flags)
 	if (Configuration::getInstance()->supportsShareableVAO())
 	{
 		glBindVertexArray(_vao);
-	}
-	else
-	{
-		glBindBuffer(GL_ARRAY_BUFFER, _vbos[0]);
-
-		GLint posLoc = getGLProgram()->getAttribLocation("a_position");
-		GLint colorLoc = getGLProgram()->getAttribLocation("a_color");
-		GLint texCoordLoc = getGLProgram()->getAttribLocation("a_texCoord");
-
-		glEnableVertexAttribArray(posLoc);
-		glEnableVertexAttribArray(colorLoc);
-		glEnableVertexAttribArray(texCoordLoc);
-
-		glVertexAttribPointer(posLoc, 2, GL_FLOAT, GL_FALSE, sizeof(_verts[0]), nullptr);
-		glVertexAttribPointer(texCoordLoc, 2, GL_FLOAT, GL_FALSE, sizeof(_verts[0]), (const GLvoid *)(2 * sizeof(GLfloat)));
-		glVertexAttribPointer(colorLoc, 4, GL_FLOAT, GL_FALSE, sizeof(_verts[0]), (const GLvoid *)(4 * sizeof(GLfloat)));
-
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _vbos[1]);
-	}
-
+    }
+    
+    if (_vertDirty || !Configuration::getInstance()->supportsShareableVAO()) {
+        glBindBuffer(GL_ARRAY_BUFFER, _vbos[0]);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _vbos[1]);
+        
+        GLint posLoc = getGLProgram()->getAttribLocation("a_position");
+        GLint colorLoc = getGLProgram()->getAttribLocation("a_color");
+        GLint texCoordLoc = getGLProgram()->getAttribLocation("a_texCoord");
+        
+        glEnableVertexAttribArray(posLoc);
+        glEnableVertexAttribArray(colorLoc);
+        glEnableVertexAttribArray(texCoordLoc);
+        
+        glVertexAttribPointer(posLoc, 2, GL_FLOAT, GL_FALSE, sizeof(_verts[0]), nullptr);
+        glVertexAttribPointer(texCoordLoc, 2, GL_FLOAT, GL_FALSE, sizeof(_verts[0]), (const GLvoid *)(2 * sizeof(GLfloat)));
+        glVertexAttribPointer(colorLoc, 4, GL_FLOAT, GL_FALSE, sizeof(_verts[0]), (const GLvoid *)(4 * sizeof(GLfloat)));
+        
+        _vertDirty = false;
+    }
+    
 	glDrawElements(GL_TRIANGLES, _segments * 6, GL_UNSIGNED_SHORT, (GLvoid *)0);
 
 	if (Configuration::getInstance()->supportsShareableVAO())
 	{
 		glBindVertexArray(0);
-	}
-	else
-	{
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	}
 
 	CHECK_GL_ERROR_DEBUG();
@@ -304,17 +299,11 @@ void MWSmoothRope::_updateVerts()
 
 			if (_rectRotated)
 			{
-#if CC_FIX_ARTIFACTS_BY_STRECHING_TEXEL
-				left = (2 * rect.origin.x + 1) / (2 * atlasWidth);
-				right = left + (rect.size.height * 2 - 2) / (2 * atlasWidth);
-				top = (2 * rect.origin.y + 1) / (2 * atlasHeight);
-				bottom = top + (rect.size.width * 2 - 2) / (2 * atlasHeight);
-#else
 				left = rect.origin.x / atlasWidth;
 				right = (rect.origin.x + rect.size.height) / atlasWidth;
 				top = rect.origin.y / atlasHeight;
 				bottom = (rect.origin.y + rect.size.width) / atlasHeight;
-#endif
+                
 				tl.texCoord.set(right, top);
 				bl.texCoord.set(left, top);
 				tr.texCoord.set(right, bottom);
@@ -322,17 +311,11 @@ void MWSmoothRope::_updateVerts()
 			}
 			else
 			{
-#if CC_FIX_ARTIFACTS_BY_STRECHING_TEXEL
-				left = (2 * rect.origin.x + 1) / (2 * atlasWidth);
-				right = left + (rect.size.width * 2 - 2) / (2 * atlasWidth);
-				top = (2 * rect.origin.y + 1) / (2 * atlasHeight);
-				bottom = top + (rect.size.height * 2 - 2) / (2 * atlasHeight);
-#else
 				left = rect.origin.x / atlasWidth;
 				right = (rect.origin.x + rect.size.width) / atlasWidth;
 				top = rect.origin.y / atlasHeight;
 				bottom = (rect.origin.y + rect.size.height) / atlasHeight;
-#endif
+
 				tl.texCoord.set(left, top);
 				bl.texCoord.set(left, bottom);
 				tr.texCoord.set(right, top);
@@ -432,17 +415,11 @@ void MWSmoothRope::_updateVerts()
 
 			if (_rectRotated)
 			{
-#if CC_FIX_ARTIFACTS_BY_STRECHING_TEXEL
-				left = (2 * rect.origin.x + 1) / (2 * atlasWidth);
-				right = left + (rect.size.height * 2 - 2) / (2 * atlasWidth);
-				top = (2 * rect.origin.y + 1) / (2 * atlasHeight);
-				bottom = top + (rect.size.width * 2 - 2) / (2 * atlasHeight);
-#else
 				left = rect.origin.x / atlasWidth;
 				right = (rect.origin.x + rect.size.height) / atlasWidth;
 				top = rect.origin.y / atlasHeight;
 				bottom = (rect.origin.y + rect.size.width) / atlasHeight;
-#endif
+
 				tl.texCoord.set(right, top);
 				bl.texCoord.set(left, top);
 				tr.texCoord.set(right, bottom);
@@ -450,17 +427,11 @@ void MWSmoothRope::_updateVerts()
 			}
 			else
 			{
-#if CC_FIX_ARTIFACTS_BY_STRECHING_TEXEL
-				left = (2 * rect.origin.x + 1) / (2 * atlasWidth);
-				right = left + (rect.size.width * 2 - 2) / (2 * atlasWidth);
-				top = (2 * rect.origin.y + 1) / (2 * atlasHeight);
-				bottom = top + (rect.size.height * 2 - 2) / (2 * atlasHeight);
-#else
 				left = rect.origin.x / atlasWidth;
 				right = (rect.origin.x + rect.size.width) / atlasWidth;
 				top = rect.origin.y / atlasHeight;
 				bottom = (rect.origin.y + rect.size.height) / atlasHeight;
-#endif
+
 				tl.texCoord.set(left, top);
 				bl.texCoord.set(left, bottom);
 				tr.texCoord.set(right, top);

@@ -44,6 +44,8 @@ class MWAStarPathFinder : public MWObject
 {
 public:
 	static MWAStarPathFinder *create(int mapWidth, int mapHeight, bool is8Directions = true);
+    
+    ~MWAStarPathFinder();
 
 	bool findPath(const cocos2d::Point &start, const cocos2d::Point &goal, bool ignoreCornor = false);
 	std::vector<cocos2d::Point> getFoundPath();
@@ -67,7 +69,6 @@ private:
 	void _reconstructPath(MWAStarPoint *current);
 
 	MWAStarPathFinder();
-	~MWAStarPathFinder();
 
 	std::vector<std::vector<MWAStarPoint>> _mapPoints;
 	bool _is8Directions;

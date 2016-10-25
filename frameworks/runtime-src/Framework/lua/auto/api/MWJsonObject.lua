@@ -57,13 +57,6 @@
 -- @return double#double ret (return value: double)
         
 --------------------------------
--- Convert to pretty string.<br>
--- return Return pretty version of json string.
--- @function [parent=#MWJsonObject] toPrettyString 
--- @param self
--- @return string#string ret (return value: string)
-        
---------------------------------
 -- Add new json array to json.<br>
 -- param key Key to insert.<br>
 -- param value Json array to add.
@@ -126,6 +119,13 @@
 -- @param self
 -- @param #string key
 -- @return MWJsonObject#MWJsonObject ret (return value: mw.MWJsonObject)
+        
+--------------------------------
+-- Convert to pretty string.<br>
+-- return Return pretty version of json string.
+-- @function [parent=#MWJsonObject] toPrettyString 
+-- @param self
+-- @return string#string ret (return value: string)
         
 --------------------------------
 -- Figure out whether json has the specified key.<br>
