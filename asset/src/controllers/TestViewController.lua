@@ -91,6 +91,14 @@ function TestViewController:viewDidLoad()
 	for _, v in ipairs(data.phone) do
 		log("\t%s\t%s", v.number, v.type)
 	end
+
+	log("Test AStar path finder...")
+	local pathFinder = mw.AStarPathFinder:create(10, 7)
+	pathFinder:setScriptDelegate(self)
+	if pathFinder:findPath(cc.p(0, 3), cc.p(9, 3)) then
+		local foundPath = pathFinder:getFoundPath()
+		table.dump(foundPath)
+	end
 end
 
 function TestViewController:viewDidUnload()
@@ -116,6 +124,25 @@ end
 
 function TestViewController:onClick(target)
 	print("TestViewController:onClick", target)
+end
+
+function TestViewController:isWalkable(x, y)
+	if x == 4 and y ~= 0 and y ~= 6 then
+		return false
+	end
+	return true
+end
+
+function TestViewController:calculateG(x1, y1, x2, y2)
+	local dx = math.abs(x1 - x2)
+	local dy = math.abs(y1 - y2)
+	local minD = math.min(dx, dy)
+	local maxD = math.max(dx, dy)
+	return minD * 14 + (maxD - minD) * 10
+end
+
+function TestViewController:calculateH(x1, y1, x2, y2)
+	return math.abs(x1 - x2) + math.abs(y1 - y2)
 end
 
 return TestViewController

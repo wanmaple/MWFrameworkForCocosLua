@@ -415,6 +415,56 @@ tolua_lerror:
 	return 0;
 }
 
+MW_LOCAL int tolua_mwframework_MWAStarPathFinder_setScriptDelegate(lua_State *tolua_S)
+{
+	int argc = 0;
+	mwframework::MWAStarPathFinder *cobj = nullptr;
+	bool ok = true;
+
+#if COCOS2D_DEBUG >= 1
+	tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+	if (!tolua_isusertype(tolua_S, 1, "mw.AStarPathFinder", 0, &tolua_err)) goto tolua_lerror;
+#endif
+
+	cobj = (mwframework::MWAStarPathFinder*) tolua_tousertype(tolua_S, 1, 0);
+
+#if COCOS2D_DEBUG >= 1
+	if (!cobj)
+	{
+		tolua_error(tolua_S, "invalid 'cobj' in function 'tolua_mwframework_MWAStarPathFinder_setScriptDelegate'", nullptr);
+		return 0;
+	}
+#endif
+
+	argc = lua_gettop(tolua_S) - 1;
+	if (argc == 1)
+	{
+		cocos2d::Ref *arg0;
+
+		ok &= luaval_to_object<cocos2d::Ref>(tolua_S, 2, "cc.Ref", &arg0);
+		if (!ok)
+		{
+			tolua_error(tolua_S, "invalid arguments in function 'tolua_mwframework_MWAStarPathFinder_setScriptDelegate'", nullptr);
+			return 0;
+		}
+		cobj->setScriptDelegate(arg0);
+		return 0;
+	}
+	luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.AStarPathFinder:setScriptDelegate", argc, 1);
+	return 0;
+
+#if COCOS2D_DEBUG >= 1
+tolua_lerror:
+	tolua_error(tolua_S, "#ferror in function 'tolua_mwframework_MWAStarPathFinder_setScriptDelegate'.", &tolua_err);
+#endif
+
+	return 0;
+}
+
 /******** MWAssetManager extension ********/
 #if MW_ENABLE_SCRIPT_BINDING
 
@@ -582,6 +632,9 @@ MW_LOCAL void extendMWAStarPathFinder(lua_State *tolua_S)
 	if (lua_istable(tolua_S, -1)) {
 		lua_pushstring(tolua_S, "getFoundPath");
 		lua_pushcfunction(tolua_S, tolua_mwframework_MWAStarPathFinder_getFoundPath);
+		lua_rawset(tolua_S, -3);
+		lua_pushstring(tolua_S, "setScriptDelegate");
+		lua_pushcfunction(tolua_S, tolua_mwframework_MWAStarPathFinder_setScriptDelegate);
 		lua_rawset(tolua_S, -3);
 	}
 }
