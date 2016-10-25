@@ -40,7 +40,6 @@ function Import(moduleName, currentModuleName)
             end
 
             currentModuleNameParts = string.split(currentModuleName, ".")
-            table.dump(currentModuleNameParts)
         end
         table.remove(currentModuleNameParts, #currentModuleNameParts)
     end
