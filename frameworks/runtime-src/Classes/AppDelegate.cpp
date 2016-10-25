@@ -7,7 +7,6 @@
 #include "mwframework.h"
 
 #include "UpdateScene.h"
-#include "AStarScene.h"
 
 #define BUNDLE_VERSION "1.0.0-D2.987612"
 #define CPP_PROGRAM_VERSION 1
