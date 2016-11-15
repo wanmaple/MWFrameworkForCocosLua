@@ -415,6 +415,9 @@ tolua_lerror:
 	return 0;
 }
 
+#if MW_ENABLE_SCRIPT_BINDING
+
+/******** MWAStarPathFinder extension ********/
 MW_LOCAL int tolua_mwframework_MWAStarPathFinder_setScriptDelegate(lua_State *tolua_S)
 {
 	int argc = 0;
@@ -466,8 +469,6 @@ tolua_lerror:
 }
 
 /******** MWAssetManager extension ********/
-#if MW_ENABLE_SCRIPT_BINDING
-
 MW_LOCAL int tolua_mwframework_MWAssetManager_getScriptDelegate(lua_State *tolua_S)
 {
     int argc = 0;
