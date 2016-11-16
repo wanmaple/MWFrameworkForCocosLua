@@ -64,7 +64,7 @@
     <LibraryPath>$(MSBuildProgramFiles32)\Microsoft SDKs\Windows\v7.1A\lib;$(ProjectDir)..\Framework\net\http\pthreads-win32\lib\x86;$(ProjectDir)..\Framework\protobuf\precompile\win32;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <LibraryPath>$(MSBuildProgramFiles32)\Microsoft SDKs\Windows\v7.1A\lib;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(MSBuildProgramFiles32)\Microsoft SDKs\Windows\v7.1A\lib;$(ProjectDir)..\Framework\net\http\pthreads-win32\lib\x86;$(ProjectDir)..\Framework\protobuf\precompile\win32;$(LibraryPath)</LibraryPath>
     <IncludePath>$(ProjectDir)..\Framework;$(ProjectDir)..\Framework\net\http\pthreads-win32\include;$(ProjectDir)..\Framework\platform\win32;$(ProjectDir)..\Framework\protobuf\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -169,6 +169,9 @@ xcopy "$(ProjectDir)..\..\..\asset\src" "$(SolutionDir)$(Configuration).win32\sr
       <Command>
       </Command>
     </PreLinkEvent>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)..\..\..\asset\res" "$(SolutionDir)$(Configuration).win32\res" /E /Y /I /R</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
@@ -338,46 +341,46 @@ xcopy "$(ProjectDir)..\..\..\asset\src" "$(SolutionDir)$(Configuration).win32\sr
     <ClCompile Include="..\Framework\platform\MWSystemHelper.cpp" />
     <ClCompile Include="..\Framework\platform\win32\MWIOUtilsStrategyWin32.cpp" />
     <ClCompile Include="..\Framework\platform\win32\MWSystemHelperStrategyWin32.cpp" />
-    <ClCompile Include="..\Framework\protobuf\pbc\alloc.c">
+    <ClCompile Include="..\Framework\protobuf\pbc\alloc.cpp">
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
     </ClCompile>
-    <ClCompile Include="..\Framework\protobuf\pbc\array.c">
+    <ClCompile Include="..\Framework\protobuf\pbc\array.cpp">
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
     </ClCompile>
-    <ClCompile Include="..\Framework\protobuf\pbc\bootstrap.c">
+    <ClCompile Include="..\Framework\protobuf\pbc\bootstrap.cpp">
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
     </ClCompile>
-    <ClCompile Include="..\Framework\protobuf\pbc\context.c">
+    <ClCompile Include="..\Framework\protobuf\pbc\context.cpp">
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
     </ClCompile>
-    <ClCompile Include="..\Framework\protobuf\pbc\decode.c">
+    <ClCompile Include="..\Framework\protobuf\pbc\decode.cpp">
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
     </ClCompile>
-    <ClCompile Include="..\Framework\protobuf\pbc\map.c">
+    <ClCompile Include="..\Framework\protobuf\pbc\map.cpp">
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
     </ClCompile>
-    <ClCompile Include="..\Framework\protobuf\pbc\pattern.c">
+    <ClCompile Include="..\Framework\protobuf\pbc\pattern.cpp">
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
     </ClCompile>
-    <ClCompile Include="..\Framework\protobuf\pbc\pbc-lua.c">
+    <ClCompile Include="..\Framework\protobuf\pbc\pbc-lua.cpp">
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
     </ClCompile>
-    <ClCompile Include="..\Framework\protobuf\pbc\proto.c">
+    <ClCompile Include="..\Framework\protobuf\pbc\proto.cpp">
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
     </ClCompile>
-    <ClCompile Include="..\Framework\protobuf\pbc\register.c">
+    <ClCompile Include="..\Framework\protobuf\pbc\register.cpp">
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
     </ClCompile>
-    <ClCompile Include="..\Framework\protobuf\pbc\rmessage.c">
+    <ClCompile Include="..\Framework\protobuf\pbc\rmessage.cpp">
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
     </ClCompile>
-    <ClCompile Include="..\Framework\protobuf\pbc\stringpool.c">
+    <ClCompile Include="..\Framework\protobuf\pbc\stringpool.cpp">
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
     </ClCompile>
-    <ClCompile Include="..\Framework\protobuf\pbc\varint.c">
+    <ClCompile Include="..\Framework\protobuf\pbc\varint.cpp">
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
     </ClCompile>
-    <ClCompile Include="..\Framework\protobuf\pbc\wmessage.c">
+    <ClCompile Include="..\Framework\protobuf\pbc\wmessage.cpp">
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
     </ClCompile>
     <ClCompile Include="..\Framework\scheme\MWGameScene.cpp" />

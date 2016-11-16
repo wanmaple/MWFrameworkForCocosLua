@@ -648,53 +648,53 @@
     <ClCompile Include="..\Framework\utils\MWUUIDGenerator-win32.cpp">
       <Filter>Framework\utils</Filter>
     </ClCompile>
-    <ClCompile Include="..\Framework\protobuf\pbc\alloc.c">
-      <Filter>Framework\protobuf\pbc</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Framework\protobuf\pbc\array.c">
-      <Filter>Framework\protobuf\pbc</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Framework\protobuf\pbc\bootstrap.c">
-      <Filter>Framework\protobuf\pbc</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Framework\protobuf\pbc\context.c">
-      <Filter>Framework\protobuf\pbc</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Framework\protobuf\pbc\decode.c">
-      <Filter>Framework\protobuf\pbc</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Framework\protobuf\pbc\map.c">
-      <Filter>Framework\protobuf\pbc</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Framework\protobuf\pbc\pattern.c">
-      <Filter>Framework\protobuf\pbc</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Framework\protobuf\pbc\proto.c">
-      <Filter>Framework\protobuf\pbc</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Framework\protobuf\pbc\register.c">
-      <Filter>Framework\protobuf\pbc</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Framework\protobuf\pbc\rmessage.c">
-      <Filter>Framework\protobuf\pbc</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Framework\protobuf\pbc\stringpool.c">
-      <Filter>Framework\protobuf\pbc</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Framework\protobuf\pbc\varint.c">
-      <Filter>Framework\protobuf\pbc</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Framework\protobuf\pbc\wmessage.c">
-      <Filter>Framework\protobuf\pbc</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Framework\protobuf\pbc\pbc-lua.c">
-      <Filter>Framework\protobuf\pbc</Filter>
-    </ClCompile>
     <ClCompile Include="..\Framework\controls\MWSmoothRope.cpp">
       <Filter>Framework\controls</Filter>
     </ClCompile>
     <ClCompile Include="..\Framework\ai\astar\MWAStarPathFinder.cpp">
       <Filter>Framework\ai\astar</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\protobuf\pbc\alloc.cpp">
+      <Filter>Framework\protobuf\pbc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\protobuf\pbc\array.cpp">
+      <Filter>Framework\protobuf\pbc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\protobuf\pbc\bootstrap.cpp">
+      <Filter>Framework\protobuf\pbc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\protobuf\pbc\context.cpp">
+      <Filter>Framework\protobuf\pbc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\protobuf\pbc\decode.cpp">
+      <Filter>Framework\protobuf\pbc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\protobuf\pbc\map.cpp">
+      <Filter>Framework\protobuf\pbc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\protobuf\pbc\pattern.cpp">
+      <Filter>Framework\protobuf\pbc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\protobuf\pbc\pbc-lua.cpp">
+      <Filter>Framework\protobuf\pbc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\protobuf\pbc\proto.cpp">
+      <Filter>Framework\protobuf\pbc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\protobuf\pbc\register.cpp">
+      <Filter>Framework\protobuf\pbc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\protobuf\pbc\rmessage.cpp">
+      <Filter>Framework\protobuf\pbc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\protobuf\pbc\stringpool.cpp">
+      <Filter>Framework\protobuf\pbc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\protobuf\pbc\varint.cpp">
+      <Filter>Framework\protobuf\pbc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\protobuf\pbc\wmessage.cpp">
+      <Filter>Framework\protobuf\pbc</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
