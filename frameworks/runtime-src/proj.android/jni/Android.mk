@@ -64,6 +64,7 @@ LOCAL_SRC_FILES := entrance/main.cpp \
 				   ../../Framework/scheme/MWViewController.cpp \
 				   ../../Framework/scheme/MWViewSegue.cpp \
 				   ../../Framework/controls/MWSmoothRope.cpp \
+				   ../../Framework/ai/astar/MWAStarPathFinder.cpp \
 				   ../../Framework/texture/gif/gif_lib/dgif_lib.c \
 				   ../../Framework/texture/gif/gif_lib/egif_lib.c \
 				   ../../Framework/texture/gif/gif_lib/gif_err.c \
@@ -81,20 +82,20 @@ LOCAL_SRC_FILES := entrance/main.cpp \
 				   ../../Framework/encryption/md5/md5.cpp \
 				   ../../Framework/encryption/MWCrypto.cpp \
 				   ../../Framework/encryption/MWCrypto-android.cpp \
-				   ../../Framework/protobuf/pbc/alloc.c \
-				   ../../Framework/protobuf/pbc/array.c \
-				   ../../Framework/protobuf/pbc/bootstrap.c \
-				   ../../Framework/protobuf/pbc/context.c \
-				   ../../Framework/protobuf/pbc/decode.c \
-				   ../../Framework/protobuf/pbc/map.c \
-				   ../../Framework/protobuf/pbc/pattern.c \
-				   ../../Framework/protobuf/pbc/pbc-lua.c \
-				   ../../Framework/protobuf/pbc/proto.c \
-				   ../../Framework/protobuf/pbc/register.c \
-				   ../../Framework/protobuf/pbc/rmessage.c \
-				   ../../Framework/protobuf/pbc/stringpool.c \
-				   ../../Framework/protobuf/pbc/varint.c \
-				   ../../Framework/protobuf/pbc/wmessage.c
+				   ../../Framework/protobuf/pbc/alloc.cpp \
+				   ../../Framework/protobuf/pbc/array.cpp \
+				   ../../Framework/protobuf/pbc/bootstrap.cpp \
+				   ../../Framework/protobuf/pbc/context.cpp \
+				   ../../Framework/protobuf/pbc/decode.cpp \
+				   ../../Framework/protobuf/pbc/map.cpp \
+				   ../../Framework/protobuf/pbc/pattern.cpp \
+				   ../../Framework/protobuf/pbc/pbc-lua.cpp \
+				   ../../Framework/protobuf/pbc/proto.cpp \
+				   ../../Framework/protobuf/pbc/register.cpp \
+				   ../../Framework/protobuf/pbc/rmessage.cpp \
+				   ../../Framework/protobuf/pbc/stringpool.cpp \
+				   ../../Framework/protobuf/pbc/varint.cpp \
+				   ../../Framework/protobuf/pbc/wmessage.cpp
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes \
 					$(LOCAL_PATH)/../../Framework \
