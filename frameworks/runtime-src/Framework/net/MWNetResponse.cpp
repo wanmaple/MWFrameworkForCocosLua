@@ -27,7 +27,7 @@ bool MWNetResponse::init(const std::string &protocolId, MWBinaryData *body, MWNe
     _protocolId = protocolId;
     _body = body;
     _relatedRequest = request;
-    _relatedRequest->retain();
+	CC_SAFE_RETAIN(_relatedRequest);
     
     return true;
 }
