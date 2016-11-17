@@ -16,6 +16,7 @@ This is a cross-platform game framework for cocos2d-x 3.x lua.
 - AStar path finder.
 - Network scheme.
 - Http service.
+- SocketIO service.
 
 ## TODO
 
