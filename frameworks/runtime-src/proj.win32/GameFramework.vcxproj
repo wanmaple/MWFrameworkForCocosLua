@@ -249,6 +249,7 @@ xcopy "$(ProjectDir)..\..\..\asset\src" "$(SolutionDir)$(Configuration).win32\sr
     <ClInclude Include="..\Framework\net\MWNetRequest.h" />
     <ClInclude Include="..\Framework\net\MWNetResponse.h" />
     <ClInclude Include="..\Framework\net\MWNetService.h" />
+    <ClInclude Include="..\Framework\net\socketio\MWSocketIOService.h" />
     <ClInclude Include="..\Framework\platform\MWIOUtils.h" />
     <ClInclude Include="..\Framework\platform\MWIOUtilsStrategy.h" />
     <ClInclude Include="..\Framework\platform\MWSystemHelper.h" />
@@ -337,6 +338,7 @@ xcopy "$(ProjectDir)..\..\..\asset\src" "$(SolutionDir)$(Configuration).win32\sr
     <ClCompile Include="..\Framework\net\MWNetProtocol.cpp" />
     <ClCompile Include="..\Framework\net\MWNetRequest.cpp" />
     <ClCompile Include="..\Framework\net\MWNetResponse.cpp" />
+    <ClCompile Include="..\Framework\net\socketio\MWSocketIOService.cpp" />
     <ClCompile Include="..\Framework\platform\MWIOUtils.cpp" />
     <ClCompile Include="..\Framework\platform\MWSystemHelper.cpp" />
     <ClCompile Include="..\Framework\platform\win32\MWIOUtilsStrategyWin32.cpp" />

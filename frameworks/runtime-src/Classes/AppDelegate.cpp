@@ -18,6 +18,19 @@ using namespace std;
 using namespace CocosDenshion;
 using namespace mwframework;
 
+//class TempHandler : public MWNetHandler
+//{
+//public:
+//	void handleSuccessfulMessage(MWNetResponse *response)
+//	{
+//		CCLOG("RECEIEVE SUCCESSFUL MESSAGE: %s");
+//	}
+//	void handleFailedMessage(MWNetResponse *response)
+//	{
+//		CCLOG("RECEIEVE FAILED MESSAGE: %s");
+//	}
+//};
+
 AppDelegate::AppDelegate()
 {
 }

@@ -103,6 +103,9 @@
     <Filter Include="Framework\ai\astar">
       <UniqueIdentifier>{75a7adf8-82d2-41d4-905c-d486502f3e18}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Framework\net\socketio">
+      <UniqueIdentifier>{eaf2f5b9-b7c7-4090-baab-d02b79964cae}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h">
@@ -430,6 +433,9 @@
     <ClInclude Include="..\Framework\ai\astar\MWAStarPathFinder.h">
       <Filter>Framework\ai\astar</Filter>
     </ClInclude>
+    <ClInclude Include="..\Framework\net\socketio\MWSocketIOService.h">
+      <Filter>Framework\net\socketio</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -695,6 +701,9 @@
     </ClCompile>
     <ClCompile Include="..\Framework\protobuf\pbc\wmessage.cpp">
       <Filter>Framework\protobuf\pbc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\net\socketio\MWSocketIOService.cpp">
+      <Filter>Framework\net\socketio</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

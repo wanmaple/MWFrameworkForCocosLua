@@ -20,7 +20,7 @@ MWNetResponse *MWNetResponse::create(const std::string &protocolId, MWBinaryData
 
 bool MWNetResponse::init(const std::string &protocolId, MWBinaryData *body, MWNetRequest *request)
 {
-    if (protocolId.size() <= 0 || !body->isValid() || !request) {
+    if (protocolId.size() <= 0 || !body->isValid()) {
         return false;
     }
     

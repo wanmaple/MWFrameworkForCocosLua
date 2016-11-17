@@ -63,6 +63,9 @@
 #include "net/http/MWHttpPostService.h"
 #include "net/http/MWHttpDownloader.h"
 
+// socket
+#include "net/socketio/MWSocketIOService.h"
+
 // lua related.
 #if MW_ENABLE_SCRIPT_BINDING
 #include "lua/MWLuaUtils.h"
