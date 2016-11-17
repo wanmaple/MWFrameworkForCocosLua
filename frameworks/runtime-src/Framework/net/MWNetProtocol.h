@@ -40,12 +40,12 @@ public:
     /**
      * Protocol id, Service id getter and setter.
      */
-    MW_SYNTHESIZE_PASS_BY_CONST_REF(std::string, _serviceId, ServiceId);
-    MW_SYNTHESIZE_PASS_BY_CONST_REF(std::string, _protocolId, ProtocolId);
+    MW_SYNTHESIZE_PASS_BY_CONST_REF(std::string, _serviceId, getServiceId, setServiceId);
+    MW_SYNTHESIZE_PASS_BY_CONST_REF(std::string, _protocolId, getProtocolId, setProtocolId);
     /**
      * Related handler getter.
      */
-    MW_SYNTHESIZE_READONLY(MWNetHandler *, _relatedHandler, RelatedHandler);
+    MW_SYNTHESIZE_READONLY(MWNetHandler *, _relatedHandler, getRelatedHandler);
     
 protected:
     bool init(const std::string &protocolId, const std::string &serviceId, MWNetHandler *handler);

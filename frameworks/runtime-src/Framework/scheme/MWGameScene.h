@@ -105,8 +105,8 @@ public:
      */
     MWViewController *getViewControllerByIdentifier(const std::string &identifier);
     
-    MW_SYNTHESIZE(double, _memoryWarningLine, MemoryWarningLine);
-    MW_SYNTHESIZE_READONLY(MWDictionary *, _viewControllers, ViewControllers);
+    MW_SYNTHESIZE(double, _memoryWarningLine, getMemoryWarningLine, setMemoryWarningLine);
+    MW_SYNTHESIZE_READONLY(MWDictionary *, _viewControllers, getViewControllers);
     
 protected:
     virtual bool init(MWDictionary *params = nullptr);

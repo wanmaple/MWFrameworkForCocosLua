@@ -184,19 +184,19 @@ public:
     /**
      * DownloadEvent getter and setter.
      */
-    MW_SYNTHESIZE(EDownloadEventType, _type, Type);
+    MW_SYNTHESIZE(EDownloadEventType, _type, getType, setType);
     /**
      * Related task getter and setter.
      */
-    MW_SYNTHESIZE_RETAIN(MWDownloadTask*, _task, RelatedTask);
+    MW_SYNTHESIZE_RETAIN(MWDownloadTask*, _task, getRelatedTask, setRelatedTask);
     /**
      * Download progress getter and setter.
      */
-    MW_SYNTHESIZE(float, _progress, Progress);
+    MW_SYNTHESIZE(float, _progress, getProgress, setProgress);
     /**
      * Error message getter and setter.
      */
-    MW_SYNTHESIZE_PASS_BY_CONST_REF(std::string, _errorMsg, ErrorMessage);
+    MW_SYNTHESIZE_PASS_BY_CONST_REF(std::string, _errorMsg, getErrorMessage, setErrorMessage);
 };
 
 /**
@@ -257,9 +257,9 @@ public:
     /**
      * Downloader delegate getter and setter.
      */
-    MW_SYNTHESIZE(IHttpDownloaderDelegate*, _delegate, Delegate);
+    MW_SYNTHESIZE(IHttpDownloaderDelegate*, _delegate, getDelegate, setDelegate);
     
-    MW_SYNTHESIZE(bool, _needRetry, NeedRetry);
+    MW_SYNTHESIZE(bool, _needRetry, isNeedRetry, setNeedRetry);
     
 protected:
     bool _initThread();

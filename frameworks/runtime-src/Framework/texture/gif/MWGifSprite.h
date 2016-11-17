@@ -72,7 +72,7 @@ public:
     
     virtual void update(float dt) override;
     
-    MW_SYNTHESIZE(float, _speedRatio, SpeedRatio);
+    MW_SYNTHESIZE(float, _speedRatio, getSpeedRatio, setSpeedRatio);
     
 protected:
     bool initWithFile(const std::string &gifPath);

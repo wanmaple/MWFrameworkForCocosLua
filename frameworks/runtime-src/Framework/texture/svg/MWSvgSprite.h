@@ -40,7 +40,7 @@ public:
     virtual ~MWSvgSprite();
     
     void setVectorScale(float scale);
-    MW_SYNTHESIZE_READONLY(float, _vectorScale, VectorScale);
+    MW_SYNTHESIZE_READONLY(float, _vectorScale, getVectorScale);
     
 protected:
     bool initWithFile(const std::string &svgPath, float dpi);

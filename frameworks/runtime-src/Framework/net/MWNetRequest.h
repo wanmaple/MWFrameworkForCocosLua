@@ -37,9 +37,8 @@ public:
     /**
      * Body, Protocol id getter and setter.
      */
-    // MW_SYNTHESIZE_PASS_BY_CONST_REF(std::string, _body, Body);
-	MW_SYNTHESIZE(MWBinaryData *, _body, Body);
-    MW_SYNTHESIZE_PASS_BY_CONST_REF(std::string, _protocolId, ProtocolId);
+	MW_SYNTHESIZE(MWBinaryData *, _body, getBody, setBody);
+    MW_SYNTHESIZE_PASS_BY_CONST_REF(std::string, _protocolId, getProtocolId, setProtocolId);
     
 protected:
 	bool init(const std::string &protocolId, MWBinaryData *body);

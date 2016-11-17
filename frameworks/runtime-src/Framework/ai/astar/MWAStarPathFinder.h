@@ -23,11 +23,11 @@ public:
 		return _g + _h;
 	}
 
-	MW_SYNTHESIZE(int, _x, X);
-	MW_SYNTHESIZE(int, _y, Y);
-	MW_SYNTHESIZE(float, _g, G);		// the exact cost from the start node to this node.
-	MW_SYNTHESIZE(float, _h, H);		// heuristic cost estimate from this node to the goal node.
-	MW_SYNTHESIZE(MWAStarPoint *, _parent, Parent);
+	MW_SYNTHESIZE(int, _x, getX, setX);
+	MW_SYNTHESIZE(int, _y, getY, setY);
+	MW_SYNTHESIZE(float, _g, getG, setG);		// the exact cost from the start node to this node.
+	MW_SYNTHESIZE(float, _h, getH, setH);		// heuristic cost estimate from this node to the goal node.
+	MW_SYNTHESIZE(MWAStarPoint *, _parent, getParent, setParent);
 };
 
 class IAStarDelegate
@@ -52,11 +52,11 @@ public:
 
 	void setDelegate(IAStarDelegate *delegate);
 #if MW_ENABLE_SCRIPT_BINDING
-	MW_SYNTHESIZE_RETAIN(cocos2d::Ref *, _scriptDelegate, ScriptDelegate);
+	MW_SYNTHESIZE_RETAIN(cocos2d::Ref *, _scriptDelegate, getScriptDelegate, setScriptDelegate);
 #endif
 
-	MW_SYNTHESIZE_READONLY(int, _mapWidth, MapWidth);
-	MW_SYNTHESIZE_READONLY(int, _mapHeight, MapHeight);
+	MW_SYNTHESIZE_READONLY(int, _mapWidth, getMapWidth);
+	MW_SYNTHESIZE_READONLY(int, _mapHeight, getMapHeight);
 
 private:
 	bool init(int mapWidth, int mapHeight, bool is8Directions);

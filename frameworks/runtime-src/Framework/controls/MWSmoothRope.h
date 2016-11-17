@@ -33,12 +33,12 @@ public:
 	void setColor(const cocos2d::Color3B &color);
 	void setOpacity(GLubyte opacity);
 
-	MW_SYNTHESIZE_READONLY(float, _bending, Bending);
-	MW_SYNTHESIZE_READONLY(float, _length, Length);
-	MW_SYNTHESIZE_READONLY(float, _thickness, Thickness);
-	MW_SYNTHESIZE_READONLY(int, _segments, Segments);
-	MW_SYNTHESIZE_RETAIN(cocos2d::Texture2D *, _segTex, SegmentTexture);
-	MW_SYNTHESIZE_PASS_BY_CONST_REF(cocos2d::Rect, _texRect, TextureRect);
+	MW_SYNTHESIZE_READONLY(float, _bending, getBending);
+	MW_SYNTHESIZE_READONLY(float, _length, getLength);
+	MW_SYNTHESIZE_READONLY(float, _thickness, getThickness);
+	MW_SYNTHESIZE_READONLY(int, _segments, getSegments);
+	MW_SYNTHESIZE_RETAIN(cocos2d::Texture2D *, _segTex, getSegmentTexture, setSegmentTexture);
+	MW_SYNTHESIZE_PASS_BY_CONST_REF(cocos2d::Rect, _texRect, getTextureRect, setTextureRect);
 
 protected:
 	MWSmoothRope();

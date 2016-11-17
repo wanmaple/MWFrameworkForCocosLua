@@ -35,7 +35,7 @@ public:
     }
     void setSpriteFrame(cocos2d::SpriteFrame *spriteFrame);
     
-    MW_SYNTHESIZE(MW_UINT, _duration, Duration);
+    MW_SYNTHESIZE(MW_UINT, _duration, getDuration, setDuration);
     
 protected:
     MWGifFrame();

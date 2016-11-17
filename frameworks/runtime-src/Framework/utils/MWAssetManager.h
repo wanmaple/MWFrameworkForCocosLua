@@ -65,22 +65,15 @@ public:
     void checkVersion();
     void beginUpdate();
     
-    inline bool isDevelopMode()
-    {
-        return _isDevelopMode;
-    }
-    inline void setDevelopMode(bool isDevelopMode)
-    {
-        _isDevelopMode = isDevelopMode;
-    }
     void setAssetUpdateDelegate(IAssetUpdateDelegate *delegate);
 #if MW_ENABLE_SCRIPT_BINDING
-    MW_SYNTHESIZE_RETAIN(cocos2d::Ref *, _scriptDelegate, ScriptDelegate);
+    MW_SYNTHESIZE_RETAIN(cocos2d::Ref *, _scriptDelegate, getScriptDelegate, setScriptDelegate);
 #endif
-    MW_SYNTHESIZE(int, _programVersion, ProgramVersion);
-    MW_SYNTHESIZE_PASS_BY_CONST_REF(std::string, _bundleVersion, BundleVersion);
-    MW_SYNTHESIZE_PASS_BY_CONST_REF(std::string, _assetRoot, AssetRootPath);
-    MW_SYNTHESIZE_PASS_BY_CONST_REF(std::string, _serverUrl, ServerUrl);
+	MW_SYNTHESIZE(bool, _isDevelopMode, isDevelopMode, setDevelopMode);
+    MW_SYNTHESIZE(int, _programVersion, getProgramVersion, setProgramVersion);
+    MW_SYNTHESIZE_PASS_BY_CONST_REF(std::string, _bundleVersion, getBundleVersion, setBundleVersion);
+    MW_SYNTHESIZE_PASS_BY_CONST_REF(std::string, _assetRoot, getAssetRootPath, setAssetRootPath);
+    MW_SYNTHESIZE_PASS_BY_CONST_REF(std::string, _serverUrl, getServerUrl, setServerUrl);
     
 private:
     // overrides
@@ -111,7 +104,6 @@ private:
     void _delegateVersionUpdated();
     void _delegateUpdateError(EAssetUpdateErrorType errorType, const std::string &errorMsg);
     
-    bool _isDevelopMode;
     bool _readyToUpdate;
     std::string _localVersion;
     std::string _newVersion;
