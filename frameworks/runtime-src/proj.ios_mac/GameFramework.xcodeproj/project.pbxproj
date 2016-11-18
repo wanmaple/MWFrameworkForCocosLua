@@ -98,6 +98,7 @@
 		C0B09C4D1C31A65300CD761B /* wmessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C0B09C3F1C31A65300CD761B /* wmessage.cpp */; settings = {ASSET_TAGS = (); }; };
 		C0B09C4F1C31ABA800CD761B /* libprotobuf-lite.la in Frameworks */ = {isa = PBXBuildFile; fileRef = C0B09C4E1C31ABA800CD761B /* libprotobuf-lite.la */; };
 		C0F0D9F81DBF161800CCD664 /* MWAStarPathFinder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C0F0D9F61DBF161800CCD664 /* MWAStarPathFinder.cpp */; settings = {ASSET_TAGS = (); }; };
+		C0F1F6421DDF520100E3C691 /* MWSocketIOService.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C0F1F6401DDF520100E3C691 /* MWSocketIOService.cpp */; settings = {ASSET_TAGS = (); }; };
 		D6B061351803AC000077942B /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6B061341803AC000077942B /* CoreMotion.framework */; };
 		F293B3CD15EB7BE500256477 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F293B3CC15EB7BE500256477 /* QuartzCore.framework */; };
 		F293B3D115EB7BE500256477 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F293B3D015EB7BE500256477 /* OpenAL.framework */; };
@@ -371,6 +372,8 @@
 		C0B09C4E1C31ABA800CD761B /* libprotobuf-lite.la */ = {isa = PBXFileReference; lastKnownFileType = text; name = "libprotobuf-lite.la"; path = "../Framework/protobuf/precompile/unix/libprotobuf-lite.la"; sourceTree = "<group>"; };
 		C0F0D9F61DBF161800CCD664 /* MWAStarPathFinder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWAStarPathFinder.cpp; sourceTree = "<group>"; };
 		C0F0D9F71DBF161800CCD664 /* MWAStarPathFinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWAStarPathFinder.h; sourceTree = "<group>"; };
+		C0F1F6401DDF520100E3C691 /* MWSocketIOService.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWSocketIOService.cpp; sourceTree = "<group>"; };
+		C0F1F6411DDF520100E3C691 /* MWSocketIOService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWSocketIOService.h; sourceTree = "<group>"; };
 		D6B061341803AC000077942B /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreMotion.framework; sourceTree = DEVELOPER_DIR; };
 		F293B3C815EB7BE500256477 /* GameFramework iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GameFramework iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F293B3CC15EB7BE500256477 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -903,6 +906,16 @@
 			path = astar;
 			sourceTree = "<group>";
 		};
+		C0F1F63F1DDF520100E3C691 /* socketio */ = {
+			isa = PBXGroup;
+			children = (
+				C0F1F6401DDF520100E3C691 /* MWSocketIOService.cpp */,
+				C0F1F6411DDF520100E3C691 /* MWSocketIOService.h */,
+			);
+			name = socketio;
+			path = net/socketio;
+			sourceTree = "<group>";
+		};
 		F293B3BD15EB7BE500256477 = {
 			isa = PBXGroup;
 			children = (
@@ -1119,6 +1132,7 @@
 		F59B05F21AB36718001204D1 /* net */ = {
 			isa = PBXGroup;
 			children = (
+				C0F1F63F1DDF520100E3C691 /* socketio */,
 				F5714FD81AB9D77B00AF3A51 /* http */,
 				F53535AB1AB455AE00EF7298 /* MWNetCenter.cpp */,
 				F53535AC1AB455AE00EF7298 /* MWNetCenter.h */,
@@ -1498,6 +1512,7 @@
 				F5CF4A421ADB6DA900D0AF87 /* MWViewSegue.cpp in Sources */,
 				F293BB9C15EB831F00256477 /* AppDelegate.cpp in Sources */,
 				F5CF4A511ADCE52C00D0AF87 /* MWHttpPostService.cpp in Sources */,
+				C0F1F6421DDF520100E3C691 /* MWSocketIOService.cpp in Sources */,
 				33250DD81A91E39A00D1668B /* libjson.cpp in Sources */,
 				F5CF4A5F1ADCE8CD00D0AF87 /* dgif_lib.c in Sources */,
 				33250DCB1A91E39A00D1668B /* internalJSONNode.cpp in Sources */,
