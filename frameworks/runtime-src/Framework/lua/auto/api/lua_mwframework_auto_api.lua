@@ -161,4 +161,29 @@
 -- @field [parent=#mw] MWNetCenter#MWNetCenter MWNetCenter preloaded module
 
 
+--------------------------------------------------------
+-- the mw MWHttpGetService
+-- @field [parent=#mw] MWHttpGetService#MWHttpGetService MWHttpGetService preloaded module
+
+
+--------------------------------------------------------
+-- the mw MWHttpPostService
+-- @field [parent=#mw] MWHttpPostService#MWHttpPostService MWHttpPostService preloaded module
+
+
+--------------------------------------------------------
+-- the mw MWTcpSocket
+-- @field [parent=#mw] MWTcpSocket#MWTcpSocket MWTcpSocket preloaded module
+
+
+--------------------------------------------------------
+-- the mw MWTcpService
+-- @field [parent=#mw] MWTcpService#MWTcpService MWTcpService preloaded module
+
+
+--------------------------------------------------------
+-- the mw MWSocketIOService
+-- @field [parent=#mw] MWSocketIOService#MWSocketIOService MWSocketIOService preloaded module
+
+
 return nil

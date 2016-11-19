@@ -4316,7 +4316,7 @@ int lua_mwframework_MWSmoothRope_getTextureRect(lua_State* tolua_S)
             tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWSmoothRope_getTextureRect'", nullptr);
             return 0;
         }
-        cocos2d::Rect ret = cobj->getTextureRect();
+        const cocos2d::Rect& ret = cobj->getTextureRect();
         rect_to_luaval(tolua_S, ret);
         return 1;
     }
@@ -11088,7 +11088,7 @@ int lua_mwframework_MWAssetManager_getAssetRootPath(lua_State* tolua_S)
             tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWAssetManager_getAssetRootPath'", nullptr);
             return 0;
         }
-        std::string ret = cobj->getAssetRootPath();
+        const std::string& ret = cobj->getAssetRootPath();
         tolua_pushcppstring(tolua_S,ret);
         return 1;
     }
@@ -11135,7 +11135,7 @@ int lua_mwframework_MWAssetManager_getServerUrl(lua_State* tolua_S)
             tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWAssetManager_getServerUrl'", nullptr);
             return 0;
         }
-        std::string ret = cobj->getServerUrl();
+        const std::string& ret = cobj->getServerUrl();
         tolua_pushcppstring(tolua_S,ret);
         return 1;
     }
@@ -11375,7 +11375,7 @@ int lua_mwframework_MWAssetManager_getBundleVersion(lua_State* tolua_S)
             tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWAssetManager_getBundleVersion'", nullptr);
             return 0;
         }
-        std::string ret = cobj->getBundleVersion();
+        const std::string& ret = cobj->getBundleVersion();
         tolua_pushcppstring(tolua_S,ret);
         return 1;
     }
@@ -11831,7 +11831,7 @@ int lua_mwframework_MWNetRequest_getProtocolId(lua_State* tolua_S)
             tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWNetRequest_getProtocolId'", nullptr);
             return 0;
         }
-        std::string ret = cobj->getProtocolId();
+        const std::string& ret = cobj->getProtocolId();
         tolua_pushcppstring(tolua_S,ret);
         return 1;
     }
@@ -12154,7 +12154,7 @@ int lua_mwframework_MWNetResponse_getProtocolId(lua_State* tolua_S)
             tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWNetResponse_getProtocolId'", nullptr);
             return 0;
         }
-        std::string ret = cobj->getProtocolId();
+        const std::string& ret = cobj->getProtocolId();
         tolua_pushcppstring(tolua_S,ret);
         return 1;
     }
@@ -12480,7 +12480,7 @@ int lua_mwframework_MWNetProtocol_getServiceId(lua_State* tolua_S)
             tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWNetProtocol_getServiceId'", nullptr);
             return 0;
         }
-        std::string ret = cobj->getServiceId();
+        const std::string& ret = cobj->getServiceId();
         tolua_pushcppstring(tolua_S,ret);
         return 1;
     }
@@ -12527,7 +12527,7 @@ int lua_mwframework_MWNetProtocol_getProtocolId(lua_State* tolua_S)
             tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWNetProtocol_getProtocolId'", nullptr);
             return 0;
         }
-        std::string ret = cobj->getProtocolId();
+        const std::string& ret = cobj->getProtocolId();
         tolua_pushcppstring(tolua_S,ret);
         return 1;
     }
@@ -13369,6 +13369,1834 @@ int lua_register_mwframework_MWNetCenter(lua_State* tolua_S)
     g_typeCast["NetCenter"] = "mw.NetCenter";
     return 1;
 }
+
+int lua_mwframework_MWHttpGetService_executeCommand(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWHttpGetService* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.HttpGetService",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWHttpGetService*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWHttpGetService_executeCommand'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 2) 
+    {
+        std::string arg0;
+        cocos2d::Ref* arg1;
+
+        ok &= luaval_to_std_string(tolua_S, 2,&arg0, "mw.HttpGetService:executeCommand");
+
+        ok &= luaval_to_object<cocos2d::Ref>(tolua_S, 3, "cc.Ref",&arg1);
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWHttpGetService_executeCommand'", nullptr);
+            return 0;
+        }
+        cobj->executeCommand(arg0, arg1);
+        return 0;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.HttpGetService:executeCommand",argc, 2);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWHttpGetService_executeCommand'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWHttpGetService_sendMessage(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWHttpGetService* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.HttpGetService",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWHttpGetService*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWHttpGetService_sendMessage'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 1) 
+    {
+        mwframework::MWNetRequest* arg0;
+
+        ok &= luaval_to_object<mwframework::MWNetRequest>(tolua_S, 2, "mw.NetRequest",&arg0);
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWHttpGetService_sendMessage'", nullptr);
+            return 0;
+        }
+        cobj->sendMessage(arg0);
+        return 0;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.HttpGetService:sendMessage",argc, 1);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWHttpGetService_sendMessage'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWHttpGetService_setServiceAddress(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWHttpGetService* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.HttpGetService",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWHttpGetService*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWHttpGetService_setServiceAddress'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 1) 
+    {
+        std::string arg0;
+
+        ok &= luaval_to_std_string(tolua_S, 2,&arg0, "mw.HttpGetService:setServiceAddress");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWHttpGetService_setServiceAddress'", nullptr);
+            return 0;
+        }
+        cobj->setServiceAddress(arg0);
+        return 0;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.HttpGetService:setServiceAddress",argc, 1);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWHttpGetService_setServiceAddress'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWHttpGetService_getServiceAddress(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWHttpGetService* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.HttpGetService",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWHttpGetService*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWHttpGetService_getServiceAddress'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 0) 
+    {
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWHttpGetService_getServiceAddress'", nullptr);
+            return 0;
+        }
+        const std::string& ret = cobj->getServiceAddress();
+        tolua_pushcppstring(tolua_S,ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.HttpGetService:getServiceAddress",argc, 0);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWHttpGetService_getServiceAddress'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWHttpGetService_create(lua_State* tolua_S)
+{
+    int argc = 0;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertable(tolua_S,1,"mw.HttpGetService",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    argc = lua_gettop(tolua_S) - 1;
+
+    if (argc == 1)
+    {
+        std::string arg0;
+        ok &= luaval_to_std_string(tolua_S, 2,&arg0, "mw.HttpGetService:create");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWHttpGetService_create'", nullptr);
+            return 0;
+        }
+        mwframework::MWHttpGetService* ret = mwframework::MWHttpGetService::create(arg0);
+        object_to_luaval<mwframework::MWHttpGetService>(tolua_S, "mw.HttpGetService",(mwframework::MWHttpGetService*)ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d\n ", "mw.HttpGetService:create",argc, 1);
+    return 0;
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWHttpGetService_create'.",&tolua_err);
+#endif
+    return 0;
+}
+int lua_mwframework_MWHttpGetService_constructor(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWHttpGetService* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 1) 
+    {
+        std::string arg0;
+
+        ok &= luaval_to_std_string(tolua_S, 2,&arg0, "mw.HttpGetService:MWHttpGetService");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWHttpGetService_constructor'", nullptr);
+            return 0;
+        }
+        cobj = new mwframework::MWHttpGetService(arg0);
+        tolua_pushusertype(tolua_S,(void*)cobj,"mw.HttpGetService");
+        tolua_register_gc(tolua_S,lua_gettop(tolua_S));
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.HttpGetService:MWHttpGetService",argc, 1);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWHttpGetService_constructor'.",&tolua_err);
+#endif
+
+    return 0;
+}
+
+static int lua_mwframework_MWHttpGetService_finalize(lua_State* tolua_S)
+{
+    printf("luabindings: finalizing LUA object (MWHttpGetService)");
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+    if (
+    !tolua_isusertype(tolua_S,1,"mw.HttpGetService",0,&tolua_err) ||
+    !tolua_isnoobj(tolua_S,2,&tolua_err)
+    )
+        goto tolua_lerror;
+    else
+#endif
+    {
+        mwframework::MWHttpGetService* self = (mwframework::MWHttpGetService*)  tolua_tousertype(tolua_S,1,0);
+#if COCOS2D_DEBUG >= 1
+        if (!self) tolua_error(tolua_S,"invalid 'self' in function 'delete'", nullptr);
+#endif
+        delete self;
+    }
+    return 0;
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'delete'.",&tolua_err);
+    return 0;
+#endif
+    return 0;
+}
+
+int lua_register_mwframework_MWHttpGetService(lua_State* tolua_S)
+{
+    tolua_usertype(tolua_S,"mw.HttpGetService");
+    tolua_cclass(tolua_S,"HttpGetService","mw.HttpGetService","mw.NetService",lua_mwframework_MWHttpGetService_finalize);
+
+    tolua_beginmodule(tolua_S,"HttpGetService");
+        tolua_function(tolua_S,"new",lua_mwframework_MWHttpGetService_constructor);
+        tolua_function(tolua_S,"executeCommand",lua_mwframework_MWHttpGetService_executeCommand);
+        tolua_function(tolua_S,"sendMessage",lua_mwframework_MWHttpGetService_sendMessage);
+        tolua_function(tolua_S,"setServiceAddress",lua_mwframework_MWHttpGetService_setServiceAddress);
+        tolua_function(tolua_S,"getServiceAddress",lua_mwframework_MWHttpGetService_getServiceAddress);
+        tolua_function(tolua_S,"create", lua_mwframework_MWHttpGetService_create);
+    tolua_endmodule(tolua_S);
+    std::string typeName = typeid(mwframework::MWHttpGetService).name();
+    g_luaType[typeName] = "mw.HttpGetService";
+    g_typeCast["HttpGetService"] = "mw.HttpGetService";
+    return 1;
+}
+
+int lua_mwframework_MWHttpPostService_executeCommand(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWHttpPostService* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.HttpPostService",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWHttpPostService*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWHttpPostService_executeCommand'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 2) 
+    {
+        std::string arg0;
+        cocos2d::Ref* arg1;
+
+        ok &= luaval_to_std_string(tolua_S, 2,&arg0, "mw.HttpPostService:executeCommand");
+
+        ok &= luaval_to_object<cocos2d::Ref>(tolua_S, 3, "cc.Ref",&arg1);
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWHttpPostService_executeCommand'", nullptr);
+            return 0;
+        }
+        cobj->executeCommand(arg0, arg1);
+        return 0;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.HttpPostService:executeCommand",argc, 2);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWHttpPostService_executeCommand'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWHttpPostService_sendMessage(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWHttpPostService* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.HttpPostService",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWHttpPostService*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWHttpPostService_sendMessage'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 1) 
+    {
+        mwframework::MWNetRequest* arg0;
+
+        ok &= luaval_to_object<mwframework::MWNetRequest>(tolua_S, 2, "mw.NetRequest",&arg0);
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWHttpPostService_sendMessage'", nullptr);
+            return 0;
+        }
+        cobj->sendMessage(arg0);
+        return 0;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.HttpPostService:sendMessage",argc, 1);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWHttpPostService_sendMessage'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWHttpPostService_setServiceAddress(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWHttpPostService* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.HttpPostService",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWHttpPostService*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWHttpPostService_setServiceAddress'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 1) 
+    {
+        std::string arg0;
+
+        ok &= luaval_to_std_string(tolua_S, 2,&arg0, "mw.HttpPostService:setServiceAddress");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWHttpPostService_setServiceAddress'", nullptr);
+            return 0;
+        }
+        cobj->setServiceAddress(arg0);
+        return 0;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.HttpPostService:setServiceAddress",argc, 1);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWHttpPostService_setServiceAddress'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWHttpPostService_getServiceAddress(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWHttpPostService* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.HttpPostService",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWHttpPostService*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWHttpPostService_getServiceAddress'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 0) 
+    {
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWHttpPostService_getServiceAddress'", nullptr);
+            return 0;
+        }
+        const std::string& ret = cobj->getServiceAddress();
+        tolua_pushcppstring(tolua_S,ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.HttpPostService:getServiceAddress",argc, 0);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWHttpPostService_getServiceAddress'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWHttpPostService_create(lua_State* tolua_S)
+{
+    int argc = 0;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertable(tolua_S,1,"mw.HttpPostService",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    argc = lua_gettop(tolua_S) - 1;
+
+    if (argc == 1)
+    {
+        std::string arg0;
+        ok &= luaval_to_std_string(tolua_S, 2,&arg0, "mw.HttpPostService:create");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWHttpPostService_create'", nullptr);
+            return 0;
+        }
+        mwframework::MWHttpPostService* ret = mwframework::MWHttpPostService::create(arg0);
+        object_to_luaval<mwframework::MWHttpPostService>(tolua_S, "mw.HttpPostService",(mwframework::MWHttpPostService*)ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d\n ", "mw.HttpPostService:create",argc, 1);
+    return 0;
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWHttpPostService_create'.",&tolua_err);
+#endif
+    return 0;
+}
+int lua_mwframework_MWHttpPostService_constructor(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWHttpPostService* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 1) 
+    {
+        std::string arg0;
+
+        ok &= luaval_to_std_string(tolua_S, 2,&arg0, "mw.HttpPostService:MWHttpPostService");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWHttpPostService_constructor'", nullptr);
+            return 0;
+        }
+        cobj = new mwframework::MWHttpPostService(arg0);
+        tolua_pushusertype(tolua_S,(void*)cobj,"mw.HttpPostService");
+        tolua_register_gc(tolua_S,lua_gettop(tolua_S));
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.HttpPostService:MWHttpPostService",argc, 1);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWHttpPostService_constructor'.",&tolua_err);
+#endif
+
+    return 0;
+}
+
+static int lua_mwframework_MWHttpPostService_finalize(lua_State* tolua_S)
+{
+    printf("luabindings: finalizing LUA object (MWHttpPostService)");
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+    if (
+    !tolua_isusertype(tolua_S,1,"mw.HttpPostService",0,&tolua_err) ||
+    !tolua_isnoobj(tolua_S,2,&tolua_err)
+    )
+        goto tolua_lerror;
+    else
+#endif
+    {
+        mwframework::MWHttpPostService* self = (mwframework::MWHttpPostService*)  tolua_tousertype(tolua_S,1,0);
+#if COCOS2D_DEBUG >= 1
+        if (!self) tolua_error(tolua_S,"invalid 'self' in function 'delete'", nullptr);
+#endif
+        delete self;
+    }
+    return 0;
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'delete'.",&tolua_err);
+    return 0;
+#endif
+    return 0;
+}
+
+int lua_register_mwframework_MWHttpPostService(lua_State* tolua_S)
+{
+    tolua_usertype(tolua_S,"mw.HttpPostService");
+    tolua_cclass(tolua_S,"HttpPostService","mw.HttpPostService","mw.NetService",lua_mwframework_MWHttpPostService_finalize);
+
+    tolua_beginmodule(tolua_S,"HttpPostService");
+        tolua_function(tolua_S,"new",lua_mwframework_MWHttpPostService_constructor);
+        tolua_function(tolua_S,"executeCommand",lua_mwframework_MWHttpPostService_executeCommand);
+        tolua_function(tolua_S,"sendMessage",lua_mwframework_MWHttpPostService_sendMessage);
+        tolua_function(tolua_S,"setServiceAddress",lua_mwframework_MWHttpPostService_setServiceAddress);
+        tolua_function(tolua_S,"getServiceAddress",lua_mwframework_MWHttpPostService_getServiceAddress);
+        tolua_function(tolua_S,"create", lua_mwframework_MWHttpPostService_create);
+    tolua_endmodule(tolua_S);
+    std::string typeName = typeid(mwframework::MWHttpPostService).name();
+    g_luaType[typeName] = "mw.HttpPostService";
+    g_typeCast["HttpPostService"] = "mw.HttpPostService";
+    return 1;
+}
+
+int lua_mwframework_MWTcpSocket_receive(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWTcpSocket* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.TcpSocket",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWTcpSocket*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWTcpSocket_receive'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 0) 
+    {
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWTcpSocket_receive'", nullptr);
+            return 0;
+        }
+        mwframework::MWBinaryData* ret = cobj->receive();
+        object_to_luaval<mwframework::MWBinaryData>(tolua_S, "mw.BinaryData",(mwframework::MWBinaryData*)ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.TcpSocket:receive",argc, 0);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWTcpSocket_receive'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWTcpSocket_bind(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWTcpSocket* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.TcpSocket",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWTcpSocket*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWTcpSocket_bind'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 1) 
+    {
+        int arg0;
+
+        ok &= luaval_to_int32(tolua_S, 2,(int *)&arg0, "mw.TcpSocket:bind");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWTcpSocket_bind'", nullptr);
+            return 0;
+        }
+        bool ret = cobj->bind(arg0);
+        tolua_pushboolean(tolua_S,(bool)ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.TcpSocket:bind",argc, 1);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWTcpSocket_bind'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWTcpSocket_send(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWTcpSocket* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.TcpSocket",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWTcpSocket*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWTcpSocket_send'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 1) 
+    {
+        mwframework::MWBinaryData* arg0;
+
+        ok &= luaval_to_object<mwframework::MWBinaryData>(tolua_S, 2, "mw.BinaryData",&arg0);
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWTcpSocket_send'", nullptr);
+            return 0;
+        }
+        int ret = cobj->send(arg0);
+        tolua_pushnumber(tolua_S,(lua_Number)ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.TcpSocket:send",argc, 1);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWTcpSocket_send'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWTcpSocket_isConnected(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWTcpSocket* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.TcpSocket",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWTcpSocket*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWTcpSocket_isConnected'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 0) 
+    {
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWTcpSocket_isConnected'", nullptr);
+            return 0;
+        }
+        bool ret = cobj->isConnected();
+        tolua_pushboolean(tolua_S,(bool)ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.TcpSocket:isConnected",argc, 0);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWTcpSocket_isConnected'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWTcpSocket_connect(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWTcpSocket* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.TcpSocket",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWTcpSocket*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWTcpSocket_connect'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 2) 
+    {
+        std::string arg0;
+        int arg1;
+
+        ok &= luaval_to_std_string(tolua_S, 2,&arg0, "mw.TcpSocket:connect");
+
+        ok &= luaval_to_int32(tolua_S, 3,(int *)&arg1, "mw.TcpSocket:connect");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWTcpSocket_connect'", nullptr);
+            return 0;
+        }
+        bool ret = cobj->connect(arg0, arg1);
+        tolua_pushboolean(tolua_S,(bool)ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.TcpSocket:connect",argc, 2);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWTcpSocket_connect'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWTcpSocket_close(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWTcpSocket* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.TcpSocket",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWTcpSocket*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWTcpSocket_close'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 0) 
+    {
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWTcpSocket_close'", nullptr);
+            return 0;
+        }
+        cobj->close();
+        return 0;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.TcpSocket:close",argc, 0);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWTcpSocket_close'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWTcpSocket_getPort(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWTcpSocket* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.TcpSocket",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWTcpSocket*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWTcpSocket_getPort'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 0) 
+    {
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWTcpSocket_getPort'", nullptr);
+            return 0;
+        }
+        int ret = cobj->getPort();
+        tolua_pushnumber(tolua_S,(lua_Number)ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.TcpSocket:getPort",argc, 0);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWTcpSocket_getPort'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWTcpSocket_listen(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWTcpSocket* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.TcpSocket",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWTcpSocket*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWTcpSocket_listen'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 1) 
+    {
+        int arg0;
+
+        ok &= luaval_to_int32(tolua_S, 2,(int *)&arg0, "mw.TcpSocket:listen");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWTcpSocket_listen'", nullptr);
+            return 0;
+        }
+        bool ret = cobj->listen(arg0);
+        tolua_pushboolean(tolua_S,(bool)ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.TcpSocket:listen",argc, 1);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWTcpSocket_listen'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWTcpSocket_getHost(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWTcpSocket* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.TcpSocket",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWTcpSocket*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWTcpSocket_getHost'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 0) 
+    {
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWTcpSocket_getHost'", nullptr);
+            return 0;
+        }
+        std::string ret = cobj->getHost();
+        tolua_pushcppstring(tolua_S,ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.TcpSocket:getHost",argc, 0);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWTcpSocket_getHost'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWTcpSocket_getBindPort(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWTcpSocket* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.TcpSocket",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWTcpSocket*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWTcpSocket_getBindPort'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 0) 
+    {
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWTcpSocket_getBindPort'", nullptr);
+            return 0;
+        }
+        int ret = cobj->getBindPort();
+        tolua_pushnumber(tolua_S,(lua_Number)ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.TcpSocket:getBindPort",argc, 0);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWTcpSocket_getBindPort'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWTcpSocket_create(lua_State* tolua_S)
+{
+    int argc = 0;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertable(tolua_S,1,"mw.TcpSocket",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    argc = lua_gettop(tolua_S) - 1;
+
+    if (argc == 0)
+    {
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWTcpSocket_create'", nullptr);
+            return 0;
+        }
+        mwframework::MWTcpSocket* ret = mwframework::MWTcpSocket::create();
+        object_to_luaval<mwframework::MWTcpSocket>(tolua_S, "mw.TcpSocket",(mwframework::MWTcpSocket*)ret);
+        return 1;
+    }
+    if (argc == 1)
+    {
+        int arg0;
+        ok &= luaval_to_int32(tolua_S, 2,(int *)&arg0, "mw.TcpSocket:create");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWTcpSocket_create'", nullptr);
+            return 0;
+        }
+        mwframework::MWTcpSocket* ret = mwframework::MWTcpSocket::create(arg0);
+        object_to_luaval<mwframework::MWTcpSocket>(tolua_S, "mw.TcpSocket",(mwframework::MWTcpSocket*)ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d\n ", "mw.TcpSocket:create",argc, 0);
+    return 0;
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWTcpSocket_create'.",&tolua_err);
+#endif
+    return 0;
+}
+static int lua_mwframework_MWTcpSocket_finalize(lua_State* tolua_S)
+{
+    printf("luabindings: finalizing LUA object (MWTcpSocket)");
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+    if (
+    !tolua_isusertype(tolua_S,1,"mw.TcpSocket",0,&tolua_err) ||
+    !tolua_isnoobj(tolua_S,2,&tolua_err)
+    )
+        goto tolua_lerror;
+    else
+#endif
+    {
+        mwframework::MWTcpSocket* self = (mwframework::MWTcpSocket*)  tolua_tousertype(tolua_S,1,0);
+#if COCOS2D_DEBUG >= 1
+        if (!self) tolua_error(tolua_S,"invalid 'self' in function 'delete'", nullptr);
+#endif
+        delete self;
+    }
+    return 0;
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'delete'.",&tolua_err);
+    return 0;
+#endif
+    return 0;
+}
+
+int lua_register_mwframework_MWTcpSocket(lua_State* tolua_S)
+{
+    tolua_usertype(tolua_S,"mw.TcpSocket");
+    tolua_cclass(tolua_S,"TcpSocket","mw.TcpSocket","cc.Ref",nullptr);
+
+    tolua_beginmodule(tolua_S,"TcpSocket");
+        tolua_function(tolua_S,"receive",lua_mwframework_MWTcpSocket_receive);
+        tolua_function(tolua_S,"bind",lua_mwframework_MWTcpSocket_bind);
+        tolua_function(tolua_S,"send",lua_mwframework_MWTcpSocket_send);
+        tolua_function(tolua_S,"isConnected",lua_mwframework_MWTcpSocket_isConnected);
+        tolua_function(tolua_S,"connect",lua_mwframework_MWTcpSocket_connect);
+        tolua_function(tolua_S,"close",lua_mwframework_MWTcpSocket_close);
+        tolua_function(tolua_S,"getPort",lua_mwframework_MWTcpSocket_getPort);
+        tolua_function(tolua_S,"listen",lua_mwframework_MWTcpSocket_listen);
+        tolua_function(tolua_S,"getHost",lua_mwframework_MWTcpSocket_getHost);
+        tolua_function(tolua_S,"getBindPort",lua_mwframework_MWTcpSocket_getBindPort);
+        tolua_function(tolua_S,"create", lua_mwframework_MWTcpSocket_create);
+    tolua_endmodule(tolua_S);
+    std::string typeName = typeid(mwframework::MWTcpSocket).name();
+    g_luaType[typeName] = "mw.TcpSocket";
+    g_typeCast["TcpSocket"] = "mw.TcpSocket";
+    return 1;
+}
+
+int lua_mwframework_MWTcpService_executeCommand(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWTcpService* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.TcpService",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWTcpService*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWTcpService_executeCommand'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 2) 
+    {
+        std::string arg0;
+        cocos2d::Ref* arg1;
+
+        ok &= luaval_to_std_string(tolua_S, 2,&arg0, "mw.TcpService:executeCommand");
+
+        ok &= luaval_to_object<cocos2d::Ref>(tolua_S, 3, "cc.Ref",&arg1);
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWTcpService_executeCommand'", nullptr);
+            return 0;
+        }
+        cobj->executeCommand(arg0, arg1);
+        return 0;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.TcpService:executeCommand",argc, 2);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWTcpService_executeCommand'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWTcpService_getPort(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWTcpService* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.TcpService",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWTcpService*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWTcpService_getPort'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 0) 
+    {
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWTcpService_getPort'", nullptr);
+            return 0;
+        }
+        int ret = cobj->getPort();
+        tolua_pushnumber(tolua_S,(lua_Number)ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.TcpService:getPort",argc, 0);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWTcpService_getPort'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWTcpService_sendMessage(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWTcpService* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.TcpService",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWTcpService*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWTcpService_sendMessage'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 1) 
+    {
+        mwframework::MWNetRequest* arg0;
+
+        ok &= luaval_to_object<mwframework::MWNetRequest>(tolua_S, 2, "mw.NetRequest",&arg0);
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWTcpService_sendMessage'", nullptr);
+            return 0;
+        }
+        cobj->sendMessage(arg0);
+        return 0;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.TcpService:sendMessage",argc, 1);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWTcpService_sendMessage'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWTcpService_getHost(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWTcpService* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.TcpService",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWTcpService*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWTcpService_getHost'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 0) 
+    {
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWTcpService_getHost'", nullptr);
+            return 0;
+        }
+        std::string ret = cobj->getHost();
+        tolua_pushcppstring(tolua_S,ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.TcpService:getHost",argc, 0);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWTcpService_getHost'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWTcpService_create(lua_State* tolua_S)
+{
+    int argc = 0;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertable(tolua_S,1,"mw.TcpService",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    argc = lua_gettop(tolua_S) - 1;
+
+    if (argc == 2)
+    {
+        std::string arg0;
+        int arg1;
+        ok &= luaval_to_std_string(tolua_S, 2,&arg0, "mw.TcpService:create");
+        ok &= luaval_to_int32(tolua_S, 3,(int *)&arg1, "mw.TcpService:create");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWTcpService_create'", nullptr);
+            return 0;
+        }
+        mwframework::MWTcpService* ret = mwframework::MWTcpService::create(arg0, arg1);
+        object_to_luaval<mwframework::MWTcpService>(tolua_S, "mw.TcpService",(mwframework::MWTcpService*)ret);
+        return 1;
+    }
+    if (argc == 3)
+    {
+        std::string arg0;
+        int arg1;
+        std::string arg2;
+        ok &= luaval_to_std_string(tolua_S, 2,&arg0, "mw.TcpService:create");
+        ok &= luaval_to_int32(tolua_S, 3,(int *)&arg1, "mw.TcpService:create");
+        ok &= luaval_to_std_string(tolua_S, 4,&arg2, "mw.TcpService:create");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWTcpService_create'", nullptr);
+            return 0;
+        }
+        mwframework::MWTcpService* ret = mwframework::MWTcpService::create(arg0, arg1, arg2);
+        object_to_luaval<mwframework::MWTcpService>(tolua_S, "mw.TcpService",(mwframework::MWTcpService*)ret);
+        return 1;
+    }
+    if (argc == 4)
+    {
+        std::string arg0;
+        int arg1;
+        std::string arg2;
+        int arg3;
+        ok &= luaval_to_std_string(tolua_S, 2,&arg0, "mw.TcpService:create");
+        ok &= luaval_to_int32(tolua_S, 3,(int *)&arg1, "mw.TcpService:create");
+        ok &= luaval_to_std_string(tolua_S, 4,&arg2, "mw.TcpService:create");
+        ok &= luaval_to_int32(tolua_S, 5,(int *)&arg3, "mw.TcpService:create");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWTcpService_create'", nullptr);
+            return 0;
+        }
+        mwframework::MWTcpService* ret = mwframework::MWTcpService::create(arg0, arg1, arg2, arg3);
+        object_to_luaval<mwframework::MWTcpService>(tolua_S, "mw.TcpService",(mwframework::MWTcpService*)ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d\n ", "mw.TcpService:create",argc, 2);
+    return 0;
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWTcpService_create'.",&tolua_err);
+#endif
+    return 0;
+}
+static int lua_mwframework_MWTcpService_finalize(lua_State* tolua_S)
+{
+    printf("luabindings: finalizing LUA object (MWTcpService)");
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+    if (
+    !tolua_isusertype(tolua_S,1,"mw.TcpService",0,&tolua_err) ||
+    !tolua_isnoobj(tolua_S,2,&tolua_err)
+    )
+        goto tolua_lerror;
+    else
+#endif
+    {
+        mwframework::MWTcpService* self = (mwframework::MWTcpService*)  tolua_tousertype(tolua_S,1,0);
+#if COCOS2D_DEBUG >= 1
+        if (!self) tolua_error(tolua_S,"invalid 'self' in function 'delete'", nullptr);
+#endif
+        delete self;
+    }
+    return 0;
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'delete'.",&tolua_err);
+    return 0;
+#endif
+    return 0;
+}
+
+int lua_register_mwframework_MWTcpService(lua_State* tolua_S)
+{
+    tolua_usertype(tolua_S,"mw.TcpService");
+    tolua_cclass(tolua_S,"TcpService","mw.TcpService","mw.NetService",nullptr);
+
+    tolua_beginmodule(tolua_S,"TcpService");
+        tolua_function(tolua_S,"executeCommand",lua_mwframework_MWTcpService_executeCommand);
+        tolua_function(tolua_S,"getPort",lua_mwframework_MWTcpService_getPort);
+        tolua_function(tolua_S,"sendMessage",lua_mwframework_MWTcpService_sendMessage);
+        tolua_function(tolua_S,"getHost",lua_mwframework_MWTcpService_getHost);
+        tolua_function(tolua_S,"create", lua_mwframework_MWTcpService_create);
+    tolua_endmodule(tolua_S);
+    std::string typeName = typeid(mwframework::MWTcpService).name();
+    g_luaType[typeName] = "mw.TcpService";
+    g_typeCast["TcpService"] = "mw.TcpService";
+    return 1;
+}
+
+int lua_mwframework_MWSocketIOService_setServiceAddress(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWSocketIOService* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.SocketIOService",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWSocketIOService*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWSocketIOService_setServiceAddress'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 1) 
+    {
+        std::string arg0;
+
+        ok &= luaval_to_std_string(tolua_S, 2,&arg0, "mw.SocketIOService:setServiceAddress");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWSocketIOService_setServiceAddress'", nullptr);
+            return 0;
+        }
+        cobj->setServiceAddress(arg0);
+        return 0;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.SocketIOService:setServiceAddress",argc, 1);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWSocketIOService_setServiceAddress'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWSocketIOService_executeCommand(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWSocketIOService* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.SocketIOService",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWSocketIOService*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWSocketIOService_executeCommand'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 2) 
+    {
+        std::string arg0;
+        cocos2d::Ref* arg1;
+
+        ok &= luaval_to_std_string(tolua_S, 2,&arg0, "mw.SocketIOService:executeCommand");
+
+        ok &= luaval_to_object<cocos2d::Ref>(tolua_S, 3, "cc.Ref",&arg1);
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWSocketIOService_executeCommand'", nullptr);
+            return 0;
+        }
+        cobj->executeCommand(arg0, arg1);
+        return 0;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.SocketIOService:executeCommand",argc, 2);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWSocketIOService_executeCommand'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWSocketIOService_sendMessage(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWSocketIOService* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.SocketIOService",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWSocketIOService*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWSocketIOService_sendMessage'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 1) 
+    {
+        mwframework::MWNetRequest* arg0;
+
+        ok &= luaval_to_object<mwframework::MWNetRequest>(tolua_S, 2, "mw.NetRequest",&arg0);
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWSocketIOService_sendMessage'", nullptr);
+            return 0;
+        }
+        cobj->sendMessage(arg0);
+        return 0;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.SocketIOService:sendMessage",argc, 1);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWSocketIOService_sendMessage'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWSocketIOService_getServiceAddress(lua_State* tolua_S)
+{
+    int argc = 0;
+    mwframework::MWSocketIOService* cobj = nullptr;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertype(tolua_S,1,"mw.SocketIOService",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    cobj = (mwframework::MWSocketIOService*)tolua_tousertype(tolua_S,1,0);
+
+#if COCOS2D_DEBUG >= 1
+    if (!cobj) 
+    {
+        tolua_error(tolua_S,"invalid 'cobj' in function 'lua_mwframework_MWSocketIOService_getServiceAddress'", nullptr);
+        return 0;
+    }
+#endif
+
+    argc = lua_gettop(tolua_S)-1;
+    if (argc == 0) 
+    {
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWSocketIOService_getServiceAddress'", nullptr);
+            return 0;
+        }
+        const std::string& ret = cobj->getServiceAddress();
+        tolua_pushcppstring(tolua_S,ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d \n", "mw.SocketIOService:getServiceAddress",argc, 0);
+    return 0;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWSocketIOService_getServiceAddress'.",&tolua_err);
+#endif
+
+    return 0;
+}
+int lua_mwframework_MWSocketIOService_create(lua_State* tolua_S)
+{
+    int argc = 0;
+    bool ok  = true;
+
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+#endif
+
+#if COCOS2D_DEBUG >= 1
+    if (!tolua_isusertable(tolua_S,1,"mw.SocketIOService",0,&tolua_err)) goto tolua_lerror;
+#endif
+
+    argc = lua_gettop(tolua_S) - 1;
+
+    if (argc == 1)
+    {
+        std::string arg0;
+        ok &= luaval_to_std_string(tolua_S, 2,&arg0, "mw.SocketIOService:create");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWSocketIOService_create'", nullptr);
+            return 0;
+        }
+        mwframework::MWSocketIOService* ret = mwframework::MWSocketIOService::create(arg0);
+        object_to_luaval<mwframework::MWSocketIOService>(tolua_S, "mw.SocketIOService",(mwframework::MWSocketIOService*)ret);
+        return 1;
+    }
+    if (argc == 2)
+    {
+        std::string arg0;
+        std::string arg1;
+        ok &= luaval_to_std_string(tolua_S, 2,&arg0, "mw.SocketIOService:create");
+        ok &= luaval_to_std_string(tolua_S, 3,&arg1, "mw.SocketIOService:create");
+        if(!ok)
+        {
+            tolua_error(tolua_S,"invalid arguments in function 'lua_mwframework_MWSocketIOService_create'", nullptr);
+            return 0;
+        }
+        mwframework::MWSocketIOService* ret = mwframework::MWSocketIOService::create(arg0, arg1);
+        object_to_luaval<mwframework::MWSocketIOService>(tolua_S, "mw.SocketIOService",(mwframework::MWSocketIOService*)ret);
+        return 1;
+    }
+    luaL_error(tolua_S, "%s has wrong number of arguments: %d, was expecting %d\n ", "mw.SocketIOService:create",argc, 1);
+    return 0;
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'lua_mwframework_MWSocketIOService_create'.",&tolua_err);
+#endif
+    return 0;
+}
+static int lua_mwframework_MWSocketIOService_finalize(lua_State* tolua_S)
+{
+    printf("luabindings: finalizing LUA object (MWSocketIOService)");
+#if COCOS2D_DEBUG >= 1
+    tolua_Error tolua_err;
+    if (
+    !tolua_isusertype(tolua_S,1,"mw.SocketIOService",0,&tolua_err) ||
+    !tolua_isnoobj(tolua_S,2,&tolua_err)
+    )
+        goto tolua_lerror;
+    else
+#endif
+    {
+        mwframework::MWSocketIOService* self = (mwframework::MWSocketIOService*)  tolua_tousertype(tolua_S,1,0);
+#if COCOS2D_DEBUG >= 1
+        if (!self) tolua_error(tolua_S,"invalid 'self' in function 'delete'", nullptr);
+#endif
+        delete self;
+    }
+    return 0;
+#if COCOS2D_DEBUG >= 1
+    tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'delete'.",&tolua_err);
+    return 0;
+#endif
+    return 0;
+}
+
+int lua_register_mwframework_MWSocketIOService(lua_State* tolua_S)
+{
+    tolua_usertype(tolua_S,"mw.SocketIOService");
+    tolua_cclass(tolua_S,"SocketIOService","mw.SocketIOService","mw.NetService",nullptr);
+
+    tolua_beginmodule(tolua_S,"SocketIOService");
+        tolua_function(tolua_S,"setServiceAddress",lua_mwframework_MWSocketIOService_setServiceAddress);
+        tolua_function(tolua_S,"executeCommand",lua_mwframework_MWSocketIOService_executeCommand);
+        tolua_function(tolua_S,"sendMessage",lua_mwframework_MWSocketIOService_sendMessage);
+        tolua_function(tolua_S,"getServiceAddress",lua_mwframework_MWSocketIOService_getServiceAddress);
+        tolua_function(tolua_S,"create", lua_mwframework_MWSocketIOService_create);
+    tolua_endmodule(tolua_S);
+    std::string typeName = typeid(mwframework::MWSocketIOService).name();
+    g_luaType[typeName] = "mw.SocketIOService";
+    g_typeCast["SocketIOService"] = "mw.SocketIOService";
+    return 1;
+}
 TOLUA_API int register_all_mwframework(lua_State* tolua_S)
 {
 	tolua_open(tolua_S);
@@ -13382,6 +15210,7 @@ TOLUA_API int register_all_mwframework(lua_State* tolua_S)
 	lua_register_mwframework_MWAStarPathFinder(tolua_S);
 	lua_register_mwframework_MWGameView(tolua_S);
 	lua_register_mwframework_MWGifFrame(tolua_S);
+	lua_register_mwframework_MWHttpGetService(tolua_S);
 	lua_register_mwframework_MWException(tolua_S);
 	lua_register_mwframework_MWGifFramesCache(tolua_S);
 	lua_register_mwframework_MWUUIDGenerator(tolua_S);
@@ -13402,9 +15231,13 @@ TOLUA_API int register_all_mwframework(lua_State* tolua_S)
 	lua_register_mwframework_MWStack(tolua_S);
 	lua_register_mwframework_MWArrayList(tolua_S);
 	lua_register_mwframework_MWJsonArray(tolua_S);
+	lua_register_mwframework_MWHttpPostService(tolua_S);
+	lua_register_mwframework_MWSocketIOService(tolua_S);
+	lua_register_mwframework_MWTcpSocket(tolua_S);
 	lua_register_mwframework_MWAssetManager(tolua_S);
 	lua_register_mwframework_MWZipData(tolua_S);
 	lua_register_mwframework_MWNetFilter(tolua_S);
+	lua_register_mwframework_MWTcpService(tolua_S);
 	lua_register_mwframework_MWCrypto(tolua_S);
 	lua_register_mwframework_MWNetResponse(tolua_S);
 	lua_register_mwframework_MWJsonObject(tolua_S);

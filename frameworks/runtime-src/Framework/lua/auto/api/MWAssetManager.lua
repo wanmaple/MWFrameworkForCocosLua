@@ -47,7 +47,7 @@
 -- 
 -- @function [parent=#MWAssetManager] setDevelopMode 
 -- @param self
--- @param #bool isDevelopMode
+-- @param #bool var
         
 --------------------------------
 -- 
