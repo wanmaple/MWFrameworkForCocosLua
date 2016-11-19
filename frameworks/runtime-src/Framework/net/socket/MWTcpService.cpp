@@ -12,6 +12,8 @@ using namespace std;
 
 MW_FRAMEWORK_BEGIN
 
+static volatile bool g_threadSignal = true;
+
 MWTcpService *MWTcpService::create(const std::string &host, int port, const std::string &protocolId, int bindPort)
 {
 	auto ret = new (nothrow)MWTcpService();
@@ -31,6 +33,7 @@ bool MWTcpService::_init(const std::string &host, int port, const std::string &p
 	_protocolId = protocolId;
 	_queue = MWQueue::create();
 	CC_SAFE_RETAIN(_queue);
+	g_threadSignal = true;
 
 	_socket = MWTcpSocket::create(bindPort);
 	if (!_socket)
@@ -59,16 +62,14 @@ MWTcpService::MWTcpService()
 MWTcpService::~MWTcpService()
 {
 	Director::getInstance()->getScheduler()->unscheduleAllForTarget(this);
-	if (_mutex)
-	{
-		pthread_mutex_destroy(&_mutex);
-	}
+	pthread_mutex_destroy(&_mutex);
 	if (_socket)
 	{
 		_socket->close();
 		_socket->release();
 	}
-	pthread_cancel(_pid);
+	g_threadSignal = false;
+	//pthread_cancel(_pid);
 	CC_SAFE_RELEASE(_queue);
 }
 
@@ -139,7 +140,7 @@ void *MWTcpService::_socketThread(void *param)
 
 	int retryCount = 0;
 
-	while (true)
+	while (g_threadSignal)
 	{
 		if (!service->_socket)
 		{

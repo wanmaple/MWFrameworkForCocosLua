@@ -55,6 +55,8 @@ LOCAL_SRC_FILES := entrance/main.cpp \
 				   ../../Framework/net/http/MWHttpForm.cpp \
 				   ../../Framework/net/http/MWHttpGetService.cpp \
 				   ../../Framework/net/http/MWHttpPostService.cpp \
+				   ../../Framework/net/socket/MWTcpSocket-android.cpp \
+				   ../../Framework/net/socket/MWTcpService.cpp \
 				   ../../Framework/net/socketio/MWSocketIOService.cpp \
 				   ../../Framework/platform/android/MWIOUtilsStrategyAndroid.cpp \
 				   ../../Framework/platform/android/MWSystemHelperStrategyAndroid.cpp \
