@@ -447,7 +447,7 @@
 		F58A04A91B86366700BB5229 /* md5.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = md5.cpp; sourceTree = "<group>"; };
 		F58A04AA1B86366700BB5229 /* md5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = md5.h; sourceTree = "<group>"; };
 		F58A04AC1B86400200BB5229 /* MWCrypto-ios.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "MWCrypto-ios.mm"; sourceTree = "<group>"; };
-		F5950CB91AFA8CA600A73190 /* MWIOUtilsStrategy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MWIOUtilsStrategy.h; sourceTree = "<group>"; };
+		F5950CB91AFA8CA600A73190 /* IIOUtilsStrategy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IIOUtilsStrategy.h; sourceTree = "<group>"; };
 		F5950CBF1AFA8F8B00A73190 /* MWIOUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWIOUtils.cpp; sourceTree = "<group>"; };
 		F59B05F41AB367EF001204D1 /* MWNetService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MWNetService.h; path = net/MWNetService.h; sourceTree = "<group>"; };
 		F5A5F00D1B4428B70060AE8E /* MWCrypto.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWCrypto.cpp; sourceTree = "<group>"; };
@@ -456,7 +456,7 @@
 		F5A79BB61AEF7B9E0040F7BE /* MWGifFramesCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWGifFramesCache.h; sourceTree = "<group>"; };
 		F5C9F9251AD7B5B6008FAF9A /* MWSystemHelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWSystemHelper.cpp; sourceTree = "<group>"; };
 		F5C9F9261AD7B5B6008FAF9A /* MWSystemHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWSystemHelper.h; sourceTree = "<group>"; };
-		F5C9F9291AD7B7F4008FAF9A /* MWSystemHelperStrategy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MWSystemHelperStrategy.h; sourceTree = "<group>"; };
+		F5C9F9291AD7B7F4008FAF9A /* ISystemHelperStrategy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ISystemHelperStrategy.h; sourceTree = "<group>"; };
 		F5CF4A401ADB6DA900D0AF87 /* MWViewSegue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWViewSegue.cpp; sourceTree = "<group>"; };
 		F5CF4A411ADB6DA900D0AF87 /* MWViewSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWViewSegue.h; sourceTree = "<group>"; };
 		F5CF4A461ADBEC8700D0AF87 /* MWIOUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWIOUtils.h; sourceTree = "<group>"; };
@@ -1169,10 +1169,10 @@
 				F55B48E31B591393004D8759 /* ios */,
 				F5950CBF1AFA8F8B00A73190 /* MWIOUtils.cpp */,
 				F5CF4A461ADBEC8700D0AF87 /* MWIOUtils.h */,
-				F5950CB91AFA8CA600A73190 /* MWIOUtilsStrategy.h */,
+				F5950CB91AFA8CA600A73190 /* IIOUtilsStrategy.h */,
 				F5C9F9251AD7B5B6008FAF9A /* MWSystemHelper.cpp */,
 				F5C9F9261AD7B5B6008FAF9A /* MWSystemHelper.h */,
-				F5C9F9291AD7B7F4008FAF9A /* MWSystemHelperStrategy.h */,
+				F5C9F9291AD7B7F4008FAF9A /* ISystemHelperStrategy.h */,
 			);
 			path = platform;
 			sourceTree = "<group>";
