@@ -17,6 +17,7 @@ This is a cross-platform game framework for cocos2d-x 3.x lua.
 - Network scheme.
 - Http service.
 - SocketIO service.
+- TCP service.
 
 ## TODO
 
