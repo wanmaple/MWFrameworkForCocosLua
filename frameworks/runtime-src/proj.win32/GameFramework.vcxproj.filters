@@ -106,6 +106,9 @@
     <Filter Include="Framework\net\socketio">
       <UniqueIdentifier>{eaf2f5b9-b7c7-4090-baab-d02b79964cae}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Framework\net\socket">
+      <UniqueIdentifier>{eaccaa34-5a06-4e00-b977-fe09203e0e07}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h">
@@ -436,6 +439,15 @@
     <ClInclude Include="..\Framework\net\socketio\MWSocketIOService.h">
       <Filter>Framework\net\socketio</Filter>
     </ClInclude>
+    <ClInclude Include="..\Framework\net\socket\ISocketProtocol.h">
+      <Filter>Framework\net\socket</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\net\socket\MWTcpSocket.h">
+      <Filter>Framework\net\socket</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\net\socket\MWTcpService.h">
+      <Filter>Framework\net\socket</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -704,6 +716,12 @@
     </ClCompile>
     <ClCompile Include="..\Framework\net\socketio\MWSocketIOService.cpp">
       <Filter>Framework\net\socketio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\net\socket\MWTcpSocket-win32.cpp">
+      <Filter>Framework\net\socket</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Framework\net\socket\MWTcpService.cpp">
+      <Filter>Framework\net\socket</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

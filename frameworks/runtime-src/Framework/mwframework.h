@@ -64,6 +64,10 @@
 #include "net/http/MWHttpDownloader.h"
 
 // socket
+#include "net/socket/MWTcpSocket.h"
+#include "net/socket/MWTcpService.h"
+
+// socketio
 #include "net/socketio/MWSocketIOService.h"
 
 // lua related.

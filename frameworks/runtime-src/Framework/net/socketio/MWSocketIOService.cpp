@@ -12,10 +12,10 @@ using namespace std;
 
 MW_FRAMEWORK_BEGIN
 
-MWSocketIOService *MWSocketIOService::create(const std::string &serviceAddress)
+MWSocketIOService *MWSocketIOService::create(const std::string &serviceAddress, const std::string &protocolId)
 {
 	auto ret = new (nothrow) MWSocketIOService();
-	if (ret && ret->_init(serviceAddress))
+	if (ret && ret->_init(serviceAddress, protocolId))
 	{
 		ret->autorelease();
 		return ret;
@@ -24,9 +24,10 @@ MWSocketIOService *MWSocketIOService::create(const std::string &serviceAddress)
 	return nullptr;
 }
 
-bool MWSocketIOService::_init(const std::string &serviceAddress)
+bool MWSocketIOService::_init(const std::string &serviceAddress, const std::string &protocolId)
 {
 	_serviceAddr = serviceAddress;
+	_protocolId = protocolId;
 
 	_socket = SocketIO::connect(_serviceAddr, *this);
 	if (_socket)
@@ -70,7 +71,7 @@ void MWSocketIOService::onConnect(cocos2d::network::SIOClient *client)
 void MWSocketIOService::onMessage(cocos2d::network::SIOClient *client, const std::string &data)
 {
 	MWBinaryData *binary = MWBinaryData::create((MW_RAW_DATA)data.c_str(), data.size());
-	auto response = MWNetResponse::create(SOCKET_IO_PROTOCOL_ID, binary, nullptr);
+	auto response = MWNetResponse::create(_protocolId, binary, nullptr);
 	MWNetCenter::getInstance()->dispatchSuccessfulMessage(response);
 }
 
@@ -82,7 +83,7 @@ void MWSocketIOService::onClose(cocos2d::network::SIOClient *client)
 void MWSocketIOService::onError(cocos2d::network::SIOClient *client, const std::string &data)
 {
 	MWBinaryData *binary = MWBinaryData::create((MW_RAW_DATA)data.c_str(), data.size());
-	auto response = MWNetResponse::create(SOCKET_IO_PROTOCOL_ID, binary, nullptr);
+	auto response = MWNetResponse::create(_protocolId, binary, nullptr);
 	MWNetCenter::getInstance()->dispatchFailedMessage(response);
 }
 

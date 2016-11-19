@@ -4,8 +4,8 @@ Author: M.Wan
 Date: 11/17/2016
 ******************************/
 
-#ifndef __SOCKET_TCP_SERVICE__
-#define __SOCKET_TCP_SERVICE__
+#ifndef __SOCKETIO_SOCKETIO_SERVICE__
+#define __SOCKETIO_SOCKETIO_SERVICE__
 
 #include "../../base/mwbase.h"
 
@@ -22,7 +22,7 @@ class MWNetRequest;
 class MW_DLL MWSocketIOService : public MWNetService, public cocos2d::network::SocketIO::SIODelegate
 {
 public:
-	static MWSocketIOService *create(const std::string &serviceAddress);
+	static MWSocketIOService *create(const std::string &serviceAddress, const std::string &protocolId = SOCKET_IO_PROTOCOL_ID);
 
 	virtual ~MWSocketIOService();
 
@@ -46,10 +46,12 @@ public:
 protected:
 	MWSocketIOService();
 
-	bool _init(const std::string &serviceAddress);
+	bool _init(const std::string &serviceAddress, const std::string &responseProtocolId);
 
 private:
 	cocos2d::network::SIOClient *_socket;
+
+	std::string _protocolId;
 };
 
 MW_FRAMEWORK_END

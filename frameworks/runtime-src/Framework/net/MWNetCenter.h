@@ -69,7 +69,7 @@ public:
      *
      * @param serviceId Service id to remove.
      */
-    void removeNetService(const std::string &serviceId);
+	void removeNetService(const std::string &serviceId);
     
     /**
      * Add a new net protocol.

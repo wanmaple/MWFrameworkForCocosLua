@@ -18,18 +18,28 @@ using namespace std;
 using namespace CocosDenshion;
 using namespace mwframework;
 
-//class TempHandler : public MWNetHandler
-//{
-//public:
-//	void handleSuccessfulMessage(MWNetResponse *response)
-//	{
-//		CCLOG("RECEIEVE SUCCESSFUL MESSAGE: %s");
-//	}
-//	void handleFailedMessage(MWNetResponse *response)
-//	{
-//		CCLOG("RECEIEVE FAILED MESSAGE: %s");
-//	}
-//};
+class TempHandler : public MWNetHandler
+{
+public:
+	void handleSuccessfulMessage(MWNetResponse *response)
+	{
+		auto data = response->getBody();
+		char *buf = new char[data->getSize() + 1];
+		memcpy(buf, data->getData(), data->getSize());
+		buf[data->getSize()] = 0;
+		CCLOG("RECEIEVE SUCCESSFUL MESSAGE: %s", buf);
+		delete[] buf;
+	}
+	void handleFailedMessage(MWNetResponse *response)
+	{
+		auto data = response->getBody();
+		char *buf = new char[data->getSize() + 1];
+		memcpy(buf, data->getData(), data->getSize());
+		buf[data->getSize()] = 0;
+		CCLOG("RECEIEVE FAILED MESSAGE: %s", buf);
+		delete[] buf;
+	}
+};
 
 AppDelegate::AppDelegate()
 {
@@ -67,6 +77,12 @@ bool AppDelegate::applicationDidFinishLaunching()
     MWAssetManager::getInstance()->setDevelopMode(DEVELOP_MODE);
     MWAssetManager::getInstance()->setServerUrl(SERVER_ASSET_ROOT_URL);
     MWAssetManager::getInstance()->setAssetRootPath(MWIOUtils::getInstance()->splicePath(FileUtils::getInstance()->getWritablePath(), "Update"));
+
+	/*MWTcpService *service = MWTcpService::create("192.168.0.106", 8765, "TCP1");
+	MWNetProtocol *protocol = MWNetProtocol::create("TCP1", "TCP_SERVICE", new TempHandler());
+	MWNetCenter::getInstance()->addNetService("TCP_SERVICE", service);
+	MWNetCenter::getInstance()->addNetProtocol(protocol);
+	MWNetCenter::getInstance()->sendMessage(MWNetRequest::create("TCP1", MWBinaryData::create("abc", 3)));*/
     
     if (MWAssetManager::getInstance()->isDevelopMode()) {
 #ifdef MW_ENABLE_SCRIPT_BINDING
