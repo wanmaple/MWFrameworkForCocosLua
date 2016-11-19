@@ -81,6 +81,8 @@
 		78C738861A77F4100028FC3A /* MWViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 78C738841A77F4100028FC3A /* MWViewController.cpp */; };
 		78C738941A77F7440028FC3A /* MWBinaryData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 78C738871A77F7440028FC3A /* MWBinaryData.cpp */; };
 		C0092ACD1CEF53AF004CB380 /* MWSmoothRope.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C0092ACB1CEF53AF004CB380 /* MWSmoothRope.cpp */; settings = {ASSET_TAGS = (); }; };
+		C049394B1DE0D3AC006A4479 /* MWTcpService.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C04939461DE0D3AC006A4479 /* MWTcpService.cpp */; settings = {ASSET_TAGS = (); }; };
+		C049394F1DE0D404006A4479 /* MWTcpSocket-ios.mm in Sources */ = {isa = PBXBuildFile; fileRef = C049394E1DE0D404006A4479 /* MWTcpSocket-ios.mm */; settings = {ASSET_TAGS = (); }; };
 		C06E23C418CEF9740093C81A /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C06E23C318CEF9740093C81A /* main.cpp */; };
 		C0B09C401C31A65300CD761B /* alloc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C0B09C261C31A65300CD761B /* alloc.cpp */; settings = {ASSET_TAGS = (); }; };
 		C0B09C411C31A65300CD761B /* array.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C0B09C281C31A65300CD761B /* array.cpp */; settings = {ASSET_TAGS = (); }; };
@@ -342,6 +344,11 @@
 		C0092ACB1CEF53AF004CB380 /* MWSmoothRope.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWSmoothRope.cpp; sourceTree = "<group>"; };
 		C0092ACC1CEF53AF004CB380 /* MWSmoothRope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWSmoothRope.h; sourceTree = "<group>"; };
 		C03781AE18BF654500FE4F13 /* cocos2d_lua_bindings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_lua_bindings.xcodeproj; path = "../../cocos2d-x/cocos/scripting/lua-bindings/proj.ios_mac/cocos2d_lua_bindings.xcodeproj"; sourceTree = "<group>"; };
+		C04939451DE0D3AC006A4479 /* ISocketProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISocketProtocol.h; sourceTree = "<group>"; };
+		C04939461DE0D3AC006A4479 /* MWTcpService.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWTcpService.cpp; sourceTree = "<group>"; };
+		C04939471DE0D3AC006A4479 /* MWTcpService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWTcpService.h; sourceTree = "<group>"; };
+		C049394A1DE0D3AC006A4479 /* MWTcpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWTcpSocket.h; sourceTree = "<group>"; };
+		C049394E1DE0D404006A4479 /* MWTcpSocket-ios.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "MWTcpSocket-ios.mm"; sourceTree = "<group>"; };
 		C06E23C318CEF9740093C81A /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		C0B09C261C31A65300CD761B /* alloc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = alloc.cpp; path = protobuf/pbc/alloc.cpp; sourceTree = "<group>"; };
 		C0B09C271C31A65300CD761B /* alloc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = alloc.h; path = protobuf/pbc/alloc.h; sourceTree = "<group>"; };
@@ -848,6 +855,19 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		C04939441DE0D3AC006A4479 /* socket */ = {
+			isa = PBXGroup;
+			children = (
+				C04939451DE0D3AC006A4479 /* ISocketProtocol.h */,
+				C04939461DE0D3AC006A4479 /* MWTcpService.cpp */,
+				C04939471DE0D3AC006A4479 /* MWTcpService.h */,
+				C049394E1DE0D404006A4479 /* MWTcpSocket-ios.mm */,
+				C049394A1DE0D3AC006A4479 /* MWTcpSocket.h */,
+			);
+			name = socket;
+			path = net/socket;
+			sourceTree = "<group>";
+		};
 		C0B09C241C31A63100CD761B /* protobuf */ = {
 			isa = PBXGroup;
 			children = (
@@ -1132,6 +1152,7 @@
 		F59B05F21AB36718001204D1 /* net */ = {
 			isa = PBXGroup;
 			children = (
+				C04939441DE0D3AC006A4479 /* socket */,
 				C0F1F63F1DDF520100E3C691 /* socketio */,
 				F5714FD81AB9D77B00AF3A51 /* http */,
 				F53535AB1AB455AE00EF7298 /* MWNetCenter.cpp */,
@@ -1457,7 +1478,9 @@
 				3382DA041A83966100A3702F /* MWObject.cpp in Sources */,
 				33125B1A1A7A53B80030DD61 /* MWArrayList.cpp in Sources */,
 				33BC563F1A7BA39B00EBCA2A /* MWGameView.cpp in Sources */,
+				C049394F1DE0D404006A4479 /* MWTcpSocket-ios.mm in Sources */,
 				F55B48E61B591393004D8759 /* MWIOUtilsStrategyIOS.mm in Sources */,
+				C049394B1DE0D3AC006A4479 /* MWTcpService.cpp in Sources */,
 				33250DC71A91E39A00D1668B /* MWJsonElement.cpp in Sources */,
 				33250DD41A91E39A00D1668B /* JSONStream.cpp in Sources */,
 				C0B09C4A1C31A65300CD761B /* rmessage.cpp in Sources */,
