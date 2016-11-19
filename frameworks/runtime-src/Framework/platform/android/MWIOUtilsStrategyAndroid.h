@@ -8,12 +8,12 @@
 #define __PLATFORM_IOUTILS_STRATEGY_ANDROID__
 
 #include "../../base/mwbase.h"
-#include "../MWIOUtilsStrategy.h"
+#include "../IIOUtilsStrategy.h"
 #include <string>
 
 MW_FRAMEWORK_BEGIN
 
-class MW_DLL MWIOUtilsStrategyAndroid : public MWIOUtilsStrategy
+class MW_DLL MWIOUtilsStrategyAndroid : public IIOUtilsStrategy
 {
 public:
     std::string resourcePath(const std::string &path) override;

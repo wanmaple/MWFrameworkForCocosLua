@@ -322,13 +322,7 @@
     <ClInclude Include="..\Framework\platform\MWSystemHelper.h">
       <Filter>Framework\platform</Filter>
     </ClInclude>
-    <ClInclude Include="..\Framework\platform\MWSystemHelperStrategy.h">
-      <Filter>Framework\platform</Filter>
-    </ClInclude>
     <ClInclude Include="..\Framework\platform\MWIOUtils.h">
-      <Filter>Framework\platform</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Framework\platform\MWIOUtilsStrategy.h">
       <Filter>Framework\platform</Filter>
     </ClInclude>
     <ClInclude Include="..\Framework\scheme\MWGameView.h">
@@ -447,6 +441,12 @@
     </ClInclude>
     <ClInclude Include="..\Framework\net\socket\MWTcpService.h">
       <Filter>Framework\net\socket</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\platform\IIOUtilsStrategy.h">
+      <Filter>Framework\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Framework\platform\ISystemHelperStrategy.h">
+      <Filter>Framework\platform</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

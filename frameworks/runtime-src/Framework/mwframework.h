@@ -5,9 +5,7 @@
 #include "base/mwbase.h"
 
 // platform.
-#include "platform/MWSystemHelperStrategy.h"
 #include "platform/MWSystemHelper.h"
-#include "platform/MWIOUtilsStrategy.h"
 #include "platform/MWIOUtils.h"
 
 // custom controls
@@ -58,7 +56,6 @@
 
 // http
 #include "net/http/MWHttpForm.h"
-#include "net/http/IHttpTransferStrategy.h"
 #include "net/http/MWHttpGetService.h"
 #include "net/http/MWHttpPostService.h"
 #include "net/http/MWHttpDownloader.h"

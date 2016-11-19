@@ -254,9 +254,9 @@ xcopy "$(ProjectDir)..\..\..\asset\src" "$(SolutionDir)$(Configuration).win32\sr
     <ClInclude Include="..\Framework\net\socket\MWTcpService.h" />
     <ClInclude Include="..\Framework\net\socket\MWTcpSocket.h" />
     <ClInclude Include="..\Framework\platform\MWIOUtils.h" />
-    <ClInclude Include="..\Framework\platform\MWIOUtilsStrategy.h" />
+    <ClInclude Include="..\Framework\platform\IIOUtilsStrategy.h" />
     <ClInclude Include="..\Framework\platform\MWSystemHelper.h" />
-    <ClInclude Include="..\Framework\platform\MWSystemHelperStrategy.h" />
+    <ClInclude Include="..\Framework\platform\ISystemHelperStrategy.h" />
     <ClInclude Include="..\Framework\platform\win32\MWIOUtilsStrategyWin32.h" />
     <ClInclude Include="..\Framework\platform\win32\MWSystemHelperStrategyWin32.h" />
     <ClInclude Include="..\Framework\protobuf\pbc\alloc.h" />

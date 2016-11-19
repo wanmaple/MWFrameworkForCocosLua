@@ -18,7 +18,7 @@ MW_ENUM ENetStatus {
     WWAN = 2,
 };
 
-class MWSystemHelperStrategy;
+class ISystemHelperStrategy;
 
 class MW_DLL MWSystemHelper
 {
@@ -56,7 +56,7 @@ public:
     double getCurrentUsedMemory();
     
 protected:
-    MWSystemHelperStrategy *_strategy;
+	ISystemHelperStrategy *_strategy;
 };
 
 MW_FRAMEWORK_END

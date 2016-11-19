@@ -9,12 +9,12 @@
 
 #include "../../base/mwbase.h"
 #include "../MWSystemHelper.h"
-#include "../MWSystemHelperStrategy.h"
+#include "../ISystemHelperStrategy.h"
 #include <string>
 
 MW_FRAMEWORK_BEGIN
 
-class MW_DLL MWSystemHelperStrategyIos : public MWSystemHelperStrategy
+class MW_DLL MWSystemHelperStrategyIos : public ISystemHelperStrategy
 {
 public:
     void copyToPasteBoard(const std::string &content) override;

@@ -13,7 +13,7 @@
 
 MW_FRAMEWORK_BEGIN
 
-class MWIOUtilsStrategy;
+class IIOUtilsStrategy;
 
 /**
  * A helper class to handle io operations.
@@ -134,7 +134,7 @@ public:
     std::string splicePath(const std::string &path1, const std::string &path2);
     
 protected:
-    MWIOUtilsStrategy *_strategy;
+    IIOUtilsStrategy *_strategy;
 };
 
 MW_FRAMEWORK_END
