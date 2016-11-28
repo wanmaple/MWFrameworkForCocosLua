@@ -12,6 +12,14 @@
         
 --------------------------------
 -- 
+-- @function [parent=#MWBinaryData] init 
+-- @param self
+-- @param #void data
+-- @param #unsigned long size
+-- @return bool#bool ret (return value: bool)
+        
+--------------------------------
+-- 
 -- @function [parent=#MWBinaryData] toString 
 -- @param self
 -- @return string#string ret (return value: string)

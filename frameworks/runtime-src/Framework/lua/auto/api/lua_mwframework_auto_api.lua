@@ -172,11 +172,6 @@
 
 
 --------------------------------------------------------
--- the mw MWTcpSocket
--- @field [parent=#mw] MWTcpSocket#MWTcpSocket MWTcpSocket preloaded module
-
-
---------------------------------------------------------
 -- the mw MWTcpService
 -- @field [parent=#mw] MWTcpService#MWTcpService MWTcpService preloaded module
 
