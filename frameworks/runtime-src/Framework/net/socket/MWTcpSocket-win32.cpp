@@ -16,7 +16,6 @@ MWTcpSocket *MWTcpSocket::create(int bindPort)
 	auto ret = new (std::nothrow) MWTcpSocket();
 	if (ret && ret->_init(bindPort))
 	{
-		ret->autorelease();
 		return ret;
 	}
 	CC_SAFE_RELEASE(ret);
@@ -50,7 +49,7 @@ bool MWTcpSocket::_init(int bindPort)
 		return false;
 	}
 
-	if (!bind(bindPort))
+	if (bindPort != 0 && !bind(bindPort))
 	{
 		return false;
 	}
@@ -154,7 +153,7 @@ int MWTcpSocket::send(MWBinaryData *data)
 	return sent;
 }
 
-MWBinaryData *MWTcpSocket::receive()
+MW_BYTE *MWTcpSocket::receive(MW_ULONG *size)
 {
 	int received = ::recv(_sock, _buffer, 1024, 0);
 	if (received <= 0)
@@ -165,8 +164,9 @@ MWBinaryData *MWTcpSocket::receive()
 		CCLOG("Socket disconnected");
 		return nullptr;
 	}
-	auto ret = MWBinaryData::create(_buffer, received);
-	ret->retain();
+	MW_BYTE *ret = (MW_BYTE *)malloc(received);
+	memcpy(ret, _buffer, received);
+	*size = received;
 	// clear buffer.
 	memset(_buffer, 0, received);
 	return ret;

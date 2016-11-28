@@ -37,6 +37,10 @@ public:
 		memcpy(buf, data->getData(), data->getSize());
 		buf[data->getSize()] = 0;
 		CCLOG("RECEIEVE FAILED MESSAGE: %s", buf);
+		if (string(buf) == "socket connected")
+		{
+			MWNetCenter::getInstance()->sendMessage(MWNetRequest::create("TCP1", MWBinaryData::create("abc", 3)));
+		}
 		delete[] buf;
 	}
 };
@@ -78,11 +82,10 @@ bool AppDelegate::applicationDidFinishLaunching()
     MWAssetManager::getInstance()->setServerUrl(SERVER_ASSET_ROOT_URL);
     MWAssetManager::getInstance()->setAssetRootPath(MWIOUtils::getInstance()->splicePath(FileUtils::getInstance()->getWritablePath(), "Update"));
 
-	/*MWTcpService *service = MWTcpService::create("192.168.0.106", 8765, "TCP1");
+	MWTcpService *service = MWTcpService::create("192.168.0.106", 8765, "TCP1");
 	MWNetProtocol *protocol = MWNetProtocol::create("TCP1", "TCP_SERVICE", new TempHandler());
 	MWNetCenter::getInstance()->addNetService("TCP_SERVICE", service);
 	MWNetCenter::getInstance()->addNetProtocol(protocol);
-	MWNetCenter::getInstance()->sendMessage(MWNetRequest::create("TCP1", MWBinaryData::create("abc", 3)));*/
     
     if (MWAssetManager::getInstance()->isDevelopMode()) {
 #ifdef MW_ENABLE_SCRIPT_BINDING

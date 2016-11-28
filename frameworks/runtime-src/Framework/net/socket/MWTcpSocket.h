@@ -17,7 +17,10 @@ MW_FRAMEWORK_BEGIN
 class MW_DLL MWTcpSocket : public cocos2d::Ref, public ISocketProtocol
 {
 public:
-	static MWTcpSocket *create(int bindPort = 4000);
+	/**
+	* The object created won't be autoreleased. (Take care)
+	*/
+	static MWTcpSocket *create(int bindPort = 0);
 
 	~MWTcpSocket();
 
@@ -33,7 +36,7 @@ public:
 	bool bind(int port) override;
 	bool listen(int count) override;
 	int send(MWBinaryData *data) override;
-	MWBinaryData *receive() override;
+	MW_BYTE *receive(MW_ULONG *size) override;
 	void close() override;
 
 private:

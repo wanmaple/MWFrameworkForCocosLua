@@ -7,6 +7,8 @@
 
 #include <new>
 
+#define DEFAULT_RETRY_COUNT 10
+
 using namespace cocos2d;
 using namespace std;
 
@@ -30,17 +32,9 @@ bool MWTcpService::_init(const std::string &host, int port, const std::string &p
 {
 	_host = host;
 	_port = port;
+	_bindPort = bindPort;
 	_protocolId = protocolId;
-	_queue = MWQueue::create();
-	CC_SAFE_RETAIN(_queue);
 	g_threadSignal = true;
-
-	_socket = MWTcpSocket::create(bindPort);
-	if (!_socket)
-	{
-		return false;
-	}
-	CC_SAFE_RETAIN(_socket);
 
 	if (!_connect())
 	{
@@ -55,7 +49,7 @@ MWTcpService::MWTcpService()
 , _pid()
 , _host("")
 , _port(0)
-, _queue(nullptr)
+, _socket(nullptr)
 {
 }
 
@@ -70,7 +64,6 @@ MWTcpService::~MWTcpService()
 	}
 	g_threadSignal = false;
 	//pthread_cancel(_pid);
-	CC_SAFE_RELEASE(_queue);
 }
 
 void MWTcpService::sendMessage(MWNetRequest *request)
@@ -89,12 +82,6 @@ void MWTcpService::executeCommand(const std::string &cmd, cocos2d::Ref *param)
 bool MWTcpService::_connect()
 {
 	int err;
-
-	if (!_socket->connect(_host, _port))
-	{
-		CCLOG("Socket connect failed.");
-		return false;
-	}
 
 	Director::getInstance()->getScheduler()->scheduleUpdate(this, 0, false);
 
@@ -138,62 +125,81 @@ void *MWTcpService::_socketThread(void *param)
 {
 	MWTcpService *service = (MWTcpService *)param;
 
-	int retryCount = 0;
+	volatile int retryCount = 0;
 
 	while (g_threadSignal)
 	{
-		if (!service->_socket)
+		if (retryCount >= DEFAULT_RETRY_COUNT)
 		{
 			break;
+		}
+		if (!service->_socket)
+		{
+			service->_socket = MWTcpSocket::create(service->_bindPort);
+			if (service->_socket)
+			{
+				if (service->_socket->connect(service->_host, service->_port))
+				{
+					Director::getInstance()->getScheduler()->schedule([service](float dt) {
+						string err = "socket connected";
+						auto response = MWNetResponse::create(service->_protocolId, MWBinaryData::create((MW_RAW_DATA)err.c_str(), err.size()), nullptr);
+						MWNetCenter::getInstance()->dispatchFailedMessage(response);
+					}, (void *)service, 0, 0, 0, false, "TCP_CONNECT_MSG");
+				}
+			}
 		}
 		if (!service->_socket->isConnected())
 		{
 			// try reconnecting.
-			int bindPort = service->_socket->getBindPort();
 			service->_socket->release();
-			service->_socket = MWTcpSocket::create(bindPort);
+			service->_socket = MWTcpSocket::create(service->_bindPort);
 			if (service->_socket)
 			{
-				service->_socket->retain();
 				if (service->_socket->connect(service->_host, service->_port)) {
+					retryCount = 0;
 					Director::getInstance()->getScheduler()->schedule([service](float dt) {
-						string err = "tcp socket reconnected";
+						string err = "socket reconnected";
 						auto response = MWNetResponse::create(service->_protocolId, MWBinaryData::create((MW_RAW_DATA)err.c_str(), err.size()), nullptr);
 						MWNetCenter::getInstance()->dispatchFailedMessage(response);
 					}, (void *)service, 0, 0, 0, false, "TCP_RECONNECT_MSG");
-					retryCount = 0;
 				}
 			}
 			++retryCount;
 
-			if (retryCount >= 10)
+			if (retryCount >= DEFAULT_RETRY_COUNT)
 			{
 				// over the retry limit.
 				Director::getInstance()->getScheduler()->schedule([service](float dt) {
 					if (service->_socket == nullptr || !service->_socket->isConnected())
 					{
-						string err = "tcp socket disconnected";
+						string err = "socket closed";
 						auto response = MWNetResponse::create(service->_protocolId, MWBinaryData::create((MW_RAW_DATA)err.c_str(), err.size()), nullptr);
 						MWNetCenter::getInstance()->dispatchFailedMessage(response);
 					}
-				}, (void *)service, 0, 0, 0, false, "TCP_DISCONNECT_MSG");
-				retryCount = 0;
+				}, (void *)service, 0, 0, 0, false, "TCP_CLOSE_MSG");
 			}
 
 			continue;
 		}
 
-		MWBinaryData *data = service->_socket->receive();
+		MW_ULONG size;
+		MW_BYTE *data = service->_socket->receive(&size);
 		if (!data)
 		{
+			Director::getInstance()->getScheduler()->schedule([service](float dt) {
+				if (service->_socket == nullptr || !service->_socket->isConnected())
+				{
+					string err = "socket disconnected";
+					auto response = MWNetResponse::create(service->_protocolId, MWBinaryData::create((MW_RAW_DATA)err.c_str(), err.size()), nullptr);
+					MWNetCenter::getInstance()->dispatchFailedMessage(response);
+				}
+			}, (void *)service, 0, 0, 0, false, "TCP_DISCONNECT_MSG");
 			continue;
 		}
 
 		pthread_mutex_lock(&service->_mutex);
-		service->_queue->enqueue(data);
+		service->_queue.push(std::make_pair(data, size));
 		pthread_mutex_unlock(&service->_mutex);
-
-		data->release();
 	}
 
 	return nullptr;
@@ -206,13 +212,18 @@ void MWTcpService::update(float dt)
 		return;
 	}
 
-	while (!_queue->empty())
+	while (!_queue.empty())
 	{
-		MWBinaryData *data = static_cast<MWBinaryData *>(_queue->front());
-		_queue->dequeue();
+		pthread_mutex_lock(&_mutex);
+		auto pair = _queue.front();
+		_queue.pop();
+		pthread_mutex_unlock(&_mutex);
 
+		auto data = MWBinaryData::create(pair.first, pair.second);
 		auto response = MWNetResponse::create(_protocolId, data, nullptr);
 		MWNetCenter::getInstance()->dispatchSuccessfulMessage(response);
+
+		free(pair.first);
 	}
 }
 

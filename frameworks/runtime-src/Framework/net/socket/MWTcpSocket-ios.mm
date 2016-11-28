@@ -38,7 +38,7 @@ bool MWTcpSocket::_init(int bindPort)
 		return false;
 	}
 
-	if (!bind(bindPort))
+	if (bindPort != 0 && !bind(bindPort))
 	{
 		return false;
 	}

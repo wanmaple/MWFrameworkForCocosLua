@@ -35,7 +35,9 @@ public:
     /**
      * BinaryData destructor.
      */
-    virtual ~MWBinaryData();
+	virtual ~MWBinaryData();
+
+	bool init(MW_RAW_DATA data, MW_ULONG size);
     
     /**
      * Get raw data.
@@ -58,8 +60,6 @@ public:
     std::string toString();
     
 private:
-    bool init(MW_RAW_DATA data, MW_ULONG size);
-    
     MW_RAW_DATA _data;
     MW_ULONG _size;
 };

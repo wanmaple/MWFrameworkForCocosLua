@@ -31,6 +31,10 @@ MWBinaryData::~MWBinaryData()
 
 bool MWBinaryData::init(MW_RAW_DATA data, MW_ULONG size)
 {
+	if (_data)
+	{
+		free(_data);
+	}
     // copy the data
     _data = (MW_ULONG*)malloc(size);
     memcpy(this->_data, data, size);

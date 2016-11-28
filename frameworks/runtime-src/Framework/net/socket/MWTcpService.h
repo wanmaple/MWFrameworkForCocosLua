@@ -10,6 +10,7 @@ Date: 11/19/2016
 #include "../../base/mwbase.h"
 #include "cocos2d.h"
 #include "../MWNetService.h"
+#include <queue>
 #include <pthread.h>
 
 #define TCP_SOCKET_PROTOCOL_ID "TCP_SOCKET"
@@ -22,7 +23,7 @@ class MWTcpSocket;
 class MW_DLL MWTcpService : public MWNetService
 {
 public:
-	static MWTcpService *create(const std::string &host, int port, const std::string &protocolId = TCP_SOCKET_PROTOCOL_ID, int bindPort = 4000);
+	static MWTcpService *create(const std::string &host, int port, const std::string &protocolId = TCP_SOCKET_PROTOCOL_ID, int bindPort = 0);
 
 	~MWTcpService();
 
@@ -49,7 +50,8 @@ protected:
 	std::string _protocolId;
 
 	MWTcpSocket *_socket;
-	MWQueue *_queue;
+	std::queue<std::pair<MW_RAW_DATA, MW_ULONG> > _queue;
+	int _bindPort;
 
 	pthread_t _pid;
 	pthread_mutex_t _mutex;

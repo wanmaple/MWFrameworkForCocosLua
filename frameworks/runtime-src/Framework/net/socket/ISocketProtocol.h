@@ -20,7 +20,7 @@ public:
 	virtual bool bind(int port) = 0;
 	virtual bool listen(int count) = 0;
 	virtual int send(MWBinaryData *data) = 0;
-	virtual MWBinaryData *receive() = 0;
+	virtual MW_BYTE *receive(MW_ULONG *size) = 0;
 	virtual void close() = 0;
 };
 
