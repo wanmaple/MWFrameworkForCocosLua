@@ -82,10 +82,10 @@ bool AppDelegate::applicationDidFinishLaunching()
     MWAssetManager::getInstance()->setServerUrl(SERVER_ASSET_ROOT_URL);
     MWAssetManager::getInstance()->setAssetRootPath(MWIOUtils::getInstance()->splicePath(FileUtils::getInstance()->getWritablePath(), "Update"));
 
-	MWTcpService *service = MWTcpService::create("127.0.0.1", 8888, "TCP1");
+	/*MWTcpService *service = MWTcpService::create("192.168.0.106", 8765, "TCP1");
 	MWNetProtocol *protocol = MWNetProtocol::create("TCP1", "TCP_SERVICE", new TempHandler());
 	MWNetCenter::getInstance()->addNetService("TCP_SERVICE", service);
-	MWNetCenter::getInstance()->addNetProtocol(protocol);
+	MWNetCenter::getInstance()->addNetProtocol(protocol);*/
     
     if (MWAssetManager::getInstance()->isDevelopMode()) {
 #ifdef MW_ENABLE_SCRIPT_BINDING

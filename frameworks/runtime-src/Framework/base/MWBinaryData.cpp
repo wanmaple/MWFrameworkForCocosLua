@@ -21,6 +21,11 @@ MWBinaryData *MWBinaryData::create(MW_RAW_DATA data, MW_ULONG size)
     return nullptr;
 }
 
+MWBinaryData::MWBinaryData()
+: _data(nullptr)
+{
+}
+
 MWBinaryData::~MWBinaryData()
 {
     if (_data)

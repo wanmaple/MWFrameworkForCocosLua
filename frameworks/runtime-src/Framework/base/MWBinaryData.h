@@ -60,6 +60,8 @@ public:
     std::string toString();
     
 private:
+	MWBinaryData();
+
     MW_RAW_DATA _data;
     MW_ULONG _size;
 };
