@@ -68,7 +68,7 @@ function table.forEach(t, action, ...)
 	end
 
 	for i, v in ipairs(t) do
-		action(v, i, ...)
+		action(v, ...)
 	end
 end
 
@@ -80,23 +80,22 @@ function table.select(t, selector, ...)
 
 	local ret = {}
 	for i, v in ipairs(t) do
-		if selector(v, i, ...) then
-			table.insert(ret, v)
-		end
+		ret[i] = selector(v, ...)
 	end
 	return ret
 end
 
--- cast every item of table to the specified item
-function table.cast(t, caster, ...)
-	if type(t) ~= "table" or type(caster) ~= "function" then
+-- find elements which satisfy the selector
+function table.filter(t, filter, ...)
+	if type(t) ~= "table" or type(filter) ~= "function" then
 		return nil
 	end
 
 	local ret = {}
-	for i, v in ipairs(table) do
-		local item = caster(v, i, ...)
-		table.insert(ret, item)
+	for i, v in ipairs(t) do
+		if filter(v, ...) then
+			table.insert(ret, v)
+		end
 	end
 	return ret
 end
@@ -108,7 +107,7 @@ function table.contains(t, selector, ...)
 	end
 
 	for i, v in ipairs(t) do
-		if selector(v, i, ...) then
+		if selector(v, ...) then
 			return true
 		end
 	end
@@ -122,7 +121,7 @@ function table.erase(t, selector, ...)
 	end
 
 	for i, v in ipairs(t) do
-		if selector(v, i, ...) then
+		if selector(v, ...) then
 			table.remove(table, i)
 			return true
 		end
