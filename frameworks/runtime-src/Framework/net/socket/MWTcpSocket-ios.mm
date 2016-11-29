@@ -1,4 +1,4 @@
-#if CC_TARGET_PLATFORM == CC_TARGET_PLATFORM_IOS
+#if CC_TARGET_PLATFORM == CC_PLATFORM_IOS
 
 #include "MWTcpSocket.h"
 #include <sys/socket.h>
