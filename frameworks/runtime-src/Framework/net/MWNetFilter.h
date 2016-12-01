@@ -25,7 +25,7 @@ public:
      * Create a NetFilter object.
      * @note This method is just for script. Please don't create it in cpp.
      */
-    MWNetFilter *create();
+    static MWNetFilter *create();
     
     /**
      * MWNetHandler destructor.

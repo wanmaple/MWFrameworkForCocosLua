@@ -125,7 +125,7 @@ void *MWTcpService::_socketThread(void *param)
 {
 	MWTcpService *service = (MWTcpService *)param;
 
-	volatile int retryCount = 0;
+	int retryCount = 0;
 
 	while (g_threadSignal)
 	{

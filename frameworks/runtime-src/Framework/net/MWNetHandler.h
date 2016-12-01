@@ -25,7 +25,7 @@ public:
      * Create a NetHandler object.
      * @note This method is just for script. Please don't create it in cpp.
      */
-    MWNetHandler *create();
+    static MWNetHandler *create();
     
     /**
      * MWNetHandler destructor.
