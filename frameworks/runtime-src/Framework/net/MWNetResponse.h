@@ -48,6 +48,8 @@ public:
     MW_SYNTHESIZE_READONLY(MWNetRequest *, _relatedRequest, getRelatedRequest);
     
 protected:
+	MWNetResponse() {}
+
 	bool init(const std::string &protocolId, MWBinaryData *body, MWNetRequest *request);
 };
 

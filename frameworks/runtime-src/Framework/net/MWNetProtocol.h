@@ -48,6 +48,8 @@ public:
     MW_SYNTHESIZE_READONLY(MWNetHandler *, _relatedHandler, getRelatedHandler);
     
 protected:
+	MWNetProtocol() {}
+
     bool init(const std::string &protocolId, const std::string &serviceId, MWNetHandler *handler);
 };
 

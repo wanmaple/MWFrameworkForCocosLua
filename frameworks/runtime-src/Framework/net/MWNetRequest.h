@@ -41,6 +41,8 @@ public:
     MW_SYNTHESIZE_PASS_BY_CONST_REF(std::string, _protocolId, getProtocolId, setProtocolId);
     
 protected:
+	MWNetRequest() {}
+
 	bool init(const std::string &protocolId, MWBinaryData *body);
 };
 

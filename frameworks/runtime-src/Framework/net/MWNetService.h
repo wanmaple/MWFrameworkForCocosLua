@@ -35,6 +35,9 @@ public:
      * @param params Command parameters.
      */
     virtual void executeCommand(const std::string &cmd, cocos2d::Ref *params) = 0;
+
+protected:
+	MWNetService() {}
 };
 
 MW_FRAMEWORK_END

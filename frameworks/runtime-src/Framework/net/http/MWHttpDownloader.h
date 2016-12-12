@@ -133,7 +133,9 @@ public:
      */
     void setUserdata(cocos2d::Ref *userdata);
     
-protected:
+private:
+	MWDownloadTask() {}
+
     int _retryOnce();
     
     std::string _url;
@@ -197,6 +199,9 @@ public:
      * Error message getter and setter.
      */
     MW_SYNTHESIZE_PASS_BY_CONST_REF(std::string, _errorMsg, getErrorMessage, setErrorMessage);
+
+private:
+	MWDownloadEvent() {}
 };
 
 /**

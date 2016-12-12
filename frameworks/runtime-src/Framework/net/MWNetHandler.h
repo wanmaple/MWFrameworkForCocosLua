@@ -37,6 +37,9 @@ public:
      */
     virtual void handleSuccessfulMessage(MWNetResponse *response);
     virtual void handleFailedMessage(MWNetResponse *response);
+
+protected:
+	MWNetHandler() {}
 };
 
 MW_FRAMEWORK_END

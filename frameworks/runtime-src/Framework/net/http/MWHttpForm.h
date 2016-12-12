@@ -57,6 +57,8 @@ public:
     virtual std::string toString() override;
     
 protected:
+	MWHttpForm() {}
+
     bool _init();
     
     unsigned char toHex(unsigned char x);

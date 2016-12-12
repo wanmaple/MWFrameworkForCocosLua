@@ -37,6 +37,9 @@ public:
      */
     virtual void filterSuccessfulMessage(MWNetResponse *response);
     virtual void filterFailedMessage(MWNetResponse *response);
+
+protected:
+	MWNetFilter() {}
 };
 
 MW_FRAMEWORK_END
