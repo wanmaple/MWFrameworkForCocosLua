@@ -142,7 +142,7 @@ function TestViewController:calculateG(x1, y1, x2, y2)
 end
 
 function TestViewController:calculateH(x1, y1, x2, y2)
-	return math.abs(x1 - x2) + math.abs(y1 - y2)
+	return (math.abs(x1 - x2) + math.abs(y1 - y2)) * 10
 end
 
 return TestViewController
