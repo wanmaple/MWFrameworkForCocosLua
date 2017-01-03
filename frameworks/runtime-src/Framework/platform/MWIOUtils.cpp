@@ -21,6 +21,8 @@ MWIOUtils::MWIOUtils()
 : _strategy(new MWIOUtilsStrategyAndroid())
 #elif CC_TARGET_PLATFORM == CC_PLATFORM_WIN32
 : _strategy(new MWIOUtilsStrategyWin32())
+#else
+: _strategy(nullptr)
 #endif
 {
 }

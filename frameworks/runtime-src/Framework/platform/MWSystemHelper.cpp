@@ -20,6 +20,8 @@ MWSystemHelper::MWSystemHelper()
 : _strategy(new MWSystemHelperStrategyAndroid())
 #elif CC_TARGET_PLATFORM == CC_PLATFORM_WIN32
 : _strategy(new MWSystemHelperStrategyWin32())
+#else
+: _strategy(nullptr)
 #endif
 {
 }
